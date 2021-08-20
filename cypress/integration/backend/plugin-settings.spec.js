@@ -34,7 +34,7 @@ describe('Plugin Settings', function () {
 		cy.get('#submit').click();
 
 		// Settings page is reloaded.
-		cy.get('@paymentPointerField').should('have.value', 'incorrect');
+		cy.get('@paymentPointerField').should('have.value', paymentPointer);
 		cy.get('.notice').should('have.class', 'notice-success');
 
 		// Check the payment pointer is output in a post's HTML.
