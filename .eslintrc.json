@@ -35,6 +35,7 @@
 			"version": "16.6.3"
 		}
 	},
+	"ignorePatterns": ["spec.js"],
 	"rules": {
 		"array-bracket-spacing": ["error", "always"],
 		"brace-style": ["error", "1tbs"],

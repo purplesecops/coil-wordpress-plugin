@@ -1,4 +1,6 @@
 version: 2.0
+orbs:
+  cypress: cypress-io/cypress@1.28.0
 jobs:
   js_scss_linting:
     docker:
@@ -12,7 +14,7 @@ jobs:
       - image: cimg/php:7.4.19
       - image: circleci/mysql:8.0.16
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
           MYSQL_USER: root
           MYSQL_ROOT_PASSWORD: "root"
           MYSQL_DATABASE: wordpress_test
@@ -51,9 +53,63 @@ jobs:
       - run:
           name: PHP linting
           command: composer phpcs
+  cypress_tests:
+    docker:
+      - image: php:7-apache
+      - image: cypress/included:5.6.0
+      - image: mysql
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: "password"
+          MYSQL_ROOT_PASSWORD: "password"
+          MYSQL_DATABASE: wordpress
+          # Might need to be in quotes?? Or localhost
+          MYSQL_HOST: 127.0.0.1
+    working_directory: /var/www/html
+    steps:
+      - run:
+          # The primary container isn't MYSQL, running a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+        # Might also need wp-core-download becasue code only includes plugin not WordPress site, still need to activate plugin first
+          name: Set up WordPress site
+          command: |
+            docker-php-ext-install mysqli
+            docker-php-ext-install pdo pdo_mysql
+            curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+            chmod +x wp-cli.phar
+            mv wp-cli.phar /usr/local/bin/wp
+            wp core download --skip-content
+            cd wp-content/plugins
+      - checkout
+      - run:
+          name: ls and pwd
+          command: |
+            ls
+            pwd
+      - run:
+          name: Initializing WordPress
+          command: |
+            wp core install --url=http://php --title=coil --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email --allow-root
+            wp plugin install wordpress-importer --activate --allow-root
+            wp import 'wp-content/plugins/coil-wordpress-plugin/cypress/fixtures' --authors=create --allow-root
 workflows:
   version: 2
-  basic_linting_tests:
+  test:
     jobs:
       - js_scss_linting
-      - php_testing
+      - php_testing:
+          requires:
+            - js_scss_linting
+      - cypress_tests:
+          requires:
+            - php_testing
