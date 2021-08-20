@@ -2,9 +2,18 @@
 
 set -e
 
+apt update
+
 apt install default-mysql-client
 
-# wp config create --dbname=wordpress --dbuser=admin --dbhost=db --allow-root
+apt install -y libzip-dev zip && docker-php-ext-install zip
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+wp core download --skip-content --allow-root
 
 cp wp-config-sample.php wp-config.php
 
@@ -17,6 +26,6 @@ wp core install --url=http://php --title=wordpress --admin_user=admin --admin_pa
 
 wp plugin install wordpress-importer --activate  --allow-root
 
-wp import /var/www/html/wp-config/plugins/coil-wordpress-plugin/cypress/fixtures --authors=create  --allow-root
+wp import /var/www/html/wp-config/plugins/coil-wordpress-plugin/cypress/fixtures/coil-automation.xml --authors=create  --allow-root
 
 # wp plugin activate /var/www/html/wp-config/plugins/coil-wordpress-plugin/plugin.php --allow-root
