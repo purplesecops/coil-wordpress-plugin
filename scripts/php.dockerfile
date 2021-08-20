@@ -5,38 +5,35 @@ WORKDIR /var/www/html
 RUN docker-php-ext-install mysqli
 
 RUN docker-php-ext-install pdo pdo_mysql
- 
+
+# Installing wp-cli
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-
 RUN chmod +x wp-cli.phar
-
 RUN mv wp-cli.phar /usr/local/bin/wp
 
+# Installing mysql-client
 RUN apt update
-
 RUN apt install default-mysql-client -y
 
+# Downloading wordPress core, which requires ZipArchive and copying in the plugin code
 RUN apt install -y libzip-dev zip && docker-php-ext-install zip
-
 RUN wp core download --skip-content --allow-root
-
 COPY . /var/www/html/wp-content/plugins/coil-wordpress-plugin
-
 RUN cp wp-config-sample.php wp-config.php
 
+# Adjusting the wp-config.php file appropriately for the context
 RUN sed -i "s/database_name_here/wordpress/" "wp-config.php"
 RUN sed -i "s/username_here/admin/" "wp-config.php"
 RUN sed -i "s/password_here/password/" "wp-config.php"
 RUN sed -i "s/localhost/db/" "wp-config.php"
 
-RUN bash curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash && nvm install 12 && nvm use 12
+# Installing nvm to install Cypress as well as its dependencies
+RUN apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
+RUN curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
+SHELL ["/bin/bash", "-c"]
+RUN bash install.sh
+RUN chmod -R 777 ~
+RUN source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress
 
-# RUN wp core install --url=http://php --title=wordpress --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email  --allow-root
-
-# RUN wp plugin install wordpress-importer --activate  --allow-root
-
-# RUN wp import 'wp-content/plugins/coil-wordpress-plugin/cypress/fixtures' --authors=create  --allow-root
-
-# RUN wp plugin activate coil-web-monetization/plugin.php --allow-root or wp plugin install coil-web-monetization --activate --allow-root
-
+# ENTRYPOINT [ "/var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/wordpress-set-up.sh" ]
 CMD ["apache2-foreground"]

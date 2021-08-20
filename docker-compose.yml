@@ -11,13 +11,7 @@ services:
         working_dir: /var/www/html
         volumes:
             - .:/var/www/html/wp-content/plugins/coil-wordpress-plugin
+        ports:
+            - 9000:80
         depends_on:
             - db
-    cypress:
-        build:
-            context: .
-            dockerfile: ./scripts/cypress.dockerfile
-        volumes:
-            - .:/app
-        depends_on:
-            - php
