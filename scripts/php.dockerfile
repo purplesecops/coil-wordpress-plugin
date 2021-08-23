@@ -20,7 +20,7 @@ RUN apt install -y libzip-dev zip && docker-php-ext-install zip
 RUN wp core download --allow-root
 COPY . /var/www/html/wp-content/plugins/coil-wordpress-plugin
 
-# RUN addgroup -g 1000 php-user && adduser -G php-user -g php-user -s /bin/sh -D php-user
+# RUN groupadd -g 1000 php-user && useradd -G php-user -g php-user -s /bin/bash -D php-user
 # USER php-user
 # RUN chown -R php-user:php-user .
 
@@ -32,7 +32,7 @@ RUN sed -i "s/password_here/password/" "wp-config.php"
 RUN sed -i "s/localhost/db/" "wp-config.php"
 
 # Installing nvm to install Cypress as well as its dependencies
-RUN apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
+RUN apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
 RUN curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
 # Setting the shell to bash to make sure the nvm scripts work correctly
 SHELL ["/bin/bash", "-c"]

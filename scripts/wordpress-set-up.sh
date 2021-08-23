@@ -6,7 +6,7 @@ set -e
 
 wp core install --url=http://php --title=wordpress --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email  --allow-root
 
-wp db import /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/importtest.sql --allow-root
+wp db import /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/test-site.sql --allow-root
 
 # wp plugin install wordpress-importer --activate  --allow-root
 
