@@ -42,6 +42,6 @@ RUN chmod -R 777 ~
 RUN source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress
 RUN chmod -R 777 ~
 
-# CMD ["apache2-foreground"]
-# ENTRYPOINT ["/bin/bash", "/var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/wordpress-set-up.sh"]
 ENTRYPOINT ["sleep", "10000"]
+
+# ENTRYPOINT ["/bin/bash", "/var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/wordpress-set-up.sh"]

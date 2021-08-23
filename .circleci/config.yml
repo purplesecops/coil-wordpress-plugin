@@ -56,7 +56,6 @@ jobs:
   cypress_tests:
     docker:
       - image: php:7-apache
-      - image: cypress/included:5.6.0
       - image: mysql
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
@@ -81,27 +80,56 @@ jobs:
             echo Failed waiting for MySQL && exit 1
       - run:
         # Might also need wp-core-download becasue code only includes plugin not WordPress site, still need to activate plugin first
-          name: Set up WordPress site
+          name: Install extensions
           command: |
             docker-php-ext-install mysqli
             docker-php-ext-install pdo pdo_mysql
+      - run:
+          name: Installing wp-cli.phar
+          command: |
             curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
             chmod +x wp-cli.phar
             mv wp-cli.phar /usr/local/bin/wp
-            wp core download
-            cd wp-content/plugins
+      - run:
+          name: Installing WordPress
+          command: |
+              RUN apt install -y libzip-dev zip && docker-php-ext-install zip
+              RUN wp core download
+              cd wp-content/plugins/coil-wordpress-plugin
       - checkout
       - run:
-          name: ls and pwd
+          name: Adjusting the wp-config.php file appropriately for the context
           command: |
-            ls
-            pwd
+            cd /var/www/html
+            cp wp-config-sample.php wp-config.php
+            sed -i "s/database_name_here/wordpress/" "wp-config.php"
+            sed -i "s/username_here/admin/" "wp-config.php"
+            sed -i "s/password_here/password/" "wp-config.php"
+            sed -i "s/localhost/db/" "wp-config.php"
       - run:
-          name: Initializing WordPress
+          name: Installing nvm to install Cypress as well as its dependencies
           command: |
-            wp core install --url=http://php --title=coil --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email --allow-root
-            wp plugin install wordpress-importer --activate --allow-root
-            wp import 'wp-content/plugins/coil-wordpress-plugin/cypress/fixtures' --authors=create --allow-root
+            apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
+            curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
+            install.sh
+            nvm install 12
+            nvm use 12
+            nvm install-latest-npm
+            npm install cypress
+      - run:
+          name: Running apache
+          command: ./scripts/apache2-background.sh
+      - run:
+          name: Initializing the database, importing data, and activating the plugin
+          command: |
+            wp core install --url=http://php --title=wordpress --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email
+            wp db import /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/test-site.sql
+            wp plugin activate coil-wordpress-plugin
+      - run:
+          name: Cypress tests
+          command: |
+            cd wp-content/plugins/coil-wordpress-plugin
+            npx cypress run --config baseUrl="http://php"
 workflows:
   version: 2
   test:
