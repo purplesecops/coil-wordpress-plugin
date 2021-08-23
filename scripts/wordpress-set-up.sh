@@ -2,13 +2,15 @@
 
 set -e
 
-./apache2-background.sh
+# ./apache2-background.sh
 
 wp core install --url=http://php --title=wordpress --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email  --allow-root
 
-wp plugin install wordpress-importer --activate  --allow-root
+wp db import /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/importtest.sql --allow-root
 
-wp import /var/www/html/wp-content/plugins/coil-wordpress-plugin/cypress/fixtures/coil-automation.xml --authors=create  --allow-root
+# wp plugin install wordpress-importer --activate  --allow-root
+
+# wp import /var/www/html/wp-content/plugins/coil-wordpress-plugin/cypress/fixtures/coil-automation.xml --authors=create  --allow-root
 
 wp plugin activate coil-wordpress-plugin --allow-root
 

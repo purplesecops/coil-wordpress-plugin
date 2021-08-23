@@ -17,8 +17,12 @@ RUN apt install default-mysql-client -y
 
 # Downloading wordPress core, which requires ZipArchive and copying in the plugin code
 RUN apt install -y libzip-dev zip && docker-php-ext-install zip
-RUN wp core download --skip-content --allow-root
+RUN wp core download --allow-root
 COPY . /var/www/html/wp-content/plugins/coil-wordpress-plugin
+
+# RUN addgroup -g 1000 php-user && adduser -G php-user -g php-user -s /bin/sh -D php-user
+# USER php-user
+# RUN chown -R php-user:php-user .
 
 # Adjusting the wp-config.php file appropriately for the context
 RUN cp wp-config-sample.php wp-config.php
@@ -39,4 +43,5 @@ RUN source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-n
 RUN chmod -R 777 ~
 
 # CMD ["apache2-foreground"]
-ENTRYPOINT ["/bin/bash", "/var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/wordpress-set-up.sh"]
+# ENTRYPOINT ["/bin/bash", "/var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/wordpress-set-up.sh"]
+ENTRYPOINT ["sleep", "10000"]
