@@ -2,6 +2,8 @@
 
 set -e
 
+./apache2-background.sh
+
 wp core install --url=http://php --title=wordpress --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email  --allow-root
 
 wp plugin install wordpress-importer --activate  --allow-root
