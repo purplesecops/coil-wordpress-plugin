@@ -128,6 +128,6 @@ workflows:
       # - php_testing:
       #     requires:
       #       - js_scss_linting
-      - cypress_tests:
-          requires:
+      - cypress_tests
+          # requires:
             # - php_testing
