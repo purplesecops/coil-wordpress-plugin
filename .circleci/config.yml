@@ -123,10 +123,10 @@ workflows:
   version: 2
   test:
     jobs:
-      - js_scss_linting
-      - php_testing:
-          requires:
-            - js_scss_linting
+      # - js_scss_linting
+      # - php_testing:
+      #     requires:
+      #       - js_scss_linting
       - cypress_tests:
           requires:
             - php_testing
