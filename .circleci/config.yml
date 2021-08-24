@@ -87,7 +87,8 @@ jobs:
               apt update
               apt install -y libzip-dev zip && docker-php-ext-install zip
               wp core download --allow-root
-              mv coil-wordpress-plugin wp-content/plugins
+      - run: pwd && ls
+      - run: mv coil-wordpress-plugin wp-content/plugins
       - run: pwd && ls
       - run: cd /var/www/html/wp-content/plugins/coil-wordpress-plugin && pwd && ls && cd /var/www/html
       - run:
