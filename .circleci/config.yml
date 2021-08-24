@@ -85,7 +85,11 @@ jobs:
               apt update
               apt install -y libzip-dev zip && docker-php-ext-install zip
               wp core download --allow-root
-              cd wp-content/plugins/coil-wordpress-plugin
+              cd wp-content/plugins
+              ls
+              mkdir coil-wordpress-plugin
+              ls
+              cd coil-wordpress-plugin
       - checkout
       - run:
           name: Adjusting the wp-config.php file appropriately for the context
@@ -118,10 +122,7 @@ jobs:
       - run:
           name: Cypress tests
           command: |
-            cd wp-content/plugins
-            ls
-            mkdir coil-wordpress-plugin
-            cd coil-wordpress-plugin
+            cd wp-content/plugins/coil-wordpress-plugin
             npx cypress run --config baseUrl="http://127.0.0.1"
 workflows:
   version: 2
