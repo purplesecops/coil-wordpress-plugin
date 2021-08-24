@@ -82,7 +82,7 @@ jobs:
       - run:
           name: Installing WordPress
           command: |
-              docker-php-ext-install zip
+              apt install -y libzip && docker-php-ext-install zip
               sudo -u USER -i -- wp core download
               cd wp-content/plugins/coil-wordpress-plugin
       - checkout
@@ -111,9 +111,9 @@ jobs:
       - run:
           name: Initializing the database, importing data, and activating the plugin
           command: |
-            wp core install --url=http://php --title=wordpress --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email
-            wp db import /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/test-site.sql
-            wp plugin activate coil-wordpress-plugin
+            sudo -u USER -i --  wp core install --url=http://php --title=wordpress --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email
+            sudo -u USER -i --  wp db import /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/test-site.sql
+            sudo -u USER -i --  wp plugin activate coil-wordpress-plugin
       - run:
           name: Cypress tests
           command: |
