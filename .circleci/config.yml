@@ -88,8 +88,6 @@ jobs:
               apt install -y libzip-dev zip && docker-php-ext-install zip
               wp core download --allow-root
               mv /var/www/html/coil-wordpress-plugin /var/www/html/wp-content/plugins/coil-wordpress-plugin
-      - run: cd /var/www/html/wp-content/plugins && pwd && ls
-      - run: cd /var/www/html/wp-content/plugins/coil-wordpress-plugin && pwd && ls
       - run:
           name: Adjusting the wp-config.php file appropriately for the context
           command: |
