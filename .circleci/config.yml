@@ -130,4 +130,4 @@ workflows:
       #       - js_scss_linting
       - cypress_tests:
           requires:
-            - php_testing
+            # - php_testing
