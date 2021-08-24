@@ -119,6 +119,7 @@ jobs:
           name: Cypress tests
           command: |
             cd wp-content/plugins
+            ls
             mkdir coil-wordpress-plugin
             cd coil-wordpress-plugin
             npx cypress run --config baseUrl="http://127.0.0.1"
