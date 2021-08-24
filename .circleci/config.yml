@@ -84,7 +84,7 @@ jobs:
           command: |
               apt update
               apt install -y libzip-dev zip && docker-php-ext-install zip
-              -u USER -i -- wp core download
+              USER -i -- wp core download
               cd wp-content/plugins/coil-wordpress-plugin
       - checkout
       - run:
