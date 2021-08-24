@@ -38,7 +38,7 @@ describe('Plugin Settings', function () {
 		cy.get('.notice').should('have.class', 'notice-success');
 
 		// Check the payment pointer is output in a post's HTML.
-		cy.visit('/');
+		cy.visit('/blog');
 		// ??
 		// cy.get('article.hentry:first .entry-title a').click();
 		cy.get('head meta[name="monetization"]').should('have.attr', 'content', paymentPointer);
