@@ -101,14 +101,6 @@ jobs:
             sed -i "s/password_here/password/" "wp-config.php"
             sed -i "s/localhost/127.0.0.1/" "wp-config.php"
       - run:
-          name: Installing nvm to install Cypress as well as its dependencies
-          command: |
-            apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
-            curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
-            bash install.sh
-            chmod -R 777 ~
-            source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress
-      - run:
           name: Running apache
           command: bash /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/apache2-background.sh
       - run:
@@ -118,10 +110,15 @@ jobs:
             wp db import /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/db.sql --allow-root
             wp plugin activate coil-wordpress-plugin --allow-root
       - run:
-          name: Cypress tests
+          name: Installing npm and running Cypress tests
           command: |
+            apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
+            curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
+            bash install.sh
+            chmod -R 777 ~
+            pwd && ls -la
             cd /var/www/html/wp-content/plugins/coil-wordpress-plugin
-            source ~/.nvm/nvm.sh && npx cypress run --config baseUrl="http://127.0.0.1"
+            source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress && npx cypress run --config baseUrl="http://127.0.0.1"
 workflows:
   version: 2
   test:
