@@ -68,7 +68,7 @@ jobs:
     working_directory: /var/www/html
     steps:
       - checkout
-      - run: mv * /var/www/html/coil-wordpress-plugin
+      - run: mkdir /coil-wordpress-plugin && pwd && ls && mv * /coil-wordpress-plugin
       - run:
         # Might also need wp-core-download becasue code only includes plugin not WordPress site, still need to activate plugin first
           name: Install extensions
@@ -88,7 +88,7 @@ jobs:
               apt install -y libzip-dev zip && docker-php-ext-install zip
               wp core download --allow-root
       - run: pwd && ls
-      - run: mv coil-wordpress-plugin wp-content/plugins
+      - run: mv /coil-wordpress-plugin /var/www/htmlwp-content/plugins
       - run: pwd && ls
       - run: cd /var/www/html/wp-content/plugins/coil-wordpress-plugin && pwd && ls && cd /var/www/html
       - run:
