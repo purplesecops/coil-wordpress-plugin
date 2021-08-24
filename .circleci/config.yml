@@ -67,8 +67,9 @@ jobs:
           MYSQL_HOST: 127.0.0.1
     working_directory: /var/www/html
     steps:
-      - run: mkdir coil-wordpress-plugin && cd coil-wordpress-plugin
       - checkout
+      - run: pwd
+      - run: ls
       - run:
         # Might also need wp-core-download becasue code only includes plugin not WordPress site, still need to activate plugin first
           name: Install extensions
