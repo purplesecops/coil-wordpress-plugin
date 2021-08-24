@@ -101,8 +101,7 @@ jobs:
           command: |
             apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
             curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
-            pwd && ls
-            install.sh
+            bash install.sh
             nvm install 12
             nvm use 12
             nvm install-latest-npm
