@@ -69,7 +69,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir coil-wordpress-plugin
-      - run: ls
+      - run: pwd && ls
       - run: mv *.* var/www/html/coil-wordpress-plugin
       - run: pwd && ls
       - run: cd coil-wordpress-plugin && pwd && ls
