@@ -68,7 +68,7 @@ jobs:
     working_directory: /var/www/html
     steps:
       - checkout
-      - run: mkdir /var/www/html/coil-wordpress-plugin && mv *.* /var/www/html/coil-wordpress-plugin && cd /var/www/html/coil-wordpress-plugin && pwd && ls
+      - run: mkdir /var/www/html/coil-wordpress-plugin && mv *.* /var/www/html/coil-wordpress-plugin
       - run:
         # Might also need wp-core-download becasue code only includes plugin not WordPress site, still need to activate plugin first
           name: Install extensions
