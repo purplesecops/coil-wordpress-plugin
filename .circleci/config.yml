@@ -121,7 +121,7 @@ jobs:
           name: Cypress tests
           command: |
             cd /var/www/html/wp-content/plugins/coil-wordpress-plugin
-            npx cypress run --config baseUrl="http://127.0.0.1"
+            source ~/.nvm/nvm.sh && npx cypress run --config baseUrl="http://127.0.0.1"
 workflows:
   version: 2
   test:
