@@ -106,7 +106,7 @@ jobs:
             source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress
       - run:
           name: Running apache
-          command: ./scripts/apache2-background.sh
+          command: bash /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/apache2-background.sh
       - run:
           name: Initializing the database, importing data, and activating the plugin
           command: |
