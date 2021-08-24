@@ -43,7 +43,7 @@ jobs:
           name: Install MySQL CLI
           command: |
             sudo apt update
-            sudo apt install mysql-client
+            sudo apt-get install mysql-client
       - run:
           name: Setup PHPUnit
           command: sudo bash ./scripts/setup-phpunit-ci.sh
@@ -85,7 +85,7 @@ jobs:
           name: Installing mysql-client
           command: |
             apt update
-            apt install mysql-client -y
+            apt install default-mysql-client -y
       - run:
           name: Installing WordPress
           command: |
@@ -111,7 +111,6 @@ jobs:
       - run:
           name: Running apache
           command: bash /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/apache2-background.sh
-      - run: mysql -v
       - run:
           name: Initializing the database, importing data, and activating the plugin
           command: |
@@ -122,7 +121,7 @@ jobs:
           name: Cypress tests
           command: |
             cd /var/www/html/wp-content/plugins/coil-wordpress-plugin
-            npx cypress run --config baseUrl="http://127.0.0.1"
+            cypress run --config baseUrl="http://127.0.0.1"
 workflows:
   version: 2
   test:
