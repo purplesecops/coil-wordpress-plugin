@@ -20,28 +20,14 @@ describe('Fully restricted posts', () => {
 			.get('#submit')
 			.click();
 
-		cy.visit('/');
-
-		cy.get('.entry-title a')
-			.contains('Coil Members Only')
-			.then($link => {
-				$link[0].scrollIntoView();
-				$link[0].click();
-			})
+		cy.visit('/?p=109/');
 		cy
 			.contains(lockedMessage)
 			.should('be.visible');
 	})
 
 	it('Checks that a VM enabled user can view monetized content', () => {
-		cy.visit('/');
-
-		cy.get('.entry-title a')
-			.contains('Coil Members Only')
-			.then($link => {
-				$link[0].scrollIntoView();
-				$link[0].click();
-			})
+		cy.visit('/?p=109/');
 		cy
 			.contains('This is a test post for the Coil Members Only state.')
 			.should('not.be.visible');
