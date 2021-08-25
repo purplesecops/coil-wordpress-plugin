@@ -119,7 +119,7 @@ jobs:
             chmod -R 777 ~
             pwd && ls -la
             cd /var/www/html/wp-content/plugins/coil-wordpress-plugin
-            source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress && npx cypress run --config baseUrl="http://127.0.0.1"
+            source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress && npx cypress run --config baseUrl="http://127.0.0.1:80"
 workflows:
   version: 2
   test:
