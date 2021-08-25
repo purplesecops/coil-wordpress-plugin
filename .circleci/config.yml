@@ -110,7 +110,6 @@ jobs:
             wp import /var/www/html/wp-content/plugins/coil-wordpress-plugin/cypress/fixtures/coil-automation-docker.xml --authors=create  --allow-root
             wp rewrite structure '/%postname%' --allow-root
             wp plugin activate coil-wordpress-plugin --allow-root
-      - run: cd ~/.wp-cli/ && pwd && ls && cat config.yml
       - run:
           name: Installing npm and running Cypress tests
           command: |
