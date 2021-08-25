@@ -6,16 +6,7 @@ describe('Excerpt behaviour', () => {
 	it('Checks that the excerpt respects coil settings', () => {
 		setExcerptVisibility(true)
 
-		cy.visit('/');
-
-		cy.get('.entry-title a')
-			.contains('Excerpt post')
-			.then($link => {
-				$link[0].scrollIntoView();
-				$link[0].click();
-			})
-
-		// cy.visit('/excerpt-post/');
+		cy.visit('/excerpt-post/');
 
 		cy
 			.contains('This content should be visible as an excerpt')
