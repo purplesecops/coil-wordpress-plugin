@@ -26,18 +26,18 @@ describe('Fully restricted posts', () => {
 			.should('be.visible');
 	})
 
-	it('Checks that a VM enabled user can view monetized content', () => {
-		cy.visit('/?p=109/');
-		cy
-			.contains('This is a test post for the Coil Members Only state.')
-			.should('not.be.visible');
+	// it('Checks that a VM enabled user can view monetized content', () => {
+	// 	cy.visit('/?p=109/');
+	// 	cy
+	// 		.contains('This is a test post for the Coil Members Only state.')
+	// 		.should('not.be.visible');
 
-		cy.startWebMonetization();
+	// 	cy.startWebMonetization();
 
-		cy
-			.contains('This is a test post for the Coil Members Only state.')
-			.should('be.visible');
+	// 	cy
+	// 		.contains('This is a test post for the Coil Members Only state.')
+	// 		.should('be.visible');
 
-		cy.stopWebMonetization();
-	})
+	// 	cy.stopWebMonetization();
+	// })
 })
