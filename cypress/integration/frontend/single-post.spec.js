@@ -33,7 +33,7 @@ describe('Single Posts', function () {
 	});
 
 	// Seems repetitive?
-	// it('check that I can view single post set to monetised and public.', function() {
+	// it('check that I can view single post set to monetized and public.', function() {
 	// 	cy.visit('/');
 
 	// 	cy.get('.hentry .entry-title a')
@@ -61,7 +61,7 @@ describe('Single Posts', function () {
 		cy.visit('/');
 
 		cy.get('.entry-title a')
-			.contains('Members Only')
+			.contains('Coil Members Only')
 			.then($link => {
 				$link[0].scrollIntoView();
 				$link[0].click();
