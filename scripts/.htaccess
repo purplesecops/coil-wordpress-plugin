@@ -11,7 +11,7 @@ RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
-RewriteRule ^coil-members-only$ 109
+RewriteRule ^coil-members-only$ ?p=109
 </IfModule>
 
 # END WordPress
