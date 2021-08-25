@@ -10,14 +10,14 @@ describe('Padlock test', () => {
 
 		togglePadlock('check');
 
-		cy.visit('/coil-members-only/')
+		cy.visit('/?p=109/')
 		cy
 			.get('.entry-title')
 			.should('contain', '🔒')
 
 		togglePadlock('uncheck');
 
-		cy.visit('/coil-members-only/')
+		cy.visit('/?p=109/')
 		cy
 			.get('.entry-title > .emoji')
 			.should('not.exist')
