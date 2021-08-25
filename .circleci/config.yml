@@ -98,7 +98,7 @@ jobs:
             sed -i "s/database_name_here/wordpress/" "wp-config.php"
             sed -i "s/username_here/admin/" "wp-config.php"
             sed -i "s/password_here/password/" "wp-config.php"
-            sed -i "s/localhost/127.0.0.1/" "wp-config.php"
+            sed -i "s/localhost/127.0.0.1:80/" "wp-config.php"
       - run:
           name: Running apache
           command: bash /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/apache2-background.sh
