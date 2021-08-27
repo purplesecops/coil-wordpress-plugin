@@ -117,7 +117,7 @@ jobs:
             bash install.sh
             chmod -R 777 ~
             cd /var/www/html/wp-content/plugins/coil-wordpress-plugin
-            source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress && npx cypress run --config baseUrl="http://127.0.0.1:80/" --record --key=qiooce
+            source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress && npx cypress run --config baseUrl="http://127.0.0.1:80/" --record --key=922fab3b-54e3-4369-9c78-c6f1a4ea9ea7
 workflows:
   version: 2
   test:
