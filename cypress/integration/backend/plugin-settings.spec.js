@@ -1,3 +1,5 @@
+// Need to add tests for the rest of the settings panel
+
 /**
  * Site setting / option tests.
  */
