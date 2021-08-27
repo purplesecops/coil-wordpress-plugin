@@ -1,5 +1,5 @@
 {
-	"baseUrl": "http://localhost:10008/",
+	"baseUrl": "http://localhost:10029/",
 	"projectId": "qiooce",
 	"video": true,
 	"videoUploadOnPasses": false,

@@ -67,7 +67,7 @@ jobs:
     working_directory: /var/www/html
     steps:
       - checkout
-      - run: mkdir /coil-wordpress-plugin && pwd && ls && mv * /coil-wordpress-plugin
+      - run: mkdir /coil-wordpress-plugin && mv * /coil-wordpress-plugin
       - run:
         # Might also need wp-core-download becasue code only includes plugin not WordPress site, still need to activate plugin first
           name: Install extensions
@@ -116,7 +116,6 @@ jobs:
             curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
             bash install.sh
             chmod -R 777 ~
-            pwd && ls -la
             cd /var/www/html/wp-content/plugins/coil-wordpress-plugin
             source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress && npx cypress run --config baseUrl="http://127.0.0.1:80/"
 workflows:
