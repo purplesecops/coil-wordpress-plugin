@@ -129,7 +129,7 @@ jobs:
           name: Cypress tests
           command: |
             cd wp-content/plugins/coil-wordpress-plugin
-            npx cypress run --config baseUrl="http://php"
+            npx cypress run --config baseUrl="http://127.0.0.1:80/" --record --key=CYPRESS_PROJECT_KEY
 workflows:
   version: 2
   test:
