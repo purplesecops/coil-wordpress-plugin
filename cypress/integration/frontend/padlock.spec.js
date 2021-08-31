@@ -10,10 +10,10 @@ describe('Padlock test', () => {
 
 		togglePadlock('check');
 
-		cy.visit('/coil-members-only/')
-		cy
-			.get('.entry-title')
-			.should('contain', '🔒')
+		// cy.visit('/coil-members-only/')
+		// cy
+		// 	.get('.entry-title')
+		// 	.should('contain', '🔒')
 
 		togglePadlock('uncheck');
 
