@@ -17,7 +17,7 @@ describe('Padlock test', () => {
 
 		togglePadlock('uncheck');
 
-		cy.visit('/coil-members-only/')
+		cy.visit('/?p=109/')
 		cy
 			.get('.entry-title > .emoji')
 			.should('not.exist')
@@ -30,11 +30,11 @@ describe('Padlock test', () => {
  * @param {('check'|'uncheck')} checkboxState
  */
 function togglePadlock(checkboxState) {
-	cy.visit('/wp-admin/admin.php?page=coil_settings&tab=messaging_settings')
+	cy.visit('/wp-admin/admin.php?page=coil_settings')
 
-	cy
-		.get('#coil-appearance-settings')
-		.click();
+	cy.get('.nav-tab-wrapper > #coil-appearance-settings')
+		.contains('Appearance')
+		.click()
 
 	switch(checkboxState) {
 		case 'check':

@@ -29,7 +29,7 @@ RUN cp wp-config-sample.php wp-config.php
 RUN sed -i "s/database_name_here/wordpress/" "wp-config.php"
 RUN sed -i "s/username_here/admin/" "wp-config.php"
 RUN sed -i "s/password_here/password/" "wp-config.php"
-RUN sed -i "s/localhost/db/" "wp-config.php"
+RUN sed -i "s/localhost/127.0.0.1/" "wp-config.php"
 
 # Installing nvm to install Cypress as well as its dependencies
 RUN apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y

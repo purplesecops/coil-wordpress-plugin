@@ -34,7 +34,7 @@ describe('"Learn more button" panel', function () {
 		cy.get('#coil_learn_more_button_text').should('have.value', label);
 
 		// Test the front-end.
-		cy.visit('/coil-members-only/');
+		cy.visit('/?p=109/');
 		cy.get('.coil-message-button')
 			.contains(label);
 	});

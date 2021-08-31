@@ -63,21 +63,11 @@ jobs:
           MYSQL_PASSWORD: "password"
           MYSQL_ROOT_PASSWORD: "password"
           MYSQL_DATABASE: wordpress
-          # Might need to be in quotes?? Or localhost
           MYSQL_HOST: 127.0.0.1
     working_directory: /var/www/html
     steps:
-      - run:
-          # The primary container isn't MYSQL, running a sleep command until it's ready.
-          name: Waiting for MySQL to be ready
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3306 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for MySQL && exit 1
+      - checkout
+      - run: mkdir /coil-wordpress-plugin && mv * /coil-wordpress-plugin
       - run:
         # Might also need wp-core-download becasue code only includes plugin not WordPress site, still need to activate plugin first
           name: Install extensions
@@ -91,53 +81,51 @@ jobs:
             chmod +x wp-cli.phar
             mv wp-cli.phar /usr/local/bin/wp
       - run:
+          name: Installing mysql-client
+          command: |
+            apt update
+            apt install default-mysql-client -y
+      - run:
           name: Installing WordPress
           command: |
-              RUN apt install -y libzip-dev zip && docker-php-ext-install zip
-              RUN wp core download
-              cd wp-content/plugins/coil-wordpress-plugin
-      - checkout
+              apt install -y libzip-dev zip && docker-php-ext-install zip
+              wp core download --allow-root
+              mv /coil-wordpress-plugin /var/www/html/wp-content/plugins
       - run:
           name: Adjusting the wp-config.php file appropriately for the context
           command: |
-            cd /var/www/html
             cp wp-config-sample.php wp-config.php
             sed -i "s/database_name_here/wordpress/" "wp-config.php"
             sed -i "s/username_here/admin/" "wp-config.php"
             sed -i "s/password_here/password/" "wp-config.php"
-            sed -i "s/localhost/db/" "wp-config.php"
-      - run:
-          name: Installing nvm to install Cypress as well as its dependencies
-          command: |
-            apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
-            curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
-            install.sh
-            nvm install 12
-            nvm use 12
-            nvm install-latest-npm
-            npm install cypress
+            sed -i "s/localhost/127.0.0.1/" "wp-config.php"
       - run:
           name: Running apache
-          command: ./scripts/apache2-background.sh
+          command: bash /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/apache2-background.sh
       - run:
           name: Initializing the database, importing data, and activating the plugin
           command: |
-            wp core install --url=http://php --title=wordpress --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email
-            wp db import /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/test-site.sql
-            wp plugin activate coil-wordpress-plugin
+            wp core install --url="http://127.0.0.1" --title=wordpress --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email --allow-root
+            wp plugin install wordpress-importer --activate  --allow-root
+            wp import /var/www/html/wp-content/plugins/coil-wordpress-plugin/cypress/fixtures/coil-automation-CI.xml --authors=create  --allow-root
+            wp plugin activate coil-wordpress-plugin --allow-root
       - run:
-          name: Cypress tests
+          name: Installing npm and running Cypress tests
           command: |
-            cd wp-content/plugins/coil-wordpress-plugin
-            npx cypress run --config baseUrl="http://127.0.0.1:80/" --record --key=CYPRESS_PROJECT_KEY
+            apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
+            curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
+            bash install.sh
+            chmod -R 777 ~
+            cd /var/www/html/wp-content/plugins/coil-wordpress-plugin
+            source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress && npx cypress run --config baseUrl="http://127.0.0.1:80/" --record --key=CYPRESS_PROJECT_KEY
 workflows:
   version: 2
   test:
     jobs:
-      - js_scss_linting
-      - php_testing:
-          requires:
-            - js_scss_linting
-      - cypress_tests:
-          requires:
-            - php_testing
+      # - js_scss_linting
+      # - php_testing:
+      #     requires:
+      #       - js_scss_linting
+      - cypress_tests
+          # requires:
+            # - php_testing
