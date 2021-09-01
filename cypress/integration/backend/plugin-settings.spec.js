@@ -62,7 +62,7 @@ describe('Plugin Settings', function () {
 		cy.get('.coil-no-payment-pointer-notice__content').should('exist')
 	});
 
-	it.only('Check warning pops up if CSS selector is empty', function( ) {
+	it('Check warning pops up if CSS selector is empty', function( ) {
 		cy.get('#adminmenu')
 			.find('div.wp-menu-name')
 			.contains('Coil')
