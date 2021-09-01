@@ -20,23 +20,23 @@ describe('Excerpt behaviour', () => {
 			.should('not.be.visible');
 	})
 
-	it('Checks that the page excerpts respect the coil settings', () => {
-		setPageExcerptVisibility(true)
+// 	it('Checks that the page excerpts respect the coil settings', () => {
+// 		setPageExcerptVisibility(true)
 
-		cy.visit('/?p=105/');
+// 		cy.visit('/?p=105/');
 
-		cy
-			.contains('This content should be visible as an excerpt')
-			.should('be.visible');
+// 		cy
+// 			.contains('This content should be visible as an excerpt')
+// 			.should('be.visible');
 
-		setPageExcerptVisibility(false)
+// 		setPageExcerptVisibility(false)
 
-		cy.visit('/?p=105/');
-		cy
-			.contains('This content should be visible as an excerpt')
-			.should('not.be.visible');
-	})
-})
+// 		cy.visit('/?p=105/');
+// 		cy
+// 			.contains('This content should be visible as an excerpt')
+// 			.should('not.be.visible');
+// 	})
+// })
 
 /**
  * Sets whether excerpts are visible on posts
