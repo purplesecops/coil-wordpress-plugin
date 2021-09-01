@@ -19,6 +19,21 @@ describe('Plugin Settings', function () {
 			cy.get('div.plugin-branding > .plugin-branding').should('contain', 'Coil Web Monetization');
 	});
 
+	it('Check warning pops up if payment pointer is empty', function( ) {
+		cy.get('#adminmenu')
+			.find('div.wp-menu-name')
+			.contains('Coil')
+			.click();
+
+		cy.get('#coil-global-settings').click();
+
+		cy.get('#coil_payment_pointer_id')
+			.click()
+			.clear()
+		cy.get('#submit').click();
+		cy.get('.coil-no-payment-pointer-notice__content').should('exist')
+	});
+
 	it('check that the payment pointer can be set', function() {
 		cy.get('#adminmenu')
 			.find('div.wp-menu-name')
@@ -46,21 +61,6 @@ describe('Plugin Settings', function () {
 		// cy.get('article.hentry:first .entry-title a').click();
 		cy.get('head meta[name="monetization"]').should('have.attr', 'content', paymentPointer);
 	} );
-
-	it('Check warning pops up if payment pointer is empty', function( ) {
-		cy.get('#adminmenu')
-			.find('div.wp-menu-name')
-			.contains('Coil')
-			.click();
-
-		cy.get('#coil-global-settings').click();
-
-		cy.get('#coil_payment_pointer_id')
-			.click()
-			.clear()
-		cy.get('#submit').click();
-		cy.get('.coil-no-payment-pointer-notice__content').should('exist')
-	});
 
 	it('Check warning pops up if CSS selector is empty', function( ) {
 		cy.get('#adminmenu')

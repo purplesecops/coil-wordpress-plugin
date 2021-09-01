@@ -51,6 +51,7 @@ describe('Fully restricted posts', () => {
 			.should('not.be.visible');
 
 		cy.startWebMonetization();
+		// The proccess must still verify before proceeding
 		cy.wait(5000);
 
 		cy
