@@ -7,7 +7,7 @@ describe('Padlock test', () => {
 	it('Checks if a padlock appears when enabled', () => {
 		togglePadlock('check');
 
-		cy.visit('/coil-members-only/')
+		cy.visit('/?p=109/')
 		cy
 			.get('.entry-title')
 			.should('contain', ' Coil Members Only')
