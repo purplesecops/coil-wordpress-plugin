@@ -5,15 +5,12 @@ describe('Padlock test', () => {
 	})
 
 	it('Checks if a padlock appears when enabled', () => {
-		// cy.server()
-		// cy.route({method: 'POST', url: '/wp-admin/admin-ajax.php'}).as('settingsSubmitted')
-
 		togglePadlock('check');
 
-		// cy.visit('/coil-members-only/')
-		// cy
-		// 	.get('.entry-title')
-		// 	.should('contain', '🔒')
+		cy.visit('/coil-members-only/')
+		cy
+			.get('.entry-title > .emoji')
+			.should('exist')
 
 		togglePadlock('uncheck');
 
@@ -54,6 +51,4 @@ function togglePadlock(checkboxState) {
 	cy
 		.get('#submit')
 		.click({force: true});
-
-	// cy.wait('@settingsSubmitted')
 }

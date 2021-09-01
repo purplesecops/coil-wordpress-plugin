@@ -45,21 +45,21 @@ describe('Fully restricted posts', () => {
 	})
 })
 
-describe('Check visibility of content for WM-enabled users', () => {
-	beforeEach(() => {
-		cy.visit('/?p=109/')
-		cy.startWebMonetization();
-	})
+// describe('Check visibility of content for WM-enabled users', () => {
+// 	beforeEach(() => {
+// 		cy.visit('/?p=109/')
+// 		cy.startWebMonetization();
+// 	})
 
-	it('Checks that a VM enabled user can view monetized content', () => {
-		cy
-			.contains('This is a test post for the Coil Members Only state.')
-			.should('be.visible');
+// 	it('Checks that a VM enabled user can view monetized content', () => {
+// 		cy
+// 			.contains('This is a test post for the Coil Members Only state.')
+// 			.should('be.visible');
 		
-		cy
-			.get('.coil-message-inner')
-			.should('not.exist');
+// 		cy
+// 			.get('.coil-message-inner')
+// 			.should('not.exist');
 
-		cy.stopWebMonetization();
-	})
-})
+// 		cy.stopWebMonetization();
+// 	})
+// })
