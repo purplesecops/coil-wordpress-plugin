@@ -56,9 +56,8 @@ describe('Plugin Settings', function () {
 		cy.get('.notice').should('have.class', 'notice-success');
 
 		// Check the payment pointer is output in a post's HTML.
-		cy.visit('/');
-		// ??
-		// cy.get('article.hentry:first .entry-title a').click();
+		// The Hello World post is set to the default settings with monetization enabled and full visibility
+		cy.visit('/?p=1');
 		cy.get('head meta[name="monetization"]').should('have.attr', 'content', paymentPointer);
 	} );
 

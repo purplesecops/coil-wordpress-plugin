@@ -43,17 +43,15 @@ describe('Fully restricted posts', () => {
 			.contains('Unlock exclusive content with Coil. Need a Coil account?')
 			.should('be.visible');
 	})
+})
+
+describe('Check visibility of content for WM-enabled users', () => {
+	beforeEach(() => {
+		cy.visit('/?p=109/')
+		cy.startWebMonetization();
+	})
 
 	it('Checks that a VM enabled user can view monetized content', () => {
-		cy.visit('/?p=109/');
-		cy
-			.contains('This is a test post for the Coil Members Only state.')
-			.should('not.be.visible');
-
-		cy.startWebMonetization();
-		// The proccess must still verify before proceeding
-		cy.wait(5000);
-
 		cy
 			.contains('This is a test post for the Coil Members Only state.')
 			.should('be.visible');
