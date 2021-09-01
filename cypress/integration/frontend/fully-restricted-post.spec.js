@@ -51,6 +51,10 @@ describe('Fully restricted posts', () => {
 // 		cy.startWebMonetization();
 // 	})
 
+// 	afterEach(() => {
+// 		cy.stopWebMonetization();
+// 	})
+
 // 	it('Checks that a VM enabled user can view monetized content', () => {
 // 		cy
 // 			.contains('This is a test post for the Coil Members Only state.')
@@ -59,7 +63,5 @@ describe('Fully restricted posts', () => {
 // 		cy
 // 			.get('.coil-message-inner')
 // 			.should('not.exist');
-
-// 		cy.stopWebMonetization();
 // 	})
 // })

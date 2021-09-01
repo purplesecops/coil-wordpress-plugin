@@ -14,9 +14,9 @@ describe('Visibility of content blocks for non WM-enabled users', () => {
 
 	it('Check visibility of content blocks shown to non WM-enabled users', () => {
 		cy
-			// .get('.everyone-shown h3')
-			// .invoke('text')
-			// .should('not.contain', hiddenContentMessage)
+			.contains('Public')
+			.should('not.contain', hiddenContentMessage)
+			.should('be.visible')
 
 		cy
 			.get('img')
@@ -25,14 +25,10 @@ describe('Visibility of content blocks for non WM-enabled users', () => {
 	})
 
 	it('Check visibility of content blocks hidden from WM-enabled users', () => {
-		// cy
-		// 	.get('.wm-hidden h3')
-		// 	.invoke('text')
-		// 	.should('not.contain', hiddenContentMessage)
-
 		cy
 			.contains('Hidden')
-			.should('be.visible');
+			.should('not.contain', hiddenContentMessage)
+			.should('be.visible')
 	})
 })
 
@@ -51,9 +47,15 @@ describe('Check visibility of content blocks for WM-enabled users', () => {
 			.get('.coil-show-monetize-users')
 			.invoke('text')
 			.should('not.contain', hiddenContentMessage)
+			.should('contain', 'Coil only')
 	})
 
 	it('Check visibility of content blocks shown to non WM-enabled users', () => {
+		cy
+			.contains('Public')
+			.should('not.contain', hiddenContentMessage)
+			.should('be.visible')
+			
 		cy
 			.get('img')
 			.invoke('text')
