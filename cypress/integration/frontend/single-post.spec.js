@@ -20,52 +20,29 @@ describe('Single Posts', function () {
 	});
 
 	it('check that the payment pointer is printed when viewing a single post.', function() {
-		cy.visit('/');
-
-		cy.get('.hentry .entry-title a')
-			.contains('Monetized and Public')
-			.then($link => {
-				$link[0].scrollIntoView();
-				$link[0].click();
-			})
-
+		cy.visit('/?p=103/');
 		cy.get('head meta[name="monetization"]').should('have.attr', 'content', paymentPointer);
 	});
 
-	// Seems repetitive?
-	// it('check that I can view single post set to monetized and public.', function() {
-	// 	cy.visit('/');
-
-	// 	cy.get('.hentry .entry-title a')
-	// 		.contains('Monetized and Public')
-	// 		.then($link => {
-	// 			$link[0].scrollIntoView();
-	// 			$link[0].click();
-	// 		})
-	// });
+	it('check that I can view single post set to monetized and public.', function() {
+		cy.visit('/?p=103/');
+		cy
+		.get('.entry-content > p')
+		.should('be.visible')
+		.should('contain', 'Lorem ipsum');
+	});
 
 	it('check that I can view single post set to no monetization.', function() {
-		cy.visit('/');
-
-		cy.get('.entry-title a')
-			.contains('No Monetization')
-			.then($link => {
-				$link[0].scrollIntoView();
-				$link[0].click();
-			})
-
+		cy.visit('/?p=112/');
 		cy.get('head meta[name="monetization"]', {timeout: 0}).should('not.exist');
+		cy
+		.get('.entry-content > p')
+		.should('be.visible')
+		.should('contain', 'Everything is visible.');
 	});
 
 	it('without a browser extension, check that I cannot view a post set to members only.', function() {
-		cy.visit('/');
-
-		cy.get('.entry-title a')
-			.contains('Coil Members Only')
-			.then($link => {
-				$link[0].scrollIntoView();
-				$link[0].click();
-			})
+		cy.visit('/?p=109/');
 
 		// Main article content should be hidden with CSS.
 		cy.get('.entry-content:not(.coil-message-container)').should('not.be.visible');
