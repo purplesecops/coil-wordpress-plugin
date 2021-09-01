@@ -10,7 +10,7 @@ describe('Fully restricted posts', () => {
 			.get('#coil-messaging-settings')
 			.click();
 
-		let lockedMessage = 'This post is fully locked!'
+		const lockedMessage = 'This post is fully locked!'
 
 		cy
 			.get('#coil_fully_gated_content_message')
@@ -30,11 +30,9 @@ describe('Fully restricted posts', () => {
 			.get('#coil-messaging-settings')
 			.click();
 
-		lockedMessage = 'Unlock exclusive content with Coil. Need a Coil account?'
-
 		cy
 			.get('#coil_fully_gated_content_message')
-			.type(`{selectall}${lockedMessage}`)
+			.clear().type('Unlock exclusive content with Coil. Need a Coil account?')
 
 		cy
 			.get('#submit')
@@ -42,7 +40,7 @@ describe('Fully restricted posts', () => {
 
 		cy.visit('/?p=109/');
 		cy
-			.contains(lockedMessage)
+			.contains('Unlock exclusive content with Coil. Need a Coil account?')
 			.should('be.visible');
 	})
 
@@ -53,6 +51,7 @@ describe('Fully restricted posts', () => {
 			.should('not.be.visible');
 
 		cy.startWebMonetization();
+		cy.wait(5000);
 
 		cy
 			.contains('This is a test post for the Coil Members Only state.')
