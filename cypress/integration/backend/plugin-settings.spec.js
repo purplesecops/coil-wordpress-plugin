@@ -17,7 +17,7 @@ describe('Plugin Settings', function () {
 			.click();
 
 			cy.get('div.plugin-branding > .plugin-branding').should('contain', 'Coil Web Monetization');
-  });
+	});
 
 	it('check that the payment pointer can be set', function() {
 		cy.get('#adminmenu')
@@ -34,6 +34,7 @@ describe('Plugin Settings', function () {
 			.clear()
 			.type(paymentPointer);
 		cy.get('#submit').click();
+		cy.get('.coil-no-payment-pointer-notice__content').should('not.exist')
 
 		// Settings page is reloaded.
 		cy.get('@paymentPointerField').should('have.value', paymentPointer);
@@ -45,4 +46,61 @@ describe('Plugin Settings', function () {
 		// cy.get('article.hentry:first .entry-title a').click();
 		cy.get('head meta[name="monetization"]').should('have.attr', 'content', paymentPointer);
 	} );
+
+	it('Check warning pops up if payment pointer is empty', function( ) {
+		cy.get('#adminmenu')
+			.find('div.wp-menu-name')
+			.contains('Coil')
+			.click();
+
+		cy.get('#coil-global-settings').click();
+
+		cy.get('#coil_payment_pointer_id')
+			.click()
+			.clear()
+		cy.get('#submit').click();
+		cy.get('.coil-no-payment-pointer-notice__content').should('exist')
+	});
+
+	it('check that the CSS selectors can be set', function() {
+		cy.get('#adminmenu')
+			.find('div.wp-menu-name')
+			.contains('Coil')
+			.click();
+
+		cy.get('#coil-global-settings').click();
+
+		cy.get('#coil_payment_pointer_id')
+			.click()
+			.clear()
+			.type('https://example.com/');
+
+		const cssSelector = '.content-area .post-content';
+		cy.get('#coil_content_container').as('cssSelectorField');
+		cy.get('@cssSelectorField')
+			.click()
+			.clear()
+			.type(cssSelector);
+		cy.get('#submit').click();
+
+		// Settings page is reloaded.
+		cy.get('@cssSelectorField').should('have.value', cssSelector);
+		cy.get('.notice').should('have.class', 'notice-success');
+	} );
+
+	it.only('Check warning pops up if CSS selector is empty', function( ) {
+		cy.get('#adminmenu')
+			.find('div.wp-menu-name')
+			.contains('Coil')
+			.click();
+
+		cy.get('#coil-global-settings').click();
+
+		cy.get('#coil_content_container')
+			.click()
+			.clear()
+		cy.get('#submit').click();
+		cy.get('#coil_content_container').invoke('prop', 'validationMessage').should('equal', 'Please fill out this field.');
+		cy.get('.notice-success').should('not.exist');
+	});
 });

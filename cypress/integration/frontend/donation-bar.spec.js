@@ -8,12 +8,6 @@ describe('Coil options panel', function () {
 	})
 
 	it('checks that the donation bar be can be enabled/disabled', function() {
-		cy.server();
-		// cy.get('.wp-menu-name').contains('Coil').click()
-		// cy
-		// 	.route({method: 'POST', url: '/wp-admin/admin-ajax.php'})
-		// 	.as('settingsSubmitted');
-
 		toggleDonationBar('uncheck');
 		cy.visit('/?p=103/');
 		cy
@@ -71,10 +65,6 @@ function toggleDonationBar(checkboxState) {
 	cy.get('.nav-tab-wrapper > #coil-appearance-settings')
 		.contains('Appearance')
 		.click()
-
-	// cy.get('#display_promotion_bar')
-	// 	.contains('Coil Web Monetization')
-	// 	.click()
 
 	switch (checkboxState) {
 		case 'check':
