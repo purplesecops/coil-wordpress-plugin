@@ -7,17 +7,17 @@ describe('Padlock test', () => {
 	it('Checks if a padlock appears when enabled', () => {
 		togglePadlock('check');
 
-		cy.visit('/?p=109/')
+		cy.visit('/?p=109/');
 		cy
 			.get('.entry-title > .emoji')
 			.should('exist')
 
 		togglePadlock('uncheck');
 
-		cy.visit('/?p=109/')
+		cy.visit('/?p=109/');
 		cy
 			.get('.entry-title > .emoji')
-			.should('not.exist')
+			.should('not.exist');
 	})
 })
 
