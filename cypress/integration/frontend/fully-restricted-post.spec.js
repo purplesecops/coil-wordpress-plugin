@@ -10,7 +10,27 @@ describe('Fully restricted posts', () => {
 			.get('#coil-messaging-settings')
 			.click();
 
-		const lockedMessage = 'This post is fully locked!'
+		let lockedMessage = 'This post is fully locked!'
+
+		cy
+			.get('#coil_fully_gated_content_message')
+			.type(`{selectall}${lockedMessage}`)
+
+		cy
+			.get('#submit')
+			.click();
+
+		cy.visit('/?p=109/');
+		cy
+			.contains(lockedMessage)
+			.should('be.visible');
+
+		cy.visit('/wp-admin/admin.php?page=coil_settings')
+		cy
+			.get('#coil-messaging-settings')
+			.click();
+
+		lockedMessage = 'Unlock exclusive content with Coil. Need a Coil account?'
 
 		cy
 			.get('#coil_fully_gated_content_message')
@@ -26,18 +46,22 @@ describe('Fully restricted posts', () => {
 			.should('be.visible');
 	})
 
-	// it('Checks that a VM enabled user can view monetized content', () => {
-	// 	cy.visit('/?p=109/');
-	// 	cy
-	// 		.contains('This is a test post for the Coil Members Only state.')
-	// 		.should('not.be.visible');
+	it('Checks that a VM enabled user can view monetized content', () => {
+		cy.visit('/?p=109/');
+		cy
+			.contains('This is a test post for the Coil Members Only state.')
+			.should('not.be.visible');
 
-	// 	cy.startWebMonetization();
+		cy.startWebMonetization();
 
-	// 	cy
-	// 		.contains('This is a test post for the Coil Members Only state.')
-	// 		.should('be.visible');
+		cy
+			.contains('This is a test post for the Coil Members Only state.')
+			.should('be.visible');
+		
+		cy
+			.get('.coil-message-inner')
+			.should('not.exist');
 
-	// 	cy.stopWebMonetization();
-	// })
+		cy.stopWebMonetization();
+	})
 })

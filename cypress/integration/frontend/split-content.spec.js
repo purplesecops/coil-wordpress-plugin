@@ -6,12 +6,6 @@ describe('Visibility of content blocks for non WM-enabled users', () => {
 	})
 
 	it('Check visibility of content blocks hidden to non WM-enabled users', () => {
-		// Why do we expect the heading to be hidden?
-		// cy
-		// 	.get('.wm-shown h3')
-		// 	.invoke('text')
-		// 	.should('contain', hiddenContentMessage)
-
 		cy
 			.get('.coil-show-monetize-users')
 			.invoke('text')
@@ -53,11 +47,6 @@ describe('Check visibility of content blocks for WM-enabled users', () => {
 	})
 
 	it('Check visibility of content blocks hidden to non WM-enabled users', () => {
-		// cy
-		// 	.get('.wm-shown h3')
-		// 	.invoke('text')
-		// 	.should('not.contain', hiddenContentMessage)
-
 		cy
 			.get('.coil-show-monetize-users')
 			.invoke('text')
@@ -65,11 +54,6 @@ describe('Check visibility of content blocks for WM-enabled users', () => {
 	})
 
 	it('Check visibility of content blocks shown to non WM-enabled users', () => {
-		// cy
-		// 	.get('.everyone-shown h3')
-		// 	.invoke('text')
-		// 	.should('not.contain', hiddenContentMessage)
-
 		cy
 			.get('img')
 			.invoke('text')
