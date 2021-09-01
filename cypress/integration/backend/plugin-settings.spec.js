@@ -62,32 +62,6 @@ describe('Plugin Settings', function () {
 		cy.get('.coil-no-payment-pointer-notice__content').should('exist')
 	});
 
-	it('check that the CSS selectors can be set', function() {
-		cy.get('#adminmenu')
-			.find('div.wp-menu-name')
-			.contains('Coil')
-			.click();
-
-		cy.get('#coil-global-settings').click();
-
-		cy.get('#coil_payment_pointer_id')
-			.click()
-			.clear()
-			.type('https://example.com/');
-
-		const cssSelector = '.content-area .post-content';
-		cy.get('#coil_content_container').as('cssSelectorField');
-		cy.get('@cssSelectorField')
-			.click()
-			.clear()
-			.type(cssSelector);
-		cy.get('#submit').click();
-
-		// Settings page is reloaded.
-		cy.get('@cssSelectorField').should('have.value', cssSelector);
-		cy.get('.notice').should('have.class', 'notice-success');
-	} );
-
 	it.only('Check warning pops up if CSS selector is empty', function( ) {
 		cy.get('#adminmenu')
 			.find('div.wp-menu-name')
@@ -102,5 +76,43 @@ describe('Plugin Settings', function () {
 		cy.get('#submit').click();
 		cy.get('#coil_content_container').invoke('prop', 'validationMessage').should('equal', 'Please fill out this field.');
 		cy.get('.notice-success').should('not.exist');
-	});
+	} );
+
+	it('check that the CSS selectors can be set and changed', function() {
+		cy.get('#adminmenu')
+			.find('div.wp-menu-name')
+			.contains('Coil')
+			.click();
+
+		cy.get('#coil-global-settings').click();
+
+		cy.get('#coil_payment_pointer_id')
+			.click()
+			.clear()
+			.type('https://example.com/');
+
+		let cssSelector = '.content-area .post-content';
+		cy.get('#coil_content_container').as('cssSelectorField');
+		cy.get('@cssSelectorField')
+			.click()
+			.clear()
+			.type(cssSelector);
+		cy.get('#submit').click();
+
+		// Settings page is reloaded.
+		cy.get('@cssSelectorField').should('have.value', cssSelector);
+		cy.get('.notice').should('have.class', 'notice-success');
+
+		cssSelector = '.content-area .entry-content';
+		cy.get('#coil_content_container').as('cssSelectorField');
+		cy.get('@cssSelectorField')
+			.click()
+			.clear()
+			.type(cssSelector);
+		cy.get('#submit').click();
+
+		// Settings page is reloaded.
+		cy.get('@cssSelectorField').should('have.value', cssSelector);
+		cy.get('.notice').should('have.class', 'notice-success');
+	} );
 });
