@@ -1,49 +1,40 @@
-const hiddenContentMessage = 'This content is for Coil Members only. To access, join Coil and install the browser extension.';
+const hiddenContentMessage = 'To keep reading, join Coil and install the browser extension. Visit coil.com for more information.';
 
 describe('Visibility of content blocks for non WM-enabled users', () => {
 	beforeEach(() => {
-		cy.visit('/block-visibility/')
+		cy.visit('/?p=116/')
 	})
 
 	it('Check visibility of content blocks hidden to non WM-enabled users', () => {
 		cy
-			.get('.wm-shown h3')
-			.invoke('text')
-			.should('contain', hiddenContentMessage)
-
-		cy
-			.get('.wm-shown p')
+			.get('.coil-show-monetize-users')
 			.invoke('text')
 			.should('contain', hiddenContentMessage)
 	})
 
 	it('Check visibility of content blocks shown to non WM-enabled users', () => {
 		cy
-			.get('.everyone-shown h3')
-			.invoke('text')
+			.contains('Public')
 			.should('not.contain', hiddenContentMessage)
+			.should('be.visible')
 
 		cy
-			.get('.everyone-shown img')
+			.get('img')
 			.invoke('text')
 			.should('not.contain', hiddenContentMessage)
 	})
 
 	it('Check visibility of content blocks hidden from WM-enabled users', () => {
 		cy
-			.get('.wm-hidden h3')
-			.invoke('text')
+			.contains('Hidden')
 			.should('not.contain', hiddenContentMessage)
-
-		cy
-			.get('.wm-hidden ')
-			.should('be.visible');
+			.should('be.visible')
 	})
 })
 
 describe('Check visibility of content blocks for WM-enabled users', () => {
 	beforeEach(() => {
-		cy.visit('/block-visibility/')
+		cy.visit('/?p=116/')
 		cy.startWebMonetization();
 	})
 
@@ -53,31 +44,27 @@ describe('Check visibility of content blocks for WM-enabled users', () => {
 
 	it('Check visibility of content blocks hidden to non WM-enabled users', () => {
 		cy
-			.get('.wm-shown h3')
+			.get('.coil-show-monetize-users')
 			.invoke('text')
 			.should('not.contain', hiddenContentMessage)
-
-		cy
-			.get('.wm-shown p')
-			.invoke('text')
-			.should('not.contain', hiddenContentMessage)
+			.should('contain', 'Coil only')
 	})
 
 	it('Check visibility of content blocks shown to non WM-enabled users', () => {
 		cy
-			.get('.everyone-shown h3')
-			.invoke('text')
+			.contains('Public')
 			.should('not.contain', hiddenContentMessage)
-
+			.should('be.visible')
+			
 		cy
-			.get('.everyone-shown img')
+			.get('img')
 			.invoke('text')
 			.should('not.contain', hiddenContentMessage)
 	})
 
 	it('Check visibility of content blocks hidden from WM-enabled users', () => {
 		cy
-			.get('.wm-hidden')
+			.get('.coil-hide-monetize-users')
 			.should('not.be.visible')
 	})
 })

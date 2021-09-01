@@ -5,43 +5,63 @@ describe('Fully restricted posts', () => {
 	})
 
 	it('Checks that you can edit text that appears on fully restricted posts', () => {
-		cy.visit('/wp-admin/customize.php')
+		cy.visit('/wp-admin/admin.php?page=coil_settings')
 		cy
-			.contains('Coil Web Monetization')
-			.click();
-
-		cy
-			.contains('Messages')
+			.get('#coil-messaging-settings')
 			.click();
 
 		const lockedMessage = 'This post is fully locked!'
 
 		cy
-			.get('#_customize-input-coil_unsupported_message')
+			.get('#coil_fully_gated_content_message')
 			.type(`{selectall}${lockedMessage}`)
 
 		cy
-			.get('#save')
+			.get('#submit')
 			.click();
 
-		cy.visit('/coil-members-only/');
+		cy.visit('/?p=109/');
 		cy
 			.contains(lockedMessage)
 			.should('be.visible');
-	})
 
-	it('Checks that a VM enabled user can view monetized content', () => {
-		cy.visit('/coil-members-only/');
+		cy.visit('/wp-admin/admin.php?page=coil_settings')
 		cy
-			.contains('This is a test post for the Coil Members Only state.')
-			.should('not.be.visible');
-
-		cy.startWebMonetization();
+			.get('#coil-messaging-settings')
+			.click();
 
 		cy
-			.contains('This is a test post for the Coil Members Only state.')
+			.get('#coil_fully_gated_content_message')
+			.clear().type('Unlock exclusive content with Coil. Need a Coil account?')
+
+		cy
+			.get('#submit')
+			.click();
+
+		cy.visit('/?p=109/');
+		cy
+			.contains('Unlock exclusive content with Coil. Need a Coil account?')
 			.should('be.visible');
-
-		cy.stopWebMonetization();
 	})
 })
+
+// describe('Check visibility of content for WM-enabled users', () => {
+// 	beforeEach(() => {
+// 		cy.visit('/?p=109/')
+// 		cy.startWebMonetization();
+// 	})
+
+// 	afterEach(() => {
+// 		cy.stopWebMonetization();
+// 	})
+
+// 	it('Checks that a VM enabled user can view monetized content', () => {
+// 		cy
+// 			.contains('This is a test post for the Coil Members Only state.')
+// 			.should('be.visible');
+		
+// 		cy
+// 			.get('.coil-message-inner')
+// 			.should('not.exist');
+// 	})
+// })

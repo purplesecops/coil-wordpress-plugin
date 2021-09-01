@@ -26,14 +26,14 @@
 >
 
 <channel>
-	<title>coil</title>
-	<link>http://localhost:10029</link>
+	<title>Coil</title>
+	<link>http://php</link>
 	<description>Just another WordPress site</description>
 	<pubDate>Fri, 20 Aug 2021 09:18:45 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
-	<wp:base_site_url>http://localhost:10029</wp:base_site_url>
-	<wp:base_blog_url>http://localhost:10029</wp:base_blog_url>
+	<wp:base_site_url>http://php</wp:base_site_url>
+	<wp:base_blog_url>http://php</wp:base_blog_url>
 
 		<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[admin]]></wp:author_login><wp:author_email><![CDATA[dev-email@flywheel.local]]></wp:author_email><wp:author_display_name><![CDATA[admin]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
 
@@ -94,10 +94,10 @@
 
 		<item>
 		<title><![CDATA[Hello world!]]></title>
-		<link>http://localhost:10029/hello-world/</link>
+		<link>http://php/hello-world/</link>
 		<pubDate>Mon, 02 Aug 2021 13:17:45 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?p=1</guid>
+		<guid isPermaLink="false">http://php/?p=1</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
@@ -137,10 +137,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 					</item>
 					<item>
 		<title><![CDATA[Sample Page]]></title>
-		<link>http://localhost:10029/sample-page/</link>
+		<link>http://php/sample-page/</link>
 		<pubDate>Mon, 02 Aug 2021 13:17:45 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?page_id=2</guid>
+		<guid isPermaLink="false">http://php/?page_id=2</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:</p>
@@ -159,7 +159,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 <!-- /wp:quote -->
 
 <!-- wp:paragraph -->
-<p>As a new WordPress user, you should go to <a href="http://localhost:10029/wp-admin/">your dashboard</a> to delete this page and create new pages for your content. Have fun!</p>
+<p>As a new WordPress user, you should go to <a href="http://php/wp-admin/">your dashboard</a> to delete this page and create new pages for your content. Have fun!</p>
 <!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>2</wp:post_id>
@@ -183,12 +183,12 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Privacy Policy]]></title>
-		<link>http://localhost:10029/?page_id=3</link>
+		<link>http://php/?page_id=3</link>
 		<pubDate>Mon, 02 Aug 2021 13:17:45 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?page_id=3</guid>
+		<guid isPermaLink="false">http://php/?page_id=3</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:heading --><h2>Who we are</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Our website address is: http://localhost:10029.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Comments</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Media</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Cookies</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Embedded content from other websites</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Who we share your data with</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you request a password reset, your IP address will be included in the reset email.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>How long we retain your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>What rights you have over your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Where we send your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Visitor comments may be checked through an automated spam detection service.</p><!-- /wp:paragraph -->]]></content:encoded>
+		<content:encoded><![CDATA[<!-- wp:heading --><h2>Who we are</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Our website address is: http://php.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Comments</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Media</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Cookies</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Embedded content from other websites</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Who we share your data with</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you request a password reset, your IP address will be included in the reset email.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>How long we retain your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>What rights you have over your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Where we send your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Visitor comments may be checked through an automated spam detection service.</p><!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>3</wp:post_id>
 		<wp:post_date><![CDATA[2021-08-02 13:17:45]]></wp:post_date>
@@ -211,10 +211,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Contact]]></title>
-		<link>http://localhost:10029/?page_id=22</link>
+		<link>http://php/?page_id=22</link>
 		<pubDate>Tue, 10 Aug 2021 07:00:27 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?page_id=22</guid>
+		<guid isPermaLink="false">http://php/?page_id=22</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph {"monetizeBlockDisplay":"show-monetize-users"} -->
 <p class="coil-show-monetize-users">This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form.</p>
@@ -253,10 +253,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Contact]]></title>
-		<link>http://localhost:10029/?page_id=72</link>
+		<link>http://php/?page_id=72</link>
 		<pubDate>Tue, 10 Aug 2021 07:00:29 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?page_id=72</guid>
+		<guid isPermaLink="false">http://php/?page_id=72</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form.</p>
@@ -295,10 +295,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Create your website with blocks]]></title>
-		<link>http://localhost:10029/</link>
+		<link>http://php/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?page_id=85</guid>
+		<guid isPermaLink="false">http://php/?page_id=85</guid>
 		<description></description>
 		<content:encoded><![CDATA[
 					<!-- wp:heading {"align":"wide","fontSize":"gigantic","style":{"typography":{"lineHeight":"1.1"}}} -->
@@ -312,7 +312,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 					<!-- wp:columns {"verticalAlignment":"center","align":"wide","className":"is-style-twentytwentyone-columns-overlap"} -->
 					<div class="wp-block-columns alignwide are-vertically-aligned-center is-style-twentytwentyone-columns-overlap"><!-- wp:column {"verticalAlignment":"center"} -->
 					<div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"align":"full","sizeSlug":"large"} -->
-					<figure class="wp-block-image alignfull size-large"><img src="http://localhost:10029/wp-content/themes/twentytwentyone/assets/images/roses-tremieres-hollyhocks-1884.jpg" alt="&#8220;Roses Trémières&#8221; by Berthe Morisot"/></figure>
+					<figure class="wp-block-image alignfull size-large"><img src="http://php/wp-content/themes/twentytwentyone/assets/images/roses-tremieres-hollyhocks-1884.jpg" alt="&#8220;Roses Trémières&#8221; by Berthe Morisot"/></figure>
 					<!-- /wp:image -->
 
 					<!-- wp:spacer -->
@@ -320,7 +320,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 					<!-- /wp:spacer -->
 
 					<!-- wp:image {"align":"full","sizeSlug":"large","className":"is-style-twentytwentyone-image-frame"} -->
-					<figure class="wp-block-image alignfull size-large is-style-twentytwentyone-image-frame"><img src="http://localhost:10029/wp-content/themes/twentytwentyone/assets/images/in-the-bois-de-boulogne.jpg" alt="&#8220;In the Bois de Boulogne&#8221; by Berthe Morisot"/></figure>
+					<figure class="wp-block-image alignfull size-large is-style-twentytwentyone-image-frame"><img src="http://php/wp-content/themes/twentytwentyone/assets/images/in-the-bois-de-boulogne.jpg" alt="&#8220;In the Bois de Boulogne&#8221; by Berthe Morisot"/></figure>
 					<!-- /wp:image --></div>
 					<!-- /wp:column -->
 
@@ -330,7 +330,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 					<!-- /wp:spacer -->
 
 					<!-- wp:image {"sizeSlug":"large","className":"alignfull size-full is-style-twentytwentyone-border"} -->
-					<figure class="wp-block-image size-large alignfull size-full is-style-twentytwentyone-border"><img src="http://localhost:10029/wp-content/themes/twentytwentyone/assets/images/young-woman-in-mauve.jpg" alt="&#8220;Young Woman in Mauve&#8221; by Berthe Morisot"/></figure>
+					<figure class="wp-block-image size-large alignfull size-full is-style-twentytwentyone-border"><img src="http://php/wp-content/themes/twentytwentyone/assets/images/young-woman-in-mauve.jpg" alt="&#8220;Young Woman in Mauve&#8221; by Berthe Morisot"/></figure>
 					<!-- /wp:image --></div>
 					<!-- /wp:column --></div>
 					<!-- /wp:columns -->
@@ -428,10 +428,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[About]]></title>
-		<link>http://localhost:10029/about/</link>
+		<link>http://php/about/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?page_id=86</guid>
+		<guid isPermaLink="false">http://php/?page_id=86</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe.</p>
@@ -458,10 +458,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Contact]]></title>
-		<link>http://localhost:10029/contact/</link>
+		<link>http://php/contact/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?page_id=87</guid>
+		<guid isPermaLink="false">http://php/?page_id=87</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form.</p>
@@ -488,10 +488,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Blog]]></title>
-		<link>http://localhost:10029/blog/</link>
+		<link>http://php/blog/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?page_id=88</guid>
+		<guid isPermaLink="false">http://php/?page_id=88</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -516,10 +516,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Home]]></title>
-		<link>http://localhost:10029/home/</link>
+		<link>http://php/home/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/home/</guid>
+		<guid isPermaLink="false">http://php/home/</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -568,15 +568,15 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
-		<wp:meta_value><![CDATA[http://localhost:10029/]]></wp:meta_value>
+		<wp:meta_value><![CDATA[http://php/]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
 		<title><![CDATA[]]></title>
-		<link>http://localhost:10029/95/</link>
+		<link>http://php/95/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/95/</guid>
+		<guid isPermaLink="false">http://php/95/</guid>
 		<description></description>
 		<content:encoded><![CDATA[ ]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -630,10 +630,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[]]></title>
-		<link>http://localhost:10029/96/</link>
+		<link>http://php/96/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/96/</guid>
+		<guid isPermaLink="false">http://php/96/</guid>
 		<description></description>
 		<content:encoded><![CDATA[ ]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -687,10 +687,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[]]></title>
-		<link>http://localhost:10029/97/</link>
+		<link>http://php/97/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/97/</guid>
+		<guid isPermaLink="false">http://php/97/</guid>
 		<description></description>
 		<content:encoded><![CDATA[ ]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -744,10 +744,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Facebook]]></title>
-		<link>http://localhost:10029/facebook/</link>
+		<link>http://php/facebook/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/facebook/</guid>
+		<guid isPermaLink="false">http://php/facebook/</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -801,10 +801,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Twitter]]></title>
-		<link>http://localhost:10029/twitter/</link>
+		<link>http://php/twitter/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/twitter/</guid>
+		<guid isPermaLink="false">http://php/twitter/</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -858,10 +858,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Instagram]]></title>
-		<link>http://localhost:10029/instagram/</link>
+		<link>http://php/instagram/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/instagram/</guid>
+		<guid isPermaLink="false">http://php/instagram/</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -915,10 +915,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Email]]></title>
-		<link>http://localhost:10029/email/</link>
+		<link>http://php/email/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/email/</guid>
+		<guid isPermaLink="false">http://php/email/</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -972,10 +972,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Monetized and Public]]></title>
-		<link>http://localhost:10029/monetized-and-public/</link>
+		<link>http://php/monetized-and-public/</link>
 		<pubDate>Mon, 02 Aug 2021 14:52:32 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?p=103</guid>
+		<guid isPermaLink="false">http://php/?p=103</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -1003,10 +1003,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Excerpt Post]]></title>
-		<link>http://localhost:10029/excerpt-post/</link>
+		<link>http://php/excerpt-post/</link>
 		<pubDate>Thu, 05 Aug 2021 14:24:52 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?p=105</guid>
+		<guid isPermaLink="false">http://php/?p=105</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This content should be visible as an excerpt</p>
@@ -1034,10 +1034,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[image]]></title>
-		<link>http://localhost:10029/block-visibility/image/</link>
+		<link>http://php/block-visibility/image/</link>
 		<pubDate>Thu, 05 Aug 2021 15:38:28 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/wp-content/uploads/2021/08/image.jpeg</guid>
+		<guid isPermaLink="false">http://php/wp-content/uploads/2021/08/image.jpeg</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1055,7 +1055,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 		<wp:post_type><![CDATA[attachment]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-						<wp:attachment_url><![CDATA[http://localhost:10029/wp-content/uploads/2021/08/image.jpeg]]></wp:attachment_url>
+						<wp:attachment_url><![CDATA[http://php/wp-content/uploads/2021/08/image.jpeg]]></wp:attachment_url>
 											<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 		<wp:meta_value><![CDATA[2021/08/image.jpeg]]></wp:meta_value>
@@ -1067,10 +1067,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Coil Members Only]]></title>
-		<link>http://localhost:10029/coil-members-only/</link>
+		<link>http://php/coil-members-only/</link>
 		<pubDate>Thu, 05 Aug 2021 14:33:58 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?p=109</guid>
+		<guid isPermaLink="false">http://php/?p=109</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This is a test post for the Coil Members Only state.</p>
@@ -1098,10 +1098,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[No Monetization]]></title>
-		<link>http://localhost:10029/no-monetization/</link>
+		<link>http://php/no-monetization/</link>
 		<pubDate>Thu, 05 Aug 2021 15:21:51 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?p=112</guid>
+		<guid isPermaLink="false">http://php/?p=112</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>Everything is visible.</p>
@@ -1129,10 +1129,10 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Block Visibility]]></title>
-		<link>http://localhost:10029/block-visibility/</link>
+		<link>http://php/block-visibility/</link>
 		<pubDate>Thu, 05 Aug 2021 15:25:28 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">http://localhost:10029/?p=116</guid>
+		<guid isPermaLink="false">http://php/?p=116</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>Public</p>
@@ -1147,7 +1147,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":118,"sizeSlug":"full","linkDestination":"none","className":"is-style-default"} -->
-<figure class="wp-block-image size-full is-style-default"><img src="http://localhost:10029/wp-content/uploads/2021/08/image.jpeg" alt="" class="wp-image-118"/></figure>
+<figure class="wp-block-image size-full is-style-default"><img src="http://php/wp-content/uploads/2021/08/image.jpeg" alt="" class="wp-image-118"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

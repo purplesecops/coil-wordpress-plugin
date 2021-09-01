@@ -5,22 +5,19 @@ describe('Padlock test', () => {
 	})
 
 	it('Checks if a padlock appears when enabled', () => {
-		cy.server()
-		cy.route({method: 'POST', url: '/wp-admin/admin-ajax.php'}).as('settingsSubmitted')
-
 		togglePadlock('check');
 
-		cy.visit('/coil-members-only/')
+		cy.visit('/?p=109/');
 		cy
 			.get('.entry-title > .emoji')
-			.should('have.attr', 'alt', '🔒')
+			.should('exist')
 
 		togglePadlock('uncheck');
 
-		cy.visit('/coil-members-only/')
+		cy.visit('/?p=109/');
 		cy
 			.get('.entry-title > .emoji')
-			.should('not.exist')
+			.should('not.exist');
 	})
 })
 
@@ -30,34 +27,28 @@ describe('Padlock test', () => {
  * @param {('check'|'uncheck')} checkboxState
  */
 function togglePadlock(checkboxState) {
-	cy.visit('/wp-admin/customize.php')
+	cy.visit('/wp-admin/admin.php?page=coil_settings')
 
-	cy
-		.contains('Coil Web Monetization')
-		.click();
-
-	cy
-		.get('#accordion-section-coil_customizer_section_options')
-		.click();
+	cy.get('.nav-tab-wrapper > #coil-appearance-settings')
+		.contains('Appearance')
+		.click()
 
 	switch(checkboxState) {
 		case 'check':
 			cy
-				.get('#_customize-input-coil_title_padlock')
+				.get('#display_padlock_id')
 				.click()
 				.check();
 			break;
 		case 'uncheck':
 			cy
-				.get('#_customize-input-coil_title_padlock')
+				.get('#display_padlock_id')
 				.click()
 				.uncheck();
 			break;
 	}
 
 	cy
-		.get('#save')
+		.get('#submit')
 		.click({force: true});
-
-	cy.wait('@settingsSubmitted')
 }

@@ -15,7 +15,7 @@
  * @param {string} username WordPress user name.
  * @param {string} password WordPress password.
  */
-Cypress.Commands.add('logInToWordPress', (username, password) => {
+ Cypress.Commands.add('logInToWordPress', (username, password) => {
 
 	cy.request({
 		method: 'POST',

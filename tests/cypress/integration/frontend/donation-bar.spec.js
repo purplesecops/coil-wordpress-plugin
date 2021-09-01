@@ -8,26 +8,21 @@ describe('Coil options panel', function () {
 	})
 
 	it('checks that the donation bar be can be enabled/disabled', function() {
-		cy.server();
-		cy
-			.route({method: 'POST', url: '/wp-admin/admin-ajax.php'})
-			.as('settingsSubmitted');
-
 		toggleDonationBar('uncheck');
-		cy.visit('/monetized-and-public/');
+		cy.visit('/?p=103/');
 		cy
 			.get('.banner-message-inner')
 			.should('not.exist');
 
 		toggleDonationBar('check');
-		cy.visit('/monetized-and-public/');
+		cy.visit('/?p=103/');
 		cy
 			.get('.banner-message-inner')
 			.should('be.visible');
 	});
 
 	it('Checks that you can dissmiss the donation bar as a WM enabled user', () => {
-		cy.visit('/monetized-and-public/');
+		cy.visit('/?p=103/');
 
 		cy.startWebMonetization();
 
@@ -39,7 +34,7 @@ describe('Coil options panel', function () {
 	})
 
 	it('Checks that you can dissmiss the donation bar as a WM disabled user', () => {
-		cy.visit('/monetized-and-public/');
+		cy.visit('/?p=103/');
 		cy
 			.get('.banner-message-inner')
 			.should('be.visible');
@@ -65,30 +60,29 @@ describe('Coil options panel', function () {
  * @param {('check'|'uncheck')} checkboxState
  */
 function toggleDonationBar(checkboxState) {
-	cy.visit('/wp-admin/customize.php')
+	cy.visit('/wp-admin/admin.php?page=coil_settings');
 
-	cy.get('h3.accordion-section-title')
-		.contains('Coil Web Monetization')
+	cy.get('.nav-tab-wrapper > #coil-appearance-settings')
+		.contains('Appearance')
 		.click()
-
-	cy.get('#accordion-section-coil_customizer_section_options')
-		.click();
 
 	switch (checkboxState) {
 		case 'check':
-			cy.get('#_customize-input-coil_show_donation_bar')
+			cy.get('#display_promotion_bar')
 				.click()
 				.check();
 			break;
 		case 'uncheck':
-			cy.get('#_customize-input-coil_show_donation_bar')
+			cy.get('#display_promotion_bar')
 				.click()
 				.uncheck();
 			break;
 	}
 
-	cy.get('#save')
+	cy.get('#submit')
 		.click({force: true});
 
-	cy.wait('@settingsSubmitted')
+	cy
+		.get('.notice-success')
+		.should('exist');
 }

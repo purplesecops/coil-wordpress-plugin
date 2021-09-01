@@ -4,55 +4,89 @@ describe('Tests for visibility settings in editor', () => {
 	})
 
 	it('Checks that visibility settings of a post can be changed in Gutenberg', () => {
-		cy.visit('/wp-admin/post.php?post=72&action=edit')
+		cy.visit('/wp-admin/post-new.php')
+		cy.get('#post-title-0')
+		.click({force: true})
+		.type("Page Visibility Settings")
 
+		// Set the post to Split
 		cy
 			.get('.interface-complementary-area')
 			.contains('Coil Web Monetization')
 			.click({force: true});
 
 		cy
-			.get('.components-radio-control__input')
-			// Selecting checked option
-			.then(options => {
-				if(options[0].checked) {
-					return options[0];
-				} else {
-					return options[1];
-				}
-			})
-			// Selecting the label text and saving it as an alias
-			.next()
-			.invoke('text')
-			.as('checkedOptionText')
+			.get('#inspector-select-control-1')
+			.select("Enabled")
 
 		cy
-			.get('.components-radio-control__input')
-			// Selecting unchecked option
-			.then(options => {
-				if(options[0].checked) {
-					return options[1];
-				} else {
-					return options[0];
-				}
-			})
-			.click()
+			.get('#inspector-radio-control-0-2')
+			.check();
+
+		cy
+			.get('.editor-post-publish-panel__toggle')
+			.click();
+		cy
+			.get('.editor-post-publish-panel__header-publish-button > .components-button')
+			.click();
+		cy
+			.get('.editor-post-publish-panel__header > .components-button')
+			.click();
+
+		// Check the Split setting is still there
+		cy
+		.get('#inspector-radio-control-0-2')
+		.should("be.checked");
+
+		// Set the post to Enabled for Everyone
+
+		cy
+			.get('#inspector-select-control-1')
+			.select("Enabled")
+
+		cy
+			.get('#inspector-radio-control-0-0')
+			.check();
 
 		cy
 			.get('.editor-post-publish-button')
 			.click();
 
-		cy.reload();
+		// Check the Enabled for Everyone setting is still there
+		cy
+		.get('#inspector-radio-control-0-0')
+		.should("be.checked");
+
+		// Set the post to Enabled and Exclusive
+		cy
+			.get('#inspector-select-control-1')
+			.select("Enabled")
 
 		cy
-			.get('@checkedOptionText')
-			.then((checkedOptionText) => {
-				// Checking that the original checkbox is not checked
-				cy
-					.contains(checkedOptionText)
-					.prev()
-					.should('not.be.checked')
-			})
+			.get('#inspector-radio-control-0-1')
+			.check();
 
+		cy
+			.get('.editor-post-publish-button')
+			.click();
+
+		// Check the Enabled and Exclusive setting is still there
+		cy
+		.get('#inspector-radio-control-0-1')
+		.should("be.checked");
+
+		// Set the post to Disabled
+		cy
+			.get('#inspector-select-control-1')
+			.select("Disabled")
+
+		cy
+			.get('.editor-post-publish-button')
+			.click();
+
+		// Check the Disabled setting is still there
+		cy
+		.get('#inspector-select-control-1')
+		.should("contain", "Disabled");
 	})
 })
