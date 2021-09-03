@@ -1,6 +1,7 @@
 describe( 'Tests for block-level visibility settings', () => {
 	beforeEach( () => {
 		cy.logInToWordPress( 'admin', 'password' );
+		cy.resetSite();
 
 	})
 

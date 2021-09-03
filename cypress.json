@@ -1,5 +1,10 @@
 {
 	"baseUrl": "http://localhost:10029/",
+	"db": {
+		"userName": "admin",
+		"password": "password",
+		"server": "127.0.0.1"
+	},
 	"projectId": "qiooce",
 	"video": true,
 	"videoUploadOnPasses": false,
