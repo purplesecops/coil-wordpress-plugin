@@ -6,7 +6,7 @@ describe('Excerpt behaviour', () => {
 	it('Checks that the excerpt respects coil settings', () => {
 		setExcerptVisibility(true)
 
-		cy.visit('/p=105/');
+		cy.visit('/?p=105/');
 
 		cy
 			.contains('This content should be visible as an excerpt')
@@ -14,7 +14,7 @@ describe('Excerpt behaviour', () => {
 
 		setExcerptVisibility(false)
 
-		cy.visit('/p=105/');
+		cy.visit('/?p=105/');
 		cy
 			.contains('This content should be visible as an excerpt')
 			.should('not.be.visible');
