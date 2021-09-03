@@ -99,7 +99,7 @@ jobs:
             sed -i "s/username_here/admin/" "wp-config.php"
             sed -i "s/password_here/password/" "wp-config.php"
             sed -i "s/localhost/127.0.0.1/" "wp-config.php"
-            mv /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/vars.php var/www/html/wp-includes
+            mv /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/vars.php /var/www/html/wp-includes
       - run:
           name: Running apache
           command: |
