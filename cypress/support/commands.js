@@ -106,5 +106,5 @@ Cypress.Commands.add('stopWebMonetization', () => {
 	// Adds a payment pointer in
 	cy.exec('wp db query \'INSERT INTO wp_options (option_name, option_value) VALUES ("coil_global_settings_group", "a:2:{s:23:coil_payment_pointer_id;s:35:https://example.com/.well-known/pay;s:22:coil_content_container;s:28:.content-area .entry-content;}");\' --allow-root');
 	// Set the permalinks to default to the post name
-	cy.exec('wp rewrite structure \'/%postname%/\'');
+	cy.exec('wp rewrite structure \'/%postname%/\' --allow-root');
 });
