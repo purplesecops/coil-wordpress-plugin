@@ -111,7 +111,7 @@ jobs:
       - run:
           name: htaccess file
           command: |
-            cp /var/www/html/scripts/.htaccess /var/www/html/.htaccess
+            cp /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/.htaccess /var/www/html/.htaccess
             ls -la
             wp rewrite structure '/%postname%/' --allow-root
             cat /var/www/html/.htaccess
