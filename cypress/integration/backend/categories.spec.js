@@ -5,7 +5,7 @@
 describe("Category Settings", function () {
 	beforeEach(() => {
 		cy.logInToWordPress("admin", "password");
-		resetSite();
+		cy.resetSite();
 	});
 
 	it("checks that Coil category settings can be updated", function () {

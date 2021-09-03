@@ -2,7 +2,7 @@ describe('Fully restricted posts', () => {
 
 	beforeEach(() => {
 		cy.logInToWordPress('admin', 'password');
-		resetSite();
+		cy.resetSite();
 	})
 
 	it('Checks that you can edit text that appears on fully restricted posts', () => {

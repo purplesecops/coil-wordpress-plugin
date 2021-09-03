@@ -7,7 +7,7 @@
 describe('Plugin Settings', function () {
   beforeEach(() => {
     cy.logInToWordPress('admin', 'password');
-	resetSite();
+	cy.resetSite();
     cy.visit('/wp-admin/');
 	})
 

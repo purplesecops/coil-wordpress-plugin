@@ -5,7 +5,7 @@
 describe('Coil options panel', function () {
 	beforeEach(() => {
 		cy.logInToWordPress('admin', 'password');
-		resetSite();
+		cy.resetSite();
 	})
 
 	it('checks that the donation bar be can be enabled/disabled', function() {

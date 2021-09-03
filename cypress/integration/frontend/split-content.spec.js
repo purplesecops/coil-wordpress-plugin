@@ -2,7 +2,7 @@ const hiddenContentMessage = 'To keep reading, join Coil and install the browser
 
 describe('Visibility of content blocks for non WM-enabled users', () => {
 	beforeEach(() => {
-		resetSite();
+		cy.resetSite();
 		cy.visit('/block-visibility/')
 	})
 
@@ -35,7 +35,7 @@ describe('Visibility of content blocks for non WM-enabled users', () => {
 
 describe('Check visibility of content blocks for WM-enabled users', () => {
 	beforeEach(() => {
-		resetSite();
+		cy.resetSite();
 		cy.visit('/block-visibility/')
 		cy.startWebMonetization();
 	})

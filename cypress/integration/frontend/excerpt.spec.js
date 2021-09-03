@@ -1,7 +1,7 @@
 describe('Excerpt behaviour', () => {
 	beforeEach(() => {
 		cy.logInToWordPress('admin', 'password');
-		resetSite();
+		cy.resetSite();
 	})
 
 	it('Checks that the excerpt respects coil settings', () => {
