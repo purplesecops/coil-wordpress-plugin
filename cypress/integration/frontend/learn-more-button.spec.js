@@ -5,6 +5,7 @@
 describe('Learn more button', function () {
 	beforeEach(() => {
 		cy.logInToWordPress('admin', 'password');
+		resetSite();
 	})
 
 	it('checks that the "Get Coil to access" button text can be changed', function() {

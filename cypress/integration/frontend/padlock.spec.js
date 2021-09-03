@@ -2,6 +2,7 @@ describe('Padlock test', () => {
 
 	beforeEach(() => {
 		cy.logInToWordPress('admin', 'password');
+		resetSite();
 	})
 
 	it('Checks if a padlock appears when enabled', () => {

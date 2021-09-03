@@ -5,6 +5,7 @@
 describe("Tag Settings", function () {
 	beforeEach(() => {
 		cy.logInToWordPress("admin", "password");
+		resetSite();
 	});
 
 	it("checks that Coil tag settings can be updated", function () {

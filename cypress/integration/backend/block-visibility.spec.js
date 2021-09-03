@@ -1,6 +1,7 @@
 describe( 'Tests for block-level visibility settings', () => {
 	beforeEach( () => {
 		cy.logInToWordPress( 'admin', 'password' );
+		resetSite();
 	})
 
 	it("Checks that a block\s visibility settings can be changed in the block editor", () => {

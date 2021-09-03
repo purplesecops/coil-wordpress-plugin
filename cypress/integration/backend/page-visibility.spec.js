@@ -1,6 +1,7 @@
 describe('Tests for visibility settings in editor', () => {
 	beforeEach(() => {
 		cy.logInToWordPress('admin', 'password');
+		resetSite();
 	})
 
 	it('Checks that visibility settings of a post can be changed in Gutenberg', () => {

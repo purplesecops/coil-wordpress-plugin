@@ -7,6 +7,7 @@ const paymentPointer = 'https://example.com/' + Math.random().toString(36) + '/.
 describe('Single Posts', function () {
 	beforeEach(() => {
 		cy.logInToWordPress('admin', 'password');
+		resetSite();
 		cy.visit('/wp-admin/admin.php?page=coil_settings');
 
 		// Make sure a payment pointer is set.
