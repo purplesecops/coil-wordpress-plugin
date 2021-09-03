@@ -101,7 +101,7 @@ jobs:
             sed -i "s/localhost/127.0.0.1/" "wp-config.php"
             mv /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/vars.php /var/www/html/wp-includes
       - run:
-          name: Running apache
+          name: Running apache and installing the mod_rewrite package
           command: |
             a2enmod rewrite
             bash /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/apache2-background.sh
@@ -113,7 +113,6 @@ jobs:
             wp plugin install wordpress-importer --activate  --allow-root
             wp import /var/www/html/wp-content/plugins/coil-wordpress-plugin/cypress/fixtures/coil-automation-CI.xml --authors=create  --allow-root
             wp rewrite structure '/%postname%/' --allow-root
-            cat /var/www/html/.htaccess
             wp plugin activate coil-wordpress-plugin --allow-root
       - run:
           name: Installing npm and running Cypress tests

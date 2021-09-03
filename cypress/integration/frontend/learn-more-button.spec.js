@@ -26,7 +26,7 @@ describe('Learn more button', function () {
 		cy.get('#coil_learn_more_button_text').should('have.value', label);
 
 		// Test the front-end.
-		cy.visit('/?p=109/');
+		cy.visit('/coil-members-only/');
 		cy.get('.coil-message-button')
 			.contains(label);
 	
@@ -40,7 +40,7 @@ describe('Learn more button', function () {
 		cy.get('#submit').click();
 
 		// Test the front-end.
-		cy.visit('/?p=109/');
+		cy.visit('/coil-members-only/');
 		cy.get('.coil-message-button')
 			.contains('Get Coil to access');
 	});
@@ -64,7 +64,7 @@ describe('Learn more button', function () {
 		cy.get('#coil_learn_more_button_link').should('have.value', link);
 
 		// Test the front-end.
-		cy.visit('/?p=109/');
+		cy.visit('/coil-members-only/');
 		cy.get('.coil-message-button')
 			.invoke('attr', 'href')
 			.should('eq', link);
@@ -79,7 +79,7 @@ describe('Learn more button', function () {
 		cy.get('#submit').click();
 
 		// Test the front-end.
-		cy.visit('/?p=109/');
+		cy.visit('/coil-members-only/');
 		cy.get('.coil-message-button')
 			.invoke('attr', 'href')
 			.should('eq', 'https://coil.com/');

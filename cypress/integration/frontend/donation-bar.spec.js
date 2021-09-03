@@ -9,20 +9,20 @@ describe('Coil options panel', function () {
 
 	it('checks that the donation bar be can be enabled/disabled', function() {
 		toggleDonationBar('uncheck');
-		cy.visit('/?p=103/');
+		cy.visit('/monetized-and-public/');
 		cy
 			.get('.banner-message-inner')
 			.should('not.exist');
 
 		toggleDonationBar('check');
-		cy.visit('/?p=103/');
+		cy.visit('/monetized-and-public/');
 		cy
 			.get('.banner-message-inner')
 			.should('be.visible');
 	});
 
 	it('Checks that you can dissmiss the donation bar as a WM enabled user', () => {
-		cy.visit('/?p=103/');
+		cy.visit('/monetized-and-public/');
 
 		cy.startWebMonetization();
 
@@ -34,7 +34,7 @@ describe('Coil options panel', function () {
 	})
 
 	it('Checks that you can dissmiss the donation bar as a WM disabled user', () => {
-		cy.visit('/?p=103/');
+		cy.visit('/monetized-and-public/');
 		cy
 			.get('.banner-message-inner')
 			.should('be.visible');

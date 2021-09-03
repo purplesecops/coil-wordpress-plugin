@@ -20,7 +20,7 @@ describe('Fully restricted posts', () => {
 			.get('#submit')
 			.click();
 
-		cy.visit('/?p=109/');
+		cy.visit('/coil-members-only/');
 		cy
 			.contains(lockedMessage)
 			.should('be.visible');
@@ -38,7 +38,7 @@ describe('Fully restricted posts', () => {
 			.get('#submit')
 			.click();
 
-		cy.visit('/?p=109/');
+		cy.visit('/coil-members-only/');
 		cy
 			.contains('Unlock exclusive content with Coil. Need a Coil account?')
 			.should('be.visible');
@@ -47,7 +47,7 @@ describe('Fully restricted posts', () => {
 
 // describe('Check visibility of content for WM-enabled users', () => {
 // 	beforeEach(() => {
-// 		cy.visit('/?p=109/')
+// 		cy.visit('/coil-members-only/')
 // 		cy.startWebMonetization();
 // 	})
 
