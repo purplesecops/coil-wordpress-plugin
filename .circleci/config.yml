@@ -102,7 +102,9 @@ jobs:
             mv /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/vars.php var/www/html/wp-includes
       - run:
           name: Running apache
-          command: bash /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/apache2-background.sh
+          command: |
+            a2enmod rewrite
+            bash /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/apache2-background.sh
       - run:
           name: Initializing the database, importing data, and activating the plugin
           command: |
