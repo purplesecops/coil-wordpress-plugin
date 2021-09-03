@@ -27,7 +27,7 @@
 
 <channel>
 	<title>Coil</title>
-	<link isPermaLink="true">http://127.0.0.1:80</link>
+	<link>http://127.0.0.1:80</link>
 	<description>Just another WordPress site</description>
 	<pubDate>Fri, 20 Aug 2021 09:18:45 +0000</pubDate>
 	<language>en-US</language>
@@ -94,7 +94,7 @@
 
 		<item>
 		<title><![CDATA[Hello world!]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/hello-world/</link>
+		<link>http://127.0.0.1:80/hello-world/</link>
 		<pubDate>Mon, 02 Aug 2021 13:17:45 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?p=1</guid>
@@ -137,7 +137,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 					</item>
 					<item>
 		<title><![CDATA[Sample Page]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/sample-page/</link>
+		<link>http://127.0.0.1:80/sample-page/</link>
 		<pubDate>Mon, 02 Aug 2021 13:17:45 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?page_id=2</guid>
@@ -183,7 +183,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Privacy Policy]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/?page_id=3</link>
+		<link>http://127.0.0.1:80/?page_id=3</link>
 		<pubDate>Mon, 02 Aug 2021 13:17:45 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?page_id=3</guid>
@@ -211,7 +211,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Contact]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/?page_id=22</link>
+		<link>http://127.0.0.1:80/?page_id=22</link>
 		<pubDate>Tue, 10 Aug 2021 07:00:27 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?page_id=22</guid>
@@ -253,7 +253,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Contact]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/?page_id=72</link>
+		<link>http://127.0.0.1:80/?page_id=72</link>
 		<pubDate>Tue, 10 Aug 2021 07:00:29 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?page_id=72</guid>
@@ -295,7 +295,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Create your website with blocks]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/</link>
+		<link>http://127.0.0.1:80/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?page_id=85</guid>
@@ -428,7 +428,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[About]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/about/</link>
+		<link>http://127.0.0.1:80/about/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?page_id=86</guid>
@@ -458,7 +458,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Contact]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/contact/</link>
+		<link>http://127.0.0.1:80/contact/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?page_id=87</guid>
@@ -488,7 +488,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Blog]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/blog/</link>
+		<link>http://127.0.0.1:80/blog/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?page_id=88</guid>
@@ -516,7 +516,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Home]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/home/</link>
+		<link>http://127.0.0.1:80/home/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/home/</guid>
@@ -573,7 +573,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/95/</link>
+		<link>http://127.0.0.1:80/95/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/95/</guid>
@@ -630,7 +630,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/96/</link>
+		<link>http://127.0.0.1:80/96/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/96/</guid>
@@ -687,7 +687,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/97/</link>
+		<link>http://127.0.0.1:80/97/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/97/</guid>
@@ -744,7 +744,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Facebook]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/facebook/</link>
+		<link>http://127.0.0.1:80/facebook/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/facebook/</guid>
@@ -801,7 +801,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Twitter]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/twitter/</link>
+		<link>http://127.0.0.1:80/twitter/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/twitter/</guid>
@@ -858,7 +858,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Instagram]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/instagram/</link>
+		<link>http://127.0.0.1:80/instagram/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/instagram/</guid>
@@ -915,7 +915,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Email]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/email/</link>
+		<link>http://127.0.0.1:80/email/</link>
 		<pubDate>Mon, 02 Aug 2021 13:58:43 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/email/</guid>
@@ -972,7 +972,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Monetized and Public]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/monetized-and-public/</link>
+		<link>http://127.0.0.1:80/monetized-and-public/</link>
 		<pubDate>Mon, 02 Aug 2021 14:52:32 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?p=103</guid>
@@ -1003,7 +1003,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Excerpt Post]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/excerpt-post/</link>
+		<link>http://127.0.0.1:80/excerpt-post/</link>
 		<pubDate>Thu, 05 Aug 2021 14:24:52 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?p=105</guid>
@@ -1034,7 +1034,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[image]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/block-visibility/image/</link>
+		<link>http://127.0.0.1:80/block-visibility/image/</link>
 		<pubDate>Thu, 05 Aug 2021 15:38:28 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/wp-content/uploads/2021/08/image.jpeg</guid>
@@ -1067,7 +1067,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Coil Members Only]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/coil-members-only/</link>
+		<link>http://127.0.0.1:80/coil-members-only/</link>
 		<pubDate>Thu, 05 Aug 2021 14:33:58 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?p=109</guid>
@@ -1098,7 +1098,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[No Monetization]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/no-monetization/</link>
+		<link>http://127.0.0.1:80/no-monetization/</link>
 		<pubDate>Thu, 05 Aug 2021 15:21:51 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?p=112</guid>
@@ -1129,7 +1129,7 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 							</item>
 					<item>
 		<title><![CDATA[Block Visibility]]></title>
-		<link isPermaLink="true">http://127.0.0.1:80/block-visibility/</link>
+		<link>http://127.0.0.1:80/block-visibility/</link>
 		<pubDate>Thu, 05 Aug 2021 15:25:28 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://127.0.0.1:80/?p=116</guid>
