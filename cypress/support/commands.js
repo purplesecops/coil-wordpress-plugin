@@ -101,10 +101,10 @@ Cypress.Commands.add('stopWebMonetization', () => {
  * The assumption is that only this post will be used for any Split content settings tests.
  */
  Cypress.Commands.add('resetSite', () => {
-	// Removes all custom data from the database
-	cy.exec('wp db query \'DELETE FROM wp_options WHERE option_name IN ("coil_global_settings_group", "coil_content_settings_posts_group", "coil_content_settings_excerpt_group", "coil_messaging_settings_group", "coil_appearance_settings_group");\' --allow-root');
-	// Adds a payment pointer in
-	cy.exec('wp db query \'INSERT INTO wp_options (option_name, option_value) VALUES ("coil_global_settings_group", "a:2:{s:23:coil_payment_pointer_id;s:35:https://example.com/.well-known/pay;s:22:coil_content_container;s:28:.content-area .entry-content;}");\' --allow-root');
+	// // Removes all custom data from the database
+	// cy.exec('wp db query \'DELETE FROM wp_options WHERE option_name IN ("coil_global_settings_group", "coil_content_settings_posts_group", "coil_content_settings_excerpt_group", "coil_messaging_settings_group", "coil_appearance_settings_group");\' --allow-root');
+	// // Adds a payment pointer in
+	// cy.exec('wp db query \'INSERT INTO wp_options (option_name, option_value) VALUES ("coil_global_settings_group", "a:2:{s:23:coil_payment_pointer_id;s:35:https://example.com/.well-known/pay;s:22:coil_content_container;s:28:.content-area .entry-content;}");\' --allow-root');
 	// Set the permalinks to default to the post name
 	cy.exec('wp rewrite structure \'/%postname%\' --allow-root');
 });
