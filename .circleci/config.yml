@@ -87,7 +87,7 @@ jobs:
           name: Installing WordPress
           command: |
               apt install -y libzip-dev zip && docker-php-ext-install zip
-              wp core download --allow-root
+              wp core download
               mv /coil-wordpress-plugin /var/www/html/wp-content/plugins
       - run:
           name: Adjusting the wp-config.php and vars.php files appropriately for the context
@@ -106,10 +106,10 @@ jobs:
       - run:
           name: Initializing the database, importing data, and activating the plugin
           command: |
-            wp core install --url="http://127.0.0.1" --title=wordpress --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email --allow-root
+            wp core install --url="http://127.0.0.1" --title=wordpress --admin_user=admin --admin_password=password --admin_email=admin@example.com --skip-email
             mv /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/.htaccess /var/www/html/
-            wp plugin install wordpress-importer --activate  --allow-root
-            wp plugin activate coil-wordpress-plugin --allow-root
+            wp plugin install wordpress-importer --activate
+            wp plugin activate coil-wordpress-plugin
       - run:
           name: Installing npm and running Cypress tests
           command: |
