@@ -10,11 +10,11 @@ wp core install --url=http://127.0.0.1 --title=wordpress --admin_user=admin --ad
 
 wp plugin install wordpress-importer --activate  --allow-root
 
-wp import /var/www/html/wp-content/plugins/coil-wordpress-plugin/cypress/fixtures/coil-automation-docker.xml --authors=create  --allow-root
+wp import /var/www/html/wp-content/plugins/coil-wordpress-plugin/tests/cypress/fixtures/coil-automation-docker.xml --authors=create  --allow-root
 
 wp plugin activate coil-wordpress-plugin --allow-root
 
 # cd wp-content/plugins/coil-wordpress-plugin
 
 # npx cypress run --project ./tests --config baseUrl="http://php"
-# npx cypress run --spec 'cypress/integration/frontend/excerpt.spec.js' --config baseUrl="http://127.0.0.1"
+# npx cypress run --spec 'tests/cypress/integration/frontend/excerpt.spec.js' --config baseUrl="http://127.0.0.1"
