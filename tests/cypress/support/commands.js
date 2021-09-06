@@ -105,7 +105,7 @@ Cypress.Commands.add( 'resetSite', () => {
 	cy.exec( 'wp db query \'DELETE FROM wp_posts;\' --allow-root' );
 
 	// Adds site data back into the database
-	cy.exec( 'wp import /var/www/html/wp-content/plugins/coil-wordpress-plugin/cypress/fixtures/coil-automation-CI.xml --authors=create  --allow-root' );
+	cy.exec( 'wp import /var/www/html/wp-content/plugins/coil-wordpress-plugin/tests/cypress/fixtures/coil-automation-CI.xml --authors=create  --allow-root' );
 	cy.exec( 'wp rewrite structure \'/%postname%/\' --allow-root' );
 
 	// Adds a payment pointer in
