@@ -42,7 +42,7 @@ describe( 'Category Settings', function() {
 
 		// Check the correct gate-all label is still applied and change it to no-gating
 		cy.get( '#coil-category-settings > label[for="gate-all"] input' ).should(
-			'be.checked'
+			'be.checked',
 		);
 		cy.get( '#coil-category-settings > label[for="no-gating"] input' ).click();
 		cy.get( '.button' ).click();
@@ -55,7 +55,7 @@ describe( 'Category Settings', function() {
 
 		// Check the correct no-gating label is still applied
 		cy.get( '#coil-category-settings > label[for="no-gating"] input' ).should(
-			'be.checked'
+			'be.checked',
 		);
 		cy.get( '#coil-category-settings > label[for="no"] input' ).click();
 		cy.get( '.button' ).click();
@@ -68,7 +68,7 @@ describe( 'Category Settings', function() {
 
 		// Check the correct no-gating label is still applied
 		cy.get( '#coil-category-settings > label[for="no"] input' ).should(
-			'be.checked'
+			'be.checked',
 		);
 	} );
 } );

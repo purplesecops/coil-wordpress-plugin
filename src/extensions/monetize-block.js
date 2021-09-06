@@ -296,25 +296,25 @@ const wrapperClass = createHigherOrderComponent( ( BlockListBlock ) => {
 addFilter(
 	'blocks.registerBlockType',
 	'coil/addAttributes',
-	addAttributes
+	addAttributes,
 );
 
 addFilter(
 	'editor.BlockEdit',
 	'coil/monetizeBlockControls',
-	monetizeBlockControls
+	monetizeBlockControls,
 );
 
 addFilter(
 	'blocks.getSaveContent.extraProps',
 	'coil/applyExtraClass',
-	applyExtraClass
+	applyExtraClass,
 );
 
 addFilter(
 	'editor.BlockListBlock',
 	'coil/wrapperClass',
-	wrapperClass
+	wrapperClass,
 );
 
 // Post Monetization Fields
