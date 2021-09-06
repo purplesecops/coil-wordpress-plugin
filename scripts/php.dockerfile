@@ -37,10 +37,10 @@ RUN curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/inst
 # Setting the shell to bash to make sure the nvm scripts work correctly
 SHELL ["/bin/bash", "-c"]
 RUN bash install.sh
-RUN chmod -R 777 ~
+RUN groupadd --gid 1000 node && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+USER node
 # Loads the environmental variables needed for nvm
 RUN source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress
-RUN chmod -R 777 ~
 
 ENTRYPOINT ["sleep", "10000"]
 

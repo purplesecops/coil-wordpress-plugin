@@ -1,54 +1,54 @@
-describe('Padlock test', () => {
+describe( 'Padlock test', () => {
+	beforeEach( () => {
+		cy.logInToWordPress( 'admin', 'password' );
+		cy.resetSite();
+	} );
 
-	beforeEach(() => {
-		cy.logInToWordPress('admin', 'password');
-	})
+	it( 'Checks if a padlock appears when enabled', () => {
+		togglePadlock( 'uncheck' );
 
-	it('Checks if a padlock appears when enabled', () => {
-		togglePadlock('check');
-
-		cy.visit('/?p=109/');
+		cy.visit( '/coil-members-only/' );
 		cy
-			.get('.entry-title > .emoji')
-			.should('exist')
+			.get( '.entry-title > .emoji' )
+			.should( 'not.exist' );
 
-		togglePadlock('uncheck');
+		togglePadlock( 'check' );
 
-		cy.visit('/?p=109/');
+		cy.visit( '/coil-members-only/' );
 		cy
-			.get('.entry-title > .emoji')
-			.should('not.exist');
-	})
-})
+			.get( '.entry-title > .emoji' )
+			.should( 'exist' );
+	} );
+} );
 
 /**
  * Checks or unchecks the display padlock option
  *
- * @param {('check'|'uncheck')} checkboxState
+ * @param {('check'|'uncheck')} checkboxState state for the padlock display
  */
-function togglePadlock(checkboxState) {
-	cy.visit('/wp-admin/admin.php?page=coil_settings')
+function togglePadlock( checkboxState ) {
+	cy.visit( '/wp-admin/admin.php?page=coil_settings' );
 
-	cy.get('.nav-tab-wrapper > #coil-appearance-settings')
-		.contains('Appearance')
-		.click()
+	cy.get( '.nav-tab-wrapper > #coil-appearance-settings' )
+		.contains( 'Appearance' )
+		.click();
 
-	switch(checkboxState) {
+	switch ( checkboxState ) {
 		case 'check':
 			cy
-				.get('#display_padlock_id')
+				.get( '#display_padlock_id' )
 				.click()
 				.check();
 			break;
 		case 'uncheck':
 			cy
-				.get('#display_padlock_id')
+				.get( '#display_padlock_id' )
 				.click()
 				.uncheck();
 			break;
 	}
 
 	cy
-		.get('#submit')
-		.click({force: true});
+		.get( '#submit' )
+		.click( { force: true } );
 }

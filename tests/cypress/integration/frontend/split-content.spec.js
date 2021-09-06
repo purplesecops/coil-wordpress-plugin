@@ -1,71 +1,75 @@
 const hiddenContentMessage = 'To keep reading, join Coil and install the browser extension. Visit coil.com for more information.';
 
-describe('Visibility of content blocks for non WM-enabled users', () => {
-	beforeEach(() => {
-		cy.visit('/?p=116/')
-	})
+describe( 'Visibility of content blocks for non WM-enabled users', () => {
+	beforeEach( () => {
+		cy.logInToWordPress( 'admin', 'password' );
+		cy.resetSite();
+		cy.visit( '/block-visibility/' );
+	} );
 
-	it('Check visibility of content blocks hidden to non WM-enabled users', () => {
+	it( 'Check visibility of content blocks hidden to non WM-enabled users', () => {
 		cy
-			.get('.coil-show-monetize-users')
-			.invoke('text')
-			.should('contain', hiddenContentMessage)
-	})
+			.get( '.coil-show-monetize-users' )
+			.invoke( 'text' )
+			.should( 'contain', hiddenContentMessage );
+	} );
 
-	it('Check visibility of content blocks shown to non WM-enabled users', () => {
+	it( 'Check visibility of content blocks shown to non WM-enabled users', () => {
 		cy
-			.contains('Public')
-			.should('not.contain', hiddenContentMessage)
-			.should('be.visible')
+			.contains( 'Public' )
+			.should( 'not.contain', hiddenContentMessage )
+			.should( 'be.visible' );
 
 		cy
-			.get('img')
-			.invoke('text')
-			.should('not.contain', hiddenContentMessage)
-	})
+			.get( 'img' )
+			.invoke( 'text' )
+			.should( 'not.contain', hiddenContentMessage );
+	} );
 
-	it('Check visibility of content blocks hidden from WM-enabled users', () => {
+	it( 'Check visibility of content blocks hidden from WM-enabled users', () => {
 		cy
-			.contains('Hidden')
-			.should('not.contain', hiddenContentMessage)
-			.should('be.visible')
-	})
-})
+			.contains( 'Hidden' )
+			.should( 'not.contain', hiddenContentMessage )
+			.should( 'be.visible' );
+	} );
+} );
 
-describe('Check visibility of content blocks for WM-enabled users', () => {
-	beforeEach(() => {
-		cy.visit('/?p=116/')
+describe( 'Check visibility of content blocks for WM-enabled users', () => {
+	beforeEach( () => {
+		cy.logInToWordPress( 'admin', 'password' );
+		cy.resetSite();
+		cy.visit( '/block-visibility/' );
 		cy.startWebMonetization();
-	})
+	} );
 
-	afterEach(() => {
+	afterEach( () => {
 		cy.stopWebMonetization();
-	})
+	} );
 
-	it('Check visibility of content blocks hidden to non WM-enabled users', () => {
+	it( 'Check visibility of content blocks hidden to non WM-enabled users', () => {
 		cy
-			.get('.coil-show-monetize-users')
-			.invoke('text')
-			.should('not.contain', hiddenContentMessage)
-			.should('contain', 'Coil only')
-	})
+			.get( '.coil-show-monetize-users' )
+			.invoke( 'text' )
+			.should( 'not.contain', hiddenContentMessage )
+			.should( 'contain', 'Coil only' );
+	} );
 
-	it('Check visibility of content blocks shown to non WM-enabled users', () => {
+	it( 'Check visibility of content blocks shown to non WM-enabled users', () => {
 		cy
-			.contains('Public')
-			.should('not.contain', hiddenContentMessage)
-			.should('be.visible')
-			
-		cy
-			.get('img')
-			.invoke('text')
-			.should('not.contain', hiddenContentMessage)
-	})
+			.contains( 'Public' )
+			.should( 'not.contain', hiddenContentMessage )
+			.should( 'be.visible' );
 
-	it('Check visibility of content blocks hidden from WM-enabled users', () => {
 		cy
-			.get('.coil-hide-monetize-users')
-			.should('not.be.visible')
-	})
-})
+			.get( 'img' )
+			.invoke( 'text' )
+			.should( 'not.contain', hiddenContentMessage );
+	} );
+
+	it( 'Check visibility of content blocks hidden from WM-enabled users', () => {
+		cy
+			.get( '.coil-hide-monetize-users' )
+			.should( 'not.be.visible' );
+	} );
+} );
 

@@ -16,5 +16,5 @@ wp plugin activate coil-wordpress-plugin --allow-root
 
 # cd wp-content/plugins/coil-wordpress-plugin
 
-# npx cypress run --config baseUrl="http://php"
+# npx cypress run --project ./tests --config baseUrl="http://php"
 # npx cypress run --spec 'cypress/integration/frontend/excerpt.spec.js' --config baseUrl="http://127.0.0.1"

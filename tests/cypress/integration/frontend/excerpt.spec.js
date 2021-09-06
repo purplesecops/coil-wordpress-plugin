@@ -1,48 +1,49 @@
-describe('Excerpt behaviour', () => {
-	beforeEach(() => {
-		cy.logInToWordPress('admin', 'password');
-	})
+describe( 'Excerpt behaviour', () => {
+	beforeEach( () => {
+		cy.logInToWordPress( 'admin', 'password' );
+		cy.resetSite();
+	} );
 
-	it('Checks that the excerpt respects coil settings', () => {
-		setExcerptVisibility(true)
+	it( 'Checks that the excerpt respects coil settings', () => {
+		setExcerptVisibility( true );
 
-		cy.visit('/?p=105/');
+		cy.visit( '/excerpt-post/' );
 
 		cy
-			.contains('This content should be visible as an excerpt')
-			.should('be.visible');
+			.contains( 'This content should be visible as an excerpt' )
+			.should( 'be.visible' );
 
-		setExcerptVisibility(false)
+		setExcerptVisibility( false );
 
-		cy.visit('/?p=105/');
+		cy.visit( '/excerpt-post/' );
 		cy
-			.contains('This content should be visible as an excerpt')
-			.should('not.be.visible');
-	})
-})
+			.contains( 'This content should be visible as an excerpt' )
+			.should( 'not.be.visible' );
+	} );
+} );
 
 /**
  * Sets whether excerpts are visible on posts
  *
- * @param {boolean} state
+ * @param {boolean} state for the excerpt setting
  */
-function setExcerptVisibility(state) {
-	cy.visit('/wp-admin/admin.php?page=coil_settings&tab=excerpt_settings');
-	switch (state) {
+function setExcerptVisibility( state ) {
+	cy.visit( '/wp-admin/admin.php?page=coil_settings&tab=excerpt_settings' );
+	switch ( state ) {
 		case true:
 			cy
-				.get('#post_display_excerpt')
+				.get( '#post_display_excerpt' )
 				.check();
 			break;
 
 		case false:
 			cy
-				.get('#post_display_excerpt')
+				.get( '#post_display_excerpt' )
 				.uncheck();
 			break;
 	}
 
 	cy
-		.get('#submit')
+		.get( '#submit' )
 		.click();
 }

@@ -160,6 +160,7 @@ module.exports = function( grunt ) {
 				'!assets/js/**/*.min.js',
 				'src/**/*.js',
 				'!src/**/*.min.js',
+				'cypress/integration/**/*.spec.js',
 			],
 		},
 
