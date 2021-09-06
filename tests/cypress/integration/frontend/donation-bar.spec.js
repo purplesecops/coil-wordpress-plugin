@@ -20,20 +20,6 @@ describe( 'Coil options panel', function() {
 		cy
 			.get( '.banner-message-inner' )
 			.should( 'be.visible' );
-		toggleDonationBar( 'uncheck' );
-		cy.visit( '/monetized-and-public/' );
-		cy
-			.get( '.banner-message-inner' )
-			.should( 'not.exist' );
-	} );
-
-	it( 'checks that the donation bar is no longer unchecked after database reset', function() {
-		cy.visit( '/wp-admin/admin.php?page=coil_settings' );
-		cy.get( '.nav-tab-wrapper > #coil-appearance-settings' )
-			.contains( 'Appearance' )
-			.click();
-
-		cy.get( '#display_promotion_bar' ).should( 'be.checked' );
 	} );
 
 	it( 'Checks that you can dissmiss the donation bar as a WM enabled user', () => {
