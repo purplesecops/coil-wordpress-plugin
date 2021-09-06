@@ -96,13 +96,26 @@ Cypress.Commands.add('stopWebMonetization', () => {
 
 /**
  * Reset site to original state.
- * Only the block visibility options in the Split content tests are in the post itself not the database.
- * Each paragraph is looped through and reset to Public in the Block Visibility post.
- * The assumption is that only this post will be used for any Split content settings tests.
+ * All post and post meta data is removed and restored from the xml file.
+ * Custom data stored in the database is individually named to be removed from the database.
+ * If any extra Coil customizations are added they must be added to the delete query.
  */
  Cypress.Commands.add('resetSite', () => {
 	// Removes all custom data from the database
 	cy.exec('wp db query \'DELETE FROM wp_options WHERE option_name IN ("coil_global_settings_group", "coil_content_settings_posts_group", "coil_content_settings_excerpt_group", "coil_messaging_settings_group", "coil_appearance_settings_group");\' --allow-root');
+	cy.exec('wp db query \'DELETE FROM wp_postmeta;\' --allow-root');
+	cy.exec('wp db query \'DELETE FROM wp_posts;\' --allow-root');
+
+	// Adds site data back into the database
+	cy.exec('wp import /var/www/html/wp-content/plugins/coil-wordpress-plugin/cypress/fixtures/coil-automation-CI.xml --authors=create  --allow-root');
+	cy.exec('wp rewrite structure \'/%postname%/\' --allow-root');
+
 	// Adds a payment pointer in
-	cy.exec('wp db query \'INSERT INTO wp_options (option_name, option_value) VALUES ("coil_global_settings_group", "a:2:{s:23:coil_payment_pointer_id;s:35:https://example.com/.well-known/pay;s:22:coil_content_container;s:28:.content-area .entry-content;}");\' --allow-root');
+	cy.visit('/wp-admin/admin.php?page=coil_settings');
+	cy.get('#coil-global-settings').click();
+	cy.get('#coil_payment_pointer_id')
+		.click()
+		.clear()
+		.type('https://example.com/.well-known/pay');
+	cy.get('#submit').click();
 });
