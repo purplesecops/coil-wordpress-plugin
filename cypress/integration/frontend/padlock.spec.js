@@ -6,19 +6,19 @@ describe('Padlock test', () => {
 	})
 
 	it('Checks if a padlock appears when enabled', () => {
-		togglePadlock('uncheck');
-
-		cy.visit('/coil-members-only/');
-		cy
-			.get('.entry-title > .emoji')
-			.should('not.exist');
-
 		togglePadlock('check');
 
 		cy.visit('/coil-members-only/');
 		cy
 			.get('.entry-title > .emoji')
 			.should('exist');
+			
+		togglePadlock('uncheck');
+
+		cy.visit('/coil-members-only/');
+		cy
+			.get('.entry-title > .emoji')
+			.should('not.exist');
 	})
 })
 
@@ -38,13 +38,11 @@ function togglePadlock(checkboxState) {
 		case 'check':
 			cy
 				.get('#display_padlock_id')
-				.click()
 				.check();
 			break;
 		case 'uncheck':
 			cy
 				.get('#display_padlock_id')
-				.click()
 				.uncheck();
 			break;
 	}
