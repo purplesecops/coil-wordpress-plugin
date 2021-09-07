@@ -16,7 +16,7 @@ describe( 'Visibility of content blocks for non WM-enabled users', () => {
 
 	it( 'Check visibility of content blocks shown to non WM-enabled users', () => {
 		cy
-			.contains( 'Public' )
+			.contains( 'This block is public.' )
 			.should( 'not.contain', hiddenContentMessage )
 			.should( 'be.visible' );
 
@@ -28,7 +28,7 @@ describe( 'Visibility of content blocks for non WM-enabled users', () => {
 
 	it( 'Check visibility of content blocks hidden from WM-enabled users', () => {
 		cy
-			.contains( 'Hidden' )
+			.contains( 'This block is hidden for Coil members.' )
 			.should( 'not.contain', hiddenContentMessage )
 			.should( 'be.visible' );
 	} );
@@ -51,12 +51,12 @@ describe( 'Check visibility of content blocks for WM-enabled users', () => {
 			.get( '.coil-show-monetize-users' )
 			.invoke( 'text' )
 			.should( 'not.contain', hiddenContentMessage )
-			.should( 'contain', 'Coil only' );
+			.should( 'contain', 'This block is only visible to Coil members.' );
 	} );
 
 	it( 'Check visibility of content blocks shown to non WM-enabled users', () => {
 		cy
-			.contains( 'Public' )
+			.contains( 'This block is public.' )
 			.should( 'not.contain', hiddenContentMessage )
 			.should( 'be.visible' );
 

@@ -39,7 +39,7 @@ describe( 'Single Posts', function() {
 		cy
 			.get( '.entry-content > p' )
 			.should( 'be.visible' )
-			.should( 'contain', 'Everything is visible.' );
+			.should( 'contain', 'Everything is visible in this post with no monetization.' );
 	} );
 
 	it( 'without a browser extension, check that I cannot view a post set to members only.', function() {

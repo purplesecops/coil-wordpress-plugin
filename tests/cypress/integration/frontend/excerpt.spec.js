@@ -10,14 +10,14 @@ describe( 'Excerpt behaviour', () => {
 		cy.visit( '/excerpt-post/' );
 
 		cy
-			.contains( 'This content should be visible as an excerpt' )
+			.contains( 'This content should be visible as an excerpt.' )
 			.should( 'be.visible' );
 
 		setExcerptVisibility( false );
 
 		cy.visit( '/excerpt-post/' );
 		cy
-			.contains( 'This content should be visible as an excerpt' )
+			.contains( 'This content should be visible as an excerpt.' )
 			.should( 'not.be.visible' );
 	} );
 } );

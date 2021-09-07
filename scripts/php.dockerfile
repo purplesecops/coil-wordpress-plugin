@@ -36,8 +36,8 @@ RUN curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/inst
 SHELL ["/bin/bash", "-c"]
 RUN bash install.sh
 RUN chmod -R 777 ~
-# Loads the environmental variables needed for nvm
-RUN source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress
+# Loads the environmental variables needed for nvm and installs Cypress directly from the executable becasue there 
+RUN source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && cd /var/www/html/wp-content/plugins/coil-wordpress-plugin && ./node_modules/.bin/cypress install
 RUN chmod -R 777 ~
 
 ENTRYPOINT ["sleep", "10000"]
