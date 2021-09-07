@@ -9,5 +9,7 @@ services:
             context: .
             dockerfile: ./scripts/php.dockerfile
         working_dir: /var/www/html
+        # Workaround for running multiple tests in a docker container: https://github.com/cypress-io/cypress/issues/350
+        ipc: host
         depends_on:
             - db

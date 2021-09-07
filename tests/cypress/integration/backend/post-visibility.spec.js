@@ -7,6 +7,12 @@ describe( 'Tests for visibility settings in editor', () => {
 	it( 'Checks that visibility settings of a post can be changed in Gutenberg', () => {
 		cy.visit( '/wp-admin/post.php?post=1&action=edit' );
 
+		// Removal nag modal and open panel.
+		cy
+			.get( '.interface-complementary-area' )
+			.contains( 'Coil Web Monetization' )
+			.click( { force: true } );
+
 		const monetizationDropDown = '#inspector-select-control-1';
 		const monetizationAndVisibilityCombinations = [
 			{
