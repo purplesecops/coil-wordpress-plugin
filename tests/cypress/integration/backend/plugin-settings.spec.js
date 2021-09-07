@@ -21,12 +21,7 @@ describe( 'Plugin Settings Panel', function() {
 	} );
 
 	it( 'Check warning pops up if payment pointer is empty', function( ) {
-		cy.get( '#adminmenu' )
-			.find( 'div.wp-menu-name' )
-			.contains( 'Coil' )
-			.click();
-
-		cy.get( '#coil-global-settings' ).click();
+		cy.visit( '/wp-admin/admin.php?page=coil_settings' );
 
 		cy.get( '#coil_payment_pointer_id' )
 			.click()
@@ -36,12 +31,7 @@ describe( 'Plugin Settings Panel', function() {
 	} );
 
 	it( 'check that the payment pointer can be set', function() {
-		cy.get( '#adminmenu' )
-			.find( 'div.wp-menu-name' )
-			.contains( 'Coil' )
-			.click();
-
-		cy.get( '#coil-global-settings' ).click();
+		cy.visit( '/wp-admin/admin.php?page=coil_settings' );
 
 		const paymentPointer = 'https://example.com/' + Math.random().toString( 36 ) + '/.well-known/pay';
 		cy.get( '#coil_payment_pointer_id' ).as( 'paymentPointerField' );
@@ -63,12 +53,7 @@ describe( 'Plugin Settings Panel', function() {
 	} );
 
 	it( 'Check warning pops up if CSS selector is empty', function( ) {
-		cy.get( '#adminmenu' )
-			.find( 'div.wp-menu-name' )
-			.contains( 'Coil' )
-			.click();
-
-		cy.get( '#coil-global-settings' ).click();
+		cy.visit( '/wp-admin/admin.php?page=coil_settings' );
 
 		cy.get( '#coil_content_container' )
 			.click()
@@ -79,31 +64,9 @@ describe( 'Plugin Settings Panel', function() {
 	} );
 
 	it( 'check that the CSS selectors can be set and changed', function() {
-		cy.get( '#adminmenu' )
-			.find( 'div.wp-menu-name' )
-			.contains( 'Coil' )
-			.click();
+		cy.visit( '/wp-admin/admin.php?page=coil_settings' );
 
-		cy.get( '#coil-global-settings' ).click();
-
-		cy.get( '#coil_payment_pointer_id' )
-			.click()
-			.clear()
-			.type( 'https://example.com/' );
-
-		let cssSelector = '.content-area .post-content';
-		cy.get( '#coil_content_container' ).as( 'cssSelectorField' );
-		cy.get( '@cssSelectorField' )
-			.click()
-			.clear()
-			.type( cssSelector );
-		cy.get( '#submit' ).click();
-
-		// Settings page is reloaded.
-		cy.get( '@cssSelectorField' ).should( 'have.value', cssSelector );
-		cy.get( '.notice' ).should( 'have.class', 'notice-success' );
-
-		cssSelector = '.content-area .entry-content';
+		const cssSelector = '.content-area .post-content';
 		cy.get( '#coil_content_container' ).as( 'cssSelectorField' );
 		cy.get( '@cssSelectorField' )
 			.click()
