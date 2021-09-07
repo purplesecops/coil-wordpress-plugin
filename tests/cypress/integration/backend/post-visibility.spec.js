@@ -8,7 +8,7 @@ describe( 'Tests for visibility settings in editor', () => {
 		cy.visit( '/wp-admin/edit.php?post_type=post/' );
 		cy
 			.contains( 'Post Visibility' )
-			.click();
+			.click( { force: true } );
 
 		const monetizationDropDown = '#inspector-select-control-1';
 		const monetizationAndVisibilityCombinations = [
