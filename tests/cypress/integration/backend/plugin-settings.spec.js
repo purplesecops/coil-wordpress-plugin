@@ -21,7 +21,12 @@ describe( 'Plugin Settings Panel', function() {
 	} );
 
 	it( 'Check warning pops up if payment pointer is empty', function( ) {
-		cy.visit( '/wp-admin/admin.php?page=coil_settings' );
+		cy.get( '#adminmenu' )
+			.find( 'div.wp-menu-name' )
+			.contains( 'Coil' )
+			.click();
+
+		cy.get( '#coil-global-settings' ).click();
 
 		cy.get( '#coil_payment_pointer_id' )
 			.click()

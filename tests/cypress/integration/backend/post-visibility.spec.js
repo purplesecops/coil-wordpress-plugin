@@ -5,7 +5,10 @@ describe( 'Tests for visibility settings in editor', () => {
 	} );
 
 	it( 'Checks that visibility settings of a post can be changed in Gutenberg', () => {
-		cy.visit( '/post-visibility' );
+		cy.visit( '/wp-admin/edit.php?post_type=post/' );
+		cy
+			.contains( 'Post Visibility' )
+			.click();
 
 		const monetizationDropDown = '#inspector-select-control-1';
 		const monetizationAndVisibilityCombinations = [
