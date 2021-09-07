@@ -20,16 +20,14 @@ RUN apt install -y libzip-dev zip && docker-php-ext-install zip
 RUN wp core download --allow-root
 COPY . /var/www/html/wp-content/plugins/coil-wordpress-plugin
 
-# RUN groupadd -g 1000 php-user && useradd -G php-user -g php-user -s /bin/bash -D php-user
-# USER php-user
-# RUN chown -R php-user:php-user .
-
-# Adjusting the wp-config.php file appropriately for the context
+# Adjusting the wp-config.php, vars.php, and htaccess files appropriately for the context
 RUN cp wp-config-sample.php wp-config.php
 RUN sed -i "s/database_name_here/wordpress/" "wp-config.php"
 RUN sed -i "s/username_here/admin/" "wp-config.php"
 RUN sed -i "s/password_here/password/" "wp-config.php"
 RUN sed -i "s/localhost/db/" "wp-config.php"
+RUN mv /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/vars.php /var/www/html/wp-includes
+RUN mv /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/.htaccess /var/www/html/
 
 # Installing nvm to install Cypress as well as its dependencies
 RUN apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
@@ -37,10 +35,10 @@ RUN curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/inst
 # Setting the shell to bash to make sure the nvm scripts work correctly
 SHELL ["/bin/bash", "-c"]
 RUN bash install.sh
-RUN groupadd --gid 1000 node && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
-USER node
+RUN chmod -R 777 ~
 # Loads the environmental variables needed for nvm
 RUN source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress
+RUN chmod -R 777 ~
 
 ENTRYPOINT ["sleep", "10000"]
 

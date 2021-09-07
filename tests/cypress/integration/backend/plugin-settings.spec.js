@@ -4,7 +4,7 @@
  * Site setting / option tests.
  */
 
-describe( 'Plugin Settings', function() {
+describe( 'Plugin Settings Panel', function() {
 	beforeEach( () => {
 		cy.logInToWordPress( 'admin', 'password' );
 		cy.resetSite();

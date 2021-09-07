@@ -15,7 +15,6 @@ describe( 'Fully restricted posts', () => {
 		cy
 			.get( '#coil_fully_gated_content_message' )
 			.type( `{selectall}${ lockedMessage }` );
-
 		cy
 			.get( '#submit' )
 			.click();
@@ -29,11 +28,9 @@ describe( 'Fully restricted posts', () => {
 		cy
 			.get( '#coil-messaging-settings' )
 			.click();
-
 		cy
 			.get( '#coil_fully_gated_content_message' )
 			.clear().type( 'Unlock exclusive content with Coil. Need a Coil account?' );
-
 		cy
 			.get( '#submit' )
 			.click();

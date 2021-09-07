@@ -29,44 +29,38 @@ describe( 'Tag Settings', function() {
 		cy.get( '#tag-name' ).type( 'demotag' );
 		cy.get( '#tag-slug' ).type( 'demotagslug' );
 
-		// Make the tag fully gated
+		// Make the tag "fully gated"
 		cy.get( '#coil-category-settings > label[for="gate-all"]' ).click();
 		cy.get( '#submit' ).click();
 
-		// Re-open and edit the tag
+		// Re-open and edit the tag to check the correct "gate-all" label is still applied and change it to "no-gating"
 		const editTag =
 			'.row-actions span.edit a[aria-label="Edit “demotag”"]';
 		cy.get( editTag ).then( ( $element ) => {
 			$element[ 0 ].click();
 		} );
-
-		// Check the correct gate-all label is still applied and change it to no-gating
 		cy.get( '#coil-category-settings > label[for="gate-all"] input' ).should(
 			'be.checked',
 		);
 		cy.get( '#coil-category-settings > label[for="no-gating"] input' ).click();
 		cy.get( '.button' ).click();
 
-		// Re-open and edit the tag to check the correct no-gating label is still applied and change it to no
+		// Re-open and edit the tag to check the correct "no-gating" label is still applied and change it to "no"
 		cy.visit( '/wp-admin/edit-tags.php?taxonomy=post_tag' );
 		cy.get( editTag ).then( ( $element ) => {
 			$element[ 0 ].click();
 		} );
-
-		// Check the correct no-gating label is still applied
 		cy.get( '#coil-category-settings > label[for="no-gating"] input' ).should(
 			'be.checked',
 		);
 		cy.get( '#coil-category-settings > label[for="no"] input' ).click();
 		cy.get( '.button' ).click();
 
-		// Re-open and edit the tag to check the correct no label is still applied
+		// Re-open and edit the tag to check the correct "no" label is still applied
 		cy.visit( '/wp-admin/edit-tags.php?taxonomy=post_tag' );
 		cy.get( editTag ).then( ( $element ) => {
 			$element[ 0 ].click();
 		} );
-
-		// Check the correct no-gating label is still applied
 		cy.get( '#coil-category-settings > label[for="no"] input' ).should(
 			'be.checked',
 		);

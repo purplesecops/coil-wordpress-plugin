@@ -42,7 +42,6 @@ function setExcerptVisibility( state ) {
 				.uncheck();
 			break;
 	}
-
 	cy
 		.get( '#submit' )
 		.click();

@@ -9,7 +9,5 @@ services:
             context: .
             dockerfile: ./scripts/php.dockerfile
         working_dir: /var/www/html
-        ports:
-            - 9000:80
         depends_on:
             - db

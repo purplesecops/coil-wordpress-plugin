@@ -1,7 +1,3 @@
-/**
- * Tests for options under the "Learn more button" Customiser panel.
- */
-
 describe( 'Learn more button', function() {
 	beforeEach( () => {
 		cy.logInToWordPress( 'admin', 'password' );

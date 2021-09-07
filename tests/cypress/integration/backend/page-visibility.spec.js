@@ -5,6 +5,7 @@ describe( 'Tests for visibility settings in editor', () => {
 	} );
 
 	it( 'Checks that visibility settings of a post can be changed in Gutenberg', () => {
+		// Create a new post
 		cy.visit( '/wp-admin/post-new.php' );
 		cy.get( '#post-title-0' )
 			.click( { force: true } )
@@ -15,15 +16,12 @@ describe( 'Tests for visibility settings in editor', () => {
 			.get( '.interface-complementary-area' )
 			.contains( 'Coil Web Monetization' )
 			.click( { force: true } );
-
 		cy
 			.get( '#inspector-select-control-1' )
 			.select( 'Enabled' );
-
 		cy
 			.get( '#inspector-radio-control-0-2' )
 			.check();
-
 		cy
 			.get( '.editor-post-publish-panel__toggle' )
 			.click();
@@ -40,15 +38,12 @@ describe( 'Tests for visibility settings in editor', () => {
 			.should( 'be.checked' );
 
 		// Set the post to Enabled for Everyone
-
 		cy
 			.get( '#inspector-select-control-1' )
 			.select( 'Enabled' );
-
 		cy
 			.get( '#inspector-radio-control-0-0' )
 			.check();
-
 		cy
 			.get( '.editor-post-publish-button' )
 			.click();
@@ -62,11 +57,9 @@ describe( 'Tests for visibility settings in editor', () => {
 		cy
 			.get( '#inspector-select-control-1' )
 			.select( 'Enabled' );
-
 		cy
 			.get( '#inspector-radio-control-0-1' )
 			.check();
-
 		cy
 			.get( '.editor-post-publish-button' )
 			.click();
@@ -80,7 +73,6 @@ describe( 'Tests for visibility settings in editor', () => {
 		cy
 			.get( '#inspector-select-control-1' )
 			.select( 'Disabled' );
-
 		cy
 			.get( '.editor-post-publish-button' )
 			.click();
