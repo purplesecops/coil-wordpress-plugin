@@ -36,7 +36,12 @@ describe( 'Plugin Settings Panel', function() {
 	} );
 
 	it( 'check that the payment pointer can be set', function() {
-		cy.visit( '/wp-admin/admin.php?page=coil_settings' );
+		cy.get( '#adminmenu' )
+			.find( 'div.wp-menu-name' )
+			.contains( 'Coil' )
+			.click();
+
+		cy.get( '#coil-global-settings' ).click();
 
 		const paymentPointer = 'https://example.com/' + Math.random().toString( 36 ) + '/.well-known/pay';
 		cy.get( '#coil_payment_pointer_id' ).as( 'paymentPointerField' );
@@ -58,7 +63,12 @@ describe( 'Plugin Settings Panel', function() {
 	} );
 
 	it( 'Check warning pops up if CSS selector is empty', function( ) {
-		cy.visit( '/wp-admin/admin.php?page=coil_settings' );
+		cy.get( '#adminmenu' )
+			.find( 'div.wp-menu-name' )
+			.contains( 'Coil' )
+			.click();
+
+		cy.get( '#coil-global-settings' ).click();
 
 		cy.get( '#coil_content_container' )
 			.click()
@@ -69,7 +79,12 @@ describe( 'Plugin Settings Panel', function() {
 	} );
 
 	it( 'check that the CSS selectors can be set and changed', function() {
-		cy.visit( '/wp-admin/admin.php?page=coil_settings' );
+		cy.get( '#adminmenu' )
+			.find( 'div.wp-menu-name' )
+			.contains( 'Coil' )
+			.click();
+
+		cy.get( '#coil-global-settings' ).click();
 
 		const cssSelector = '.content-area .post-content';
 		cy.get( '#coil_content_container' ).as( 'cssSelectorField' );

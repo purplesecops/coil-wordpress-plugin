@@ -37,13 +37,11 @@ function togglePadlock( checkboxState ) {
 		case 'check':
 			cy
 				.get( '#display_padlock_id' )
-				.click()
 				.check();
 			break;
 		case 'uncheck':
 			cy
 				.get( '#display_padlock_id' )
-				.click()
 				.uncheck();
 			break;
 	}

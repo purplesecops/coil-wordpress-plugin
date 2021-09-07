@@ -18,7 +18,7 @@ describe( 'Prmotion bar', function() {
 			.should( 'be.visible' );
 	} );
 
-	it( 'Checks that you can dissmiss the promotion bar as a WM enabled user', () => {
+	it( 'Checks that you are not shown the promotion bar as a WM enabled user', () => {
 		cy.visit( '/monetized-and-public/' );
 
 		cy.startWebMonetization();
@@ -66,12 +66,10 @@ function togglePromotionBar( checkboxState ) {
 	switch ( checkboxState ) {
 		case 'check':
 			cy.get( '#display_promotion_bar' )
-				.click()
 				.check();
 			break;
 		case 'uncheck':
 			cy.get( '#display_promotion_bar' )
-				.click()
 				.uncheck();
 			break;
 	}

@@ -32,11 +32,9 @@ describe( 'Learn more button', function() {
 		cy.get( '#coil-messaging-settings' )
 			.click();
 
-		// Test the backend.
+		// Test the text will revert to its default value.
 		cy.get( '#coil_learn_more_button_text' ).clear();
 		cy.get( '#submit' ).click();
-
-		// Test the front-end.
 		cy.visit( '/coil-members-only/' );
 		cy.get( '.coil-message-button' )
 			.contains( 'Get Coil to access' );
@@ -71,11 +69,9 @@ describe( 'Learn more button', function() {
 		cy.get( '#coil-messaging-settings' )
 			.click();
 
-		// Test the backend.
+		// Test the link will revert to its default value.
 		cy.get( '#coil_learn_more_button_link' ).clear();
 		cy.get( '#submit' ).click();
-
-		// Test the front-end.
 		cy.visit( '/coil-members-only/' );
 		cy.get( '.coil-message-button' )
 			.invoke( 'attr', 'href' )
