@@ -49,7 +49,7 @@ Cypress.Commands.add( 'startWebMonetization', () => {
 
 		cy
 			.reload()
-			.then( window => {  // eslint-disable-line
+			.then( () => {  // eslint-disable-line
 				startMonetization( window );
 			} );
 	} );
