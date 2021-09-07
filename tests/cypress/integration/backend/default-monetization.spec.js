@@ -38,11 +38,11 @@ describe( 'Default monetization settings for pages and posts', () => {
 		// Set the monetization on pages and posts to enabled and public
 		cy.visit( '/wp-admin/admin.php?page=coil_settings&tab=monetization_settings' );
 		cy
-			.get( '#post_no_gating' )
+			.get( '#post_no-gating' )
 			.check();
 
 		cy
-			.get( '#page_no_gating' )
+			.get( '#page_no-gating' )
 			.check();
 		cy
 			.get( '#submit' )
@@ -57,11 +57,11 @@ describe( 'Default monetization settings for pages and posts', () => {
 		// Set the monetization on pages and posts to enabled and exclusive
 		cy.visit( '/wp-admin/admin.php?page=coil_settings&tab=monetization_settings' );
 		cy
-			.get( '#post_gate_all' )
+			.get( '#post_gate-all' )
 			.check();
 
 		cy
-			.get( '#page_gate_all' )
+			.get( '#page_gate-all' )
 			.check();
 		cy
 			.get( '#submit' )
