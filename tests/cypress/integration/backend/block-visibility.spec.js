@@ -6,6 +6,8 @@ describe( 'Tests for block-level visibility settings in the editor', () => {
 
 	it( 'Checks that a block\s visibility settings can be changed in the block editor', () => {
 		cy.visit( '/wp-admin/post.php?post=1&action=edit' );
+		const showCoilMessage = '.coil-show-monetize-users:not(.has-warning)';
+		const hideCoilMessage = '.coil-hide-monetize-users:not(.has-warning)';
 
 		// Removal nag modal and open panel.
 		cy
@@ -39,55 +41,53 @@ describe( 'Tests for block-level visibility settings in the editor', () => {
 			.click( { force: true } );
 
 		// Make block visible for only Coil Members
-		cy
-			.get( '.interface-complementary-area' )
-			.contains( 'Only Show Coil Members' )
-			.prev( 'input[type="radio"]' )
-			.check();
+		openCoilPanel( 'Only Show Coil Members' );
 
 		// Check that a "this block will be shown to monetized users only" message appear.
 		// This is a CSS :before attribute, which we can't check for directly.
 		cy
-			.get( '.coil-show-monetize-users:not(.has-warning)' )
+			.get( showCoilMessage )
 			.should( 'exist' );
 
 		cy
-			.get( '.coil-hide-monetize-users:not(.has-warning)' )
+			.get( hideCoilMessage )
 			.should( 'not.exist' );
 
 		// Make block visible for Everyone
-		cy
-			.get( '.interface-complementary-area' )
-			.contains( 'Always Show' )
-			.get( '#inspector-radio-control-1-0' )
-			.check();
+		openCoilPanel( 'Always Show' );
 
 		// Check that a no message will appear.
 		// This is a CSS :before attribute, which we can't check for directly.
 		cy
-			.get( '.coil-show-monetize-users:not(.has-warning)' )
+			.get( showCoilMessage )
 			.should( 'not.exist' );
 
 		cy
-			.get( '.coil-hide-monetize-users:not(.has-warning)' )
+			.get( hideCoilMessage )
 			.should( 'not.exist' );
 
 		// Hide block from Coil Members
-		cy
-			.get( '.interface-complementary-area' )
-			.contains( 'Hide For Coil Members' )
-			.prev( 'input[type="radio"]' )
-			.get( '#inspector-radio-control-1-2' )
-			.check();
+		openCoilPanel( 'Hide For Coil Members' );
 
 		// Check that a "this block will be shown to non-monetized users only" message appear.
 		// This is a CSS :before attribute, which we can't check for directly.
 		cy
-			.get( '.coil-show-monetize-users:not(.has-warning)' )
+			.get( showCoilMessage )
 			.should( 'not.exist' );
 
 		cy
-			.get( '.coil-hide-monetize-users:not(.has-warning)' )
+			.get( hideCoilMessage )
 			.should( 'exist' );
 	} );
 } );
+
+/**
+ * Opens the Coil panel in the editor so that monetization and visibility can be set
+ *  @param {String} visibilityState specifies the gating type
+ */
+function openCoilPanel( visibilityState ) {
+	cy
+		.get( '.interface-complementary-area' )
+		.contains( visibilityState )
+		.click();
+}
