@@ -7,6 +7,7 @@ describe( 'Tests for visibility settings in editor', () => {
 	it( 'Checks that visibility settings of a post can be changed in Gutenberg', () => {
 		cy.visit( '/post-visibility' );
 
+		const monetizationDropDown = '#inspector-select-control-1';
 		const monetizationAndVisibilityCombinations = [
 			{
 				monetization: 'Enabled',
@@ -24,43 +25,32 @@ describe( 'Tests for visibility settings in editor', () => {
 				monetization: 'Disabled',
 			},
 		];
-		saveAndCheckSettings( monetizationAndVisibilityCombinations );
-	} );
-} );
-
-/**
- * Opens the Coil panel in the editor so that monetization and visibility can be set.
- * All setting combinations that are passed in are selected, saved and checked.
- *  @param {Array} Settings specifies the gating type
- */
-function saveAndCheckSettings( Settings ) {
-	const monetizationDropDown = '#inspector-select-control-1';
-
-	Settings.foreach( ( selection ) => {
-		cy
-			.get( monetizationDropDown )
-			.select( selection.monetization );
-		if ( selection.monetization === 'Disabled' ) {
-			cy
-				.get( '.editor-post-publish-button' )
-				.click();
-
-			// Check the correct setting is still there
+		monetizationAndVisibilityCombinations.forEach( ( selection ) => {
 			cy
 				.get( monetizationDropDown )
-				.should( 'contain', selection.monetization );
-		} else {
-			cy
-				.get( selection.visibility )
-				.check();
-			cy
-				.get( '.editor-post-publish-button' )
-				.click();
+				.select( selection.monetization );
+			if ( selection.monetization === 'Disabled' ) {
+				cy
+					.get( '.editor-post-publish-button' )
+					.click();
 
-			// Check the correct setting is still there
-			cy
-				.get( selection.visibility )
-				.should( 'be.checked' );
-		}
+				// Check the correct setting is still there
+				cy
+					.get( monetizationDropDown )
+					.should( 'contain', selection.monetization );
+			} else {
+				cy
+					.get( selection.visibility )
+					.check();
+				cy
+					.get( '.editor-post-publish-button' )
+					.click();
+
+				// Check the correct setting is still there
+				cy
+					.get( selection.visibility )
+					.should( 'be.checked' );
+			}
+		} );
 	} );
-}
+} );
