@@ -44,6 +44,8 @@ describe( 'Fully restricted posts', () => {
 
 describe( 'Check visibility of content for WM-enabled users', () => {
 	beforeEach( () => {
+		cy.logInToWordPress( 'admin', 'password' );
+		cy.resetSite();
 		cy.visit( '/coil-members-only/' );
 		cy.startWebMonetization();
 	} );
