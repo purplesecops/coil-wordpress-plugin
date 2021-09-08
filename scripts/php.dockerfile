@@ -18,6 +18,11 @@ RUN apt install default-mysql-client -y
 # Downloading wordPress core, which requires ZipArchive and copying in the plugin code
 RUN apt install -y libzip-dev zip && docker-php-ext-install zip
 RUN wp core download --allow-root
+
+# Installing Cypress dependencies and sudo
+RUN apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb sudo -y
+
+# Copying code into the correct folder
 COPY . /var/www/html/wp-content/plugins/coil-wordpress-plugin
 
 # Adjusting the wp-config.php, vars.php, and htaccess files appropriately for the context
@@ -29,21 +34,19 @@ RUN sed -i "s/localhost/db/" "wp-config.php"
 RUN mv /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/vars.php /var/www/html/wp-includes
 RUN mv /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/.htaccess /var/www/html/
 
-# Installing nvm to install Cypress as well as its dependencies
-RUN apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
+# Creating a node user
+RUN groupadd --gid 1000 node && useradd --uid 1000 --gid node -G sudo --shell /bin/bash --create-home node
+RUN echo "\nnode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN chown -R node:node /var/www/html
+USER node
+
+#Installing nvm and Cypress
 RUN curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
 # Setting the shell to bash to make sure the nvm scripts work correctly
 SHELL ["/bin/bash", "-c"]
 RUN bash install.sh
-RUN chmod -R 777 ~
 # Loads the environmental variables needed for nvm and installs Cypress directly from the executable becasue there 
-RUN source ~/.nvm/nvm.sh \
-&& nvm install 12 \
-&& nvm use 12 \
-&& nvm install-latest-npm \
-&& cd /var/www/html/wp-content/plugins/coil-wordpress-plugin \
-&& ./node_modules/.bin/cypress install
-RUN chmod -R 777 ~
+RUN source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress
 
 ENTRYPOINT ["sleep", "10000"]
 
