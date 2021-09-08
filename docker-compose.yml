@@ -9,7 +9,11 @@ services:
             context: .
             dockerfile: ./scripts/php.dockerfile
         working_dir: /var/www/html
+        # The bind mount allows videos and screenshots to be saved
+        volumes:
+            - .:/var/www/html/wp-content/plugins/coil-wordpress-plugin
         # Workaround for running multiple tests in a docker container: https://github.com/cypress-io/cypress/issues/350
         ipc: host
+        entrypoint: ['/bin/bash', '/var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/wordpress-set-up.sh']
         depends_on:
             - db

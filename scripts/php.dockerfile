@@ -23,7 +23,7 @@ RUN wp core download --allow-root
 RUN apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb sudo -y
 
 # Copying code into the correct folder
-COPY . /var/www/html/wp-content/plugins/coil-wordpress-plugin
+COPY ./scripts /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts
 
 # Adjusting the wp-config.php, vars.php, and htaccess files appropriately for the context
 RUN cp wp-config-sample.php wp-config.php
@@ -47,7 +47,3 @@ SHELL ["/bin/bash", "-c"]
 RUN bash install.sh
 # Loads the environmental variables needed for nvm and installs Cypress directly from the executable becasue there 
 RUN source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress
-
-ENTRYPOINT ["sleep", "10000"]
-
-# ENTRYPOINT ["/bin/bash", "/var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/wordpress-set-up.sh"]

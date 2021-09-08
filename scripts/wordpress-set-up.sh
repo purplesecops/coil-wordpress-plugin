@@ -2,6 +2,9 @@
 
 set -e
 
+# Issues with the database taking too long to start
+sleep 10
+
 sudo a2enmod rewrite
 
 sudo bash /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts/apache2-background.sh
@@ -14,4 +17,4 @@ wp plugin activate coil-wordpress-plugin --allow-root
 
 cd wp-content/plugins/coil-wordpress-plugin
 
-npx cypress run --project ./tests --config baseUrl="http://127.0.0.1"
+source ~/.nvm/nvm.sh && npx cypress run --project ./tests --config baseUrl="http://127.0.0.1"
