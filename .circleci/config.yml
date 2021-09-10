@@ -116,6 +116,7 @@ jobs:
             curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
             bash install.sh
             groupadd --gid 1000 node && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+            echo "\nnode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
             source ~/.nvm/nvm.sh && nvm install 12 && nvm use 12 && nvm install-latest-npm && npm install cypress && npx cypress run --project /var/www/html/wp-content/plugins/coil-wordpress-plugin/tests --config baseUrl="http://127.0.0.1:80/" --record --key=$CYPRESS_PROJECT_KEY
 workflows:
   version: 2
