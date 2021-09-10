@@ -15,6 +15,4 @@ wp plugin install wordpress-importer --activate  --allow-root
 
 wp plugin activate coil-wordpress-plugin --allow-root
 
-cd wp-content/plugins/coil-wordpress-plugin
-
-source ~/.nvm/nvm.sh && npx cypress run --project ./tests --config baseUrl="http://127.0.0.1"
+source ~/.nvm/nvm.sh && npx cypress run --project /var/www/html/wp-content/plugins/coil-wordpress-plugin/tests --config baseUrl="http://127.0.0.1"
