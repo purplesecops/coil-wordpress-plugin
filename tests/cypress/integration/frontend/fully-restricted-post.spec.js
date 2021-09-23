@@ -2,6 +2,11 @@ describe( 'Fully restricted posts', () => {
 	beforeEach( () => {
 		cy.logInToWordPress( 'admin', 'password' );
 		cy.resetSite();
+		cy.startWebMonetization();
+	} );
+
+	afterEach( () => {
+		cy.stopWebMonetization();
 	} );
 
 	it( 'Checks that you can edit text that appears on fully restricted posts', () => {
@@ -40,22 +45,9 @@ describe( 'Fully restricted posts', () => {
 			.contains( 'Unlock exclusive content with Coil. Need a Coil account?' )
 			.should( 'be.visible' );
 	} );
-} );
 
-describe( 'Check visibility of content for WM-enabled users', () => {
-	beforeEach( () => {
-		cy.logInToWordPress( 'admin', 'password' );
-		cy.resetSite();
+	it( 'Checks that a VM enabled user can view monetized content', () => {
 		cy.visit( '/coil-members-only/' );
-		cy.startWebMonetization();
-	} );
-
-	afterEach( () => {
-		cy.stopWebMonetization();
-	} );
-
-	it.only( 'Checks that a VM enabled user can view monetized content', () => {
-		cy.pause();
 		cy
 			.contains( 'This is a test post for the Coil Members Only state.' )
 			.should( 'be.visible' );
