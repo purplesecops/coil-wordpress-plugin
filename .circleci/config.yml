@@ -1,15 +1,14 @@
 version: 2.0
 jobs:
   js_scss_linting:
-    docker:
-      - image: ubuntu:18.04
+    machine:
+      image: ubuntu:18.04
     steps:
       - checkout
       - run:
           name: Installing npm
           command: |
             apt update
-            apt-get install docker docker-engine docker.io containerd runc
             docker run hello-world
             apt install curl libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
             curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
