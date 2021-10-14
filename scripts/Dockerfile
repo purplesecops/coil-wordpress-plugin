@@ -22,9 +22,6 @@ RUN wp core download --allow-root
 # Installing Cypress dependencies and sudo
 RUN apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb sudo -y
 
-# Copying code into the correct folder
-COPY ./scripts /var/www/html/wp-content/plugins/coil-wordpress-plugin/scripts
-
 # Adjusting the wp-config.php, vars.php, and htaccess files appropriately for the context
 RUN cp wp-config-sample.php wp-config.php
 RUN sed -i "s/database_name_here/wordpress/" "wp-config.php"
