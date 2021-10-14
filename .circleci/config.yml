@@ -2,7 +2,7 @@ version: 2.0
 jobs:
   js_scss_linting:
     machine:
-      image: ubuntu:18.04
+      image: ubuntu-2004:202104-01
     steps:
       - checkout
       - run:
