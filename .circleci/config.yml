@@ -8,7 +8,8 @@ jobs:
       - run:
           name: Installing npm
           command: |
-            docker --help
+            docker run -d --name db --network host --env-file ./mysql.env
+            docker build ./scripts/php.dockerfile
             sudo apt update
             # sudo docker run hello-world
             # apt install curl libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
