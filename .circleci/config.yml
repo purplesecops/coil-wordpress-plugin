@@ -3,11 +3,12 @@ jobs:
   cypress_tests:
     machine:
       image: ubuntu-2004:202104-01
+    working_directory: /var/www/html
     steps:
       - checkout
       - run: sudo mkdir /coil-wordpress-plugin && sudo mv * /coil-wordpress-plugin
       - run:
-          name: Installing npm
+          name: Build and run Docker containers
           command: |
             docker run -d --name db --network host --env-file /coil-wordpress-plugin/mysql.env mysql:8
             docker run -d --name node --network host cimg/node:14.10.1
