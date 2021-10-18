@@ -24,6 +24,7 @@ jobs:
       - run:
           name: Installing mysql-client
           command: |
+            cat /etc/apt/apt.conf
             apt update
             sudo apt install -y mysql-client
       - run:
