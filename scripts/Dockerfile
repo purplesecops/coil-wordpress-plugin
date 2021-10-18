@@ -19,6 +19,10 @@ RUN apt install default-mysql-client -y
 RUN apt install -y libzip-dev zip && docker-php-ext-install zip
 RUN wp core download --allow-root
 COPY . /var/www/html/wp-content/plugins/coil-wordpress-plugin
+RUN ls
+RUN cd /var/www/html/wp-content/plugins/coil-wordpress-plugin
+RUN ls
+RUN cd /var/www/html
 
 # Installing Cypress dependencies and sudo
 RUN apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb sudo -y
