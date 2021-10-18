@@ -3,9 +3,9 @@ jobs:
   cypress_tests:
     machine:
       image: ubuntu-2004:202104-01
-    working_directory: /var/www/html
     steps:
       - checkout
+      - run: pwd
       - run: sudo mkdir /coil-wordpress-plugin && sudo mv * /coil-wordpress-plugin
       - run:
           name: Build and run Docker containers
