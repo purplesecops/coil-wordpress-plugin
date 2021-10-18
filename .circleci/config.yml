@@ -25,12 +25,12 @@ jobs:
           name: Installing mysql-client
           command: |
             apt update
-            sudo apt install default-mysql-client --allow
+            sudo apt install mysql-client -y
       - run:
           name: Downloading wordPress core, which requires ZipArchive and copying in the plugin code
           command: |
-            sudo apt install --allow libzip-dev zip && docker-php-ext-install zip
-            wp core download --allow-root
+            sudo apt install -y libzip-dev zip && docker-php-ext-install zip
+            wp core download -y-root
             sudo mv /coil-wordpress-plugin /var/www/html/wp-content/plugins
       - run:
           name: Build and run Apache container
@@ -39,7 +39,7 @@ jobs:
             docker run -d --name sever --network host webserver:apache
       - run:
           name: Installing Cypress dependencies and sudo
-          command: sudo apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb --allow
+          command: sudo apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
             # curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
             # bash install.sh
             # groupadd --gid 1000 node && useradd --uid 1000 --gid node -G sudo --shell /bin/bash --create-home node
