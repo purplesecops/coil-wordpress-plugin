@@ -5,7 +5,7 @@ jobs:
       image: ubuntu-2004:202104-01
     steps:
       - checkout
-      - run: sudo mkdir /coil-wordpress-plugin && mv * /coil-wordpress-plugin
+      - run: sudo mkdir /coil-wordpress-plugin && sudo mv * /coil-wordpress-plugin
       - run:
           name: Installing npm
           command: |
