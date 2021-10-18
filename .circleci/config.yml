@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Run mysql and node Docker containers
           command: |
-            docker run -d --name db --network host --env-file ./mysql.env mysql:8
+            docker run -d --name db --network host --env-file /coil-wordpress-plugin/mysql.env mysql:8
             docker run -d --name node --network host cimg/node:12.22.7
       - run:
           name: Installing wp-cli
