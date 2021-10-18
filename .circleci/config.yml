@@ -25,7 +25,7 @@ jobs:
           name: Installing mysql-client
           command: |
             apt update
-            sudo apt install mysql-client -y
+            sudo apt-get install mysql-client -y
       - run:
           name: Downloading wordPress core, which requires ZipArchive and copying in the plugin code
           command: |
