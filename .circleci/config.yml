@@ -8,7 +8,8 @@ jobs:
       - run:
           name: Move files into a temporary directory
           command: |
-            sudo mkdir /coil-wordpress-plugin && sudo mv . /coil-wordpress-plugin
+            sudo mkdir /coil-wordpress-plugin
+            sudo mv *.* /coil-wordpress-plugin
       - run:
           name: Run mysql and node Docker containers
           command: |
