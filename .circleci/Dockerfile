@@ -18,8 +18,6 @@ RUN apt install default-mysql-client -y
 # Downloading wordPress core, which requires ZipArchive and copying in the plugin code
 RUN apt install -y libzip-dev zip && docker-php-ext-install zip
 RUN wp core download --allow-root
-
-# Copying code
 COPY /coil-wordpress-plugin /var/www/html/wp-content/plugins
 
 # Installing Cypress dependencies and sudo
