@@ -9,9 +9,9 @@ jobs:
       - run:
           name: Installing npm
           command: |
-            docker run -d --name db --network host --env-file ./mysql.env mysql:8
+            docker run -d --name db --network host --env-file /coil-wordpress-plugin/mysql.env mysql:8
             docker run -d --name node --network host cimg/node:14.10.1
-            docker build -t webserver:apache ./.circleci
+            docker build -t webserver:apache /coil-wordpress-plugin/.circleci
             docker run -d --name sever --network host webserver:apache
             # apt install curl libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
             # curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
