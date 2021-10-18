@@ -9,7 +9,7 @@ jobs:
           name: Build and run Docker containers
           command: |
             docker run -d --name db --network host --env-file ./mysql.env mysql:8
-            docker run -d --name node --network host cimg/node:12.122.7
+            docker run -d --name node --network host cimg/node:12.22.7
             docker build -t webserver:apache ./scripts
             docker run -d --name sever --network host webserver:apache
             # apt install curl libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
