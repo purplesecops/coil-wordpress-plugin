@@ -5,14 +5,12 @@ jobs:
       image: ubuntu-2004:202104-01
     steps:
       - checkout
-      - run: pwd
-      - run: sudo mkdir /coil-wordpress-plugin && sudo mv * /coil-wordpress-plugin
       - run:
           name: Build and run Docker containers
           command: |
-            docker run -d --name db --network host --env-file /coil-wordpress-plugin/mysql.env mysql:8
+            docker run -d --name db --network host --env-file ./mysql.env mysql:8
             docker run -d --name node --network host cimg/node:14.10.1
-            docker build -t webserver:apache /coil-wordpress-plugin/scripts
+            docker build -t webserver:apache ./scripts
             docker run -d --name sever --network host webserver:apache
             # apt install curl libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
             # curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
