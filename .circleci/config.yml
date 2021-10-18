@@ -2,7 +2,7 @@ version: 2.0
 jobs:
   cypress_tests:
     machine:
-      image: ubuntu:20.04
+      image: ubuntu-2004:202008-01
     steps:
       - checkout
       - run:
