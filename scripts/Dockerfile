@@ -4,6 +4,7 @@ WORKDIR /var/www/html
 
 # Downloading wordPress core, which requires ZipArchive and copying in the plugin code
 RUN apt update
+RUN apt install default-mysql-client -y
 RUN apt install -y libzip-dev zip && docker-php-ext-install zip
 RUN wp core download --allow-root
 COPY . /var/www/html/wp-content/plugins/coil-wordpress-plugin
