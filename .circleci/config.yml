@@ -6,13 +6,39 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build and run Docker containers
+          name: Move files into a temporary directory
+          command: |
+            sudo mkdir /coil-wordpress-plugin && sudo mv . /coil-wordpress-plugin
+      - run:
+          name: Run mysql and node Docker containers
           command: |
             docker run -d --name db --network host --env-file ./mysql.env mysql:8
             docker run -d --name node --network host cimg/node:12.22.7
+      - run:
+          name: Installing wp-cli
+          command: |
+            curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+            chmod +x wp-cli.phar
+            sudo mv wp-cli.phar /usr/local/bin/wp
+      - run:
+          name: Installing mysql-client
+          command: |
+            apt update
+            apt install default-mysql-client -y
+      - run:
+          name: Downloading wordPress core, which requires ZipArchive and copying in the plugin code
+          command: |
+            apt install -y libzip-dev zip && docker-php-ext-install zip
+            wp core download --allow-root
+            sudo mv /coil-wordpress-plugin /var/www/html/wp-content/plugins
+      - run:
+          name: Build and run Apache container
+          command: |
             docker build -t webserver:apache ./scripts
             docker run -d --name sever --network host webserver:apache
-            # apt install curl libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
+      - run:
+          name: Installing Cypress dependencies and sudo
+          command: apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
             # curl -o install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
             # bash install.sh
             # groupadd --gid 1000 node && useradd --uid 1000 --gid node -G sudo --shell /bin/bash --create-home node
