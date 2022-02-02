@@ -162,13 +162,13 @@ function register_admin_content_settings() {
 		'coil_enable_button_section'
 	);
 
-	// // ==== Button Settings
-	// add_settings_section(
-	// 	'coil_button_section',
-	// 	false,
-	// 	__NAMESPACE__ . '\coil_settings_coil_button_settings_render_callback',
-	// 	'coil_button_section'
-	// );
+	// ==== Button Settings
+	add_settings_section(
+		'coil_button_settings_section',
+		false,
+		__NAMESPACE__ . '\coil_settings_coil_button_settings_render_callback',
+		'coil_button_settings_section'
+	);
 
 	// // ==== Button Visibility
 	// add_settings_section(
@@ -352,7 +352,23 @@ function coil_exclusive_settings_group_validation( $exclusive_settings ) : array
  * @return array
 */
 function coil_button_settings_group_validation( $coil_button_settings ): array {
-	$final_settings  = [];
+	$final_settings = [];
+
+	// Validates all text input fields
+	$text_fields = [
+		'coil_button_text',
+		'coil_button_link',
+	];
+
+	foreach ( $text_fields as $field_name ) {
+
+		if ( $field_name === 'coil_button_link' ) {
+			$final_settings[ $field_name ] = ( isset( $coil_button_settings[ $field_name ] ) ) ? esc_url_raw( $coil_button_settings[ $field_name ] ) : '';
+		} else {
+			$final_settings[ $field_name ] = ( isset( $coil_button_settings[ $field_name ] ) ) ? sanitize_text_field( $coil_button_settings[ $field_name ] ) : '';
+		}
+	}
+
 	$checkbox_fields = [ 'coil_show_promotion_bar', 'coil_button_toggle' ];
 
 	foreach ( $checkbox_fields as $field_name ) {
@@ -1138,6 +1154,34 @@ function coil_paywall_appearance_text_field_settings_render_callback( $field_nam
 }
 
 /**
+ * Renders the output of the show Coil Promotion Bar footer checkbox
+ * @return void
+*/
+function coil_settings_promotion_bar_render_callback() {
+
+	/**
+	* Specify the default checked state on the input from
+	* any settings stored in the database. If the
+	* input status is not set, default to checked
+	*/
+	$checked_input_value = Admin\get_coil_button_setting( 'coil_show_promotion_bar' );
+
+	printf(
+		'<input type="%s" name="%s" id="%s" "%s">',
+		esc_attr( 'checkbox' ),
+		esc_attr( 'coil_button_settings_group[coil_show_promotion_bar]' ),
+		esc_attr( 'coil_show_promotion_bar' ),
+		checked( 1, $checked_input_value, false )
+	);
+
+	printf(
+		'<label for="%s">%s</label>',
+		esc_attr( 'coil_show_promotion_bar' ),
+		esc_html_e( 'Show the support creator message in a footer bar on posts that are monetized and publicly visible.', 'coil-web-monetization' )
+	);
+}
+
+/**
  * Renders the output of the enable Coil Button toggle
  * @return void
 */
@@ -1167,31 +1211,27 @@ function coil_settings_enable_coil_button_toggle_render_callback() {
 }
 
 /**
- * Renders the output of the show Coil Promotion Bar footer checkbox
+ * Renders the Coil Button customization settings
  * @return void
 */
-function coil_settings_promotion_bar_render_callback() {
-
-	/**
-	* Specify the default checked state on the input from
-	* any settings stored in the database. If the
-	* input status is not set, default to checked
-	*/
-	$checked_input_value = Admin\get_coil_button_setting( 'coil_show_promotion_bar' );
-
-	printf(
-		'<input type="%s" name="%s" id="%s" "%s">',
-		esc_attr( 'checkbox' ),
-		esc_attr( 'coil_button_settings_group[coil_show_promotion_bar]' ),
-		esc_attr( 'coil_show_promotion_bar' ),
-		checked( 1, $checked_input_value, false )
-	);
-
-	printf(
-		'<label for="%s">%s</label>',
-		esc_attr( 'coil_show_promotion_bar' ),
-		esc_html_e( 'Show the support creator message in a footer bar on posts that are monetized and publicly visible.', 'coil-web-monetization' )
-	);
+function coil_settings_coil_button_settings_render_callback() {
+	?>
+	<div class="tab-styling button-settings">
+		<h4><?php echo esc_html_e( 'Button Text', 'coil-web-monetization' ); ?></h4>
+		<?php
+		$defaults = Admin\get_coil_button_text_defaults();
+		printf(
+			'<input type="%s" class="%s" name="%s" id="%s" placeholder="%s" value="%s" />',
+			esc_attr( 'text' ),
+			esc_attr( 'wide-input' ),
+			esc_attr( 'coil_button_settings_group[coil_button_text]' ),
+			esc_attr( 'coil_button_text' ),
+			esc_attr( $defaults['coil_button_text'] ),
+			esc_attr( Admin\get_coil_button_setting( 'coil_button_text' ) )
+		);
+		?>
+	</div>
+	<?php
 }
 
 /**
@@ -1428,8 +1468,8 @@ function render_coil_settings_screen() : void {
 					echo '<div class="settings-main">';
 					settings_fields( 'coil_button_settings_group' );
 					do_settings_sections( 'coil_promotion_bar_section' );
-						do_settings_sections( 'coil_enable_button_section' );
-					// 	do_settings_sections( 'coil_button_section' );
+					do_settings_sections( 'coil_enable_button_section' );
+					do_settings_sections( 'coil_button_settings_section' );
 					// 	do_settings_sections( 'coil_button_visibility_section' );
 					submit_button();
 					echo '</div>';

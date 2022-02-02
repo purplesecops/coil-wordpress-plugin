@@ -646,3 +646,17 @@ function get_coil_button_setting( $field_id ) {
 
 	return $value;
 }
+
+/**
+ * Retrieve the Coil button text field defaults
+ * This includes the button text and link
+ *
+ * @return array Text field default values
+ */
+function get_coil_button_text_defaults() {
+	// Set up defaults.
+	return [
+		'coil_button_text' => __( 'Support us with Coil', 'coil-web-monetization' ),
+		'coil_button_link' => __( 'https://coil.com/', 'coil-web-monetization' ),
+	];
+}
