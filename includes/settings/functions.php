@@ -145,20 +145,21 @@ function register_admin_content_settings() {
 		__NAMESPACE__ . '\coil_button_settings_group_validation'
 	);
 
-	// // ==== Enable / Disable
-	// add_settings_section(
-	// 	'coil_enable_button_section',
-	// 	false,
-	// 	__NAMESPACE__ . '\coil_settings_enable_coil_button_toggle_render_callback',
-	// 	'coil_enable_button_section'
-	// );
-
+	// TODO: Remove - holds setting as it was previously in the promotion bar
 	// ==== Button Settings
 	add_settings_section(
 		'coil_promotion_bar_section',
 		false,
 		__NAMESPACE__ . '\coil_settings_promotion_bar_render_callback',
 		'coil_promotion_bar_section'
+	);
+
+	// ==== Enable / Disable
+	add_settings_section(
+		'coil_enable_button_section',
+		false,
+		__NAMESPACE__ . '\coil_settings_enable_coil_button_toggle_render_callback',
+		'coil_enable_button_section'
 	);
 
 	// // ==== Button Settings
@@ -352,10 +353,10 @@ function coil_exclusive_settings_group_validation( $exclusive_settings ) : array
 */
 function coil_button_settings_group_validation( $coil_button_settings ): array {
 	$final_settings  = [];
-	$checkbox_fields = [ 'coil_show_promotion_bar' ];
+	$checkbox_fields = [ 'coil_show_promotion_bar', 'coil_button_toggle' ];
 
 	foreach ( $checkbox_fields as $field_name ) {
-		$final_settings[ $field_name ] = isset( $coil_button_settings[ $field_name ] ) ? true : false;
+		$final_settings[ $field_name ] = isset( $coil_button_settings[ $field_name ] ) && ( $coil_button_settings[ $field_name ] === 'on' || $coil_button_settings[ $field_name ] === true ) ? true : false;
 	}
 	return $final_settings;
 }
@@ -555,7 +556,7 @@ function coil_settings_monetization_render_callback() {
 function coil_settings_enable_exclusive_toggle_render_callback() {
 	?>
 	<div class="tab-styling">
-		<?php echo '<h3>' . esc_html__( 'Exclusive Content', 'coil-web-monetization' ) . '</h2>'; ?>
+		<?php echo '<h3>' . esc_html__( 'Exclusive Content', 'coil-web-monetization' ) . '</h3>'; ?>
 		<?php echo '<p>' . esc_html_e( 'Only Coil Members using the Coil extension or supported browsers can access exclusive content.', 'coil-web-monetization' ) . '</p>'; ?>
 			<?php
 			$exclusive_toggle_id = 'coil_exclusive_toggle';
@@ -876,11 +877,10 @@ function coil_padlock_display_checkbox_render_callback() {
 	}
 
 	printf(
-		'<input type="%s" name="%s" id="%s" value=%b %s>',
+		'<input type="%s" name="%s" id="%s" %s>',
 		esc_attr( 'checkbox' ),
 		esc_attr( 'coil_exclusive_settings_group[' . $padlock_input_id . ']' ),
 		esc_attr( $padlock_input_id ),
-		esc_attr( $value ),
 		$checked_input
 	);
 
@@ -1135,6 +1135,35 @@ function coil_paywall_appearance_text_field_settings_render_callback( $field_nam
 	if ( $field_name === 'coil_paywall_button_link' ) {
 		echo '<p class="description">' . __( 'If you have an affiliate link add it here.', 'coil-web-monetization' ) . '</p>';
 	}
+}
+
+/**
+ * Renders the output of the enable Coil Button toggle
+ * @return void
+*/
+function coil_settings_enable_coil_button_toggle_render_callback() {
+	?>
+	<div class="tab-styling">
+		<?php
+		echo '<h3>' . esc_html__( 'Floating \'Support\' Button', 'coil-web-monetization' ) . '</h3>';
+		$coil_btn_toggle_id = 'coil_button_toggle';
+		$value              = Admin\is_coil_button_enabled();
+
+		if ( $value === true ) {
+			$checked_input = 'checked="checked"';
+		} else {
+			$checked_input = '';
+		}
+		echo sprintf(
+			'<label class="coil-checkbox" for="%1$s"><input type="%2$s" name="%3$s" id="%1$s" %4$s /><span></span><i></i></label>',
+			esc_attr( $coil_btn_toggle_id ),
+			esc_attr( 'checkbox' ),
+			esc_attr( 'coil_button_settings_group[' . $coil_btn_toggle_id . ']' ),
+			$checked_input
+		);
+		?>
+	</div>
+	<?php
 }
 
 /**
@@ -1399,7 +1428,7 @@ function render_coil_settings_screen() : void {
 					echo '<div class="settings-main">';
 					settings_fields( 'coil_button_settings_group' );
 					do_settings_sections( 'coil_promotion_bar_section' );
-					// 	do_settings_sections( 'coil_enable_button_section' );
+						do_settings_sections( 'coil_enable_button_section' );
 					// 	do_settings_sections( 'coil_button_section' );
 					// 	do_settings_sections( 'coil_button_visibility_section' );
 					submit_button();

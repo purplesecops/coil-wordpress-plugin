@@ -621,6 +621,17 @@ function get_coil_button_settings() : array {
 }
 
 /**
+ * Retrieve the Coil button toggle setting
+ *
+ * @return bool setting stored in options
+ */
+function is_coil_button_enabled() {
+	$coil_button_options = get_coil_button_settings();
+	$exclusive_toggle_id = 'coil_button_toggle';
+	return isset( $coil_button_options[ $exclusive_toggle_id ] ) ? $coil_button_options[ $exclusive_toggle_id ] : false;
+}
+
+/**
  * Retrieve the checkbox value for whether or not to display the Promotion Bar.
  * @param string $field_name
  * @return string Setting stored in options.

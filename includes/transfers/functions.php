@@ -75,7 +75,8 @@ function maybe_load_database_defaults() {
 
 	if ( $coil_button_settings === 'absent' ) {
 		// Donation bar default is true
-		$coil_button_settings = [ 'coil_show_promotion_bar' => true ];
+		$coil_button_settings = [ 'coil_show_promotion_bar' => true ]; // TODO: Remove
+		$coil_button_settings = [ 'coil_button_toggle' => true ];
 		add_option( 'coil_button_settings_group', $coil_button_settings );
 	}
 }
