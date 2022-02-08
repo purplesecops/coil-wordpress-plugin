@@ -333,12 +333,12 @@ function coil_exclusive_settings_group_validation( $exclusive_settings ) : array
 
 	// Validates all checkbox input fields
 	$checkbox_fields = [
-		'coil_message_font'     => Admin\get_paywall_appearance_defaults()['coil_message_font'],
-		'coil_title_padlock'    => Admin\get_exclusive_post_defaults()['coil_title_padlock'],
-		'coil_exclusive_toggle' => Admin\get_exclusive_content_enabled_default(),
+		'coil_message_font',
+		'coil_title_padlock',
+		'coil_exclusive_toggle',
 	];
 
-	foreach ( $checkbox_fields as $field_name => $field_default ) {
+	foreach ( $checkbox_fields as $field_name ) {
 		$final_settings[ $field_name ] = isset( $exclusive_settings[ $field_name ] ) && ( $exclusive_settings[ $field_name ] === 'on' || $exclusive_settings[ $field_name ] === true ) ? true : false;
 	}
 	return $final_settings;
