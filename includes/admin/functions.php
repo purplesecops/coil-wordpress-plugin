@@ -642,13 +642,21 @@ function is_coil_button_enabled() {
  * @param string $field_name
  * @return string Setting stored in options.
  */
-function get_coil_button_setting( $field_id ) {
+function get_coil_button_setting( $field_id, $use_text_default = false ) {
 
 	$coil_button_settings = get_coil_button_settings();
 	$value                = false;
+	$text_fields          = [ 'coil_button_text', 'coil_button_link', 'coil_members_button_text' ];
 	$margin_keys          = array_keys( get_button_margin_key_defaults() );
 	$default_settings     = get_coil_button_defaults();
-	if ( in_array( $field_id, $margin_keys, true ) ) {
+	// Text inputs can be empty strings, in which the placeholder text will display or the default text will be returned.
+	if ( in_array( $field_id, $text_fields, true ) ) {
+		if ( $use_text_default && empty( $coil_button_settings[ $field_id ] ) ) {
+			$value = $default_settings[ $field_id ];
+		} else {
+			$value = ( ! empty( $coil_button_settings[ $field_id ] ) ) ? $coil_button_settings[ $field_id ] : '';
+		}
+	} elseif ( in_array( $field_id, $margin_keys, true ) ) {
 		$margin = get_coil_button_margin( $field_id );
 		if ( $margin !== false && $margin !== 0 ) {
 			$value = strval( $margin );
