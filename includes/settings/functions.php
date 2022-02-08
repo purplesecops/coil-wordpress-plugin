@@ -1459,10 +1459,10 @@ function render_buton_margin_settings() {
 	echo '<table><tr>';
 
 	$margins = [
-		'coil_button_top_margin'    => Admin\get_coil_button_setting( 'coil_button_top_margin' ) !== false ? Admin\get_coil_button_setting( 'coil_button_top_margin' ) : '-',
-		'coil_button_right_margin'  => Admin\get_coil_button_setting( 'coil_button_right_margin' ) !== false ? Admin\get_coil_button_setting( 'coil_button_right_margin' ) : '-',
-		'coil_button_bottom_margin' => Admin\get_coil_button_setting( 'coil_button_bottom_margin' ) !== false ? Admin\get_coil_button_setting( 'coil_button_bottom_margin' ) : '-',
-		'coil_button_left_margin'   => Admin\get_coil_button_setting( 'coil_button_left_margin' ) !== false ? Admin\get_coil_button_setting( 'coil_button_left_margin' ) : '-',
+		'coil_button_top_margin'    => Admin\get_coil_button_setting( 'coil_button_top_margin' ) !== false ? Admin\get_coil_button_setting( 'coil_button_top_margin' ) : '',
+		'coil_button_right_margin'  => Admin\get_coil_button_setting( 'coil_button_right_margin' ) !== false ? Admin\get_coil_button_setting( 'coil_button_right_margin' ) : '',
+		'coil_button_bottom_margin' => Admin\get_coil_button_setting( 'coil_button_bottom_margin' ) !== false ? Admin\get_coil_button_setting( 'coil_button_bottom_margin' ) : '',
+		'coil_button_left_margin'   => Admin\get_coil_button_setting( 'coil_button_left_margin' ) !== false ? Admin\get_coil_button_setting( 'coil_button_left_margin' ) : '',
 	];
 
 	foreach ( $margins as $id => $setting ) {

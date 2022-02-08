@@ -653,7 +653,7 @@ function get_coil_button_setting( $field_id ) {
 		if ( $margin !== false && $margin !== 0 ) {
 			$value = strval( $margin );
 		} else {
-			$value = '-';
+			$value = '';
 		}
 	} elseif ( in_array( $field_id, array_keys( $default_settings ), true ) ) {
 		$value = isset( $coil_button_settings[ $field_id ] ) ? $coil_button_settings[ $field_id ] : $default_settings[ $field_id ];
