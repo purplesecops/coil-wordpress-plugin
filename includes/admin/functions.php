@@ -632,7 +632,7 @@ function is_coil_button_enabled() {
 }
 
 /**
- * Retrieve the checkbox value for whether or not to display the Promotion Bar.
+ * Retrieve the Coil button settings.
  * @param string $field_name
  * @return string Setting stored in options.
  */
@@ -640,23 +640,95 @@ function get_coil_button_setting( $field_id ) {
 
 	$coil_button_settings = get_coil_button_settings();
 	$value                = false;
-	if ( $field_id === 'coil_show_promotion_bar' ) {
-		$value = isset( $coil_button_settings[ $field_id ] ) ? $coil_button_settings[ $field_id ] : false;
+	$margin_keys          = array_keys( get_button_margin_key_defaults() );
+	$default_settings     = get_coil_button_defaults();
+	if ( in_array( $field_id, $margin_keys, true ) ) {
+		$margin = get_coil_button_margin( $field_id );
+		if ( $margin !== false && $margin !== 0 ) {
+			$value = strval( $margin );
+		} else {
+			$value = '-';
+		}
+	} elseif ( in_array( $field_id, array_keys( $default_settings ), true ) ) {
+		$value = isset( $coil_button_settings[ $field_id ] ) ? $coil_button_settings[ $field_id ] : $default_settings[ $field_id ];
 	}
 
 	return $value;
 }
 
 /**
- * Retrieve the Coil button text field defaults
- * This includes the button text and link
- *
- * @return array Text field default values
+ * Retrieve the Coil button margins.
+ * @param string $field_name
+ * @return int Setting stored in options.
  */
-function get_coil_button_text_defaults() {
+function get_coil_button_margin( $field_id ) {
+
+	$coil_button_settings = get_coil_button_settings();
+	$value                = false;
+	$margin_defaults      = get_button_margin_key_defaults();
+	$margin_keys          = array_keys( $margin_defaults );
+	if ( in_array( $field_id, $margin_keys, true ) ) {
+		$value = isset( $coil_button_settings[ $field_id ] ) ? $coil_button_settings[ $field_id ] : $margin_defaults[ $field_id ];
+	}
+
+	return $value;
+}
+
+/**
+ * Retrieve the Coil button settings defaults
+ *
+ * @return array Default values
+ */
+function get_coil_button_defaults() {
 	// Set up defaults.
-	return [
-		'coil_button_text' => __( 'Support us with Coil', 'coil-web-monetization' ),
-		'coil_button_link' => __( 'https://coil.com/', 'coil-web-monetization' ),
+	$settings = [
+		'coil_show_promotion_bar'    => true,
+		'coil_button_toggle'         => true,
+		'coil_button_member_display' => true,
+		'coil_button_text'           => __( 'Support us with Coil', 'coil-web-monetization' ),
+		'coil_button_link'           => __( 'https://coil.com/', 'coil-web-monetization' ),
+		'coil_members_button_text'   => __( 'Thanks for your support!', 'coil-web-monetization' ),
+		'coil_button_color_theme'    => 'dark',
+		'coil_button_size'           => 'large',
+		'coil_button_position'       => 'bottom-right',
 	];
+	$margin_defaults = get_button_margin_key_defaults();
+	return array_merge( $settings, $margin_defaults );
+}
+
+/**
+ * @return array Default margins for the Coil button.
+ */
+function get_button_margin_key_defaults() {
+	return [
+		'coil_button_top_margin'    => 0,
+		'coil_button_right_margin'  => 0,
+		'coil_button_bottom_margin' => 0,
+		'coil_button_left_margin'   => 0,
+	];
+}
+
+/**
+ * @return array Valid button sizes.
+ */
+function get_button_size_options() {
+
+	$sizes = [ 'large', 'small' ];
+
+	return $sizes;
+}
+
+/**
+ * @return array Valid button positions.
+ */
+function get_button_position_options() {
+
+	$position_options = [
+		'bottom-right' => 'Bottom - Right',
+		'bottom-left'  => 'Bottom - Left',
+		'top-right'    => 'Top - Right',
+		'top-left'     => 'Top - Left',
+	];
+
+	return $position_options;
 }
