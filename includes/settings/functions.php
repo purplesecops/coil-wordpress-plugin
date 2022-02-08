@@ -170,13 +170,13 @@ function register_admin_content_settings() {
 		'coil_button_settings_section'
 	);
 
-	// // ==== Button Visibility
-	// add_settings_section(
-	// 	'coil_button_visibility_section',
-	// 	false,
-	// 	__NAMESPACE__ . '\coil_settings_coil_button_visibility_render_callback',
-	// 	'coil_button_visibility_section'
-	// );
+	// ==== Button Visibility
+	add_settings_section(
+		'coil_button_visibility_section',
+		false,
+		__NAMESPACE__ . '\coil_settings_coil_button_visibility_render_callback',
+		'coil_button_visibility_section'
+	);
 }
 
 /* ------------------------------------------------------------------------ *
@@ -374,7 +374,7 @@ function coil_button_settings_group_validation( $coil_button_settings ): array {
 		}
 	}
 
-	$checkbox_fields = [ 'coil_show_promotion_bar', 'coil_button_toggle', 'coil_button_member_display' ];
+	$checkbox_fields = [ 'coil_show_promotion_bar', 'coil_button_toggle', 'coil_button_member_display', 'coil_mobile_button_display' ];
 
 	foreach ( $checkbox_fields as $field_name ) {
 		$final_settings[ $field_name ] = isset( $coil_button_settings[ $field_name ] ) && ( $coil_button_settings[ $field_name ] === 'on' || $coil_button_settings[ $field_name ] === true ) ? true : false;
@@ -411,6 +411,17 @@ function coil_button_settings_group_validation( $coil_button_settings ): array {
 		} else {
 			$final_settings[ $field_name ] = $default;
 		}
+	}
+
+	// A list of valid post types
+	$post_type_options = Coil\get_supported_post_types( 'objects' );
+	foreach ( $post_type_options as $post_type ) {
+		// Validates Coil button visibility settings
+		$button_visibility_setting_key = $post_type->name . '_button_visibility';
+		$valid_options                 = [ 'show', 'hide' ];
+
+		// The default value is to show
+		$final_settings[ $button_visibility_setting_key ] = isset( $coil_button_settings[ $button_visibility_setting_key ] ) && in_array( $coil_button_settings[ $button_visibility_setting_key ], $valid_options, true ) ? sanitize_key( $coil_button_settings[ $button_visibility_setting_key ] ) : Admin\get_button_display_default();
 	}
 
 	return $final_settings;
@@ -1480,6 +1491,63 @@ function render_buton_margin_settings() {
 }
 
 /**
+ * Renders the Coil Button visibility settings
+ * @return void
+*/
+function coil_settings_coil_button_visibility_render_callback() {
+	?>
+	<div class="tab-styling">
+		<?php
+		echo '<h3>' . esc_html__( 'Visibility', 'coil-web-monetization' ) . '</h3>';
+		echo '<p>' . esc_html_e( 'Select where you want the floating button to show up by default. You can hide the button on specific pages in the Page Editor Settings.', 'coil-web-monetization' ) . '</p>';
+
+		// Using a function to generate the table with the post type excerpt checkboxes.
+		$group          = 'coil_button_settings_group';
+		$columns        = [
+			'show' => 'Show',
+			'hide' => 'Hide',
+		];
+		$input_type     = 'radio';
+		$suffix         = 'button_visibility';
+		$button_options = Admin\get_coil_button_settings();
+		render_generic_post_type_table( $group, $columns, $input_type, $suffix, $button_options );
+
+		printf(
+			'<p class="%s">%s</p>',
+			esc_attr( 'description' ),
+			esc_html__( 'You can override these settings in the Category, Tag, Page and Post menus.', 'coil-web-monetization' )
+		);
+
+		$mobile_button_display_id = 'coil_mobile_button_display';
+		$value                    = isset( $button_options[ $mobile_button_display_id ] ) ? $button_options[ $mobile_button_display_id ] : Admin\get_button_display_default();
+
+		if ( $value === true ) {
+			$checked_input = 'checked="checked"';
+		} else {
+			$checked_input = '';
+		}
+
+		echo sprintf(
+			'<label class="%6$s" for="%1$s"><input type="%3$s" name="%2$s" id="%1$s" %4$s /> <strong>%5$s</strong></label>',
+			esc_attr( $mobile_button_display_id ),
+			esc_attr( 'coil_button_settings_group[' . $mobile_button_display_id . ']' ),
+			esc_attr( 'checkbox' ),
+			$checked_input,
+			esc_html__( 'Show button for Coil Members', 'coil-web-monetization' ),
+			esc_attr( 'coil-clear-left' )
+		);
+
+		printf(
+			'<p class="%s">%s</p>',
+			esc_attr( 'description' ),
+			esc_html__( 'On mobile, the button can\'t detect if the user is a Coil member, so if you check this box, the `Support` button will always show.', 'coil-web-monetization' )
+		);
+		?>
+	</div>
+	<?php
+}
+
+/**
  * Creates dismissable welcome notice on coil admin screen
  * @return void
 */
@@ -1723,7 +1791,7 @@ function render_coil_settings_screen() : void {
 					do_settings_sections( 'coil_promotion_bar_section' );
 					do_settings_sections( 'coil_enable_button_section' );
 					do_settings_sections( 'coil_button_settings_section' );
-					// 	do_settings_sections( 'coil_button_visibility_section' );
+					do_settings_sections( 'coil_button_visibility_section' );
 					submit_button();
 					echo '</div>';
 					break;

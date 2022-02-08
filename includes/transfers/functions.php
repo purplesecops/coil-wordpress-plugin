@@ -74,11 +74,23 @@ function maybe_load_database_defaults() {
 	$coil_button_settings = get_option( 'coil_button_settings_group', 'absent' );
 
 	if ( $coil_button_settings === 'absent' ) {
+		$new_button_settings = [];
 		// Donation bar default is true
-		$coil_button_settings = [ 'coil_show_promotion_bar' => true ]; // TODO: Remove
-		$coil_button_settings = [ 'coil_button_toggle' => true ];
-		$coil_button_settings = [ 'coil_button_member_display' => true ];
-		add_option( 'coil_button_settings_group', $coil_button_settings );
+		$new_button_settings['coil_show_promotion_bar']    = true; // TODO: Remove
+		$new_button_settings['coil_button_toggle']         = true;
+		$new_button_settings['coil_button_member_display'] = true;
+		$new_button_settings['coil_mobile_button_display'] = true;
+
+		$post_type_options = Coil\get_supported_post_types( 'objects' );
+		// Button visibility default is 'show'
+		$button_visibility_default = Admin\get_button_display_default();
+
+		// Set post visibility and excerpt display default for each post type
+		foreach ( $post_type_options as $post_type ) {
+			$new_button_settings[ $post_type->name . '_button_visibility' ] = $button_visibility_default;
+		}
+
+		add_option( 'coil_button_settings_group', $new_button_settings );
 	}
 }
 

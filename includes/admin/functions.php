@@ -738,3 +738,37 @@ function get_button_position_options() {
 
 	return $position_options;
 }
+
+/**
+ * Retrieve the Coil button visibility settings.
+ * @param string $field_name
+ * @return string Setting stored in options.
+ */
+function get_coil_button_visibility_setting( $field_id ) {
+
+	$coil_button_settings = get_coil_button_settings();
+	$value                = false;
+	$default_settings     = get_coil_button_defaults();
+	if ( in_array( $field_id, $margin_keys, true ) ) {
+		$margin = get_coil_button_margin( $field_id );
+		if ( $margin !== false && $margin !== 0 ) {
+			$value = strval( $margin );
+		} else {
+			$value = '';
+		}
+	} elseif ( in_array( $field_id, array_keys( $default_settings ), true ) ) {
+		$value = isset( $coil_button_settings[ $field_id ] ) ? $coil_button_settings[ $field_id ] : $default_settings[ $field_id ];
+	}
+
+	return $value;
+}
+
+/**
+* Returns the default Coil button display for all post types. The default is to show.
+*
+* @return string
+*/
+function get_button_display_default() {
+
+	return 'show';
+}
