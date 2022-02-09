@@ -1476,6 +1476,14 @@ function render_buton_margin_settings() {
 		'coil_button_left_margin'   => Admin\get_coil_button_setting( 'coil_button_left_margin' ) !== false ? Admin\get_coil_button_setting( 'coil_button_left_margin' ) : '',
 	];
 
+	$desciptions = [
+		'coil_button_top_margin'    => esc_html__( 'TOP', 'coil-web-monetization' ),
+		'coil_button_right_margin'  => esc_html__( 'RIGHT', 'coil-web-monetization' ),
+		'coil_button_bottom_margin' => esc_html__( 'BOTTOM', 'coil-web-monetization' ),
+		'coil_button_left_margin'   => esc_html__( 'LEFT', 'coil-web-monetization' ),
+
+	];
+
 	foreach ( $margins as $id => $setting ) {
 		printf(
 			'<input style="text-align: center" type="%s" class="%s" name="%s" id="%s" placeholder="%s" value="%s" />',
@@ -1485,6 +1493,11 @@ function render_buton_margin_settings() {
 			esc_attr( $id ),
 			esc_attr( '-' ),
 			esc_attr( $setting )
+		);
+		printf(
+			'<p style="text-align: center" class="%s">%s</p>',
+			esc_attr( 'description' ),
+			esc_attr( $desciptions[ $id ] )
 		);
 	}
 	echo '</div>';
