@@ -1467,7 +1467,7 @@ function buton_position_dropdown() {
  * @return void
 */
 function render_buton_margin_settings() {
-	echo '<table><tr>';
+	echo '<div class="coil-input-group">';
 
 	$margins = [
 		'coil_button_top_margin'    => Admin\get_coil_button_setting( 'coil_button_top_margin' ) !== false ? Admin\get_coil_button_setting( 'coil_button_top_margin' ) : '',
@@ -1478,7 +1478,7 @@ function render_buton_margin_settings() {
 
 	foreach ( $margins as $id => $setting ) {
 		printf(
-			'<td><input style="text-align: center" type="%s" class="%s" name="%s" id="%s" placeholder="%s" value="%s" /></td>',
+			'<input style="text-align: center" type="%s" class="%s" name="%s" id="%s" placeholder="%s" value="%s" />',
 			esc_attr( 'text' ),
 			esc_attr( 'wide-input' ),
 			esc_attr( 'coil_button_settings_group[' . $id . ']' ),
@@ -1487,7 +1487,7 @@ function render_buton_margin_settings() {
 			esc_attr( $setting )
 		);
 	}
-	echo '</tr></table>';
+	echo '</div>';
 }
 
 /**
