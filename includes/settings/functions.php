@@ -1392,9 +1392,9 @@ function button_size_render_callback() {
 		'<label for="%1$s"><input type="radio" name="%2$s" id="%1$s" value="%3$s" %4$s /> %5$s</label>',
 		esc_attr( 'small_size' ),
 		esc_attr( 'coil_button_settings_group[coil_button_size]' ),
-		esc_attr( 'Small' ),
+		esc_attr( 'small' ),
 		( ! empty( $button_size ) && $button_size === 'small' || empty( $button_size ) ? 'checked="checked"' : false ),
-		esc_html__( 'small', 'coil-web-monetization' )
+		esc_html__( 'Small', 'coil-web-monetization' )
 	);
 
 	echo '</div>';
