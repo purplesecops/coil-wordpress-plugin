@@ -1352,7 +1352,7 @@ function button_theme_render_callback() {
 		esc_attr( 'coil_button_settings_group[coil_button_color_theme]' ),
 		esc_attr( 'dark' ),
 		( ! empty( $button_color_theme ) && $button_color_theme === 'dark' ? 'checked="checked"' : false ),
-		esc_html__( 'dark', 'coil-web-monetization' )
+		esc_html__( 'Dark', 'coil-web-monetization' )
 	);
 
 	echo sprintf(
@@ -1361,7 +1361,7 @@ function button_theme_render_callback() {
 		esc_attr( 'coil_button_settings_group[coil_button_color_theme]' ),
 		esc_attr( 'light' ),
 		( ! empty( $button_color_theme ) && $button_color_theme === 'light' || empty( $button_color_theme ) ? 'checked="checked"' : false ),
-		esc_html__( 'light', 'coil-web-monetization' )
+		esc_html__( 'Light', 'coil-web-monetization' )
 	);
 
 	echo '</div>';
@@ -1385,14 +1385,14 @@ function button_size_render_callback() {
 		esc_attr( 'coil_button_settings_group[coil_button_size]' ),
 		esc_attr( 'large' ),
 		( ! empty( $button_size ) && $button_size === 'large' ? 'checked="checked"' : false ),
-		esc_html__( 'large', 'coil-web-monetization' )
+		esc_html__( 'Large', 'coil-web-monetization' )
 	);
 
 	echo sprintf(
 		'<label for="%1$s"><input type="radio" name="%2$s" id="%1$s" value="%3$s" %4$s /> %5$s</label>',
 		esc_attr( 'small_size' ),
 		esc_attr( 'coil_button_settings_group[coil_button_size]' ),
-		esc_attr( 'small' ),
+		esc_attr( 'Small' ),
 		( ! empty( $button_size ) && $button_size === 'small' || empty( $button_size ) ? 'checked="checked"' : false ),
 		esc_html__( 'small', 'coil-web-monetization' )
 	);
