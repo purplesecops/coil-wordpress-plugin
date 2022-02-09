@@ -1533,7 +1533,7 @@ function coil_settings_coil_button_visibility_render_callback() {
 			esc_attr( 'coil_button_settings_group[' . $mobile_button_display_id . ']' ),
 			esc_attr( 'checkbox' ),
 			$checked_input,
-			esc_html__( 'Show button for Coil Members', 'coil-web-monetization' ),
+			esc_html__( 'Show on mobile', 'coil-web-monetization' ),
 			esc_attr( 'coil-clear-left' )
 		);
 
