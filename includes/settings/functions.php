@@ -1334,7 +1334,7 @@ function coil_settings_coil_button_settings_render_callback() {
 
 		printf(
 			'<h4><strong>%s</strong></h4>',
-			__( 'Button Margin', 'coil-web-monetization' )
+			__( 'Button Margin (PX)', 'coil-web-monetization' )
 		);
 		render_buton_margin_settings();
 		?>
@@ -1485,8 +1485,9 @@ function render_buton_margin_settings() {
 	];
 
 	foreach ( $margins as $id => $setting ) {
+		echo '<div>';
 		printf(
-			'<input style="text-align: center" type="%s" class="%s" name="%s" id="%s" placeholder="%s" value="%s" />',
+			'<input type="%s" class="%s" name="%s" id="%s" placeholder="%s" value="%s" />',
 			esc_attr( 'text' ),
 			esc_attr( 'wide-input' ),
 			esc_attr( 'coil_button_settings_group[' . $id . ']' ),
@@ -1495,10 +1496,11 @@ function render_buton_margin_settings() {
 			esc_attr( $setting )
 		);
 		printf(
-			'<p style="text-align: center" class="%s">%s</p>',
+			'<p class="%s">%s</p>',
 			esc_attr( 'description' ),
 			esc_attr( $desciptions[ $id ] )
 		);
+		echo '</div>';
 	}
 	echo '</div>';
 }

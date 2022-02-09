@@ -148,6 +148,26 @@
 					margin: 15px 0 10px;
 				}
 
+				.coil-input-group {
+					display: flex;
+					flex-direction: row;
+					width: 90%;
+
+					input, p {
+						border-radius: 0;
+						text-align: center;
+						width: 100%;
+					}
+
+					div:first-child input {
+						border-radius: 4px 0 0 4px;
+					}
+
+					div:last-child input {
+						border-radius: 0 4px 4px 0;
+					}
+				}
+
 				.coil-radio-group {
 					align-items: center;
 					display: flex;
