@@ -761,6 +761,7 @@ function get_coil_button_visibility_setting( $field_id ) {
 	$coil_button_settings = get_coil_button_settings();
 	$value                = false;
 	$default_settings     = get_coil_button_defaults();
+	$margin_keys          = array_keys( get_button_margin_key_defaults() );
 	if ( in_array( $field_id, $margin_keys, true ) ) {
 		$margin = get_coil_button_margin( $field_id );
 		if ( $margin !== false && $margin !== 0 ) {

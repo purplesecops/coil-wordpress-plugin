@@ -10,6 +10,8 @@
 		paywallTitle = coilParams.paywall_title,
 		loadingContent = coilParams.loading_content,
 		paywallMessage = coilParams.paywall_message,
+		coilButtonUnpaidMessage = coilParams.coil_button_unpaid_message,
+		coilButtonLink = coilParams.coil_button_link,
 		postExcerpt = coilParams.post_excerpt,
 		adminMissingIdNotice = coilParams.admin_missing_id_notice,
 		paywallButtonText = coilParams.paywall_button_text,
@@ -116,16 +118,17 @@
 	}
 
 	/**
+	 * @param {String} message Message shown to thank Coil members, or to encourage users to sign up.
 	 * @return {object} Output a slim banner message.
 	 */
-	function showBannerMessage() {
+	function showBannerMessage( message ) {
 		const modalContainer = document.createElement( 'div' );
 		modalContainer.classList.add( 'coil-banner-message-container' );
 
 		const modalData = {
 			button: {
-				text: paywallButtonText,
-				href: paywallButtonLink,
+				text: message,
+				href: coilButtonLink,
 			},
 		};
 
@@ -363,7 +366,7 @@
 			// Content has monetization enabled and visible for everyone but no extension found.
 
 			if ( showPromotionBar && ! hasBannerDismissCookie( 'ShowCoilPublicMsg' ) ) {
-				$( 'body' ).append( showBannerMessage() );
+				$( 'body' ).append( showBannerMessage( coilButtonUnpaidMessage ) );
 				addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
 			}
 		}
@@ -416,7 +419,7 @@
 				showVerificationFailureMessage();
 			}, 5000 );
 		} else if ( showPromotionBar && monetizationNotInitialized() && ! hasBannerDismissCookie( 'ShowCoilPublicMsg' ) ) {
-			$( 'body' ).append( showBannerMessage() );
+			$( 'body' ).append( showBannerMessage( coilButtonUnpaidMessage ) );
 			addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
 		}
 	}
@@ -453,7 +456,7 @@
 				} else if ( isMonetizedAndPublic() ) {
 					// Content is monetized and public but extension is stopped.
 					if ( showPromotionBar && ! hasBannerDismissCookie( 'ShowCoilPublicMsg' ) ) {
-						$( 'body' ).append( showBannerMessage() );
+						$( 'body' ).append( showBannerMessage( coilButtonUnpaidMessage ) );
 						addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
 					}
 				}
