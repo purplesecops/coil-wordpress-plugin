@@ -17,6 +17,7 @@
 		paywallButtonText = coilParams.paywall_button_text,
 		paywallButtonLink = coilParams.paywall_button_link,
 		coilMessageBranding = coilParams.coil_message_branding,
+		coilButtonTheme = coilParams.coil_button_theme,
 		siteLogo = coilParams.site_logo,
 		coilLogo = coilParams.coil_logo,
 		coilLogoWhite = coilParams.coil_logo_white,
@@ -91,16 +92,14 @@
 			modalContainer.classList.add( 'coil-inherit-theme-font' );
 		}
 
-		let brandingLogo;
+		let brandingLogo = '';
 
 		if ( coilMessageBranding === 'site_logo' ) {
-			brandingLogo = siteLogo;
+			brandingLogo = '<img src="' + siteLogo + '"></img>';
 		} else if ( coilMessageBranding === 'coil_logo' && exclusiveMessageTheme === 'dark' ) {
-			brandingLogo = coilLogoWhite;
+			brandingLogo = '<img src="' + coilLogoWhite + '"></img>';
 		} else if ( coilMessageBranding === 'coil_logo' ) {
-			brandingLogo = coilLogo;
-		} else {
-			brandingLogo = '';
+			brandingLogo = '<img src="' + coilLogo + '"></img>';
 		}
 
 		const modalData = {
@@ -125,7 +124,17 @@
 		const modalContainer = document.createElement( 'div' );
 		modalContainer.classList.add( 'coil-banner-message-container' );
 
+		let brandingLogo = '';
+
+		if ( coilButtonTheme === 'light' ) {
+			modalContainer.classList.add( 'coil-light-theme' );
+			brandingLogo = '<img src="' + coilLogo + '"></img>';
+		} else {
+			brandingLogo = '<img src="' + coilLogoWhite + '"></img>';
+		}
+
 		const modalData = {
+			headerLogo: brandingLogo,
 			button: {
 				text: message,
 				href: coilButtonLink,
