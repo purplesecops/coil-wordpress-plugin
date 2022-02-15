@@ -95,7 +95,7 @@
 		let brandingLogo = '';
 
 		if ( coilMessageBranding === 'site_logo' ) {
-			brandingLogo = '<img src="' + siteLogo + '"></img>';
+			brandingLogo = siteLogo;
 		} else if ( coilMessageBranding === 'coil_logo' && exclusiveMessageTheme === 'dark' ) {
 			brandingLogo = '<img src="' + coilLogoWhite + '"></img>';
 		} else if ( coilMessageBranding === 'coil_logo' ) {
