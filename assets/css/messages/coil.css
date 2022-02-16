@@ -408,7 +408,8 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
     font-weight: 600;
     line-height: 20px;
     margin: 0 32px 0 67px;
-    padding: 8px 16px;
+    overflow: visible;
+    padding: 8px;
     position: relative;
     text-align: center; }
     .coil-banner-message-container .coil-banner-message-button a {
@@ -423,20 +424,20 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
         justify-content: space-around;
         max-width: 434px; } }
   .coil-banner-message-container .coil-banner-message-dismiss {
-    color: #777;
+    background-color: #777;
+    border-radius: 25px;
+    color: #fff;
     cursor: pointer;
     font-size: 20px;
     font-weight: 700;
-    line-height: 1.1;
+    height: 20px;
+    line-height: 20px;
     position: absolute;
-    right: 12px;
-    top: 0px; }
-    @media only screen and (min-width: 768px) {
-      .coil-banner-message-container .coil-banner-message-dismiss {
-        font-size: 20px;
-        position: relative;
-        right: auto;
-        top: auto; } }
+    right: -7px;
+    top: -7px;
+    width: 20px; }
+    .coil-banner-message-container .coil-banner-message-dismiss:hover {
+      background-color: #c92c2c; }
 
 .coil-banner-message-container.coil-light-theme .coil-banner-message-button {
   background-color: #fff;
