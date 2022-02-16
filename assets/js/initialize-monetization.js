@@ -20,6 +20,10 @@
 		paywallButtonLink = coilParams.paywall_button_link,
 		coilMessageBranding = coilParams.coil_message_branding,
 		coilButtonTheme = coilParams.coil_button_theme,
+		ButtonMarginTop = coilParams.button_margin_top,
+		ButtonMarginRight = coilParams.button_margin_right,
+		ButtonMarginBottom = coilParams.button_margin_bottom,
+		ButtonMarginLeft = coilParams.button_margin_left,
 		coilButtonGloballyEnabled = Boolean( coilParams.coil_button_enabled ), // Cast to boolean - wp_localize_script forces string values.
 		siteLogo = coilParams.site_logo,
 		coilLogo = coilParams.coil_logo,
@@ -144,6 +148,10 @@
 		};
 
 		$( modalContainer ).append( bannerMessage( modalData ) );
+		$( modalContainer ).find( '.coil-banner-message-button' ).css( { 'margin-top': ButtonMarginTop + 'px', 'margin-right': ButtonMarginRight + 'px', 'margin-bottom': ButtonMarginBottom + 'px', 'margin-left': ButtonMarginLeft + 'px' } );
+		// $( modalContainer ).find( '.coil-banner-message-button' ).css( 'margin-right', ButtonMarginRight + 'px' );
+		// $( modalContainer ).find( '.coil-banner-message-button' ).css( 'margin-bottom', ButtonMarginBottom + 'px' );
+		// $( modalContainer ).find( '.coil-banner-message-button' ).css( 'margin-left', ButtonMarginLeft + 'px' );
 		return modalContainer;
 	}
 
