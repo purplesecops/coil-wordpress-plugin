@@ -691,6 +691,29 @@ function get_coil_button_setting( $field_id, $use_text_default = false ) {
 }
 
 /**
+ * Return the Coil button visibility status
+ * based on the global defaults.
+ *
+ * @param integer $post_id
+ * @return string Coil button status.
+ */
+function get_coil_button_status( $object_id ) {
+	$coil_button_class    = '';
+	$post_id              = (int) $object_id;
+	$post                 = get_post( $post_id );
+	$coil_button_settings = get_coil_button_settings();
+
+	if ( ! empty( $coil_button_settings ) && ! empty( $post ) && isset( $coil_button_settings[ $post->post_type . '_button_visibility' ] ) ) {
+		$status = $coil_button_settings[ $post->post_type . '_button_visibility' ];
+		if ( $status === 'show' ) {
+			$coil_button_class = 'show-coil-button';
+		}
+	}
+
+	return $coil_button_class;
+}
+
+/**
  * Retrieve the Coil button margins.
  * @param string $field_name
  * @return int Setting stored in options.

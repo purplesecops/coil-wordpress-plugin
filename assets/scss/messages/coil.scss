@@ -202,7 +202,7 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 			padding-left: $message_spacing_baseline;
 			padding-right: $message_spacing_baseline;
 			text-decoration: none;
-		  }
+		}
 
 		&:hover {
 			background-color: $message_banner_button_hover_colour;
@@ -242,7 +242,7 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 		opacity: 0.9;
 
 		a {
-			color: $message_font_colour
+			color: $message_font_colour;
 		}
 	
 		&:hover {

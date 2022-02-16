@@ -197,26 +197,28 @@ function load_full_assets() : void {
 	$strings = apply_filters(
 		'coil_js_ui_messages',
 		[
-			'content_container'          => Admin\get_css_selector(),
-			'paywall_title'              => Admin\get_paywall_text_settings_or_default( 'coil_paywall_title' ),
-			'loading_content'            => __( 'Verifying Web Monetization status. Please wait...', 'coil-web-monetization' ),
-			'paywall_message'            => Admin\get_paywall_text_settings_or_default( 'coil_paywall_message' ),
-			'coil_button_unpaid_message' => Admin\get_coil_button_setting( 'coil_button_text', true ),
-			'coil_button_link'           => Admin\get_coil_button_setting( 'coil_button_link', true ),
-			'paywall_button_text'        => Admin\get_paywall_text_settings_or_default( 'coil_paywall_button_text' ),
-			'paywall_button_link'        => Admin\get_paywall_text_settings_or_default( 'coil_paywall_button_link' ),
-			'show_promotion_bar'         => Admin\get_coil_button_setting( 'coil_show_promotion_bar' ),
-			'post_excerpt'               => get_the_excerpt(),
-			'coil_message_branding'      => Admin\get_paywall_appearance_setting( 'coil_message_branding' ),
-			'coil_button_theme'          => Admin\get_coil_button_setting( 'coil_button_color_theme' ),
-			'site_logo'                  => Admin\get_site_logo_src(),
-			'coil_logo'                  => plugin_dir_url( __DIR__ ) . 'assets/images/coil-icn-black.svg',
-			'coil_logo_white'            => plugin_dir_url( __DIR__ ) . 'assets/images/coil-icn-white.svg',
-			'exclusive_message_theme'    => Admin\get_paywall_appearance_setting( 'coil_message_color_theme' ),
-			'font_selection'             => Admin\get_paywall_appearance_setting( 'coil_message_font' ),
+			'content_container'           => Admin\get_css_selector(),
+			'paywall_title'               => Admin\get_paywall_text_settings_or_default( 'coil_paywall_title' ),
+			'loading_content'             => __( 'Verifying Web Monetization status. Please wait...', 'coil-web-monetization' ),
+			'paywall_message'             => Admin\get_paywall_text_settings_or_default( 'coil_paywall_message' ),
+			'coil_button_unpaid_message'  => Admin\get_coil_button_setting( 'coil_button_text', true ),
+			'coil_button_paid_message'    => Admin\get_coil_button_setting( 'coil_members_button_text', true ),
+			'show_coil_button_to_members' => Admin\get_coil_button_setting( 'coil_button_member_display' ),
+			'coil_button_link'            => Admin\get_coil_button_setting( 'coil_button_link', true ),
+			'paywall_button_text'         => Admin\get_paywall_text_settings_or_default( 'coil_paywall_button_text' ),
+			'paywall_button_link'         => Admin\get_paywall_text_settings_or_default( 'coil_paywall_button_link' ),
+			'post_excerpt'                => get_the_excerpt(),
+			'coil_message_branding'       => Admin\get_paywall_appearance_setting( 'coil_message_branding' ),
+			'coil_button_theme'           => Admin\get_coil_button_setting( 'coil_button_color_theme' ),
+			'coil_button_enabled'         => Admin\is_coil_button_enabled(),
+			'site_logo'                   => Admin\get_site_logo_src(),
+			'coil_logo'                   => plugin_dir_url( __DIR__ ) . 'assets/images/coil-icn-black.svg',
+			'coil_logo_white'             => plugin_dir_url( __DIR__ ) . 'assets/images/coil-icn-white.svg',
+			'exclusive_message_theme'     => Admin\get_paywall_appearance_setting( 'coil_message_color_theme' ),
+			'font_selection'              => Admin\get_paywall_appearance_setting( 'coil_message_font' ),
 
 			/* translators: 1 + 2) HTML link tags (to the Coil settings page). */
-			'admin_missing_id_notice'    => sprintf( __( 'This post is monetized but you have not set your payment pointer ID in the %1$sCoil settings page%2$s. Only content set to show for all visitors will show.', 'coil-web-monetization' ), '<a href="' . admin_url( 'admin.php?page=coil' ) . '">', '</a>' ),
+			'admin_missing_id_notice'     => sprintf( __( 'This post is monetized but you have not set your payment pointer ID in the %1$sCoil settings page%2$s. Only content set to show for all visitors will show.', 'coil-web-monetization' ), '<a href="' . admin_url( 'admin.php?page=coil' ) . '">', '</a>' ),
 		],
 		get_queried_object_id()
 	);
@@ -290,30 +292,36 @@ function add_body_class( $classes ) : array {
 		return $classes;
 	}
 
+	$object_id                 = get_queried_object_id();
 	$payment_pointer_id        = Admin\get_payment_pointer_setting();
 	$exclusive_content_enabled = Admin\is_exclusive_content_enabled();
 
 	// Transfer old post meta into new format
-	Transfers\update_post_meta( get_queried_object_id() );
+	Transfers\update_post_meta( $object_id );
 
 	// If content is not monetized, or exclusive content has been disabled,
 	// then the coil-exclusive class cannot be added to the content.
 	// This is an additional check to ensure that the incompatible not-monetized and exclusive state cannot be reached.
-	if ( Gating\is_content_monetized( get_queried_object_id() ) ) {
+	if ( Gating\is_content_monetized( $object_id ) ) {
 		$classes[] = 'monetization-not-initialized';
 
-		$coil_monetization_status = Gating\get_content_status( get_queried_object_id(), 'monetization' );
+		$coil_monetization_status = Gating\get_content_status( $object_id, 'monetization' );
 		$classes[]                = sanitize_html_class( 'coil-' . $coil_monetization_status );
 		if ( ! $exclusive_content_enabled ) {
 			$coil_visibility_status = Admin\get_visibility_default();
 		} else {
-			$coil_visibility_status = Gating\get_content_status( get_queried_object_id(), 'visibility' );
+			$coil_visibility_status = Gating\get_content_status( $object_id, 'visibility' );
 		}
 		$classes[] = sanitize_html_class( 'coil-' . $coil_visibility_status );
 
+		$coil_button_status = Admin\get_coil_button_status( $object_id );
+		if ( $coil_button_status !== '' ) {
+			$classes[] = sanitize_html_class( $coil_button_status );
+		}
+
 		if ( ! empty( $payment_pointer_id ) ) {
 			if ( $exclusive_content_enabled ) {
-				$classes[] = ( Gating\is_excerpt_visible( get_queried_object_id() ) ) ? 'coil-show-excerpt' : 'coil-hide-excerpt';
+				$classes[] = ( Gating\is_excerpt_visible( $object_id ) ) ? 'coil-show-excerpt' : 'coil-hide-excerpt';
 			}
 		} else {
 			// Error: payment pointer ID is missing.

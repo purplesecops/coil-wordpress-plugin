@@ -196,8 +196,8 @@
               background: #fff;
               color: #444; }
           .coil form .settings-main .tab-styling .coil-preview .coil-paywall-container .coil-paywall-image {
-            max-width: 50px;
-            max-height: 50px; }
+            max-height: 50px;
+            max-width: 50px; }
             .coil form .settings-main .tab-styling .coil-preview .coil-paywall-container .coil-paywall-image.no_logo {
               display: none; }
           .coil form .settings-main .tab-styling .coil-preview .coil-paywall-container .coil-paywall-heading {

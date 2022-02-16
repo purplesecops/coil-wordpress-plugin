@@ -11,6 +11,8 @@
 		loadingContent = coilParams.loading_content,
 		paywallMessage = coilParams.paywall_message,
 		coilButtonUnpaidMessage = coilParams.coil_button_unpaid_message,
+		coilButtonPaidMessage = coilParams.coil_button_paid_message,
+		showCoilButtonToMembers = Boolean( coilParams.show_coil_button_to_members ),
 		coilButtonLink = coilParams.coil_button_link,
 		postExcerpt = coilParams.post_excerpt,
 		adminMissingIdNotice = coilParams.admin_missing_id_notice,
@@ -18,10 +20,10 @@
 		paywallButtonLink = coilParams.paywall_button_link,
 		coilMessageBranding = coilParams.coil_message_branding,
 		coilButtonTheme = coilParams.coil_button_theme,
+		coilButtonGloballyEnabled = Boolean( coilParams.coil_button_enabled ), // Cast to boolean - wp_localize_script forces string values.
 		siteLogo = coilParams.site_logo,
 		coilLogo = coilParams.coil_logo,
 		coilLogoWhite = coilParams.coil_logo_white,
-		showPromotionBar = Boolean( coilParams.show_promotion_bar ), // Cast to boolean - wp_localize_script forces string values.
 		exclusiveMessageTheme = coilParams.exclusive_message_theme,
 		fontSelection = Boolean( coilParams.font_selection );
 
@@ -198,10 +200,6 @@
 		return jQuery( 'p.coil-post-excerpt' ).remove();
 	}
 
-	function removePromotionBar() {
-		return $( 'div' ).remove( '.coil-banner-message-container' );
-	}
-
 	/**
 	 * @return {bool} Helper function to determine if the content has
 	 * monetization enabled and is visible to everyone
@@ -218,6 +216,14 @@
 	 */
 	function isSubscribersOnly() {
 		return document.body.classList.contains( 'coil-exclusive' );
+	}
+
+	/**
+	 * @return {bool} Helper function to determine if the content has
+	 * the Coil button enabled
+	*/
+	function hasCoilButtonEnabled() {
+		return coilButtonGloballyEnabled && document.body.classList.contains( 'show-coil-button' );
 	}
 
 	/**
@@ -286,15 +292,6 @@
 				document.querySelector( contentContainer ).before( showSubscriberOnlyMessage( paywallMessage ) );
 			}
 		}
-	}
-
-	/**
-	 * Checks for class on <body>.
-	 *
-	 * @return {bool} Determine if Coil is not yet initialized.
-	 */
-	function monetizationNotInitialized() {
-		return document.body.classList.contains( 'monetization-not-initialized' );
 	}
 
 	/**
@@ -371,10 +368,14 @@
 			$( '.coil-show-monetize-users' ).prepend( showSplitContentMessage( paywallMessage ) );
 
 			showContentContainer();
-		} else if ( isMonetizedAndPublic() ) {
-			// Content has monetization enabled and visible for everyone but no extension found.
-
-			if ( showPromotionBar && ! hasBannerDismissCookie( 'ShowCoilPublicMsg' ) ) {
+		} else {
+			// TODO shouldn't display if the read more block is present
+			const buttonEnabled = hasCoilButtonEnabled();
+			const buttonAlreadyExists = $( '.coil-banner-message-container' ).length !== 0 ? true : false;
+			const buttonDismissed = hasBannerDismissCookie( 'ShowCoilPublicMsg' );
+			const pendingMessageDisplayed = $( 'p.monetize-msg' ).length !== 0 ? true : false;
+			const paywallDisplayed = $( '.coil-message-container' ).length !== 0 ? true : false;
+			if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed && ! paywallDisplayed ) {
 				$( 'body' ).append( showBannerMessage( coilButtonUnpaidMessage ) );
 				addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
 			}
@@ -427,7 +428,14 @@
 				hideContentExcerpt();
 				showVerificationFailureMessage();
 			}, 5000 );
-		} else if ( showPromotionBar && monetizationNotInitialized() && ! hasBannerDismissCookie( 'ShowCoilPublicMsg' ) ) {
+		}
+
+		// TODO shouldn't display if the read more block is present
+		const buttonEnabled = hasCoilButtonEnabled();
+		const buttonAlreadyExists = $( '.coil-banner-message-container' ).length !== 0 ? true : false;
+		const buttonDismissed = hasBannerDismissCookie( 'ShowCoilPublicMsg' );
+		const pendingMessageDisplayed = $( 'p.monetize-msg' ).length !== 0 ? true : false;
+		if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed ) {
 			$( 'body' ).append( showBannerMessage( coilButtonUnpaidMessage ) );
 			addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
 		}
@@ -441,6 +449,7 @@
 	function handleStartedMonetization() {
 		// User account verified, loading content. Monetization state: Started
 		document.querySelector( contentContainer ).before( showMonetizationMessage( loadingContent, '' ) );
+		$( '.coil-message-container' ).remove();
 	}
 
 	/**
@@ -462,15 +471,20 @@
 				if ( $( 'p.monetize-msg' ).text() === loadingContent ) {
 					// Monetization not started and verification failed.
 					showVerificationFailureMessage();
-				} else if ( isMonetizedAndPublic() ) {
-					// Content is monetized and public but extension is stopped.
-					if ( showPromotionBar && ! hasBannerDismissCookie( 'ShowCoilPublicMsg' ) ) {
-						$( 'body' ).append( showBannerMessage( coilButtonUnpaidMessage ) );
-						addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
-					}
 				}
 			}
 		}, 5000 );
+
+		// TODO shouldn't display if the read more block is present
+		const buttonEnabled = hasCoilButtonEnabled();
+		const buttonAlreadyExists = $( '.coil-banner-message-container' ).length !== 0 ? true : false;
+		const buttonDismissed = hasBannerDismissCookie( 'ShowCoilPublicMsg' );
+		const pendingMessageDisplayed = $( 'p.monetize-msg' ).length !== 0 ? true : false;
+		const paywallDisplayed = $( '.coil-message-container' ).length !== 0 ? true : false;
+		if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed && ! paywallDisplayed ) {
+			$( 'body' ).append( showBannerMessage( coilButtonUnpaidMessage ) );
+			addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
+		}
 	}
 
 	/**
@@ -492,10 +506,6 @@
 
 		if ( isExcerptEnabled() ) {
 			$( 'p.coil-post-excerpt' ).remove(); // Remove post excerpt.
-		}
-
-		if ( showPromotionBar ) {
-			removePromotionBar();
 		}
 
 		// Removes exclusive messages
@@ -532,6 +542,21 @@
 
 		// Manually triggering resize to ensure elements get sized corretly after the verification proccess has been completed and they are no longer hidden.
 		jQuery( window ).trigger( 'resize' );
+
+		if ( ! showCoilButtonToMembers ) {
+			$( '.coil-banner-message-container' ).remove();
+		} else {
+			const buttonEnabled = hasCoilButtonEnabled();
+			const buttonAlreadyExists = $( '.coil-banner-message-container' ).length !== 0 ? true : false;
+			const buttonDismissed = hasBannerDismissCookie( 'ShowCoilPublicMsg' );
+			// The text needs to change to the member message
+			if ( buttonAlreadyExists ) {
+				$( '.coil-banner-message-button a' ).text( coilButtonPaidMessage );
+			} else if ( buttonEnabled && ! buttonDismissed ) {
+				$( 'body' ).append( showBannerMessage( coilButtonPaidMessage ) );
+				addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
+			}
+		}
 	}
 
 	/**
