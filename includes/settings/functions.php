@@ -722,8 +722,6 @@ function coil_settings_paywall_render_callback() {
 function get_paywall_theme_logo() {
 	$logo_setting = Admin\get_paywall_appearance_setting( 'coil_message_branding', true );
 
-	$site_logo = get_custom_logo();
-
 	$coil_logo_type = ( Admin\get_paywall_appearance_setting( 'coil_message_color_theme' ) === 'light' ? 'black' : 'white' );
 
 	switch ( $logo_setting ) {
@@ -731,7 +729,7 @@ function get_paywall_theme_logo() {
 			$logo_url = plugin_dir_url( COIL__FILE__ ) . 'assets/images/coil-icn-' . $coil_logo_type . '.svg';
 			break;
 		case 'site_logo':
-			$logo_url = ( ! empty( $site_logo ) ? $site_logo : false );
+			$logo_url = Admin\get_site_logo_src();
 			break;
 		case 'no_logo':
 		default:

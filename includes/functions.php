@@ -194,11 +194,6 @@ function load_full_assets() : void {
 		true
 	);
 
-	$site_logo = false;
-	if ( function_exists( 'get_custom_logo' ) ) {
-		$site_logo = get_custom_logo();
-	}
-
 	$strings = apply_filters(
 		'coil_js_ui_messages',
 		[
@@ -214,7 +209,7 @@ function load_full_assets() : void {
 			'post_excerpt'               => get_the_excerpt(),
 			'coil_message_branding'      => Admin\get_paywall_appearance_setting( 'coil_message_branding' ),
 			'coil_button_theme'          => Admin\get_coil_button_setting( 'coil_button_color_theme' ),
-			'site_logo'                  => $site_logo,
+			'site_logo'                  => Admin\get_site_logo_src(),
 			'coil_logo'                  => plugin_dir_url( __DIR__ ) . 'assets/images/coil-icn-black.svg',
 			'coil_logo_white'            => plugin_dir_url( __DIR__ ) . 'assets/images/coil-icn-white.svg',
 			'exclusive_message_theme'    => Admin\get_paywall_appearance_setting( 'coil_message_color_theme' ),

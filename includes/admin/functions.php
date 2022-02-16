@@ -188,14 +188,12 @@ function load_admin_assets() : void {
 		return;
 	}
 
-	$site_logo = get_custom_logo();
-
 	$suffix       = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 	$admin_params = apply_filters(
 		'coil_admin_js_params',
 		[
 			'ajax_url'                 => admin_url( 'admin-ajax.php' ),
-			'site_logo_url'            => ( ! empty( $site_logo ) ? $site_logo : false ),
+			'site_logo_url'            => get_site_logo_src(),
 			'coil_logo_url'            => [
 				'light' => plugin_dir_url( dirname( __DIR__ ) ) . 'assets/images/coil-icn-black.svg',
 				'dark'  => plugin_dir_url( dirname( __DIR__ ) ) . 'assets/images/coil-icn-white.svg',
@@ -496,6 +494,24 @@ function get_paywall_branding_options() {
 	$branding_choices = [ 'site_logo', 'coil_logo', 'no_logo' ];
 
 	return $branding_choices;
+}
+
+/**
+ * @return string Extracts the src attribute of the website logo, if there is one.
+ */
+function get_site_logo_src() {
+	$site_logo_src = false;
+	if ( function_exists( 'get_custom_logo' ) ) {
+		$site_logo   = get_custom_logo();
+		$pattern     = '/(src=")[^"]*(")/i';
+		$matches     = [];
+		$match_found = preg_match( $pattern, $site_logo, $matches );
+		if ( $match_found ) {
+			$site_logo_src = str_replace( 'src="', '', $matches[0] );
+			$site_logo_src = str_replace( '"', '', $site_logo_src );
+		}
+	}
+	return $site_logo_src;
 }
 
 
