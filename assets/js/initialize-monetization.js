@@ -129,12 +129,10 @@
 	 */
 	function showBannerMessage( message ) {
 		const positionArray = coilButtonPosition.split( '-' );
-		const verticalPosition = positionArray[ 0 ]; // eslint-disable-line
-		const horizontalPosition = positionArray[ 1 ]; // eslint-disable-line
+		const verticalPosition = positionArray[ 0 ];
+		const horizontalPosition = positionArray[ 1 ];
 
 		const modalContainer = document.createElement( 'div' );
-		// modalContainer.classList.add( 'coil-banner-message-container' );
-		// modalContainer.classList.add( 'coil-banner-message-container' + ' ' + verticalPosition + ' ' + horizontalPosition );
 		$( modalContainer ).addClass( 'coil-banner-message-container' + ' ' + verticalPosition + ' ' + horizontalPosition );
 
 		let brandingLogo = '';
@@ -155,12 +153,7 @@
 		};
 
 		$( modalContainer ).append( bannerMessage( modalData ) );
-		// const positionArray = coilButtonPosition.split( '-' );
-		// const verticalPosition = positionArray[ 0 ];
-		// const verticalMargin = 'margin-' + verticalPosition; // eslint-disable-line
-		// const horizontalPosition = positionArray[ 1 ];
 		$( modalContainer ).find( '.coil-banner-message-button' ).css( { 'margin-top': ButtonMarginTop + 'px', 'margin-right': ButtonMarginRight + 'px', 'margin-bottom': ButtonMarginBottom + 'px', 'margin-left': ButtonMarginLeft + 'px' } );
-		// $( modalContainer ).css( { top: 0, 'margin-top': '20px', 'justify-content': horizontalPosition } );
 		return modalContainer;
 	}
 
