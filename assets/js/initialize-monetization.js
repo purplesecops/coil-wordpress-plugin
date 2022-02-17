@@ -20,6 +20,7 @@
 		paywallButtonLink = coilParams.paywall_button_link,
 		coilMessageBranding = coilParams.coil_message_branding,
 		coilButtonTheme = coilParams.coil_button_theme,
+		coilButtonPosition = coilParams.coil_button_position,
 		ButtonMarginTop = coilParams.button_margin_top,
 		ButtonMarginRight = coilParams.button_margin_right,
 		ButtonMarginBottom = coilParams.button_margin_bottom,
@@ -127,8 +128,14 @@
 	 * @return {object} Output a slim banner message.
 	 */
 	function showBannerMessage( message ) {
+		const positionArray = coilButtonPosition.split( '-' );
+		const verticalPosition = positionArray[ 0 ]; // eslint-disable-line
+		const horizontalPosition = positionArray[ 1 ]; // eslint-disable-line
+
 		const modalContainer = document.createElement( 'div' );
-		modalContainer.classList.add( 'coil-banner-message-container' );
+		// modalContainer.classList.add( 'coil-banner-message-container' );
+		// modalContainer.classList.add( 'coil-banner-message-container' + ' ' + verticalPosition + ' ' + horizontalPosition );
+		$( modalContainer ).addClass( 'coil-banner-message-container' + ' ' + verticalPosition + ' ' + horizontalPosition );
 
 		let brandingLogo = '';
 
@@ -148,10 +155,12 @@
 		};
 
 		$( modalContainer ).append( bannerMessage( modalData ) );
+		// const positionArray = coilButtonPosition.split( '-' );
+		// const verticalPosition = positionArray[ 0 ];
+		// const verticalMargin = 'margin-' + verticalPosition; // eslint-disable-line
+		// const horizontalPosition = positionArray[ 1 ];
 		$( modalContainer ).find( '.coil-banner-message-button' ).css( { 'margin-top': ButtonMarginTop + 'px', 'margin-right': ButtonMarginRight + 'px', 'margin-bottom': ButtonMarginBottom + 'px', 'margin-left': ButtonMarginLeft + 'px' } );
-		// $( modalContainer ).find( '.coil-banner-message-button' ).css( 'margin-right', ButtonMarginRight + 'px' );
-		// $( modalContainer ).find( '.coil-banner-message-button' ).css( 'margin-bottom', ButtonMarginBottom + 'px' );
-		// $( modalContainer ).find( '.coil-banner-message-button' ).css( 'margin-left', ButtonMarginLeft + 'px' );
+		// $( modalContainer ).css( { top: 0, 'margin-top': '20px', 'justify-content': horizontalPosition } );
 		return modalContainer;
 	}
 

@@ -392,10 +392,7 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
       padding: 50px; } }
 
 .coil-banner-message-container {
-  bottom: 0;
   display: flex;
-  justify-content: right;
-  margin-bottom: 20px;
   position: fixed;
   width: 100%;
   z-index: 200; }
@@ -438,6 +435,20 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
     width: 20px; }
     .coil-banner-message-container .coil-banner-message-dismiss:hover {
       background-color: #c92c2c; }
+
+.coil-banner-message-container.bottom {
+  bottom: 0;
+  margin-bottom: 20px; }
+
+.coil-banner-message-container.top {
+  top: 0;
+  margin-top: 20px; }
+
+.coil-banner-message-container.right {
+  justify-content: right; }
+
+.coil-banner-message-container.left {
+  justify-content: left; }
 
 .coil-banner-message-container.coil-light-theme .coil-banner-message-button {
   background-color: #fff;

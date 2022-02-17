@@ -407,7 +407,7 @@ function coil_button_settings_group_validation( $coil_button_settings ): array {
 			$number = filter_var( $coil_button_settings[ $field_name ], FILTER_SANITIZE_NUMBER_INT );
 			$int    = intval( $number );
 			// TODO: Give a max value as well.
-			$final_settings[ $field_name ] = ( $int > 0 ) ? $int : $default;
+			$final_settings[ $field_name ] = gettype( $int ) === 'integer' ? $int : $default;
 		} else {
 			$final_settings[ $field_name ] = $default;
 		}
