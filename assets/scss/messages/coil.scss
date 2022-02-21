@@ -237,8 +237,8 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 }
 
 .coil-banner-message-container.top {
-	top: 0;
 	margin-top: 20px;
+	top: 0;
 }
 
 .coil-banner-message-container.right {
@@ -267,7 +267,7 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 }
 
 .coil-banner-message-container.coil-hide-mobile-banner-message {
-	@media only screen and (max-width: $message_mobile_breakpoint ) {
+	@media only screen and (max-width: $message_mobile_breakpoint) {
 		display: none;
 	}
 }

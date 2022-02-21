@@ -11,11 +11,8 @@ describe( 'Coil button settings tab', () => {
 	it( 'Checks coil button setting defaults', () => {
 		cy.visit( '/wp-admin/admin.php?page=coil_settings&tab=coil_button' );
 
+		// Checks the deafults
 		checkButtonText( '', '', '' );
-
-		cy
-			.get( '#coil_show_promotion_bar' )
-			.should( 'be.checked' );
 
 		cy
 			.get( '#coil_button_toggle' )
@@ -55,11 +52,7 @@ describe( 'Coil button settings tab', () => {
 			.get( '#coil_members_button_text' )
 			.type( `{selectall}${ buttonMemberText }` );
 
-		cy
-			.get( '#coil_show_promotion_bar' )
-			.click();
-
-		// Disable Coil button and check that the other button settings are hidden.
+		// TODO: Disable Coil button and check that the other button settings are hidden.
 		cy
 			.get( '.coil-checkbox' )
 			.click();
@@ -81,10 +74,6 @@ describe( 'Coil button settings tab', () => {
 			.click();
 
 		checkButtonText( buttonText, buttonLink, buttonMemberText );
-
-		cy
-			.get( '#coil_show_promotion_bar' )
-			.should( 'not.be.checked' );
 
 		cy
 			.get( '#coil_button_toggle' )

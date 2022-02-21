@@ -74,9 +74,7 @@ function maybe_load_database_defaults() {
 	$coil_button_settings = get_option( 'coil_button_settings_group', 'absent' );
 
 	if ( $coil_button_settings === 'absent' ) {
-		$new_button_settings = [];
-		// Donation bar default is true
-		$new_button_settings['coil_show_promotion_bar']    = true; // TODO: Remove
+		$new_button_settings                               = [];
 		$new_button_settings['coil_button_toggle']         = true;
 		$new_button_settings['coil_button_member_display'] = true;
 		$new_button_settings['coil_mobile_button_display'] = true;
@@ -208,17 +206,9 @@ function transfer_customizer_appearance_settings() {
 		}
 	}
 
-	// The promotion bar display setting is now in the coil_button_settings_group.
 	// The promotion bar has been deprecated and a Coil button is taking its place instead.
 	if ( get_theme_mod( $coil_show_donation_bar, 'absent' ) !== 'absent' ) {
-		$existing_donation_bar_setting                        = get_option( 'coil_button_settings_group', [] );
-		$new_donation_bar_settings['coil_show_promotion_bar'] = get_theme_mod( $coil_show_donation_bar );
 		remove_theme_mod( $coil_show_donation_bar );
-		if ( [] !== $existing_donation_bar_setting ) {
-			update_option( 'coil_button_settings_group', array_merge( $existing_donation_bar_setting, $new_donation_bar_settings ) );
-		} else {
-			add_option( 'coil_button_settings_group', $new_donation_bar_settings );
-		}
 	}
 }
 
@@ -302,9 +292,6 @@ function transfer_version_1_9_panel_settings() {
 	if ( $appearance_settings !== 'absent' ) {
 		if ( isset( $appearance_settings['coil_title_padlock'] ) ) {
 			$new_exclusive_settings['coil_title_padlock'] = $appearance_settings['coil_title_padlock'];
-		}
-		if ( isset( $appearance_settings['coil_show_promotion_bar'] ) ) {
-			$new_coil_button_settings['coil_show_promotion_bar'] = $appearance_settings['coil_show_promotion_bar'];
 		}
 		delete_option( 'coil_appearance_settings_group' );
 	}

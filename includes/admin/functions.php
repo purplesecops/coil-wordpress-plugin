@@ -739,7 +739,6 @@ function get_coil_button_margin( $field_id ) {
 function get_coil_button_defaults() {
 	// Set up defaults.
 	$settings        = [
-		'coil_show_promotion_bar'    => true,
 		'coil_button_toggle'         => true,
 		'coil_button_member_display' => true,
 		'coil_button_text'           => __( 'Support us with Coil', 'coil-web-monetization' ),

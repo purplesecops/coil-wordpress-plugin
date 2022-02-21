@@ -145,15 +145,6 @@ function register_admin_content_settings() {
 		__NAMESPACE__ . '\coil_button_settings_group_validation'
 	);
 
-	// TODO: Remove - holds setting as it was previously in the promotion bar
-	// ==== Button Settings
-	add_settings_section(
-		'coil_promotion_bar_section',
-		false,
-		__NAMESPACE__ . '\coil_settings_promotion_bar_render_callback',
-		'coil_promotion_bar_section'
-	);
-
 	// ==== Enable / Disable
 	add_settings_section(
 		'coil_enable_button_section',
@@ -345,9 +336,9 @@ function coil_exclusive_settings_group_validation( $exclusive_settings ) : array
 }
 
 /**
- * Validates the checkbox that controls the display of the Promotion Bar.
+ * Validates the Coil button settings.
  *
- * @param array $coil_button_settings The checkbox input field.
+ * @param array $coil_button_settings
  * @return array
 */
 function coil_button_settings_group_validation( $coil_button_settings ): array {
@@ -374,7 +365,7 @@ function coil_button_settings_group_validation( $coil_button_settings ): array {
 		}
 	}
 
-	$checkbox_fields = [ 'coil_show_promotion_bar', 'coil_button_toggle', 'coil_button_member_display', 'coil_mobile_button_display' ];
+	$checkbox_fields = [ 'coil_button_toggle', 'coil_button_member_display', 'coil_mobile_button_display' ];
 
 	foreach ( $checkbox_fields as $field_name ) {
 		$final_settings[ $field_name ] = isset( $coil_button_settings[ $field_name ] ) && ( $coil_button_settings[ $field_name ] === 'on' || $coil_button_settings[ $field_name ] === true ) ? true : false;
@@ -1164,34 +1155,6 @@ function coil_paywall_appearance_text_field_settings_render_callback( $field_nam
 }
 
 /**
- * Renders the output of the show Coil Promotion Bar footer checkbox
- * @return void
-*/
-function coil_settings_promotion_bar_render_callback() {
-
-	/**
-	* Specify the default checked state on the input from
-	* any settings stored in the database. If the
-	* input status is not set, default to checked
-	*/
-	$checked_input_value = Admin\get_coil_button_setting( 'coil_show_promotion_bar' );
-
-	printf(
-		'<input type="%s" name="%s" id="%s" "%s">',
-		esc_attr( 'checkbox' ),
-		esc_attr( 'coil_button_settings_group[coil_show_promotion_bar]' ),
-		esc_attr( 'coil_show_promotion_bar' ),
-		checked( 1, $checked_input_value, false )
-	);
-
-	printf(
-		'<label for="%s">%s</label>',
-		esc_attr( 'coil_show_promotion_bar' ),
-		esc_html_e( 'Show the support creator message in a footer bar on posts that are monetized and publicly visible.', 'coil-web-monetization' )
-	);
-}
-
-/**
  * Renders the output of the enable Coil Button toggle
  * @return void
 */
@@ -1766,7 +1729,6 @@ function render_coil_settings_screen() : void {
 				case 'coil_button':
 					echo '<div class="settings-main">';
 					settings_fields( 'coil_button_settings_group' );
-					do_settings_sections( 'coil_promotion_bar_section' );
 					do_settings_sections( 'coil_enable_button_section' );
 					do_settings_sections( 'coil_button_settings_section' );
 					do_settings_sections( 'coil_button_visibility_section' );
