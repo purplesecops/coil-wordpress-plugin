@@ -734,7 +734,7 @@ function get_coil_button_defaults() {
 		'coil_button_color_theme'     => 'dark',
 		'coil_button_size'            => 'large',
 		'coil_button_position'        => 'bottom-right',
-		'post_type_button_visibility' => 'show',
+		'post_type_button_visibility' => 'show', // a generic default for all post-types
 		'coil_mobile_button_display'  => true,
 	];
 	$margin_defaults = get_button_margin_key_defaults();

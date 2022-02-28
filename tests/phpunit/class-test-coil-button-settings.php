@@ -75,13 +75,28 @@ class Test_Coil_Button_Settings extends WP_UnitTestCase {
 		$this->assertSame( $default_values['coil_members_button_text'], $retrieved_value['default_coil_member_button_text'] );
 	}
 
-	// /**
-	//  * Testing if the Coil button message and link settings are retrieved correctly from the wp_options table.
-	//  *
-	//  * @return void
-	//  */
-	// public function test_if_the_coil_button_message_and_link_settings_are_retrieved_successfully() :  void {
-	// }
+	/**
+	 * Testing if the Coil button message and link settings are retrieved correctly from the wp_options table.
+	 *
+	 * @return void
+	 */
+	public function test_if_the_coil_button_message_and_link_settings_are_retrieved_successfully() :  void {
+		// Set custom Coil button messages
+		$coil_button_settings = [
+			'coil_button_text'         => 'Coil Eyes Only',
+			'coil_button_link'         => 'https://example.com',
+			'coil_members_button_text' => 'Thanks!',
+		];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$button_text        = Admin\get_coil_button_setting( 'coil_button_text' );
+		$button_link        = Admin\get_coil_button_setting( 'coil_button_link' );
+		$member_button_text = Admin\get_coil_button_setting( 'coil_members_button_text' );
+
+		$this->assertSame( $coil_button_settings['coil_button_text'], $button_text );
+		$this->assertSame( $coil_button_settings['coil_button_link'], $button_link );
+		$this->assertSame( $coil_button_settings['coil_members_button_text'], $member_button_text );
+	}
 
 	/**
 	 * Testing the Coil button shows to members by default.
@@ -99,13 +114,28 @@ class Test_Coil_Button_Settings extends WP_UnitTestCase {
 		$this->assertSame( $defaults['coil_button_member_display'], $retrieved_value );
 	}
 
-	// /**
-	//  * Testing if the Coil button member display option can be retrieved correctly from the wp_options table.
-	//  *
-	//  * @return void
-	//  */
-	// public function test_if_the_coil_button_member_display_setting_can_be_retrieved_successfully() :  void {
-	// }
+	/**
+	 * Testing if the Coil button member display option can be retrieved correctly from the wp_options table.
+	 *
+	 * @return void
+	 */
+	public function test_if_the_coil_button_member_display_setting_can_be_retrieved_successfully() :  void {
+		// Set the Coil button to show for Coil members
+		$coil_button_settings = [ 'coil_button_member_display' => false ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$member_button_display = Admin\get_coil_button_setting( 'coil_button_member_display' );
+
+		$this->assertSame( false, $member_button_display );
+
+		// Set the Coil button to be hidden from Coil members
+		$coil_button_settings = [ 'coil_button_member_display' => true ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$member_button_display = Admin\get_coil_button_setting( 'coil_button_member_display' );
+
+		$this->assertSame( true, $member_button_display );
+	}
 
 	/**
 	 * Testing the Coil button color theme default.
@@ -123,13 +153,28 @@ class Test_Coil_Button_Settings extends WP_UnitTestCase {
 		$this->assertSame( $defaults['coil_button_color_theme'], $retrieved_value );
 	}
 
-	// /**
-	//  * Testing if the Coil button color theme option can be retrieved correctly from the wp_options table.
-	//  *
-	//  * @return void
-	//  */
-	// public function test_if_the_coil_button_color_theme_can_be_retrieved_successfully() :  void {
-	// }
+	/**
+	 * Testing if the Coil button color theme option can be retrieved correctly from the wp_options table.
+	 *
+	 * @return void
+	 */
+	public function test_if_the_coil_button_color_theme_can_be_retrieved_successfully() :  void {
+		// Set the Coil button theme as light
+		$coil_button_settings = [ 'coil_button_color_theme' => 'light' ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$retrieved_color_theme = Admin\get_coil_button_setting( 'coil_button_color_theme' );
+
+		$this->assertSame( 'light', $retrieved_color_theme );
+
+		// Set the Coil button theme as dark
+		$coil_button_settings = [ 'coil_button_color_theme' => 'dark' ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$retrieved_color_theme = Admin\get_coil_button_setting( 'coil_button_color_theme' );
+
+		$this->assertSame( 'dark', $retrieved_color_theme );
+	}
 
 	/**
 	 * Testing the Coil button size default.
@@ -147,13 +192,28 @@ class Test_Coil_Button_Settings extends WP_UnitTestCase {
 		$this->assertSame( $defaults['coil_button_size'], $retrieved_value );
 	}
 
-	// /**
-	//  * Testing if the Coil button size can be retrieved correctly from the wp_options table.
-	//  *
-	//  * @return void
-	//  */
-	// public function test_if_the_coil_button_size_can_be_retrieved_successfully() :  void {
-	// }
+	/**
+	 * Testing if the Coil button size can be retrieved correctly from the wp_options table.
+	 *
+	 * @return void
+	 */
+	public function test_if_the_coil_button_size_can_be_retrieved_successfully() :  void {
+		// Set the Coil button to be small
+		$coil_button_settings = [ 'coil_button_size' => 'small' ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$retrieved_button_size = Admin\get_coil_button_setting( 'coil_button_size' );
+
+		$this->assertSame( 'small', $retrieved_button_size );
+
+		// Set the Coil button to be large
+		$coil_button_settings = [ 'coil_button_size' => 'large' ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$retrieved_button_size = Admin\get_coil_button_setting( 'coil_button_size' );
+
+		$this->assertSame( 'large', $retrieved_button_size );
+	}
 
 	/**
 	 * Testing the Coil button position default.
@@ -171,13 +231,28 @@ class Test_Coil_Button_Settings extends WP_UnitTestCase {
 		$this->assertSame( $defaults['coil_button_position'], $retrieved_value );
 	}
 
-	// /**
-	//  * Testing if the Coil button position can be retrieved correctly from the wp_options table.
-	//  *
-	//  * @return void
-	//  */
-	// public function test_if_the_coil_button_position_can_be_retrieved_successfully() :  void {
-	// }
+	/**
+	 * Testing if the Coil button position can be retrieved correctly from the wp_options table.
+	 *
+	 * @return void
+	 */
+	public function test_if_the_coil_button_position_can_be_retrieved_successfully() :  void {
+		// Set the Coil button position to top-right
+		$coil_button_settings = [ 'coil_button_position' => 'top-right' ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$retrieved_button_position = Admin\get_coil_button_setting( 'coil_button_position' );
+
+		$this->assertSame( 'top-right', $retrieved_button_position );
+
+		// Set the Coil button position to bottom-left
+		$coil_button_settings = [ 'coil_button_position' => 'bottom-left' ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$retrieved_button_position = Admin\get_coil_button_setting( 'coil_button_position' );
+
+		$this->assertSame( 'bottom-left', $retrieved_button_position );
+	}
 
 	/**
 	 * Testing the Coil button margin defaults.
@@ -207,29 +282,60 @@ class Test_Coil_Button_Settings extends WP_UnitTestCase {
 		$this->assertSame( $expected_values['coil_button_left_margin'], $retrieved_value['coil_button_left_margin'] );
 	}
 
-	// /**
-	//  * Testing if the Coil button margins can be retrieved correctly from the wp_options table.
-	//  *
-	//  * @return void
-	//  */
-	// public function test_if_the_coil_button_margins_can_be_retrieved_successfully() :  void {
-	// }
-
 	/**
-	 * Testing the Coil button post-type visibility defaults.
+	 * Testing if the Coil button margins can be retrieved correctly from the wp_options table.
 	 *
 	 * @return void
 	 */
-	public function test_coil_button_visibility_defaults() :  void {
+	public function test_if_the_coil_button_margins_can_be_retrieved_successfully() :  void {
+		// Set the Coil button to have custom margin sizes
+		$coil_button_settings = [
+			'coil_button_top_margin'    => '0',
+			'coil_button_right_margin'  => '5',
+			'coil_button_bottom_margin' => 'abc', // incorrect input
+			'coil_button_left_margin'   => '', // no input
+		];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$retrieved_button_positions = [
+			'coil_button_top_margin'    => Admin\get_coil_button_setting( 'coil_button_top_margin' ),
+			'coil_button_right_margin'  => Admin\get_coil_button_setting( 'coil_button_right_margin' ),
+			'coil_button_bottom_margin' => Admin\get_coil_button_setting( 'coil_button_bottom_margin' ),
+			'coil_button_left_margin'   => Admin\get_coil_button_setting( 'coil_button_left_margin' ),
+		];
+
+		$this->assertSame( $coil_button_settings['coil_button_top_margin'], $retrieved_button_positions['coil_button_top_margin'] );
+		$this->assertSame( $coil_button_settings['coil_button_right_margin'], $retrieved_button_positions['coil_button_right_margin'] );
+		// When invalid input is given a null string is returned
+		$this->assertSame( '', $retrieved_button_positions['coil_button_bottom_margin'] );
+		$this->assertSame( $coil_button_settings['coil_button_left_margin'], $retrieved_button_positions['coil_button_left_margin'] );
 	}
 
-	// /**
-	//  * Testing if the Coil button post-type visibility settings can be retrieved correctly from the wp_options table.
-	//  *
-	//  * @return void
-	//  */
-	// public function test_if_the_coil_button_visibility_settings_can_be_retrieved_successfully() :  void {
-	// }
+	/**
+	 * Testing if the Coil button post-type visibility settings can be retrieved correctly from the wp_options table.
+	 *
+	 * @return void
+	 */
+	public function test_if_the_coil_button_visibility_settings_can_be_retrieved_successfully() :  void {
+		// Create a post
+		$post_obj = self::factory()->post->create_and_get();
+
+		// Set the Coil button to show on posts
+		$coil_button_settings = [ 'post_button_visibility' => 'show' ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$button_status = Admin\get_coil_button_status( $post_obj->ID );
+
+		$this->assertSame( 'show-coil-button', $button_status );
+
+		// Set the Coil button to be hidden on posts
+		$coil_button_settings = [ 'post_button_visibility' => 'hide' ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$button_status = Admin\get_coil_button_status( $post_obj->ID );
+
+		$this->assertSame( '', $button_status );
+	}
 
 	/**
 	 * Testing the Coil button mobile display default.
@@ -247,11 +353,26 @@ class Test_Coil_Button_Settings extends WP_UnitTestCase {
 		$this->assertSame( $defaults['coil_mobile_button_display'], $retrieved_value );
 	}
 
-	// /**
-	//  * Testing if the Coil button mobile display setting can be retrieved correctly from the wp_options table.
-	//  *
-	//  * @return void
-	//  */
-	// public function test_if_the_coil_button_mobile_display_setting_can_be_retrieved_successfully() :  void {
-	// }
+	/**
+	 * Testing if the Coil button mobile display setting can be retrieved correctly from the wp_options table.
+	 *
+	 * @return void
+	 */
+	public function test_if_the_coil_button_mobile_display_setting_can_be_retrieved_successfully() :  void {
+		// Set the Coil button to be hidden on mobile devices
+		$coil_button_settings = [ 'coil_mobile_button_display' => false ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$retrieved_mobile_display_setting = Admin\get_coil_button_setting( 'coil_mobile_button_display' );
+
+		$this->assertSame( false, $retrieved_mobile_display_setting );
+
+		// Set the Coil button to show on mobile devices
+		$coil_button_settings = [ 'coil_mobile_button_display' => true ];
+		update_option( 'coil_button_settings_group', $coil_button_settings );
+
+		$retrieved_mobile_display_setting = Admin\get_coil_button_setting( 'coil_mobile_button_display' );
+
+		$this->assertSame( true, $retrieved_mobile_display_setting );
+	}
 }
