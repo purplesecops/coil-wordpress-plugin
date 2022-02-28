@@ -396,11 +396,10 @@ function coil_button_settings_group_validation( $coil_button_settings ): array {
 
 		if ( isset( $coil_button_settings[ $field_name ] ) ) {
 			$number = filter_var( $coil_button_settings[ $field_name ], FILTER_SANITIZE_NUMBER_INT );
-			$int    = intval( $number );
 			// TODO: Give a max value as well.
-			$final_settings[ $field_name ] = gettype( $int ) === 'integer' ? $int : $default;
+			$final_settings[ $field_name ] = $number !== false ? $number : $default;
 		} else {
-			$final_settings[ $field_name ] = $default;
+			$final_settings[ $field_name ] = '';
 		}
 	}
 
@@ -412,7 +411,7 @@ function coil_button_settings_group_validation( $coil_button_settings ): array {
 		$valid_options                 = [ 'show', 'hide' ];
 
 		// The default value is to show
-		$final_settings[ $button_visibility_setting_key ] = isset( $coil_button_settings[ $button_visibility_setting_key ] ) && in_array( $coil_button_settings[ $button_visibility_setting_key ], $valid_options, true ) ? sanitize_key( $coil_button_settings[ $button_visibility_setting_key ] ) : Admin\get_button_display_default();
+		$final_settings[ $button_visibility_setting_key ] = isset( $coil_button_settings[ $button_visibility_setting_key ] ) && in_array( $coil_button_settings[ $button_visibility_setting_key ], $valid_options, true ) ? sanitize_key( $coil_button_settings[ $button_visibility_setting_key ] ) : $defaults['post_type_button_visibility'];
 	}
 
 	return $final_settings;
@@ -1460,7 +1459,7 @@ function coil_settings_coil_button_visibility_render_callback() {
 		);
 
 		$mobile_button_display_id = 'coil_mobile_button_display';
-		$value                    = isset( $button_options[ $mobile_button_display_id ] ) ? $button_options[ $mobile_button_display_id ] : Admin\get_button_display_default();
+		$value                    = isset( $button_options[ $mobile_button_display_id ] ) ? $button_options[ $mobile_button_display_id ] : $defaults[ $mobile_button_display_id ];
 
 		if ( $value === true ) {
 			$checked_input = 'checked="checked"';

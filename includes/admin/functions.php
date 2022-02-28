@@ -677,11 +677,11 @@ function get_coil_button_setting( $field_id, $use_text_default = false ) {
 			$value = ( ! empty( $coil_button_settings[ $field_id ] ) ) ? $coil_button_settings[ $field_id ] : '';
 		}
 	} elseif ( in_array( $field_id, $margin_keys, true ) ) {
-		$margin = get_coil_button_margin( $field_id );
-		if ( $margin !== false && $margin !== 0 ) {
-			$value = strval( $margin );
+		$is_zero = isset( $coil_button_settings[ $field_id ] ) && $coil_button_settings[ $field_id ] === '0';
+		if ( $use_text_default && ! $is_zero && empty( $coil_button_settings[ $field_id ] ) ) {
+			$value = $default_settings[ $field_id ];
 		} else {
-			$value = '';
+			$value = ( isset( $coil_button_settings[ $field_id ] ) ) ? $coil_button_settings[ $field_id ] : '';
 		}
 	} elseif ( in_array( $field_id, array_keys( $default_settings ), true ) ) {
 		$value = isset( $coil_button_settings[ $field_id ] ) ? $coil_button_settings[ $field_id ] : $default_settings[ $field_id ];
@@ -714,24 +714,6 @@ function get_coil_button_status( $object_id ) {
 }
 
 /**
- * Retrieve the Coil button margins.
- * @param string $field_name
- * @return int Setting stored in options.
- */
-function get_coil_button_margin( $field_id ) {
-
-	$coil_button_settings = get_coil_button_settings();
-	$value                = false;
-	$margin_defaults      = get_button_margin_key_defaults();
-	$margin_keys          = array_keys( $margin_defaults );
-	if ( in_array( $field_id, $margin_keys, true ) ) {
-		$value = isset( $coil_button_settings[ $field_id ] ) ? $coil_button_settings[ $field_id ] : $margin_defaults[ $field_id ];
-	}
-
-	return $value;
-}
-
-/**
  * Retrieve the Coil button settings defaults
  *
  * @return array Default values
@@ -739,14 +721,16 @@ function get_coil_button_margin( $field_id ) {
 function get_coil_button_defaults() {
 	// Set up defaults.
 	$settings        = [
-		'coil_button_toggle'         => true,
-		'coil_button_member_display' => true,
-		'coil_button_text'           => __( 'Support us with Coil', 'coil-web-monetization' ),
-		'coil_button_link'           => __( 'https://coil.com/', 'coil-web-monetization' ),
-		'coil_members_button_text'   => __( 'Thanks for your support!', 'coil-web-monetization' ),
-		'coil_button_color_theme'    => 'dark',
-		'coil_button_size'           => 'large',
-		'coil_button_position'       => 'bottom-right',
+		'coil_button_toggle'          => true,
+		'coil_button_member_display'  => true,
+		'coil_button_text'            => __( 'Support us with Coil', 'coil-web-monetization' ),
+		'coil_button_link'            => __( 'https://coil.com/', 'coil-web-monetization' ),
+		'coil_members_button_text'    => __( 'Thanks for your support!', 'coil-web-monetization' ),
+		'coil_button_color_theme'     => 'dark',
+		'coil_button_size'            => 'large',
+		'coil_button_position'        => 'bottom-right',
+		'post_type_button_visibility' => 'show',
+		'coil_mobile_button_display'  => true,
 	];
 	$margin_defaults = get_button_margin_key_defaults();
 	return array_merge( $settings, $margin_defaults );
@@ -757,10 +741,10 @@ function get_coil_button_defaults() {
  */
 function get_button_margin_key_defaults() {
 	return [
-		'coil_button_top_margin'    => 0,
-		'coil_button_right_margin'  => 0,
-		'coil_button_bottom_margin' => 0,
-		'coil_button_left_margin'   => 0,
+		'coil_button_top_margin'    => '0',
+		'coil_button_right_margin'  => '0',
+		'coil_button_bottom_margin' => '0',
+		'coil_button_left_margin'   => '0',
 	];
 }
 
@@ -789,40 +773,6 @@ function get_button_position_options() {
 	return $position_options;
 }
 
-/**
- * Retrieve the Coil button visibility settings.
- * @param string $field_name
- * @return string Setting stored in options.
- */
-function get_coil_button_visibility_setting( $field_id ) {
-
-	$coil_button_settings = get_coil_button_settings();
-	$value                = false;
-	$default_settings     = get_coil_button_defaults();
-	$margin_keys          = array_keys( get_button_margin_key_defaults() );
-	if ( in_array( $field_id, $margin_keys, true ) ) {
-		$margin = get_coil_button_margin( $field_id );
-		if ( $margin !== false && $margin !== 0 ) {
-			$value = strval( $margin );
-		} else {
-			$value = '';
-		}
-	} elseif ( in_array( $field_id, array_keys( $default_settings ), true ) ) {
-		$value = isset( $coil_button_settings[ $field_id ] ) ? $coil_button_settings[ $field_id ] : $default_settings[ $field_id ];
-	}
-
-	return $value;
-}
-
-/**
-* Returns the default Coil button display for all post types. The default is to show.
-*
-* @return string
-*/
-function get_button_display_default() {
-
-	return 'show';
-}
 /**
  * Create an array of the supported post types names.
  *

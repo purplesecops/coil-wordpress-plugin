@@ -74,14 +74,15 @@ function maybe_load_database_defaults() {
 	$coil_button_settings = get_option( 'coil_button_settings_group', 'absent' );
 
 	if ( $coil_button_settings === 'absent' ) {
-		$new_button_settings                               = [];
-		$new_button_settings['coil_button_toggle']         = true;
-		$new_button_settings['coil_button_member_display'] = true;
-		$new_button_settings['coil_mobile_button_display'] = true;
+		$defaults                                  = Admin\get_coil_button_defaults();
+		$new_button_settings                       = [];
+		$new_button_settings['coil_button_toggle'] = $defaults['coil_button_toggle'];
+		$new_button_settings['coil_button_member_display'] = $defaults['coil_button_member_display'];
+		$new_button_settings['coil_mobile_button_display'] = $defaults['coil_mobile_button_display'];
 
 		$post_type_options = Coil\get_supported_post_types( 'objects' );
 		// Button visibility default is 'show'
-		$button_visibility_default = Admin\get_button_display_default();
+		$button_visibility_default = $defaults['post_type_button_visibility'];
 
 		// Set post visibility and excerpt display default for each post type
 		foreach ( $post_type_options as $post_type ) {
