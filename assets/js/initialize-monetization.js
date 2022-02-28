@@ -158,8 +158,26 @@
 		};
 
 		$( modalContainer ).append( coilButtonMessage( modalData ) );
-		$( modalContainer ).find( '.coil-button' ).css( { 'margin-top': ButtonMarginTop + 'px', 'margin-right': ButtonMarginRight + 'px', 'margin-bottom': ButtonMarginBottom + 'px', 'margin-left': ButtonMarginLeft + 'px' } );
+
+		const topMargin = checkMarginValues( ButtonMarginTop );
+		const rightMargin = checkMarginValues( ButtonMarginRight );
+		const bottomMargin = checkMarginValues( ButtonMarginBottom );
+		const leftMargin = checkMarginValues( ButtonMarginLeft );
+
+		$( modalContainer ).find( '.coil-button' ).css( { 'margin-top': topMargin + 'px', 'margin-right': rightMargin + 'px', 'margin-bottom': bottomMargin + 'px', 'margin-left': leftMargin + 'px' } );
 		return modalContainer;
+	}
+
+	/**
+	 * Ensures that the margin value assigned to the Coil button has an integer value as expected.
+	 * @param {String} uncheckedMarginValue from coilParams.
+	 * @return {String} A string containing only digits and possibly a minus sign.
+	 */
+	function checkMarginValues( uncheckedMarginValue ) {
+		if ( uncheckedMarginValue.search( /[^1234567890-]/i ) >= 0 ) {
+			return '0';
+		}
+		return uncheckedMarginValue;
 	}
 
 	/**
