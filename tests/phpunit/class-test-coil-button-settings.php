@@ -215,13 +215,13 @@ class Test_Coil_Button_Settings extends WP_UnitTestCase {
 	// public function test_if_the_coil_button_margins_can_be_retrieved_successfully() :  void {
 	// }
 
-	// /**
-	//  * Testing the Coil button post-type visibility defaults.
-	//  *
-	//  * @return void
-	//  */
-	// public function test_coil_button_visibility_defaults() :  void {
-	// }
+	/**
+	 * Testing the Coil button post-type visibility defaults.
+	 *
+	 * @return void
+	 */
+	public function test_coil_button_visibility_defaults() :  void {
+	}
 
 	// /**
 	//  * Testing if the Coil button post-type visibility settings can be retrieved correctly from the wp_options table.

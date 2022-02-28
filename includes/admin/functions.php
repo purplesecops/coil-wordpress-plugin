@@ -681,7 +681,12 @@ function get_coil_button_setting( $field_id, $use_text_default = false ) {
 		if ( $use_text_default && ! $is_zero && empty( $coil_button_settings[ $field_id ] ) ) {
 			$value = $default_settings[ $field_id ];
 		} else {
-			$value = ( isset( $coil_button_settings[ $field_id ] ) ) ? $coil_button_settings[ $field_id ] : '';
+			if ( isset( $coil_button_settings[ $field_id ] ) ) {
+				$filtered_int = filter_var( $coil_button_settings[ $field_id ], FILTER_SANITIZE_NUMBER_INT );
+				$value        = ( $filtered_int !== false ) ? $filtered_int : '';
+			} else {
+				$value = '';
+			}
 		}
 	} elseif ( in_array( $field_id, array_keys( $default_settings ), true ) ) {
 		$value = isset( $coil_button_settings[ $field_id ] ) ? $coil_button_settings[ $field_id ] : $default_settings[ $field_id ];
