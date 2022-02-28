@@ -35,7 +35,7 @@
 
 	const subscriberOnlyMessage = wp.template( 'subscriber-only-message' );
 	const splitContentMessage = wp.template( 'split-content-message' );
-	const bannerMessage = wp.template( 'banner-message' );
+	const coilButtonMessage = wp.template( 'coil-button-message' );
 
 	const messageWrapper = $( 'p.monetize-msg' );
 
@@ -126,18 +126,18 @@
 
 	/**
 	 * @param {String} message Message shown to thank Coil members, or to encourage users to sign up.
-	 * @return {object} Output a slim banner message.
+	 * @return {object} Output a Coil button message.
 	 */
-	function showBannerMessage( message ) {
+	function showCoilButtonMessage( message ) {
 		const positionArray = coilButtonPosition.split( '-' );
 		const verticalPosition = positionArray[ 0 ];
 		const horizontalPosition = positionArray[ 1 ];
 
 		const modalContainer = document.createElement( 'div' );
-		$( modalContainer ).addClass( 'coil-banner-message-container' + ' ' + verticalPosition + ' ' + horizontalPosition );
+		$( modalContainer ).addClass( 'coil-button-message-container' + ' ' + verticalPosition + ' ' + horizontalPosition );
 
 		if ( ! showCoilButtonOnMobile ) {
-			$( modalContainer ).addClass( 'coil-hide-mobile-banner-message' );
+			$( modalContainer ).addClass( 'hide-mobile-coil-button' );
 		}
 
 		let brandingLogo = '';
@@ -157,8 +157,8 @@
 			},
 		};
 
-		$( modalContainer ).append( bannerMessage( modalData ) );
-		$( modalContainer ).find( '.coil-banner-message-button' ).css( { 'margin-top': ButtonMarginTop + 'px', 'margin-right': ButtonMarginRight + 'px', 'margin-bottom': ButtonMarginBottom + 'px', 'margin-left': ButtonMarginLeft + 'px' } );
+		$( modalContainer ).append( coilButtonMessage( modalData ) );
+		$( modalContainer ).find( '.coil-button' ).css( { 'margin-top': ButtonMarginTop + 'px', 'margin-right': ButtonMarginRight + 'px', 'margin-bottom': ButtonMarginBottom + 'px', 'margin-left': ButtonMarginLeft + 'px' } );
 		return modalContainer;
 	}
 
@@ -319,38 +319,31 @@
 	}
 
 	/**
-	 * Add a function to remove the banner and set a Cookie.
+	 * Add a function to remove the Coil button and set a Cookie.
 	 *
-	 * @param {String} cookieName Define when the cookie will be removed.
 	 * @see https://github.com/js-cookie/js-cookie
 	 */
-	function addBannerDismissClickHandler( cookieName ) {
-		$( '#js-coil-banner-dismiss' ).on( 'click', function() {
-			if ( ! hasBannerDismissCookie( cookieName ) ) {
-				if ( cookieName === 'ShowCoilPublicMsg' ) {
-					Cookies.set( cookieName, 1, { expires: 31 } );
-				} else if ( cookieName === 'ShowCoilPartialMsg' ) {
-					Cookies.set( cookieName, 1 );
-				}
+	function addButtonDismissClickHandler() {
+		const cookieName = 'ShowCoilButtonMsg';
+		$( '#js-coil-button-dismiss' ).on( 'click', function() {
+			if ( ! hasButtonDismissCookie() ) {
+				Cookies.set( cookieName, 1, { expires: 31 } );
 				$( this ).parent().parent().remove();
 			}
 		} );
 	}
 
 	/**
-	 * Checks if the footer banner message is dismissed.
-	 *
-	 * @param {string} cookieName Name of the cookie to check against.
+	 * Checks if the Coil button is dismissed.
 	 *
 	 * @return {bool} True if set to '1', otherwise false.
 	 */
-	function hasBannerDismissCookie( cookieName ) {
+	function hasButtonDismissCookie() {
+		const cookieName = 'ShowCoilButtonMsg';
 		const currentCookie = Cookies.get( cookieName );
 
 		if ( ( typeof currentCookie !== 'undefined' ) ) {
-			if ( cookieName === 'ShowCoilPublicMsg' || cookieName === 'ShowCoilPartialMsg' ) {
-				return ( currentCookie === '1' ) ? true : false;
-			}
+			return ( currentCookie === '1' ) ? true : false;
 		}
 		return false;
 	}
@@ -386,13 +379,13 @@
 		} else {
 			// TODO shouldn't display if the read more block is present
 			const buttonEnabled = hasCoilButtonEnabled();
-			const buttonAlreadyExists = $( '.coil-banner-message-container' ).length !== 0 ? true : false;
-			const buttonDismissed = hasBannerDismissCookie( 'ShowCoilPublicMsg' );
+			const buttonAlreadyExists = $( '.coil-button-message-container' ).length !== 0 ? true : false;
+			const buttonDismissed = hasButtonDismissCookie();
 			const pendingMessageDisplayed = $( 'p.monetize-msg' ).length !== 0 ? true : false;
 			const paywallDisplayed = $( '.coil-message-container' ).length !== 0 ? true : false;
 			if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed && ! paywallDisplayed ) {
-				$( 'body' ).append( showBannerMessage( coilButtonUnpaidMessage ) );
-				addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
+				$( 'body' ).append( showCoilButtonMessage( coilButtonUnpaidMessage ) );
+				addButtonDismissClickHandler();
 			}
 		}
 
@@ -447,12 +440,12 @@
 
 		// TODO shouldn't display if the read more block is present
 		const buttonEnabled = hasCoilButtonEnabled();
-		const buttonAlreadyExists = $( '.coil-banner-message-container' ).length !== 0 ? true : false;
-		const buttonDismissed = hasBannerDismissCookie( 'ShowCoilPublicMsg' );
+		const buttonAlreadyExists = $( '.coil-button-message-container' ).length !== 0 ? true : false;
+		const buttonDismissed = hasButtonDismissCookie();
 		const pendingMessageDisplayed = $( 'p.monetize-msg' ).length !== 0 ? true : false;
 		if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed ) {
-			$( 'body' ).append( showBannerMessage( coilButtonUnpaidMessage ) );
-			addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
+			$( 'body' ).append( showCoilButtonMessage( coilButtonUnpaidMessage ) );
+			addButtonDismissClickHandler();
 		}
 	}
 
@@ -492,13 +485,13 @@
 
 		// TODO shouldn't display if the read more block is present
 		const buttonEnabled = hasCoilButtonEnabled();
-		const buttonAlreadyExists = $( '.coil-banner-message-container' ).length !== 0 ? true : false;
-		const buttonDismissed = hasBannerDismissCookie( 'ShowCoilPublicMsg' );
+		const buttonAlreadyExists = $( '.coil-button-message-container' ).length !== 0 ? true : false;
+		const buttonDismissed = hasButtonDismissCookie();
 		const pendingMessageDisplayed = $( 'p.monetize-msg' ).length !== 0 ? true : false;
 		const paywallDisplayed = $( '.coil-message-container' ).length !== 0 ? true : false;
 		if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed && ! paywallDisplayed ) {
-			$( 'body' ).append( showBannerMessage( coilButtonUnpaidMessage ) );
-			addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
+			$( 'body' ).append( showCoilButtonMessage( coilButtonUnpaidMessage ) );
+			addButtonDismissClickHandler();
 		}
 	}
 
@@ -559,17 +552,17 @@
 		jQuery( window ).trigger( 'resize' );
 
 		if ( ! showCoilButtonToMembers ) {
-			$( '.coil-banner-message-container' ).remove();
+			$( '.coil-button-message-container' ).remove();
 		} else {
 			const buttonEnabled = hasCoilButtonEnabled();
-			const buttonAlreadyExists = $( '.coil-banner-message-container' ).length !== 0 ? true : false;
-			const buttonDismissed = hasBannerDismissCookie( 'ShowCoilPublicMsg' );
+			const buttonAlreadyExists = $( '.coil-button-message-container' ).length !== 0 ? true : false;
+			const buttonDismissed = hasButtonDismissCookie();
 			// The text needs to change to the member message
 			if ( buttonAlreadyExists ) {
-				$( '.coil-banner-message-button a' ).text( coilButtonPaidMessage );
+				$( '.coil-button a' ).text( coilButtonPaidMessage );
 			} else if ( buttonEnabled && ! buttonDismissed ) {
-				$( 'body' ).append( showBannerMessage( coilButtonPaidMessage ) );
-				addBannerDismissClickHandler( 'ShowCoilPublicMsg' );
+				$( 'body' ).append( showCoilButtonMessage( coilButtonPaidMessage ) );
+				addButtonDismissClickHandler();
 			}
 		}
 	}

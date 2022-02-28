@@ -30,13 +30,13 @@ describe( 'Coil button for WM-enabled users', function() {
 		cy.visit( '/monetized-and-public/' );
 
 		cy
-			.get( '.coil-banner-message-button' )
+			.get( '.coil-button' )
 			.should( 'be.visible' );
 
 		cy.startWebMonetization();
 
 		cy
-			.get( '.coil-banner-message-button' )
+			.get( '.coil-button' )
 			.should( 'not.exist' );
 	} );
 
@@ -54,7 +54,7 @@ describe( 'Coil button for WM-enabled users', function() {
 		cy.startWebMonetization();
 
 		cy
-			.get( '.coil-banner-message-button' )
+			.get( '.coil-button' )
 			.should( 'not.exist' );
 	} );
 
@@ -79,10 +79,10 @@ describe( 'Coil button for WM-enabled users', function() {
 		cy.startWebMonetization();
 
 		cy
-			.get( '.coil-banner-message-button' )
+			.get( '.coil-button' )
 			.should( 'be.visible' );
 		cy
-			.get( '.coil-banner-message-button > a' )
+			.get( '.coil-button > a' )
 			.should( 'contain', buttonMemberText );
 	} );
 } );
@@ -106,7 +106,7 @@ describe( 'Coil button for non WM-enabled users', function() {
 
 		cy.visit( '/monetized-and-public/' );
 		cy
-			.get( '.coil-banner-message-button' )
+			.get( '.coil-button' )
 			.should( 'not.exist' );
 
 		// Enable the Coil button and set it to display.
@@ -127,7 +127,7 @@ describe( 'Coil button for non WM-enabled users', function() {
 
 		cy.visit( '/monetized-and-public/' );
 		cy
-			.get( '.coil-banner-message-button' )
+			.get( '.coil-button' )
 			.should( 'be.visible' );
 	} );
 
@@ -154,34 +154,34 @@ describe( 'Coil button for non WM-enabled users', function() {
 		cy.visit( '/monetized-and-public/' );
 
 		cy
-			.get( '.coil-banner-message-button > a' )
+			.get( '.coil-button > a' )
 			.should( 'contain', buttonText );
 		cy
-			.get( '.coil-banner-message-button > a' )
+			.get( '.coil-button > a' )
 			.should( 'have.attr', 'href', buttonLink );
 	} );
 
 	it( 'Checks that you can dissmiss the Coil button', () => {
 		cy.visit( '/monetized-and-public/' );
 		cy
-			.get( '.coil-banner-message-button' )
+			.get( '.coil-button' )
 			.should( 'be.visible' );
 		cy
-			.get( '#js-coil-banner-dismiss' )
+			.get( '#js-coil-button-dismiss' )
 			.click();
 
 		cy
-			.get( '.coil-banner-message-button' )
+			.get( '.coil-button' )
 			.should( 'not.exist' );
 
 		cy.reload();
 
 		cy
-			.get( '.coil-banner-message-button' )
+			.get( '.coil-button' )
 			.should( 'not.exist' );
 
 		cy
-			.getCookie( 'ShowCoilPublicMsg' )
+			.getCookie( 'ShowCoilButtonMsg' )
 			.should( 'have.property', 'value', '1' );
 	} );
 } );

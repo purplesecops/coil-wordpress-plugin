@@ -134,7 +134,7 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 
 		// Testing when both settings are set to false
 		// Adding custom appearance settings to the theme_mod
-		set_theme_mod( 'coil_show_donation_bar', true );
+		set_theme_mod( 'coil_show_donation_bar', true ); // Deprecated
 		set_theme_mod( 'coil_title_padlock', false );
 
 		// Transferring settings to the wp_options table
@@ -163,7 +163,7 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 
 		// Adding custom appearance settings to the database and theme_mod
 		update_option( 'coil_exclusive_settings_group', [ 'coil_title_padlock' => false ] );
-		set_theme_mod( 'coil_show_donation_bar', false );
+		set_theme_mod( 'coil_show_donation_bar', false ); // Deprecated
 
 		// Transferrng settings to the wp_options table
 		Coil\maybe_update_database();
@@ -324,7 +324,7 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 
 		// Settings saved in the deprecated option group
 		$original_settings = [
-			'coil_show_promotion_bar' => true,
+			'coil_show_promotion_bar' => true, // Deprecated
 			'coil_title_padlock'      => false,
 		];
 		update_option( 'coil_appearance_settings_group', $original_settings );

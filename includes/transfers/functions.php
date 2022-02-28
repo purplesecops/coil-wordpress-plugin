@@ -70,7 +70,7 @@ function maybe_load_database_defaults() {
 		add_option( 'coil_exclusive_settings_group', $new_exclusive_settings );
 	}
 
-	// Loads donation bar default if it has not yet been entered into the database
+	// Loads the Coil button defaults if they have not yet been entered into the database
 	$coil_button_settings = get_option( 'coil_button_settings_group', 'absent' );
 
 	if ( $coil_button_settings === 'absent' ) {

@@ -173,17 +173,17 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 	}
 }
 
-// Scenario 3 - Banner message
-.coil-banner-message-container {
+// Scenario 3 - Coil button
+.coil-button-message-container {
 	display: flex;
 	position: fixed;
 	width: 100%;
 	z-index: 200;
 
-	.coil-banner-message-button {
-		background-color: $message_banner_button_colour;
+	.coil-button {
+		background-color: $coil_button_message_color;
 		border-radius: 6px;
-		box-shadow: 0 6px 10px 0 $message_banner_shadow_colour;
+		box-shadow: 0 6px 10px 0 $coil_button_message_shadow_color;
 		font-family: 'Open Sans', sans-serif;
 		font-size: 17px;
 		font-weight: 600;
@@ -202,7 +202,7 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 		}
 
 		&:hover {
-			background-color: $message_banner_button_hover_colour;
+			background-color: $coil_button_message_hover_color;
 		}
 
 		@media only screen and (min-width: $message_mobile_breakpoint) {
@@ -211,8 +211,8 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 		}
 	}
 
-	.coil-banner-message-dismiss {
-		background-color: $message_banner_dismiss_colour;
+	.coil-button-dismiss {
+		background-color: $coil_button_message_dismiss_color;
 		border-radius: 25px;
 		color: $white;
 		cursor: pointer;
@@ -231,28 +231,27 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 	}
 }
 
-.coil-banner-message-container.bottom {
+.coil-button-message-container.bottom {
 	bottom: 0;
 	margin-bottom: 20px;
 }
 
-.coil-banner-message-container.top {
+.coil-button-message-container.top {
 	margin-top: 20px;
 	top: 0;
 }
 
-.coil-banner-message-container.right {
+.coil-button-message-container.right {
 	justify-content: right;
 }
 
-.coil-banner-message-container.left {
+.coil-button-message-container.left {
 	justify-content: left;
 }
 
 // Changes Coil button to implement light theme
-.coil-banner-message-container.coil-light-theme {
-
-	.coil-banner-message-button {
+.coil-button-message-container.coil-light-theme {
+	.coil-button {
 		background-color: $message_background_colour;
 		opacity: 0.9;
 
@@ -266,7 +265,7 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 	}
 }
 
-.coil-banner-message-container.coil-hide-mobile-banner-message {
+.coil-button-message-container.hide-mobile-coil-button {
 	@media only screen and (max-width: $message_mobile_breakpoint) {
 		display: none;
 	}
