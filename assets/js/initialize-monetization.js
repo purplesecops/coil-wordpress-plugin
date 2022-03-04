@@ -29,7 +29,9 @@
 		coilButtonGloballyEnabled = Boolean( coilParams.coil_button_enabled ), // Cast to boolean - wp_localize_script forces string values.
 		siteLogo = coilParams.site_logo,
 		coilLogo = coilParams.coil_logo,
+		coilLogoStreaming = coilParams.coil_logo_streaming,
 		coilLogoWhite = coilParams.coil_logo_white,
+		coilLogoWhiteStreaming = coilParams.coil_logo_white_streaming,
 		exclusiveMessageTheme = coilParams.exclusive_message_theme,
 		fontSelection = Boolean( coilParams.font_selection );
 
@@ -103,11 +105,11 @@
 		let brandingLogo = '';
 
 		if ( coilMessageBranding === 'site_logo' ) {
-			brandingLogo = brandingLogo = '<img src="' + siteLogo + '"></img>';
+			brandingLogo = brandingLogo = '<img src="' + siteLogo + '">';
 		} else if ( coilMessageBranding === 'coil_logo' && exclusiveMessageTheme === 'dark' ) {
-			brandingLogo = '<img src="' + coilLogoWhite + '"></img>';
+			brandingLogo = '<img src="' + coilLogoWhite + '">';
 		} else if ( coilMessageBranding === 'coil_logo' ) {
-			brandingLogo = '<img src="' + coilLogo + '"></img>';
+			brandingLogo = '<img src="' + coilLogo + '">';
 		}
 
 		const modalData = {
@@ -144,9 +146,9 @@
 
 		if ( coilButtonTheme === 'light' ) {
 			modalContainer.classList.add( 'coil-light-theme' );
-			brandingLogo = '<img src="' + coilLogo + '"></img>';
+			brandingLogo = coilLogo;
 		} else {
-			brandingLogo = '<img src="' + coilLogoWhite + '"></img>';
+			brandingLogo = coilLogoWhite;
 		}
 
 		const modalData = {
@@ -522,6 +524,7 @@
 	 */
 	function monetizationStartListener( event ) {
 		monetizationStartEventOccurred = true;
+		let brandingLogo = '';
 
 		if ( document.body.classList.contains( 'show-fw-message' ) ) {
 			$( 'body' ).removeClass( 'show-fw-message' );
@@ -577,7 +580,13 @@
 			const buttonDismissed = hasButtonDismissCookie();
 			// The text needs to change to the member message
 			if ( buttonAlreadyExists ) {
-				$( '.coil-button a' ).text( coilButtonPaidMessage );
+				if ( coilButtonTheme === 'light' ) {
+					brandingLogo = coilLogoStreaming;
+				} else {
+					brandingLogo = coilLogoWhiteStreaming;
+				}
+				$( '.coil-button img' ).attr( 'src', brandingLogo );
+				$( '.coil-button div' ).text( coilButtonPaidMessage );
 			} else if ( buttonEnabled && ! buttonDismissed ) {
 				$( 'body' ).append( showCoilButtonMessage( coilButtonPaidMessage ) );
 				addButtonDismissClickHandler();

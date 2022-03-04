@@ -406,35 +406,40 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
     line-height: 20px;
     margin: 0 32px 0 67px;
     overflow: visible;
-    padding: 8px;
     position: relative;
     text-align: center; }
     .coil-button-message-container .coil-button a {
-      color: #fff;
-      padding-left: 8px;
-      padding-right: 8px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: row;
+      padding: 8px;
       text-decoration: none; }
-    .coil-button-message-container .coil-button:hover {
-      background-color: #494949; }
+      .coil-button-message-container .coil-button a div {
+        color: #fff;
+        margin: auto;
+        padding-left: 8px;
+        padding-right: 8px; }
+      .coil-button-message-container .coil-button a:hover {
+        background-color: #494949; }
     @media only screen and (min-width: 768px) {
       .coil-button-message-container .coil-button {
         justify-content: space-around;
         max-width: 434px; } }
-  .coil-button-message-container .coil-button-dismiss {
-    background-color: #777;
-    border-radius: 25px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 700;
-    height: 20px;
-    line-height: 20px;
-    position: absolute;
-    right: -7px;
-    top: -7px;
-    width: 20px; }
-    .coil-button-message-container .coil-button-dismiss:hover {
-      background-color: #c92c2c; }
+    .coil-button-message-container .coil-button .coil-button-dismiss {
+      background-color: #777;
+      border-radius: 100%;
+      color: #fff;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 700;
+      height: 20px;
+      line-height: 20px;
+      position: absolute;
+      right: -7px;
+      top: -7px;
+      width: 20px; }
+      .coil-button-message-container .coil-button .coil-button-dismiss:hover {
+        background-color: #c92c2c; }
 
 .coil-button-message-container.bottom {
   bottom: 0;
@@ -453,9 +458,9 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 .coil-button-message-container.coil-light-theme .coil-button {
   background-color: #fff;
   opacity: 0.9; }
-  .coil-button-message-container.coil-light-theme .coil-button a {
+  .coil-button-message-container.coil-light-theme .coil-button a div {
     color: #2c333a; }
-  .coil-button-message-container.coil-light-theme .coil-button:hover {
+  .coil-button-message-container.coil-light-theme .coil-button a:hover {
     background-color: #ccc; }
 
 @media only screen and (max-width: 768px) {

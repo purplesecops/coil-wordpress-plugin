@@ -219,7 +219,9 @@ function load_full_assets() : void {
 			'coil_button_enabled'         => Admin\is_coil_button_enabled(),
 			'site_logo'                   => Admin\get_site_logo_src(),
 			'coil_logo'                   => plugin_dir_url( __DIR__ ) . 'assets/images/coil-icn-black.svg',
+			'coil_logo_streaming'         => plugin_dir_url( __DIR__ ) . 'assets/images/coil-icn-black-streaming.svg',
 			'coil_logo_white'             => plugin_dir_url( __DIR__ ) . 'assets/images/coil-icn-white.svg',
+			'coil_logo_white_streaming'   => plugin_dir_url( __DIR__ ) . 'assets/images/coil-icn-white-streaming.svg',
 			'exclusive_message_theme'     => Admin\get_paywall_appearance_setting( 'coil_message_color_theme' ),
 			'font_selection'              => Admin\get_paywall_appearance_setting( 'coil_message_font' ),
 
