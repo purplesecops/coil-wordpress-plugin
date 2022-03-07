@@ -130,7 +130,7 @@
 	 * @param {String} message Message shown to thank Coil members, or to encourage users to sign up.
 	 * @return {object} Output a Coil button message.
 	 */
-	function showCoilButtonMessage( message ) {
+	function showCoilButton( message ) {
 		const positionArray = coilButtonPosition.split( '-' );
 		const verticalPosition = positionArray[ 0 ];
 		const horizontalPosition = positionArray[ 1 ];
@@ -171,11 +171,30 @@
 	}
 
 	/**
+	 * Determines whether a Coil button element should be added to the page.
+	 * The button will only be added if it is not already present, it is globally enabled, the browser doesn't have a dismiss cookie for it,
+	 * and neither the pending message nor paywall are being displayed.
+	 */
+	function maybeAddCoilButton() {
+		// TODO shouldn't display if the read more block is present
+		const buttonEnabled = hasCoilButtonEnabled();
+		const buttonAlreadyExists = $( '.coil-button-message-container' ).length !== 0 ? true : false;
+		const buttonDismissed = hasButtonDismissCookie();
+		const pendingMessageDisplayed = $( 'p.monetize-msg' ).length !== 0 ? true : false;
+		const paywallDisplayed = $( '.coil-message-container' ).length !== 0 ? true : false;
+		if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed && ! paywallDisplayed ) {
+			$( 'body' ).append( showCoilButton( coilButtonUnpaidMessage ) );
+			addButtonDismissClickHandler();
+		}
+	}
+
+	/**
 	 * Ensures that the margin value assigned to the Coil button has an integer value as expected.
 	 * @param {String} marginValue from coilParams.
 	 * @return {String} A string containing only digits and possibly a minus sign.
 	 */
 	function checkMarginValues( marginValue ) {
+		// If the value is invalid simply set it to 0.
 		if ( marginValue.search( /[^1234567890-]/i ) >= 0 ) {
 			return '0';
 		}
@@ -397,16 +416,7 @@
 
 			showContentContainer();
 		} else {
-			// TODO shouldn't display if the read more block is present
-			const buttonEnabled = hasCoilButtonEnabled();
-			const buttonAlreadyExists = $( '.coil-button-message-container' ).length !== 0 ? true : false;
-			const buttonDismissed = hasButtonDismissCookie();
-			const pendingMessageDisplayed = $( 'p.monetize-msg' ).length !== 0 ? true : false;
-			const paywallDisplayed = $( '.coil-message-container' ).length !== 0 ? true : false;
-			if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed && ! paywallDisplayed ) {
-				$( 'body' ).append( showCoilButtonMessage( coilButtonUnpaidMessage ) );
-				addButtonDismissClickHandler();
-			}
+			maybeAddCoilButton();
 		}
 
 		// Trigger an event.
@@ -458,15 +468,7 @@
 			}, 5000 );
 		}
 
-		// TODO shouldn't display if the read more block is present
-		const buttonEnabled = hasCoilButtonEnabled();
-		const buttonAlreadyExists = $( '.coil-button-message-container' ).length !== 0 ? true : false;
-		const buttonDismissed = hasButtonDismissCookie();
-		const pendingMessageDisplayed = $( 'p.monetize-msg' ).length !== 0 ? true : false;
-		if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed ) {
-			$( 'body' ).append( showCoilButtonMessage( coilButtonUnpaidMessage ) );
-			addButtonDismissClickHandler();
-		}
+		maybeAddCoilButton();
 	}
 
 	/**
@@ -503,16 +505,7 @@
 			}
 		}, 5000 );
 
-		// TODO shouldn't display if the read more block is present
-		const buttonEnabled = hasCoilButtonEnabled();
-		const buttonAlreadyExists = $( '.coil-button-message-container' ).length !== 0 ? true : false;
-		const buttonDismissed = hasButtonDismissCookie();
-		const pendingMessageDisplayed = $( 'p.monetize-msg' ).length !== 0 ? true : false;
-		const paywallDisplayed = $( '.coil-message-container' ).length !== 0 ? true : false;
-		if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed && ! paywallDisplayed ) {
-			$( 'body' ).append( showCoilButtonMessage( coilButtonUnpaidMessage ) );
-			addButtonDismissClickHandler();
-		}
+		maybeAddCoilButton();
 	}
 
 	/**
@@ -588,7 +581,7 @@
 				$( '.coil-button img' ).attr( 'src', brandingLogo );
 				$( '.coil-button div' ).text( coilButtonPaidMessage );
 			} else if ( buttonEnabled && ! buttonDismissed ) {
-				$( 'body' ).append( showCoilButtonMessage( coilButtonPaidMessage ) );
+				$( 'body' ).append( showCoilButton( coilButtonPaidMessage ) );
 				addButtonDismissClickHandler();
 			}
 		}
