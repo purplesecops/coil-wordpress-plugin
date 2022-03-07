@@ -51,6 +51,7 @@ describe( 'Coil button for WM-enabled users', function() {
 			.click();
 
 		cy.visit( '/monetized-and-public/' );
+
 		cy.startWebMonetization();
 
 		cy
@@ -67,7 +68,7 @@ describe( 'Coil button for WM-enabled users', function() {
 			.type( `{selectall}${ buttonMemberText }` );
 		cy
 			.get( '#coil_button_member_display' )
-			.check();
+			.should( 'be.checked' );
 		cy
 			.get( '#post_button_visibility_show' )
 			.should( 'be.checked' );
@@ -159,6 +160,69 @@ describe( 'Coil button for non WM-enabled users', function() {
 		cy
 			.get( '.coil-button > a' )
 			.should( 'have.attr', 'href', buttonLink );
+	} );
+
+	it( 'Checks the Coil button settings can be customized', () => {
+		const topMargin = '0';
+		const rightMargin = '10px';
+		const bottomMargin = '-40';
+		const leftMargin = 'abc';
+
+		cy.visit( '/wp-admin/admin.php?page=coil_settings&tab=coil_button' );
+		cy
+			.get( '#light_color_theme' )
+			.click();
+
+		cy
+			.get( '#position_dropdown' )
+			.select( 'top-left' );
+
+		cy
+			.get( '#coil_button_top_margin' )
+			.type( `{selectall}${ topMargin }` );
+		cy
+			.get( '#coil_button_right_margin' )
+			.type( `{selectall}${ rightMargin }` );
+		cy
+			.get( '#coil_button_bottom_margin' )
+			.type( `{selectall}${ bottomMargin }` );
+		cy
+			.get( '#coil_button_left_margin' )
+			.type( `{selectall}${ leftMargin }` );
+
+		cy
+			.get( '#submit' )
+			.click();
+
+		cy.visit( '/monetized-and-public/' );
+
+		cy
+			.get( '.coil-button-message-container.top.left.coil-light-theme' )
+			.should( 'exist' );
+
+		cy
+			.get( '.coil-button' )
+			.should( 'have.attr', 'style', 'margin: 0px 42px -40px 32px;' );
+	} );
+
+	it( 'Checks the button can be hidden on a post level', () => {
+		cy.visit( '/wp-admin/admin.php?page=coil_settings&tab=coil_button' );
+
+		cy
+			.get( '#post_button_visibility_hide' )
+			.click();
+
+		cy.visit( '/monetized-and-public/' );
+
+		cy
+			.get( '.coil-button' )
+			.should( 'not.exist' );
+
+		cy.visit( '/monetized-and-public-page/' );
+
+		cy
+			.get( '.coil-button' )
+			.should( 'exist' );
 	} );
 
 	it( 'Checks that you can dissmiss the Coil button', () => {
