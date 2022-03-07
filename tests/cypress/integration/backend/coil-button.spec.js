@@ -74,6 +74,10 @@ describe( 'Coil button settings tab', () => {
 			.click();
 
 		cy
+			.get( '#position_dropdown' )
+			.select( 'top-left' );
+
+		cy
 			.get( '#coil_button_top_margin' )
 			.type( `{selectall}${ topMargin }` );
 		cy
@@ -107,6 +111,10 @@ describe( 'Coil button settings tab', () => {
 		cy
 			.get( '#coil_button_member_display' )
 			.should( 'not.be.checked' );
+
+		cy
+			.get( '#position_dropdown' )
+			.should( 'have.value', 'top-left' );
 
 		checkButtonMargins( '', '10', bottomMargin, '' );
 	} );

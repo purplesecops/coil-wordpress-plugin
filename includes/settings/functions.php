@@ -415,14 +415,14 @@ function coil_button_settings_group_validation( $coil_button_settings ): array {
 		],
 		[
 			'field_name'    => 'coil_button_position',
-			'valid_choices' => Admin\get_button_position_options(),
+			'valid_choices' => array_keys( Admin\get_button_position_options() ),
 		],
 	];
 
 	foreach ( $additional_fields as $field_item ) {
-		foreach ( $field_item as $field_name => $valid_choices ) {
-			$final_settings[ $field_name ] = isset( $coil_button_settings[ $field_name ] ) && in_array( $coil_button_settings[ $field_name ], $valid_choices, true ) ? sanitize_key( $coil_button_settings[ $field_name ] ) : $defaults[ $field_name ];
-		}
+		$field_name                    = $field_item['field_name'];
+		$valid_choices                 = $field_item['valid_choices'];
+		$final_settings[ $field_name ] = isset( $coil_button_settings[ $field_name ] ) && in_array( $coil_button_settings[ $field_name ], $valid_choices, true ) ? sanitize_key( $coil_button_settings[ $field_name ] ) : $defaults[ $field_name ];
 	}
 
 	return $final_settings;
