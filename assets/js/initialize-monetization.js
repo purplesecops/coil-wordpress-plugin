@@ -172,14 +172,14 @@
 
 	/**
 	 * Ensures that the margin value assigned to the Coil button has an integer value as expected.
-	 * @param {String} uncheckedMarginValue from coilParams.
+	 * @param {String} marginValue from coilParams.
 	 * @return {String} A string containing only digits and possibly a minus sign.
 	 */
-	function checkMarginValues( uncheckedMarginValue ) {
-		if ( uncheckedMarginValue.search( /[^1234567890-]/i ) >= 0 ) {
+	function checkMarginValues( marginValue ) {
+		if ( marginValue.search( /[^1234567890-]/i ) >= 0 ) {
 			return '0';
 		}
-		return uncheckedMarginValue;
+		return marginValue;
 	}
 
 	/**

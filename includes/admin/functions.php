@@ -659,6 +659,7 @@ function is_coil_button_enabled() {
 
 /**
  * Retrieve the Coil button settings.
+ * Note: This does not return the final button margins since they need to be calculated relative the baseline using the get_coil_button_margins function.
  * @param string $field_name
  * @return string Setting stored in options.
  */
@@ -677,19 +678,35 @@ function get_coil_button_setting( $field_id, $use_text_default = false ) {
 			$value = ( ! empty( $coil_button_settings[ $field_id ] ) ) ? $coil_button_settings[ $field_id ] : '';
 		}
 	} elseif ( in_array( $field_id, $margin_keys, true ) ) {
-		$is_zero = isset( $coil_button_settings[ $field_id ] ) && $coil_button_settings[ $field_id ] === '0';
-		if ( $use_text_default && ! $is_zero && empty( $coil_button_settings[ $field_id ] ) ) {
-			$value = $default_settings[ $field_id ];
+		if ( ! empty( $coil_button_settings[ $field_id ] ) ) {
+			$filtered_int = filter_var( $coil_button_settings[ $field_id ], FILTER_SANITIZE_NUMBER_INT );
+			$value        = ( $filtered_int !== false ) ? $filtered_int : '';
 		} else {
-			if ( isset( $coil_button_settings[ $field_id ] ) ) {
-				$filtered_int = filter_var( $coil_button_settings[ $field_id ], FILTER_SANITIZE_NUMBER_INT );
-				$value        = ( $filtered_int !== false ) ? $filtered_int : '';
-			} else {
-				$value = '';
-			}
+			$value = '';
 		}
 	} elseif ( in_array( $field_id, array_keys( $default_settings ), true ) ) {
 		$value = isset( $coil_button_settings[ $field_id ] ) ? $coil_button_settings[ $field_id ] : $default_settings[ $field_id ];
+	}
+
+	return $value;
+}
+
+/**
+ * Calculates the final Coil button margin values.
+ * The button has baseline margin values that can be added to or subtracted from in the Coil buton settings tab.
+ * @param string $field_name
+ * @return string Final button margin value.
+ */
+function get_coil_button_margins( $field_id ) {
+	$value                   = get_coil_button_setting( $field_id );
+	$margin_keys             = array_keys( get_button_margin_key_defaults() );
+	$magin_baseline_settings = get_coil_button_defaults();
+	if ( in_array( $field_id, $margin_keys, true ) ) {
+		if ( empty( $value ) ) {
+			$value = $magin_baseline_settings[ $field_id ];
+		} else {
+			$value = strval( intval( $value ) + intval( $magin_baseline_settings[ $field_id ] ) );
+		}
 	}
 
 	return $value;
@@ -745,11 +762,13 @@ function get_coil_button_defaults() {
  * @return array Default margins for the Coil button.
  */
 function get_button_margin_key_defaults() {
+	$horizontal_margin_baseline = '32';
+	$vertical_margin_baseline   = '0';
 	return [
-		'coil_button_top_margin'    => '0',
-		'coil_button_right_margin'  => '0',
-		'coil_button_bottom_margin' => '0',
-		'coil_button_left_margin'   => '0',
+		'coil_button_top_margin'    => $vertical_margin_baseline,
+		'coil_button_right_margin'  => $horizontal_margin_baseline,
+		'coil_button_bottom_margin' => $vertical_margin_baseline,
+		'coil_button_left_margin'   => $horizontal_margin_baseline,
 	];
 }
 
