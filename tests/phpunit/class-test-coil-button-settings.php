@@ -304,7 +304,8 @@ class Test_Coil_Button_Settings extends WP_UnitTestCase {
 			'coil_button_left_margin'   => Admin\get_coil_button_setting( 'coil_button_left_margin' ),
 		];
 
-		$this->assertSame( $coil_button_settings['coil_button_top_margin'], $retrieved_margin_settings['coil_button_top_margin'] );
+		// When the input is considered empty (false, 0, '') then a null string is returned
+		$this->assertSame( '', $retrieved_margin_settings['coil_button_top_margin'] );
 		$this->assertSame( $coil_button_settings['coil_button_right_margin'], $retrieved_margin_settings['coil_button_right_margin'] );
 		// When invalid input is given a null string is returned
 		$this->assertSame( '', $retrieved_margin_settings['coil_button_bottom_margin'] );
