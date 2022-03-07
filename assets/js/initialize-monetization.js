@@ -576,17 +576,18 @@
 			const buttonEnabled = hasCoilButtonEnabled();
 			const buttonAlreadyExists = $( '.coil-button-message-container' ).length !== 0 ? true : false;
 			const buttonDismissed = hasButtonDismissCookie();
+			if ( coilButtonTheme === 'light' ) {
+				brandingLogo = coilLogoStreaming;
+			} else {
+				brandingLogo = coilLogoWhiteStreaming;
+			}
 			// The text needs to change to the member message
 			if ( buttonAlreadyExists ) {
-				if ( coilButtonTheme === 'light' ) {
-					brandingLogo = coilLogoStreaming;
-				} else {
-					brandingLogo = coilLogoWhiteStreaming;
-				}
-				$( '.coil-button img' ).attr( 'src', brandingLogo );
+				$( '.coil-button a img' ).attr( 'src', brandingLogo );
 				$( '.coil-button div' ).text( coilButtonPaidMessage );
 			} else if ( buttonEnabled && ! buttonDismissed ) {
 				$( 'body' ).append( showCoilButton( coilButtonPaidMessage ) );
+				$( '.coil-button a img' ).attr( 'src', brandingLogo );
 				addButtonDismissClickHandler();
 			}
 		}

@@ -86,12 +86,65 @@ describe( 'Coil button for WM-enabled users', function() {
 			.get( '.coil-button > a' )
 			.should( 'contain', buttonMemberText );
 	} );
+
+	it( 'Checks the Coil button shows a streaming logo for Coil members', () => {
+		cy.visit( '/monetized-and-public/' );
+		cy.startWebMonetization();
+
+		cy.get( '.coil-button a img' ).invoke( 'attr', 'src' ).should( 'match', /coil-icn-white-streaming.svg/ );
+	} );
+
+	it( 'Checks the Coil button displays correctly on posts that are monetized and public', () => {
+		cy.visit( '/monetized-and-public/' );
+		cy.startWebMonetization();
+		cy
+			.get( '.coil-button' )
+			.should( 'be.visible' );
+	} );
+
+	it( 'Checks the Coil button displays correctly on posts that are exclusive', () => {
+		cy.visit( '/coil-members-only/' );
+		cy.startWebMonetization();
+		cy
+			.get( '.coil-button' )
+			.should( 'be.visible' );
+	} );
+
+	it( 'Checks the Coil button displays correctly on posts that are split', () => {
+		cy.visit( '/block-visibility/' );
+		cy.startWebMonetization();
+		cy
+			.get( '.coil-button' )
+			.should( 'be.visible' );
+	} );
 } );
 
 describe( 'Coil button for non WM-enabled users', function() {
 	beforeEach( () => {
 		cy.logInToWordPress( 'admin', 'password' );
 		cy.resetSite();
+	} );
+
+	it( 'Checks the Coil button displays correctly on posts that are not monetized', () => {
+		// The Coil button doesn't display on pages which are not monetized.
+		cy.visit( '/no-monetization/' );
+		cy
+			.get( '.coil-button' )
+			.should( 'not.exist' );
+	} );
+
+	it( 'Checks the Coil button display does not display in conjunction with the paywall on exclusive posts', () => {
+		cy.visit( '/coil-members-only/' );
+		cy
+			.get( '.coil-button' )
+			.should( 'not.exist' );
+	} );
+
+	it( 'Checks the Coil button displays does not display in conjunction with the split content message', () => {
+		cy.visit( '/block-visibility/' );
+		cy
+			.get( '.coil-button' )
+			.should( 'not.exist' );
 	} );
 
 	it( 'Checks that the Coil button be can be enabled/disabled', function() {
@@ -220,12 +273,17 @@ describe( 'Coil button for non WM-enabled users', function() {
 			.get( '#post_button_visibility_hide' )
 			.click();
 
+		cy
+			.get( '#submit' )
+			.click();
+
 		cy.visit( '/monetized-and-public/' );
 
 		cy
 			.get( '.coil-button' )
 			.should( 'not.exist' );
 
+		// Hiding the Coil button for posts shouldn't affect their display on pages
 		cy.visit( '/monetized-and-public-page/' );
 
 		cy
