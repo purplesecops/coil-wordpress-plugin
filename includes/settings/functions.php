@@ -298,29 +298,36 @@ function coil_exclusive_settings_group_validation( $exclusive_settings ) : array
 		}
 	}
 
-	// Theme validation
-	$valid_color_choices  = Admin\get_theme_color_types();
-	$coil_theme_color_key = 'coil_message_color_theme';
+	// Theme validation, branding, icon position, and icon style validation
+	$additional_fields = [
+		[
+			'field_name'    => 'coil_message_color_theme',
+			'valid_choices' => Admin\get_theme_color_types(),
+			'default'       => $paywall_defaults['coil_message_color_theme'],
+		],
+		[
+			'field_name'    => 'coil_message_branding',
+			'valid_choices' => Admin\get_paywall_branding_options(),
+			'default'       => $paywall_defaults['coil_message_branding'],
+		],
+		[
+			'field_name'    => 'coil_padlock_icon_position',
+			'valid_choices' => Admin\get_padlock_title_icon_position_options(),
+			'default'       => $exclusive_post_defaults['coil_padlock_icon_position'],
+		],
+		[
+			'field_name'    => 'coil_padlock_icon_style',
+			'valid_choices' => Admin\get_padlock_title_icon_style_options(),
+			'default'       => $exclusive_post_defaults['coil_padlock_icon_style'],
+		],
+	];
 
-	$final_settings[ $coil_theme_color_key ] = isset( $exclusive_settings[ $coil_theme_color_key ] ) && in_array( $exclusive_settings[ $coil_theme_color_key ], $valid_color_choices, true ) ? sanitize_key( $exclusive_settings[ $coil_theme_color_key ] ) : $paywall_defaults[ $coil_theme_color_key ];
-
-	// Branding validation
-	$valid_branding_choices = Admin\get_paywall_branding_options();
-	$message_branding_key   = 'coil_message_branding';
-
-	$final_settings[ $message_branding_key ] = isset( $exclusive_settings[ $message_branding_key ] ) && in_array( $exclusive_settings[ $message_branding_key ], $valid_branding_choices, true ) ? sanitize_key( $exclusive_settings[ $message_branding_key ] ) : $paywall_defaults[ $message_branding_key ];
-
-	// Icon Position validation
-	$valid_icon_positions = Admin\get_padlock_title_icon_position_options();
-	$icon_position_key    = 'coil_padlock_icon_position';
-
-	$final_settings[ $icon_position_key ] = isset( $exclusive_settings[ $icon_position_key ] ) && in_array( $exclusive_settings[ $icon_position_key ], $valid_icon_positions, true ) ? sanitize_key( $exclusive_settings[ $icon_position_key ] ) : $exclusive_post_defaults[ $icon_style_key ];
-
-	// Icon Style validation
-	$valid_icon_styles = Admin\get_padlock_title_icon_style_options();
-	$icon_style_key    = 'coil_padlock_icon_style';
-
-	$final_settings[ $icon_style_key ] = isset( $exclusive_settings[ $icon_style_key ] ) && in_array( $exclusive_settings[ $icon_style_key ], $valid_icon_styles, true ) ? sanitize_key( $exclusive_settings[ $icon_style_key ] ) : $exclusive_post_defaults[ $icon_style_key ];
+	foreach ( $additional_fields as $field_item ) {
+		$field_name                    = $field_item['field_name'];
+		$valid_choices                 = $field_item['valid_choices'];
+		$default                       = $field_item['default'];
+		$final_settings[ $field_name ] = isset( $exclusive_settings[ $field_name ] ) && in_array( $exclusive_settings[ $field_name ], $valid_choices, true ) ? sanitize_key( $exclusive_settings[ $field_name ] ) : $default;
+	}
 
 	// Validates all checkbox input fields
 	$checkbox_fields = [
@@ -371,24 +378,6 @@ function coil_button_settings_group_validation( $coil_button_settings ): array {
 		$final_settings[ $field_name ] = isset( $coil_button_settings[ $field_name ] ) && ( $coil_button_settings[ $field_name ] === 'on' || $coil_button_settings[ $field_name ] === true ) ? true : false;
 	}
 
-	// Theme validation
-	$valid_color_choices    = Admin\get_theme_color_types();
-	$button_theme_color_key = 'coil_button_color_theme';
-
-	$final_settings[ $button_theme_color_key ] = isset( $coil_button_settings[ $button_theme_color_key ] ) && in_array( $coil_button_settings[ $button_theme_color_key ], $valid_color_choices, true ) ? sanitize_key( $coil_button_settings[ $button_theme_color_key ] ) : $defaults[ $button_theme_color_key ];
-
-	// Size validation
-	$valid_size_choices = Admin\get_button_size_options();
-	$button_size_key    = 'coil_button_size';
-
-	$final_settings[ $button_size_key ] = isset( $coil_button_settings[ $button_size_key ] ) && in_array( $coil_button_settings[ $button_size_key ], $valid_size_choices, true ) ? sanitize_key( $coil_button_settings[ $button_size_key ] ) : $defaults[ $button_size_key ];
-
-	// Position validation
-	$valid_position_choices = array_keys( Admin\get_button_position_options() );
-	$button_position_key    = 'coil_button_position';
-
-	$final_settings[ $button_position_key ] = isset( $coil_button_settings[ $button_position_key ] ) && in_array( $coil_button_settings[ $button_position_key ], $valid_position_choices, true ) ? sanitize_key( $coil_button_settings[ $button_position_key ] ) : $defaults[ $button_position_key ];
-
 	// Validates button margins
 	$margin_fields = Admin\get_button_margin_key_defaults();
 
@@ -412,6 +401,28 @@ function coil_button_settings_group_validation( $coil_button_settings ): array {
 
 		// The default value is to show
 		$final_settings[ $button_visibility_setting_key ] = isset( $coil_button_settings[ $button_visibility_setting_key ] ) && in_array( $coil_button_settings[ $button_visibility_setting_key ], $valid_options, true ) ? sanitize_key( $coil_button_settings[ $button_visibility_setting_key ] ) : $defaults['post_type_button_visibility'];
+	}
+
+	// Theme validation, button size, and button position validation
+	$additional_fields = [
+		[
+			'field_name'    => 'coil_button_color_theme',
+			'valid_choices' => Admin\get_theme_color_types(),
+		],
+		[
+			'field_name'    => 'coil_button_size',
+			'valid_choices' => Admin\get_button_size_options(),
+		],
+		[
+			'field_name'    => 'coil_button_position',
+			'valid_choices' => Admin\get_button_position_options(),
+		],
+	];
+
+	foreach ( $additional_fields as $field_item ) {
+		foreach ( $field_item as $field_name => $valid_choices ) {
+			$final_settings[ $field_name ] = isset( $coil_button_settings[ $field_name ] ) && in_array( $coil_button_settings[ $field_name ], $valid_choices, true ) ? sanitize_key( $coil_button_settings[ $field_name ] ) : $defaults[ $field_name ];
+		}
 	}
 
 	return $final_settings;
