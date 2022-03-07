@@ -211,6 +211,7 @@ function load_full_assets() : void {
 			'post_excerpt'                => get_the_excerpt(),
 			'coil_message_branding'       => Admin\get_paywall_appearance_setting( 'coil_message_branding' ),
 			'coil_button_theme'           => Admin\get_coil_button_setting( 'coil_button_color_theme' ),
+			'coil_button_size'            => Admin\get_coil_button_setting( 'coil_button_size' ),
 			'coil_button_position'        => Admin\get_coil_button_setting( 'coil_button_position' ),
 			'button_margin_top'           => Admin\get_coil_button_margins( 'coil_button_top_margin' ),
 			'button_margin_right'         => Admin\get_coil_button_margins( 'coil_button_right_margin' ),

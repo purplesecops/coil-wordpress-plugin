@@ -174,6 +174,10 @@ describe( 'Coil button for non WM-enabled users', function() {
 			.click();
 
 		cy
+			.get( '#small_size' )
+			.click();
+
+		cy
 			.get( '#position_dropdown' )
 			.select( 'top-left' );
 
@@ -201,7 +205,7 @@ describe( 'Coil button for non WM-enabled users', function() {
 		cy.visit( '/monetized-and-public/' );
 
 		cy
-			.get( '.coil-button-message-container.top.left.coil-light-theme.hide-mobile-coil-button' )
+			.get( '.coil-button-message-container.top.left.coil-light-theme.coil-button-small.hide-mobile-coil-button' )
 			.should( 'exist' );
 
 		cy

@@ -21,6 +21,7 @@
 		paywallButtonLink = coilParams.paywall_button_link,
 		coilMessageBranding = coilParams.coil_message_branding,
 		coilButtonTheme = coilParams.coil_button_theme,
+		coilButtonSize = coilParams.coil_button_size,
 		coilButtonPosition = coilParams.coil_button_position,
 		ButtonMarginTop = coilParams.button_margin_top,
 		ButtonMarginRight = coilParams.button_margin_right,
@@ -149,6 +150,10 @@
 			brandingLogo = coilLogo;
 		} else {
 			brandingLogo = coilLogoWhite;
+		}
+
+		if ( coilButtonSize === 'small' ) {
+			modalContainer.classList.add( 'coil-button-small' );
 		}
 
 		const modalData = {

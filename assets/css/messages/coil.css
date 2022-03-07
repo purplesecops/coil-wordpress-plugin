@@ -462,6 +462,24 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
   .coil-button-message-container.coil-light-theme .coil-button a:hover {
     background-color: #ccc; }
 
+.coil-button-message-container.coil-button-small .coil-button {
+  font-size: 14px;
+  line-height: 17px; }
+  .coil-button-message-container.coil-button-small .coil-button a {
+    padding: 6px; }
+    .coil-button-message-container.coil-button-small .coil-button a div {
+      padding-left: 6px;
+      padding-right: 6px; }
+    .coil-button-message-container.coil-button-small .coil-button a img {
+      width: 16px; }
+  .coil-button-message-container.coil-button-small .coil-button .coil-button-dismiss {
+    font-size: 14px;
+    height: 14px;
+    line-height: 14px;
+    right: -5px;
+    top: -5px;
+    width: 14px; }
+
 @media only screen and (max-width: 768px) {
   .coil-button-message-container.hide-mobile-coil-button {
     display: none; } }
