@@ -637,7 +637,7 @@ function get_css_selector() {
 }
 
 /**
- * Retrieve the Coil Button settings.
+ * Retrieve the Coil button settings.
  * @return array Setting stored in options.
  */
 function get_coil_button_settings() : array {

@@ -1181,7 +1181,7 @@ function coil_paywall_appearance_text_field_settings_render_callback( $field_nam
 }
 
 /**
- * Renders the output of the enable Coil Button toggle
+ * Renders the output of the enable Coil button toggle
  * @return void
 */
 function coil_settings_enable_coil_button_toggle_render_callback() {
@@ -1204,7 +1204,7 @@ function coil_settings_enable_coil_button_toggle_render_callback() {
 }
 
 /**
- * Renders the Coil Button customization settings
+ * Renders the Coil button customization settings
  * @return void
 */
 function coil_settings_coil_button_settings_render_callback() {
@@ -1429,7 +1429,7 @@ function render_buton_margin_settings() {
 }
 
 /**
- * Renders the Coil Button visibility settings
+ * Renders the Coil button visibility settings
  * @return void
 */
 function coil_settings_coil_button_visibility_render_callback() {
