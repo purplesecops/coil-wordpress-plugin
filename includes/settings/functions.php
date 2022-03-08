@@ -878,7 +878,7 @@ function coil_settings_exclusive_post_render_callback() {
 					__( 'Icon Style', 'coil-web-monetization' ),
 					'coil_icon_style_label'
 				);
-				coil_padlock_icon_style_checkbox_render_callback();
+				coil_padlock_icon_style_selection_render_callback();
 
 				$padlock_icon_styles  = Admin\get_padlock_icon_styles();
 				$padlock_icon         = Admin\get_exlusive_post_setting( 'coil_padlock_icon_style', true );
@@ -995,7 +995,7 @@ function coil_padlock_icon_position_selection_render_callback() {
  *
  * @return void
 */
-function coil_padlock_icon_style_checkbox_render_callback() {
+function coil_padlock_icon_style_selection_render_callback() {
 
 	// Set the icon style
 	$padlock_icon_style = Admin\get_exlusive_post_setting( 'coil_padlock_icon_style' );
@@ -1317,22 +1317,21 @@ function button_theme_render_callback() {
 
 	echo '<div class="coil-radio-group">';
 
-	echo sprintf(
-		'<label for="%1$s"><input type="radio" name="%2$s" id="%1$s" value="%3$s" %4$s /> %5$s</label>',
-		esc_attr( 'dark_color_theme' ),
-		esc_attr( 'coil_button_settings_group[coil_button_color_theme]' ),
-		esc_attr( 'dark' ),
-		( ! empty( $button_color_theme ) && $button_color_theme === 'dark' ? 'checked="checked"' : false ),
-		esc_html__( 'Dark', 'coil-web-monetization' )
+	Rendering\render_radio_button_field(
+		'dark_color_theme',
+		'coil_button_settings_group[coil_button_color_theme]',
+		'dark',
+		__( 'Dark', 'coil-web-monetization' ),
+		$button_color_theme,
+		true
 	);
 
-	echo sprintf(
-		'<label for="%1$s"><input type="radio" name="%2$s" id="%1$s" value="%3$s" %4$s /> %5$s</label>',
-		esc_attr( 'light_color_theme' ),
-		esc_attr( 'coil_button_settings_group[coil_button_color_theme]' ),
-		esc_attr( 'light' ),
-		( ! empty( $button_color_theme ) && $button_color_theme === 'light' || empty( $button_color_theme ) ? 'checked="checked"' : false ),
-		esc_html__( 'Light', 'coil-web-monetization' )
+	Rendering\render_radio_button_field(
+		'light_color_theme',
+		'coil_button_settings_group[coil_button_color_theme]',
+		'light',
+		__( 'Light', 'coil-web-monetization' ),
+		$button_color_theme
 	);
 
 	echo '</div>';
@@ -1350,22 +1349,21 @@ function button_size_render_callback() {
 
 	echo '<div class="coil-radio-group">';
 
-	echo sprintf(
-		'<label for="%1$s"><input type="radio" name="%2$s" id="%1$s" value="%3$s" %4$s /> %5$s</label>',
-		esc_attr( 'large_size' ),
-		esc_attr( 'coil_button_settings_group[coil_button_size]' ),
-		esc_attr( 'large' ),
-		( ! empty( $button_size ) && $button_size === 'large' ? 'checked="checked"' : false ),
-		esc_html__( 'Large', 'coil-web-monetization' )
+	Rendering\render_radio_button_field(
+		'large_size',
+		'coil_button_settings_group[coil_button_size]',
+		'large',
+		__( 'Large', 'coil-web-monetization' ),
+		$button_size,
+		true
 	);
 
-	echo sprintf(
-		'<label for="%1$s"><input type="radio" name="%2$s" id="%1$s" value="%3$s" %4$s /> %5$s</label>',
-		esc_attr( 'small_size' ),
-		esc_attr( 'coil_button_settings_group[coil_button_size]' ),
-		esc_attr( 'small' ),
-		( ! empty( $button_size ) && $button_size === 'small' || empty( $button_size ) ? 'checked="checked"' : false ),
-		esc_html__( 'Small', 'coil-web-monetization' )
+	Rendering\render_radio_button_field(
+		'small_size',
+		'coil_button_settings_group[coil_button_size]',
+		'small',
+		__( 'Small', 'coil-web-monetization' ),
+		$button_size
 	);
 
 	echo '</div>';
