@@ -128,6 +128,28 @@ function render_toggle( $id, $name, $value ) {
 	);
 }
 
+/**
+ * Creates a radio button element.
+ * @return void
+ * @param string $name
+ * @param string $id
+ * @param string $value
+ * @param string $description
+ * @param string $saved_value The value (if any) already stored in the database.
+ * @param boolean $default Is this the radio option that should be selected by default?
+*/
+function render_radio_button_field( $id, $name, $value, $description, $saved_value, $default = false ) {
+	$checked = ( ! empty( $saved_value ) && $saved_value === $value ) || ( empty( $saved_value ) && $default ) ? 'checked="checked"' : false;
+	printf(
+		'<label for="%1$s"><input type="radio" name="%2$s" id="%1$s" value="%3$s" %4$s /> %5$s</label>',
+		esc_attr( $id ),
+		esc_attr( $name ),
+		esc_attr( $value ),
+		esc_attr( $checked ),
+		esc_html( $description )
+	);
+}
+
 // Rendering\render_toggle( $exclusive_toggle_name, $exclusive_toggle_id, $exclusive_toggle_value );
 
 /**
