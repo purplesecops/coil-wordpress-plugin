@@ -822,22 +822,12 @@ function paywall_branding_render_callback() {
 function paywall_font_render_callback() {
 
 	$font_input_id = 'coil_message_font';
-	$value         = Admin\get_paywall_appearance_setting( $font_input_id );
 
-	if ( $value === true ) {
-		$checked_input = 'checked="checked"';
-	} else {
-		$checked_input = '';
-	}
-
-	echo sprintf(
-		'<label class="%1$s" for="%2$s"><input type="%3$s" name="%4$s" id="%2$s" %5$s /> <strong>%6$s</strong></label>',
-		esc_attr( 'coil-clear-left' ),
-		esc_attr( $font_input_id ),
-		esc_attr( 'checkbox' ),
-		esc_attr( 'coil_exclusive_settings_group[' . $font_input_id . ']' ),
-		$checked_input,
-		esc_html__( 'Use theme font styles', 'coil-web-monetization' )
+	Rendering\render_checkbox_field(
+		$font_input_id,
+		'coil_exclusive_settings_group[' . $font_input_id . ']',
+		__( 'Use theme font styles', 'coil-web-monetization' ),
+		Admin\get_paywall_appearance_setting( $font_input_id )
 	);
 }
 
@@ -934,26 +924,11 @@ function coil_padlock_display_checkbox_render_callback() {
 	*/
 
 	$padlock_input_id = 'coil_title_padlock';
-	$value            = Admin\get_exlusive_post_setting( $padlock_input_id );
-
-	if ( $value === true ) {
-		$checked_input = 'checked="checked"';
-	} else {
-		$checked_input = '';
-	}
-
-	printf(
-		'<input type="%1$s" name="%2$s" id="%3$s" %4$s>',
-		esc_attr( 'checkbox' ),
-		esc_attr( 'coil_exclusive_settings_group[' . $padlock_input_id . ']' ),
-		esc_attr( $padlock_input_id ),
-		$checked_input
-	);
-
-	printf(
-		'<label for="%1$s">%2$s</label>',
-		esc_attr( $padlock_input_id ),
-		esc_html_e( 'Show padlock icon next to exclusive post titles.', 'coil-web-monetization' )
+	Rendering\render_checkbox_field(
+		$padlock_input_id,
+		'coil_exclusive_settings_group[' . $padlock_input_id . ']',
+		__( 'Show padlock icon next to exclusive post titles.', 'coil-web-monetization' ),
+		Admin\get_exlusive_post_setting( $padlock_input_id )
 	);
 }
 
@@ -1286,22 +1261,11 @@ function coil_settings_coil_button_settings_render_callback() {
 function show_button_render_callback() {
 
 	$button_display_id = 'coil_button_member_display';
-	$value             = Admin\get_coil_button_setting( $button_display_id );
-
-	if ( $value === true ) {
-		$checked_input = 'checked="checked"';
-	} else {
-		$checked_input = '';
-	}
-
-	echo sprintf(
-		'<label class="%6$s" for="%1$s"><input type="%3$s" name="%2$s" id="%1$s" %4$s /> <strong>%5$s</strong></label>',
-		esc_attr( $button_display_id ),
-		esc_attr( 'coil_button_settings_group[' . $button_display_id . ']' ),
-		esc_attr( 'checkbox' ),
-		$checked_input,
-		esc_html__( 'Show button for Coil Members', 'coil-web-monetization' ),
-		esc_attr( 'coil-clear-left' )
+	Rendering\render_checkbox_field(
+		$button_display_id,
+		'coil_button_settings_group[' . $button_display_id . ']',
+		__( 'Show button for Coil Members', 'coil-web-monetization' ),
+		Admin\get_coil_button_setting( $button_display_id )
 	);
 }
 
@@ -1471,22 +1435,11 @@ function coil_settings_coil_button_visibility_render_callback() {
 		);
 
 		$mobile_button_display_id = 'coil_mobile_button_display';
-		$value                    = Admin\get_coil_button_setting( $mobile_button_display_id );
-
-		if ( $value === true ) {
-			$checked_input = 'checked="checked"';
-		} else {
-			$checked_input = '';
-		}
-
-		echo sprintf(
-			'<label class="%6$s" for="%1$s"><input type="%3$s" name="%2$s" id="%1$s" %4$s /> <strong>%5$s</strong></label>',
-			esc_attr( $mobile_button_display_id ),
-			esc_attr( 'coil_button_settings_group[' . $mobile_button_display_id . ']' ),
-			esc_attr( 'checkbox' ),
-			$checked_input,
-			esc_html__( 'Show on mobile', 'coil-web-monetization' ),
-			esc_attr( 'coil-clear-left' )
+		Rendering\render_checkbox_field(
+			$mobile_button_display_id,
+			'coil_button_settings_group[' . $mobile_button_display_id . ']',
+			__( 'Show on mobile', 'coil-web-monetization' ),
+			Admin\get_coil_button_setting( $mobile_button_display_id )
 		);
 
 		printf(

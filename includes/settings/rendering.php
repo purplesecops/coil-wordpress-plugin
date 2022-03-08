@@ -150,6 +150,27 @@ function render_radio_button_field( $id, $name, $value, $description, $saved_val
 	);
 }
 
+/**
+ * Creates a checkbox element.
+ * @return void
+ * @param string $name
+ * @param string $id
+ * @param string $description
+ * @param string $saved_value The value (if any) already stored in the database.
+*/
+function render_checkbox_field( $id, $name, $description, $saved_value ) {
+	$checked = ( isset( $saved_value ) && $saved_value === true ) ? 'checked="checked"' : false;
+	printf(
+		'<label class="%1$s" for="%2$s"><input type="%3$s" name="%4$s" id="%2$s" %5$s /> <strong>%6$s</strong></label>',
+		esc_attr( 'coil-clear-left' ),
+		esc_attr( $id ),
+		esc_attr( 'checkbox' ),
+		esc_attr( $name ),
+		esc_attr( $checked ),
+		esc_html( $description )
+	);
+}
+
 // Rendering\render_toggle( $exclusive_toggle_name, $exclusive_toggle_id, $exclusive_toggle_value );
 
 /**
