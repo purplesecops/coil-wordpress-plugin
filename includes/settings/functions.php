@@ -1471,7 +1471,7 @@ function coil_settings_coil_button_visibility_render_callback() {
 		);
 
 		$mobile_button_display_id = 'coil_mobile_button_display';
-		$value                    = isset( $button_options[ $mobile_button_display_id ] ) ? $button_options[ $mobile_button_display_id ] : $defaults[ $mobile_button_display_id ];
+		$value                    = Admin\get_coil_button_setting( $mobile_button_display_id );
 
 		if ( $value === true ) {
 			$checked_input = 'checked="checked"';
