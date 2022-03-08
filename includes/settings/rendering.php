@@ -32,11 +32,19 @@ function render_settings_section_heading( $heading, $description = '' ) {
  * @return void
  * @param string $heading
 */
-function render_input_field_heading( $heading ) {
-	printf(
-		'<h4><strong>%s</strong></h4>',
-		esc_html( $heading )
-	);
+function render_input_field_heading( $heading, $id = '' ) {
+	if ( $id !== '' ) {
+		printf(
+			'<h4 id="%s"><strong>%s</strong></h4>',
+			esc_html( $id ),
+			esc_html( $heading )
+		);
+	} else {
+		printf(
+			'<h4><strong>%s</strong></h4>',
+			esc_html( $heading )
+		);
+	}
 }
 
 /**

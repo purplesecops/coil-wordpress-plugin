@@ -671,12 +671,13 @@ function coil_settings_paywall_render_callback() {
 				}
 
 				// Renders the color theme radio buttons
-				echo '<h4>' . esc_html__( 'Color Theme', 'coil-web-monetization' ) . '</h4>';
+				$color_theme_heading = __( 'Color Theme', 'coil-web-monetization' );
+				Rendering\render_input_field_heading( $color_theme_heading );
 				paywall_theme_render_callback();
 
 				// Renders the branding selection box
-				echo '<h4>' . esc_html__( 'Branding', 'coil-web-monetization' ) . '</h4>';
-
+				$branding_heading = __( 'Branding', 'coil-web-monetization' );
+				Rendering\render_input_field_heading( $branding_heading );
 				paywall_branding_render_callback();
 
 				// Renders the font checkbox
@@ -684,7 +685,10 @@ function coil_settings_paywall_render_callback() {
 				?>
 			</div>
 			<div class="coil-column-5">
-				<?php echo '<h4>' . esc_html__( 'Preview', 'coil-web-monetization' ) . '</h4>'; ?>
+				<?php
+				$preview_heading = __( 'Preview', 'coil-web-monetization' );
+				Rendering\render_input_field_heading( $preview_heading );
+				?>
 				<div class=" coil-preview">
 					<div class="coil-paywall-container" data-theme="<?php echo esc_attr( Admin\get_paywall_appearance_setting( 'coil_message_color_theme' ) ); ?>">
 						<?php printf( '<img class="%s %s" src="%s" />', 'coil-paywall-image', Admin\get_paywall_appearance_setting( 'coil_message_branding', true ), get_paywall_theme_logo() ); ?>
@@ -846,15 +850,20 @@ function coil_settings_exclusive_post_render_callback() {
 			<div class="coil-column-7">
 				<?php
 				// Renders the padlock display checkbox
-				echo '<h4>' . esc_html__( 'Title Icon', 'coil-web-monetization' ) . '</h4>';
+				$show_icon_heading = __( 'Title Icon', 'coil-web-monetization' );
+				Rendering\render_input_field_heading( $show_icon_heading );
 				coil_padlock_display_checkbox_render_callback();
 
 				// Renders the icon position radio buttons
-				echo '<h4 id="coil_icon_position_label">' . esc_html__( 'Icon Position', 'coil-web-monetization' ) . '</h4>';
+				$icon_position_heading = __( 'Icon Position', 'coil-web-monetization' );
+				$icon_position_id      = 'coil_icon_position_label';
+				Rendering\render_input_field_heading( $icon_position_heading, $icon_position_id );
 				coil_padlock_icon_position_checkbox_render_callback();
 
 				// Renders the icon style radio buttons
-				echo '<h4 id="coil_icon_style_label">' . esc_html__( 'Icon Style', 'coil-web-monetization' ) . '</h4>';
+				$icon_style_heading = __( 'Icon Style', 'coil-web-monetization' );
+				$icon_style_id      = 'coil_icon_style_label';
+				Rendering\render_input_field_heading( $icon_style_heading, $icon_style_id );
 				coil_padlock_icon_style_checkbox_render_callback();
 
 				$padlock_icon_styles  = Admin\get_padlock_icon_styles();
@@ -863,7 +872,10 @@ function coil_settings_exclusive_post_render_callback() {
 				?>
 			</div>
 			<div class="coil-column-5 <?php echo esc_attr( $padlock_icon_enabled ? '' : 'hidden' ); ?>">
-				<?php echo '<h4>' . esc_html__( 'Preview', 'coil-web-monetization' ) . '</h4>'; ?>
+				<?php
+				$icon_style_heading = __( 'Preview', 'coil-web-monetization' );
+				Rendering\render_input_field_heading( $icon_style_heading );
+				?>
 				<div class="coil-preview">
 					<div class="coil-title-preview-container" data-padlock-icon-position="<?php echo esc_attr( Admin\get_exlusive_post_setting( 'coil_padlock_icon_position' ) ); ?>">
 						<div class="coil-title-preview-row coil-title-padlock-row">
@@ -1141,9 +1153,7 @@ function coil_paywall_appearance_text_field_settings_render_callback( $field_nam
 	} else {
 		// Print <textarea> field for the paywall message
 		if ( '' !== $heading ) {
-			?>
-			<h4><?php echo esc_html( $heading ); ?></h4>
-			<?php
+			Rendering\render_input_field_heading( $heading );
 		}
 
 		printf(
@@ -1237,28 +1247,20 @@ function coil_settings_coil_button_settings_render_callback() {
 			$coil_button_member_text_heading
 		);
 
-		printf(
-			'<h4><strong>%s</strong></h4>',
-			__( 'Color Theme', 'coil-web-monetization' )
-		);
+		$coil_button_theme_heading = __( 'Color Theme', 'coil-web-monetization' );
+		Rendering\render_input_field_heading( $coil_button_theme_heading );
 		button_theme_render_callback();
 
-		printf(
-			'<h4><strong>%s</strong></h4>',
-			__( 'Button Size', 'coil-web-monetization' )
-		);
+		$coil_button_size_heading = __( 'Button Size', 'coil-web-monetization' );
+		Rendering\render_input_field_heading( $coil_button_size_heading );
 		button_size_render_callback();
 
-		printf(
-			'<h4><strong>%s</strong></h4>',
-			__( 'Button Position on Screen', 'coil-web-monetization' )
-		);
+		$coil_button_position_heading = __( 'Button Position on Screen', 'coil-web-monetization' );
+		Rendering\render_input_field_heading( $coil_button_position_heading );
 		buton_position_dropdown();
 
-		printf(
-			'<h4><strong>%s</strong></h4>',
-			__( 'Button Margin (PX)', 'coil-web-monetization' )
-		);
+		$coil_button_margin_heading = __( 'Button Margin (PX)', 'coil-web-monetization' );
+		Rendering\render_input_field_heading( $coil_button_margin_heading );
 		render_buton_margin_settings();
 		?>
 	</div>
