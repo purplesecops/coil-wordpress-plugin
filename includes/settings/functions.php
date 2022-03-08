@@ -923,12 +923,33 @@ function coil_padlock_display_checkbox_render_callback() {
 	* input status is not set, default to checked.
 	*/
 
+	/**
+	* Specify the default checked state for the input from
+	* any settings stored in the database. If the
+	* input status is not set, default to checked.
+	*/
+
 	$padlock_input_id = 'coil_title_padlock';
-	Rendering\render_checkbox_field(
-		$padlock_input_id,
-		'coil_exclusive_settings_group[' . $padlock_input_id . ']',
-		__( 'Show padlock icon next to exclusive post titles.', 'coil-web-monetization' ),
-		Admin\get_exlusive_post_setting( $padlock_input_id )
+	$value            = Admin\get_exlusive_post_setting( $padlock_input_id );
+
+	if ( $value === true ) {
+		$checked_input = 'checked="checked"';
+	} else {
+		$checked_input = '';
+	}
+
+	printf(
+		'<input type="%1$s" name="%2$s" id="%3$s" %4$s>',
+		esc_attr( 'checkbox' ),
+		esc_attr( 'coil_exclusive_settings_group[' . $padlock_input_id . ']' ),
+		esc_attr( $padlock_input_id ),
+		$checked_input
+	);
+
+	printf(
+		'<label for="%1$s">%2$s</label>',
+		esc_attr( $padlock_input_id ),
+		esc_html_e( 'Show padlock icon next to exclusive post titles', 'coil-web-monetization' )
 	);
 }
 
@@ -1217,12 +1238,27 @@ function coil_settings_coil_button_settings_render_callback() {
 			__( 'If you have an affiliate link add it here.', 'coil-web-monetization' )
 		);
 
-		$button_display_id = 'coil_button_member_display';
-		Rendering\render_checkbox_field(
-			$button_display_id,
-			'coil_button_settings_group[' . $button_display_id . ']',
-			__( 'Show button for Coil Members', 'coil-web-monetization' ),
-			Admin\get_coil_button_setting( $button_display_id )
+		$coil_button_member_display_id = 'coil_button_member_display';
+		$value                         = Admin\get_coil_button_setting( $coil_button_member_display_id );
+
+		if ( $value === true ) {
+			$checked_input = 'checked="checked"';
+		} else {
+			$checked_input = '';
+		}
+
+		printf(
+			'<input type="%1$s" name="%2$s" id="%3$s" %4$s>',
+			esc_attr( 'checkbox' ),
+			esc_attr( 'coil_button_settings_group[' . $coil_button_member_display_id . ']' ),
+			esc_attr( $coil_button_member_display_id ),
+			$checked_input
+		);
+
+		printf(
+			'<label for="%1$s">%2$s</label>',
+			esc_attr( $coil_button_member_display_id ),
+			esc_html_e( 'Show button for Coil Members', 'coil-web-monetization' )
 		);
 
 		// Render the Coil button member text input field
