@@ -1217,7 +1217,13 @@ function coil_settings_coil_button_settings_render_callback() {
 			__( 'If you have an affiliate link add it here.', 'coil-web-monetization' )
 		);
 
-		show_button_render_callback();
+		$button_display_id = 'coil_button_member_display';
+		Rendering\render_checkbox_field(
+			$button_display_id,
+			'coil_button_settings_group[' . $button_display_id . ']',
+			__( 'Show button for Coil Members', 'coil-web-monetization' ),
+			Admin\get_coil_button_setting( $button_display_id )
+		);
 
 		// Render the Coil button member text input field
 		$coil_button_member_text_id = 'coil_members_button_text';
@@ -1251,22 +1257,6 @@ function coil_settings_coil_button_settings_render_callback() {
 		?>
 	</div>
 	<?php
-}
-
-/**
- * Renders the output of the show Coil Button checkbox
- * The default is checked
- * @return void
-*/
-function show_button_render_callback() {
-
-	$button_display_id = 'coil_button_member_display';
-	Rendering\render_checkbox_field(
-		$button_display_id,
-		'coil_button_settings_group[' . $button_display_id . ']',
-		__( 'Show button for Coil Members', 'coil-web-monetization' ),
-		Admin\get_coil_button_setting( $button_display_id )
-	);
 }
 
 /**

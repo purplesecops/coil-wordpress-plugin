@@ -31,6 +31,7 @@ function render_settings_section_heading( $heading, $description = '' ) {
  * Renders the heading for input fields in the settings panel.
  * @return void
  * @param string $heading
+ * @param string $id Provided if the heading needs an ID
 */
 function render_input_field_heading( $heading, $id = '' ) {
 	if ( $id !== '' ) {
@@ -52,7 +53,8 @@ function render_input_field_heading( $heading, $id = '' ) {
  * @return void
  * @param string $heading
  * @param string $explanation
- * @param string $link The link to the appropriate tab if there is one, otherwise a null string.
+ * @param string $tab Used to create the link to the appropriate tab if there is one, otherwise a null string.
+ * @param string $button_text Text appearing on button (if there is one) that links to a tab.
 */
 function render_welcome_section( $heading, $explanation, $tab = '', $button_text = '' ) {
 	?>
@@ -76,8 +78,8 @@ function render_welcome_section( $heading, $explanation, $tab = '', $button_text
 /**
  * Creates a text input element.
  * @return void
- * @param string $name
  * @param string $id
+ * @param string $name
  * @param string $value
  * @param string $placeholder
  * @param string $heading
@@ -131,8 +133,8 @@ function render_toggle( $id, $name, $value ) {
 /**
  * Creates a radio button element.
  * @return void
- * @param string $name
  * @param string $id
+ * @param string $name
  * @param string $value
  * @param string $description
  * @param string $saved_value The value (if any) already stored in the database.
@@ -153,8 +155,8 @@ function render_radio_button_field( $id, $name, $value, $description, $saved_val
 /**
  * Creates a checkbox element.
  * @return void
- * @param string $name
  * @param string $id
+ * @param string $name
  * @param string $description
  * @param string $saved_value The value (if any) already stored in the database.
 */
@@ -171,14 +173,14 @@ function render_checkbox_field( $id, $name, $description, $saved_value ) {
 	);
 }
 
-// Rendering\render_toggle( $exclusive_toggle_name, $exclusive_toggle_id, $exclusive_toggle_value );
-
 /**
  * Sets up a table to create radio button / checkbox options for the different post types available.
  * @return void
+ * @param string $settings_group Name of options group in the wp_options table
  * @param array $column_names
  * @param string $input_type checkbox or radio.
  * @param array $value_id_suffix The suffix that goes after the post type name to create an id for it.
+ * @param array $current_options Settings currently stored in the database
 */
 function render_generic_post_type_table( $settings_group, $column_names, $input_type, $value_id_suffix, $current_options ) {
 	$post_type_options = Coil\get_supported_post_types( 'objects' );
