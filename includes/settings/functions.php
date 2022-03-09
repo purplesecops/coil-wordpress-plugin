@@ -851,10 +851,13 @@ function coil_settings_exclusive_post_render_callback() {
 			<div class="coil-column-7">
 				<?php
 				// Renders the padlock display checkbox
-				Rendering\render_input_field_heading(
-					__( 'Title Icon', 'coil-web-monetization' )
+				$padlock_input_id = 'coil_title_padlock';
+				Rendering\render_checkbox_that_toggles_content(
+					$padlock_input_id,
+					'coil_exclusive_settings_group[' . $padlock_input_id . ']',
+					__( 'Show padlock icon next to exclusive post titles', 'coil-web-monetization' ),
+					Admin\get_exlusive_post_setting( $padlock_input_id )
 				);
-				coil_padlock_display_checkbox_render_callback();
 
 				// Renders the icon position radio buttons
 				Rendering\render_input_field_heading(
@@ -910,47 +913,6 @@ function coil_settings_exclusive_post_render_callback() {
 		</div>
 	</div>
 	<?php
-}
-
-/**
- * Renders the output of the display title padlock checkbox
- * @return void
-*/
-function coil_padlock_display_checkbox_render_callback() {
-	/**
-	* Specify the default checked state for the input from
-	* any settings stored in the database. If the
-	* input status is not set, default to checked.
-	*/
-
-	/**
-	* Specify the default checked state for the input from
-	* any settings stored in the database. If the
-	* input status is not set, default to checked.
-	*/
-
-	$padlock_input_id = 'coil_title_padlock';
-	$value            = Admin\get_exlusive_post_setting( $padlock_input_id );
-
-	if ( $value === true ) {
-		$checked_input = 'checked="checked"';
-	} else {
-		$checked_input = '';
-	}
-
-	printf(
-		'<input type="%1$s" name="%2$s" id="%3$s" %4$s>',
-		esc_attr( 'checkbox' ),
-		esc_attr( 'coil_exclusive_settings_group[' . $padlock_input_id . ']' ),
-		esc_attr( $padlock_input_id ),
-		$checked_input
-	);
-
-	printf(
-		'<label for="%1$s">%2$s</label>',
-		esc_attr( $padlock_input_id ),
-		esc_html_e( 'Show padlock icon next to exclusive post titles', 'coil-web-monetization' )
-	);
 }
 
 /**
@@ -1239,26 +1201,11 @@ function coil_settings_coil_button_settings_render_callback() {
 		);
 
 		$coil_button_member_display_id = 'coil_button_member_display';
-		$value                         = Admin\get_coil_button_setting( $coil_button_member_display_id );
-
-		if ( $value === true ) {
-			$checked_input = 'checked="checked"';
-		} else {
-			$checked_input = '';
-		}
-
-		printf(
-			'<input type="%1$s" name="%2$s" id="%3$s" %4$s>',
-			esc_attr( 'checkbox' ),
-			esc_attr( 'coil_button_settings_group[' . $coil_button_member_display_id . ']' ),
-			esc_attr( $coil_button_member_display_id ),
-			$checked_input
-		);
-
-		printf(
-			'<label for="%1$s">%2$s</label>',
-			esc_attr( $coil_button_member_display_id ),
-			esc_html_e( 'Show button for Coil Members', 'coil-web-monetization' )
+		Rendering\render_checkbox_that_toggles_content(
+			$coil_button_member_display_id,
+			'coil_button_settings_group[' . $coil_button_member_display_id . ']',
+			__( 'Show button for Coil Members', 'coil-web-monetization' ),
+			Admin\get_coil_button_setting( $coil_button_member_display_id )
 		);
 
 		// Render the Coil button member text input field

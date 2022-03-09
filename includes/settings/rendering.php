@@ -174,6 +174,32 @@ function render_checkbox_field( $id, $name, $description, $saved_value ) {
 }
 
 /**
+ * Creates a checkbox element that can be used to hide other elements when it is unchecked.
+ * @return void
+ * @param string $id
+ * @param string $name
+ * @param string $description
+ * @param string $saved_value The value (if any) already stored in the database.
+*/
+function render_checkbox_that_toggles_content( $id, $name, $description, $saved_value ) {
+	$checked = ( isset( $saved_value ) && $saved_value === true ) ? 'checked="checked"' : false;
+
+	printf(
+		'<br><input type="%1$s" name="%2$s" id="%3$s" %4$s>',
+		esc_attr( 'checkbox' ),
+		esc_attr( $name ),
+		esc_attr( $id ),
+		esc_attr( $checked )
+	);
+
+	printf(
+		'<label for="%1$s"> <strong>%2$s</strong></label>',
+		esc_attr( $id ),
+		esc_html( $description )
+	);
+}
+
+/**
  * Sets up a table to create radio button / checkbox options for the different post types available.
  * @return void
  * @param string $settings_group Name of options group in the wp_options table
