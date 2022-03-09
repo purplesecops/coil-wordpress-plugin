@@ -44,9 +44,9 @@
 	if ( activeTabID === 'coil-exclusive-settings' ) {
 		const exclusiveContentEnabled = $( 'input[name="coil_exclusive_settings_group[coil_exclusive_toggle]"]' ).is( ':checked' );
 		if ( exclusiveContentEnabled ) {
-			$( '*.exclusive-content' ).show();
+			$( '*.exclusive-content-section' ).show();
 		} else {
-			$( '*.exclusive-content' ).hide();
+			$( '*.exclusive-content-section' ).hide();
 		}
 	}
 
@@ -116,7 +116,7 @@
 	}
 
 	$( document ).on( 'change', 'input[name="coil_exclusive_settings_group[coil_exclusive_toggle]"]', function() {
-		$( '.exclusive-content' ).toggle();
+		$( '.exclusive-content-section' ).toggle();
 	} );
 
 	$( document ).on( 'change', 'input[name="coil_button_settings_group[coil_button_toggle]"]', function() {

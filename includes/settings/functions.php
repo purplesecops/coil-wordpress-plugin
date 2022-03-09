@@ -643,7 +643,7 @@ function coil_settings_enable_exclusive_toggle_render_callback() {
 */
 function coil_settings_paywall_render_callback() {
 	?>
-	<div class="tab-styling exclusive-content">
+	<div class="tab-styling exclusive-content-section">
 		<?php
 		Rendering\render_settings_section_heading(
 			__( 'Paywall Appearance', 'coil-web-monetization' ),
@@ -840,7 +840,7 @@ function paywall_font_render_callback() {
 function coil_settings_exclusive_post_render_callback() {
 
 	?>
-	<div class="tab-styling exclusive-content">
+	<div class="tab-styling exclusive-content-section">
 		<?php
 		Rendering\render_settings_section_heading(
 			__( 'Exclusive Post Appearance', 'coil-web-monetization' ),
@@ -981,7 +981,7 @@ function coil_padlock_icon_style_selection_render_callback() {
 */
 function coil_settings_post_visibility_render_callback() {
 	?>
-	<div class="tab-styling exclusive-content">
+	<div class="tab-styling exclusive-content-section">
 		<?php
 		Rendering\render_settings_section_heading(
 			__( 'Visibility Settings', 'coil-web-monetization' ),
@@ -1023,7 +1023,7 @@ function coil_settings_post_visibility_render_callback() {
 function coil_settings_excerpt_display_render_callback() {
 
 	?>
-	<div class="tab-styling exclusive-content">
+	<div class="tab-styling exclusive-content-section">
 		<?php
 		Rendering\render_settings_section_heading(
 			__( 'Excerpt Settings', 'coil-web-monetization' ),
@@ -1051,7 +1051,7 @@ function coil_settings_excerpt_display_render_callback() {
 function coil_settings_css_selector_render_callback() {
 
 	?>
-	<div class="tab-styling exclusive-content">
+	<div class="tab-styling exclusive-content-section">
 		<?php
 		Rendering\render_settings_section_heading(
 			__( 'CSS Selector', 'coil-web-monetization' )

@@ -11,7 +11,7 @@ describe( 'Exclusive content on / off toggle', () => {
 			.should( 'be.checked' );
 
 		cy
-			.get( '.exclusive-content' )
+			.get( '.exclusive-content-section' )
 			.should( 'be.visible' );
 	} );
 
@@ -20,7 +20,7 @@ describe( 'Exclusive content on / off toggle', () => {
 
 		// By default exclusive content is enabled.
 		cy
-			.get( '.exclusive-content' )
+			.get( '.exclusive-content-section' )
 			.should( 'be.visible' );
 
 		// Disable exclusive content and check that the other exclusive content settings are hidden.
@@ -29,7 +29,7 @@ describe( 'Exclusive content on / off toggle', () => {
 			.click();
 
 		cy
-			.get( '.exclusive-content' )
+			.get( '.exclusive-content-section' )
 			.should( 'not.be.visible' );
 
 		// Enabling exclusive content should reveal the other exclusive content settings.
@@ -38,7 +38,7 @@ describe( 'Exclusive content on / off toggle', () => {
 			.click();
 
 		cy
-			.get( '.exclusive-content' )
+			.get( '.exclusive-content-section' )
 			.should( 'be.visible' );
 	} );
 
@@ -53,7 +53,7 @@ describe( 'Exclusive content on / off toggle', () => {
 		cy.reload();
 
 		cy
-			.get( '.exclusive-content' )
+			.get( '.exclusive-content-section' )
 			.should( 'not.be.visible' );
 	} );
 } );
