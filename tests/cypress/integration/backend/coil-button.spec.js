@@ -14,14 +14,6 @@ describe( 'Coil button settings tab', () => {
 		checkButtonText( '', '', '' );
 
 		cy
-			.get( '#coil_button_toggle' )
-			.should( 'be.checked' );
-
-		cy
-			.get( '.coil-button-section' )
-			.should( 'be.visible' );
-
-		cy
 			.get( '#dark_color_theme' )
 			.should( 'be.checked' );
 
@@ -41,34 +33,49 @@ describe( 'Coil button settings tab', () => {
 		checkButtonMargins( '', '', '', '' );
 	} );
 
-	it( 'Checks that the setting sections are shown or hidden depending on whether the Coil button is enabled', () => {
-		// By default the Coil button is enabled.
+	it( 'Checks that the member sections are shown or hidden depending on whether the Coil button is enabled for Coil members', () => {
+		// By default the Coil button is displayed to members.
 		cy
-			.get( '.coil-button-section' )
+			.get( '#coil_button_member_display + label + h4' )
+			.should( 'contain', 'Message for Coil Members' )
 			.should( 'be.visible' );
 
-		// Disable the Coil button and check that the other settings are hidden.
 		cy
-			.get( '.coil-checkbox' )
+			.get( '#coil_members_button_text' )
+			.should( 'be.visible' );
+
+		// Hide the Coil button from members and check that the other settings are hidden.
+		cy
+			.get( '#coil_button_member_display' )
 			.click();
 
 		cy
-			.get( '.coil-button-section' )
+			.get( '#coil_button_member_display + label + h4' )
+			.should( 'contain', 'Message for Coil Members' )
 			.should( 'not.be.visible' );
 
-		// Enabling the Coil button should reveal the other settings.
 		cy
-			.get( '.coil-checkbox' )
+			.get( '#coil_members_button_text' )
+			.should( 'not.be.visible' );
+
+		// Enabling the Coil button to members should reveal the other settings.
+		cy
+			.get( '#coil_button_member_display' )
 			.click();
 
 		cy
-			.get( '.coil-button-section' )
+			.get( '#coil_button_member_display + label + h4' )
+			.should( 'contain', 'Message for Coil Members' )
+			.should( 'be.visible' );
+
+		cy
+			.get( '#coil_members_button_text' )
 			.should( 'be.visible' );
 	} );
 
-	it( 'Checks that Coil button settings are hidden when the Coil button is disabled', () => {
+	it( 'Checks that when the Coil button is set to hide for Coil members that the members settings are hidden', () => {
 		cy
-			.get( '.coil-checkbox' )
+			.get( '#coil_button_member_display' )
 			.click();
 
 		cy.get( '#submit' ).click();
@@ -76,7 +83,12 @@ describe( 'Coil button settings tab', () => {
 		cy.reload();
 
 		cy
-			.get( '.coil-button-section' )
+			.get( '#coil_button_member_display + label + h4' )
+			.should( 'contain', 'Message for Coil Members' )
+			.should( 'not.be.visible' );
+
+		cy
+			.get( '#coil_members_button_text' )
 			.should( 'not.be.visible' );
 	} );
 
