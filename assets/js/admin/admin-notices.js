@@ -50,6 +50,16 @@
 		}
 	}
 
+	// Coil Button tab
+	if ( activeTabID === 'coil-button-settings' ) {
+		const coilButtonEnabled = $( 'input[name="coil_button_settings_group[coil_button_toggle]"]' ).is( ':checked' );
+		if ( coilButtonEnabled ) {
+			$( '*.coil-button-section' ).show();
+		} else {
+			$( '*.coil-button-section' ).hide();
+		}
+	}
+
 	// No payment pointer
 	if ( activeTabID === 'coil-general-settings' ) {
 		// No payment pointer warning
@@ -107,6 +117,10 @@
 
 	$( document ).on( 'change', 'input[name="coil_exclusive_settings_group[coil_exclusive_toggle]"]', function() {
 		$( '.exclusive-content' ).toggle();
+	} );
+
+	$( document ).on( 'change', 'input[name="coil_button_settings_group[coil_button_toggle]"]', function() {
+		$( '.coil-button-section' ).toggle();
 	} );
 
 	$( document ).on( 'keyup', '#coil_paywall_title', function() {

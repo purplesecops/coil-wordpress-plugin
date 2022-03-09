@@ -1171,7 +1171,7 @@ function coil_settings_enable_coil_button_toggle_render_callback() {
 */
 function coil_settings_coil_button_settings_render_callback() {
 	?>
-	<div class="tab-styling button-settings">
+	<div class="tab-styling coil-button-section">
 		<?php
 		$defaults = Admin\get_coil_button_defaults();
 
@@ -1381,7 +1381,7 @@ function render_buton_margin_settings() {
 */
 function coil_settings_coil_button_visibility_render_callback() {
 	?>
-	<div class="tab-styling">
+	<div class="tab-styling coil-button-section">
 		<?php
 		Rendering\render_settings_section_heading(
 			__( 'Visibility', 'coil-web-monetization' ),
