@@ -199,10 +199,15 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 			padding: $message_spacing_baseline;
 			text-decoration: none;
 			div {
-				color: $white;
+				color: $coil_button_font_color;
 				margin: auto;
 				padding-left: $message_spacing_baseline;
 				padding-right: $message_spacing_baseline;
+			}
+
+			img {
+				height: 24px;
+				width: 24px;
 			}
 
 			&:hover {
@@ -218,7 +223,7 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 		.coil-button-dismiss {
 			background-color: $coil_button_message_dismiss_color;
 			border-radius: 100%;
-			color: $white;
+			color: $coil_dismiss_font_color;
 			cursor: pointer;
 			display: none;
 			font-size: 20px;
@@ -231,7 +236,7 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 			width: 20px;
 	
 			&:hover {
-				background-color: $red;
+				background-color: $coil_dismiss_hover_color;
 			}
 		}
 	}
@@ -258,16 +263,15 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 // Changes Coil button to implement light theme
 .coil-button-message-container.coil-light-theme {
 	.coil-button {
-		background-color: $message_background_colour;
-		opacity: 0.9;
+		background-color: $coil_button_message_color_light_theme;
 
 		a {
 			div {
-				color: $message_font_colour;
+				color: $coil_button_font_color_light_theme;
 			}
 
 			&:hover {
-				background-color: $message_content_conceal_colour_dark_theme;
+				background-color: $coil_button_message_hover_color_light_theme;
 			}
 		}
 	}
@@ -287,6 +291,7 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 			}
 	
 			img {
+				height: 16px;
 				width: 16px;
 			}
 		}
