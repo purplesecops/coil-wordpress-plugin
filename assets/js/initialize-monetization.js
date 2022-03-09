@@ -105,7 +105,7 @@
 
 		let brandingLogo = '';
 
-		if ( coilMessageBranding === 'site_logo' ) {
+		if ( coilMessageBranding === 'site_logo' && siteLogo !== '' ) {
 			brandingLogo = brandingLogo = '<img src="' + siteLogo + '">';
 		} else if ( coilMessageBranding === 'coil_logo' && exclusiveMessageTheme === 'dark' ) {
 			brandingLogo = '<img src="' + coilLogoWhite + '">';
