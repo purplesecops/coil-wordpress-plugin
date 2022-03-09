@@ -35,42 +35,21 @@ describe( 'Coil button settings tab', () => {
 
 	it( 'Checks that the member sections are shown or hidden depending on whether the Coil button is enabled for Coil members', () => {
 		// By default the Coil button is displayed to members.
-		cy
-			.get( '#coil_button_member_display + label + h4' )
-			.should( 'contain', 'Message for Coil Members' )
-			.should( 'be.visible' );
-
-		cy
-			.get( '#coil_members_button_text' )
-			.should( 'be.visible' );
+		checkMemberButtonOptionsVisibility( 'show' );
 
 		// Hide the Coil button from members and check that the other settings are hidden.
 		cy
 			.get( '#coil_button_member_display' )
 			.click();
 
-		cy
-			.get( '#coil_button_member_display + label + h4' )
-			.should( 'contain', 'Message for Coil Members' )
-			.should( 'not.be.visible' );
-
-		cy
-			.get( '#coil_members_button_text' )
-			.should( 'not.be.visible' );
+		checkMemberButtonOptionsVisibility( 'hidden' );
 
 		// Enabling the Coil button to members should reveal the other settings.
 		cy
 			.get( '#coil_button_member_display' )
 			.click();
 
-		cy
-			.get( '#coil_button_member_display + label + h4' )
-			.should( 'contain', 'Message for Coil Members' )
-			.should( 'be.visible' );
-
-		cy
-			.get( '#coil_members_button_text' )
-			.should( 'be.visible' );
+		checkMemberButtonOptionsVisibility( 'show' );
 	} );
 
 	it( 'Checks that when the Coil button is set to hide for Coil members that the members settings are hidden', () => {
@@ -82,14 +61,7 @@ describe( 'Coil button settings tab', () => {
 
 		cy.reload();
 
-		cy
-			.get( '#coil_button_member_display + label + h4' )
-			.should( 'contain', 'Message for Coil Members' )
-			.should( 'not.be.visible' );
-
-		cy
-			.get( '#coil_members_button_text' )
-			.should( 'not.be.visible' );
+		checkMemberButtonOptionsVisibility( 'hidden' );
 	} );
 
 	it( 'Checks the button settings can be changed', () => {
@@ -259,4 +231,27 @@ function checkButtonMargins( topMargin, rightMargin, bottomMargin, leftMargin ) 
 		.get( '#coil_button_left_margin' )
 		.should( 'have.attr', 'placeholder', '-' )
 		.should( 'have.value', leftMargin );
+}
+
+/**
+ * Checks the visibility status of the Coil button settings for displaying to Coil members.
+ *
+ * @param {String} visibilityStatus Whether the elements should be 'shown' or 'hidden'.
+*/
+function checkMemberButtonOptionsVisibility( visibilityStatus ) {
+	let assertion;
+	if ( visibilityStatus === 'show' ) {
+		assertion = 'be.visible';
+	} else {
+		assertion = 'not.be.visible';
+	}
+
+	cy
+		.get( '#coil_button_member_display + label + h4' )
+		.should( 'contain', 'Message for Coil Members' )
+		.should( assertion );
+
+	cy
+		.get( '#coil_members_button_text' )
+		.should( assertion );
 }

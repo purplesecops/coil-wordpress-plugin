@@ -90,74 +90,26 @@ describe( 'Exclusive Content settings tab', () => {
 			.should( 'be.checked' );
 	} );
 
-	it.only( 'Checks that the member sections are shown or hidden depending on whether the Exclusive Content is enabled for Coil members', () => {
+	it( 'Checks that the icon options are shown or hidden depending on whether the title icon is selected', () => {
 		// By default the icon is displayed to members.
-		cy
-			.get( '#coil_title_padlock + label + h4' )
-			.should( 'contain', 'Icon Position' )
-			.should( 'be.visible' );
-
-		cy
-			.get( '#coil_title_padlock + label + h4 + .coil-radio-group' )
-			.should( 'be.visible' );
-
-		cy
-			.get( '#coil_title_padlock + label + h4 + .coil-radio-group + h4' )
-			.should( 'contain', 'Icon Style' )
-			.should( 'be.visible' );
-
-		cy
-			.get( '#coil_title_padlock + label + h4 + .coil-radio-group + h4 + .coil-radio-group' )
-			.should( 'be.visible' );
+		checkIconOptionsVisibility( 'show' );
 
 		// Remove the icon from the title of exclusive posts.
 		cy
 			.get( '#coil_title_padlock' )
 			.click();
 
-		cy
-			.get( '#coil_title_padlock + label + h4' )
-			.should( 'contain', 'Icon Position' )
-			.should( 'not.be.visible' );
-
-		cy
-			.get( '#coil_title_padlock + label + h4 + .coil-radio-group' )
-			.should( 'not.be.visible' );
-
-		cy
-			.get( '#coil_title_padlock + label + h4 + .coil-radio-group + h4' )
-			.should( 'contain', 'Icon Style' )
-			.should( 'not.be.visible' );
-
-		cy
-			.get( '#coil_title_padlock + label + h4 + .coil-radio-group + h4 + .coil-radio-group' )
-			.should( 'not.be.visible' );
+		checkIconOptionsVisibility( 'hidden' );
 
 		// Enable the icon to appear in the title of exclusive posts.
 		cy
 			.get( '#coil_title_padlock' )
 			.click();
 
-		cy
-			.get( '#coil_title_padlock + label + h4' )
-			.should( 'contain', 'Icon Position' )
-			.should( 'be.visible' );
-
-		cy
-			.get( '#coil_title_padlock + label + h4 + .coil-radio-group' )
-			.should( 'be.visible' );
-
-		cy
-			.get( '#coil_title_padlock + label + h4 + .coil-radio-group + h4' )
-			.should( 'contain', 'Icon Style' )
-			.should( 'be.visible' );
-
-		cy
-			.get( '#coil_title_padlock + label + h4 + .coil-radio-group + h4 + .coil-radio-group' )
-			.should( 'be.visible' );
+		checkIconOptionsVisibility( 'show' );
 	} );
 
-	it( 'Checks that when the Exclusive Content is set to hide for Coil members that the members settings are hidden', () => {
+	it( 'Checks that when the title icon has been disabled that the icon options are hidden', () => {
 		cy
 			.get( '#coil_title_padlock' )
 			.click();
@@ -166,14 +118,7 @@ describe( 'Exclusive Content settings tab', () => {
 
 		cy.reload();
 
-		cy
-			.get( '#coil_title_padlock + label + h4' )
-			.should( 'contain', 'Message for Coil Members' )
-			.should( 'not.be.visible' );
-
-		cy
-			.get( '#coil_members_button_text' )
-			.should( 'not.be.visible' );
+		checkIconOptionsVisibility( 'hidden' );
 	} );
 
 	it( 'Checks Exclusive Post Appearnce settings can be changed', () => {
@@ -279,4 +224,35 @@ function checkTextInputs( title, message, buttonText, buttonLink ) {
 		.get( '#coil_paywall_button_link' )
 		.should( 'have.attr', 'placeholder', 'https://coil.com/' )
 		.should( 'have.value', buttonLink );
+}
+
+/**
+ * Checks the visibility status of the icon options.
+ *
+ * @param {String} visibilityStatus Whether the elements should be 'shown' or 'hidden'.
+*/
+function checkIconOptionsVisibility( visibilityStatus ) {
+	let assertion;
+	if ( visibilityStatus === 'show' ) {
+		assertion = 'be.visible';
+	} else {
+		assertion = 'not.be.visible';
+	}
+	cy
+		.get( '#coil_title_padlock + label + h4' )
+		.should( 'contain', 'Icon Position' )
+		.should( assertion );
+
+	cy
+		.get( '#coil_title_padlock + label + h4 + .coil-radio-group' )
+		.should( assertion );
+
+	cy
+		.get( '#coil_title_padlock + label + h4 + .coil-radio-group + h4' )
+		.should( 'contain', 'Icon Style' )
+		.should( assertion );
+
+	cy
+		.get( '#coil_title_padlock + label + h4 + .coil-radio-group + h4 + .coil-radio-group' )
+		.should( assertion );
 }
