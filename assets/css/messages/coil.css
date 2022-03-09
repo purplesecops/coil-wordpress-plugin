@@ -468,14 +468,9 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 .coil-button-message-container.coil-button-small .coil-button {
   font-size: 14px;
   line-height: 17px; }
-  .coil-button-message-container.coil-button-small .coil-button a {
-    padding: 6px; }
-    .coil-button-message-container.coil-button-small .coil-button a div {
-      padding-left: 6px;
-      padding-right: 6px; }
-    .coil-button-message-container.coil-button-small .coil-button a img {
-      height: 16px;
-      width: 16px; }
+  .coil-button-message-container.coil-button-small .coil-button a img {
+    height: 16px;
+    width: 16px; }
   .coil-button-message-container.coil-button-small .coil-button .coil-button-dismiss {
     font-size: 14px;
     height: 14px;
