@@ -25,6 +25,25 @@ describe( 'Welcome settings tab', () => {
 			.should( 'have.attr', 'href', '?page=coil_settings&tab=general_settings' );
 
 		cy
+			.get( '.tab-styling .button-primary' )
+			.should( 'have.class', 'disabled' );
+
+		cy
+			.get( '.coil-welcome-notice .notice-dismiss' )
+			.click();
+
+		cy.reload();
+
+		cy
+			.get( '.coil-welcome-notice' )
+			.should( 'not.exist' );
+		cy
+			.get( '.tab-styling .button-primary' )
+			.should( 'not.have.class', 'disabled' );
+	} );
+
+	it( 'Checks the settings sidebar gets displayed', () => {
+		cy
 			.get( '.settings-sidebar' )
 			.should( 'exist' );
 	} );
