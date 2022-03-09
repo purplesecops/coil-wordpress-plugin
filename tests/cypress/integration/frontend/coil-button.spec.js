@@ -296,6 +296,19 @@ describe( 'Coil button for non WM-enabled users', function() {
 		cy
 			.get( '.coil-button' )
 			.should( 'be.visible' );
+
+		cy
+			.get( '#js-coil-button-dismiss' )
+			.should( 'not.be.visible' );
+
+		cy
+			.get( '.coil-button' )
+			.trigger( 'mouseover' );
+
+		cy
+			.get( '#js-coil-button-dismiss' )
+			.should( 'be.visible' );
+
 		cy
 			.get( '#js-coil-button-dismiss' )
 			.click();
