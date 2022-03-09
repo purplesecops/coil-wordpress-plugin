@@ -76,7 +76,7 @@ describe( 'Exclusive Content settings tab', () => {
 			.should( 'be.checked' );
 	} );
 
-	it( 'Checks Exclusive Post Appearnce defaults', () => {
+	it( 'Checks Exclusive Post Appearance defaults', () => {
 		cy
 			.get( '#coil_title_padlock' )
 			.should( 'be.checked' );
@@ -121,17 +121,13 @@ describe( 'Exclusive Content settings tab', () => {
 		checkIconOptionsVisibility( 'hidden' );
 	} );
 
-	it( 'Checks Exclusive Post Appearnce settings can be changed', () => {
+	it( 'Checks Exclusive Post Appearance settings can be changed', () => {
 		cy
-			.get( '#post_button_visibility_hide' )
+			.get( '#padlock_icon_position_after' )
 			.click();
 
 		cy
-			.get( '#page_button_visibility_hide' )
-			.click();
-
-		cy
-			.get( '#coil_mobile_button_display' )
+			.get( '#coil_padlock_icon_style_coil_icon' )
 			.click();
 
 		cy
@@ -139,43 +135,31 @@ describe( 'Exclusive Content settings tab', () => {
 			.click();
 
 		cy
-			.get( '#post_button_visibility_hide' )
+			.get( '#padlock_icon_position_after' )
 			.should( 'be.checked' );
 
 		cy
-			.get( '#page_button_visibility_hide' )
+			.get( '#coil_padlock_icon_style_coil_icon' )
 			.should( 'be.checked' );
-
-		cy
-			.get( '#coil_mobile_button_display' )
-			.should( 'not.be.checked' );
 	} );
 
 	it( 'Checks Exclusive Content visibility defaults', () => {
 		cy
-			.get( '#post_button_visibility_show' )
+			.get( '#post_visibility_public' )
 			.should( 'be.checked' );
 
 		cy
-			.get( '#page_button_visibility_show' )
-			.should( 'be.checked' );
-
-		cy
-			.get( '#coil_mobile_button_display' )
+			.get( '#page_visibility_public' )
 			.should( 'be.checked' );
 	} );
 
 	it( 'Checks Exclusive Content visibility settings can be changed', () => {
 		cy
-			.get( '#post_button_visibility_hide' )
+			.get( '#post_visibility_exclusive' )
 			.click();
 
 		cy
-			.get( '#page_button_visibility_hide' )
-			.click();
-
-		cy
-			.get( '#coil_mobile_button_display' )
+			.get( '#page_visibility_exclusive' )
 			.click();
 
 		cy
@@ -183,16 +167,44 @@ describe( 'Exclusive Content settings tab', () => {
 			.click();
 
 		cy
-			.get( '#post_button_visibility_hide' )
+			.get( '#post_visibility_exclusive' )
 			.should( 'be.checked' );
 
 		cy
-			.get( '#page_button_visibility_hide' )
+			.get( '#page_visibility_exclusive' )
 			.should( 'be.checked' );
+	} );
 
+	it( 'Checks Excerpt Settings defaults', () => {
 		cy
-			.get( '#coil_mobile_button_display' )
+			.get( '#post_excerpt' )
 			.should( 'not.be.checked' );
+
+		cy
+			.get( '#page_excerpt' )
+			.should( 'not.be.checked' );
+	} );
+
+	it( 'Checks Excerpt Settings can be changed', () => {
+		cy
+			.get( '#post_excerpt' )
+			.click();
+
+		cy
+			.get( '#page_excerpt' )
+			.click();
+
+		cy
+			.get( '#submit' )
+			.click();
+
+		cy
+			.get( '#post_excerpt' )
+			.should( 'be.checked' );
+
+		cy
+			.get( '#page_excerpt' )
+			.should( 'be.checked' );
 	} );
 } );
 
