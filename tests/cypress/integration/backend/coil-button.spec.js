@@ -18,6 +18,10 @@ describe( 'Coil button settings tab', () => {
 			.should( 'be.checked' );
 
 		cy
+			.get( '.coil-button-section' )
+			.should( 'be.visible' );
+
+		cy
 			.get( '#dark_color_theme' )
 			.should( 'be.checked' );
 
@@ -35,6 +39,45 @@ describe( 'Coil button settings tab', () => {
 
 		// Checks the margin defaults
 		checkButtonMargins( '', '', '', '' );
+	} );
+
+	it( 'Checks that the setting sections are shown or hidden depending on whether the Coil button is enabled', () => {
+		// By default the Coil button is enabled.
+		cy
+			.get( '.coil-button-section' )
+			.should( 'be.visible' );
+
+		// Disable the Coil button and check that the other settings are hidden.
+		cy
+			.get( '.coil-checkbox' )
+			.click();
+
+		cy
+			.get( '.coil-button-section' )
+			.should( 'not.be.visible' );
+
+		// Enabling the Coil button should reveal the other settings.
+		cy
+			.get( '.coil-checkbox' )
+			.click();
+
+		cy
+			.get( '.coil-button-section' )
+			.should( 'be.visible' );
+	} );
+
+	it( 'Checks that Coil button settings are hidden when the Coil button is disabled', () => {
+		cy
+			.get( '.coil-checkbox' )
+			.click();
+
+		cy.get( '#submit' ).click();
+
+		cy.reload();
+
+		cy
+			.get( '.coil-button-section' )
+			.should( 'not.be.visible' );
 	} );
 
 	it( 'Checks the button settings can be changed', () => {
@@ -55,11 +98,6 @@ describe( 'Coil button settings tab', () => {
 		cy
 			.get( '#coil_members_button_text' )
 			.type( `{selectall}${ buttonMemberText }` );
-
-		// TODO: Disable Coil button and check that the other button settings are hidden.
-		cy
-			.get( '.coil-checkbox' )
-			.click();
 
 		cy
 			.get( '#light_color_theme' )
@@ -95,10 +133,6 @@ describe( 'Coil button settings tab', () => {
 			.click();
 
 		checkButtonText( buttonText, buttonLink, buttonMemberText );
-
-		cy
-			.get( '#coil_button_toggle' )
-			.should( 'not.be.checked' );
 
 		cy
 			.get( '#light_color_theme' )
