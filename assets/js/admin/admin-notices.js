@@ -21,22 +21,27 @@
 
 	// Welcome notice
 	if ( activeTabID === 'coil-welcome-settings' ) {
-		const $welcomeNoticeDismissButton = $( '.coil-welcome-notice .notice-dismiss' );
+		const $welcomeNoticeDismissButton = $( '.coil-welcome-notice' );
 
 		// No welcome notice on this screen.
-		if ( ! $welcomeNoticeDismissButton ) {
+		if ( $welcomeNoticeDismissButton.length === 0 ) {
 			return;
 		}
 
-		// Fire ajax request to dismiss notice permanently.
-		$welcomeNoticeDismissButton.on( 'click', function() {
-			$.ajax( {
-				url: ajaxUrl,
-				type: 'POST',
-				data: {
-					action: 'dismiss_welcome_notice',
-				},
-			} );
+		$( '.tab-styling .button-primary' ).addClass( 'disabled' );
+
+		$welcomeNoticeDismissButton.on( 'click', '.notice-dismiss', function() {
+			// Fire ajax request to dismiss notice permanently.
+			( function() {
+				$.ajax( {
+					url: ajaxUrl,
+					type: 'POST',
+					data: {
+						action: 'dismiss_welcome_notice',
+					},
+				} );
+			}() );
+			$( '.tab-styling .button-primary' ).removeClass( 'disabled' );
 		} );
 	}
 
