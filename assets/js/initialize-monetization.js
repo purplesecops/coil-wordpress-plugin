@@ -190,6 +190,7 @@
 		if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed && ! paywallDisplayed ) {
 			$( 'body' ).append( showCoilButton( coilButtonUnpaidMessage ) );
 			addButtonDismissClickHandler();
+			addButtonDismissAppearanceHandler();
 		}
 	}
 
@@ -375,6 +376,21 @@
 				$( this ).parent().parent().remove();
 			}
 		} );
+	}
+
+	/**
+	 * Add a function to show or hide the Coil button dismiss
+	 * depending on whether you are hovering over the button or not.
+	 *
+	 */
+	function addButtonDismissAppearanceHandler() {
+		$( '.coil-button' ).hover(
+			function() {
+				$( '#js-coil-button-dismiss' ).css( 'display', 'block' );
+			}, function() {
+				$( '#js-coil-button-dismiss' ).css( 'display', 'none' );
+			},
+		);
 	}
 
 	/**
@@ -589,6 +605,7 @@
 				$( 'body' ).append( showCoilButton( coilButtonPaidMessage ) );
 				$( '.coil-button a img' ).attr( 'src', brandingLogo );
 				addButtonDismissClickHandler();
+				addButtonDismissAppearanceHandler();
 			}
 		}
 	}
