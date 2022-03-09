@@ -1550,11 +1550,11 @@ function render_coil_settings_screen() : void {
 			<?php
 			switch ( $active_tab ) {
 				case 'welcome':
-					coil_settings_sidebar_render_callback();
 					echo '<div class="settings-main has-sidebar">';
 					settings_fields( 'coil_welcome_settings_group' );
 					do_settings_sections( 'coil_welcome_section' );
 					echo '</div>';
+					coil_settings_sidebar_render_callback();
 					break;
 				case 'general_settings':
 					echo '<div class="settings-main">';

@@ -89,7 +89,7 @@
 
 .coil form {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   justify-content: start; }
   .coil form .settings-main {
     max-width: 790px;
