@@ -128,10 +128,22 @@
 	}
 
 	/**
+	 * Adds the Coil button to the body oif the document and adds it's handler functions.
+	 * @param {String} message Message shown to thank Coil members, or to encourage users to sign up.
+	 * @return {void}
+	*/
+	function showCoilButton( message ) {
+		const coilButton = createCoilButton( message );
+		$( 'body' ).append( coilButton );
+		addButtonDismissClickHandler();
+		addButtonDismissAppearanceHandler();
+	}
+
+	/**
 	 * @param {String} message Message shown to thank Coil members, or to encourage users to sign up.
 	 * @return {object} Output a Coil button message.
-	 */
-	function showCoilButton( message ) {
+	*/
+	function createCoilButton( message ) {
 		const positionArray = coilButtonPosition.split( '-' );
 		const verticalPosition = positionArray[ 0 ];
 		const horizontalPosition = positionArray[ 1 ];
@@ -188,9 +200,7 @@
 		const pendingMessageDisplayed = $( 'p.monetize-msg' ).length !== 0 ? true : false;
 		const paywallDisplayed = $( '.coil-message-container' ).length !== 0 ? true : false;
 		if ( buttonEnabled && ! buttonAlreadyExists && ! buttonDismissed && ! pendingMessageDisplayed && ! paywallDisplayed ) {
-			$( 'body' ).append( showCoilButton( coilButtonUnpaidMessage ) );
-			addButtonDismissClickHandler();
-			addButtonDismissAppearanceHandler();
+			showCoilButton( coilButtonUnpaidMessage );
 		}
 	}
 
@@ -602,10 +612,8 @@
 				$( '.coil-button a img' ).attr( 'src', brandingLogo );
 				$( '.coil-button div' ).text( coilButtonPaidMessage );
 			} else if ( buttonEnabled && ! buttonDismissed ) {
-				$( 'body' ).append( showCoilButton( coilButtonPaidMessage ) );
+				showCoilButton( coilButtonPaidMessage );
 				$( '.coil-button a img' ).attr( 'src', brandingLogo );
-				addButtonDismissClickHandler();
-				addButtonDismissAppearanceHandler();
 			}
 		}
 	}
