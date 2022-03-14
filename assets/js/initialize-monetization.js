@@ -605,14 +605,14 @@
 			} else {
 				brandingLogo = coilLogoWhiteStreaming;
 			}
-			// The text needs to change to the member message
-			if ( buttonAlreadyExists ) {
-				$( '.coil-button a img' ).attr( 'src', brandingLogo );
-				$( '.coil-button div' ).text( coilButtonPaidMessage );
-				$( '.coil-button a' ).removeAttr( 'href' ).css( 'cursor', 'default' );
-				$( '.coil-button a' ).css( 'cursor', 'default' );
-			} else if ( buttonEnabled && ! buttonDismissed ) {
-				showCoilButton( coilButtonPaidMessage );
+
+			if ( buttonEnabled && ! buttonDismissed ) {
+				if ( buttonAlreadyExists ) {
+					// The text needs to change to the member message
+					$( '.coil-button div' ).text( coilButtonPaidMessage );
+				} else {
+					showCoilButton( coilButtonPaidMessage );
+				}
 				$( '.coil-button a' ).removeAttr( 'href' ).css( 'cursor', 'default' );
 				$( '.coil-button a' ).css( 'cursor', 'default' );
 				$( '.coil-button a img' ).attr( 'src', brandingLogo );
