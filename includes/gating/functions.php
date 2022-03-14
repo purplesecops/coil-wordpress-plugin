@@ -193,7 +193,7 @@ function maybe_restrict_content( string $content ) : string {
 	$public_content         = '';
 
 	// If it's a single post which doesn't have a read more block, just return the content
-	if ( is_single() && ! has_read_more_block( $content ) ) {
+	if ( is_singular() && ! has_read_more_block( $content ) ) {
 		return $content;
 	}
 
