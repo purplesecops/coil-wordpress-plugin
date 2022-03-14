@@ -377,7 +377,7 @@
 		const cookieName = 'ShowCoilButtonMsg';
 		$( '#js-coil-button-dismiss' ).on( 'click', function() {
 			if ( ! hasButtonDismissCookie() ) {
-				Cookies.set( cookieName, 1, { expires: 31 } );
+				Cookies.set( cookieName, 1, { expires: 14 } );
 				$( this ).parent().parent().remove();
 			}
 		} );

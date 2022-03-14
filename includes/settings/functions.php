@@ -1411,12 +1411,6 @@ function coil_settings_coil_button_visibility_render_callback() {
 			'button_visibility',
 			Admin\get_coil_button_settings()
 		);
-
-		printf(
-			'<p class="%s">%s</p>',
-			esc_attr( 'description' ),
-			esc_html__( 'You can override these settings in the Category, Tag, Page and Post menus.', 'coil-web-monetization' )
-		);
 		?>
 	</div>
 	<?php
