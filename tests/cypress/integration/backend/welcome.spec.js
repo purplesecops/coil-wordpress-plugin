@@ -26,20 +26,7 @@ describe( 'Welcome settings tab', () => {
 
 		cy
 			.get( '.tab-styling .button-primary' )
-			.should( 'have.class', 'disabled' );
-
-		cy
-			.get( '.coil-welcome-notice .notice-dismiss' )
-			.click();
-
-		cy.reload();
-
-		cy
-			.get( '.coil-welcome-notice' )
-			.should( 'not.exist' );
-		cy
-			.get( '.tab-styling .button-primary' )
-			.should( 'not.have.class', 'disabled' );
+			.should( 'not.be.visible' );
 	} );
 
 	it( 'Checks the settings sidebar gets displayed', () => {
