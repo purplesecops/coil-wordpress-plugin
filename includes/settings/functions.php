@@ -620,8 +620,15 @@ function coil_settings_enable_exclusive_toggle_render_callback() {
 	<div class="tab-styling">
 		<?php
 		Rendering\render_settings_section_heading(
-			__( 'Exclusive Content', 'coil-web-monetization' ),
-			__( 'Only Coil members using the Coil extension or supported browsers can access exclusive content.', 'coil-web-monetization' )
+			__( 'Exclusive Content', 'coil-web-monetization' )
+		);
+
+		printf(
+			'<p>%s (<a href="%s" target="%s" >%s</a>)</p>',
+			esc_html__( 'Exclusive content is only available to Coil members. Coil members must use the Coil extension or supported mobile browser to unlock exclusive content.', 'coil-web-monetization' ),
+			esc_url( 'https://help.coil.com/docs/membership/coil-extension/index.html' ),
+			esc_attr( '_blank' ),
+			esc_html__( 'Learn more', 'coil-web-monetization' )
 		);
 
 		$exclusive_toggle_id = 'coil_exclusive_toggle';
@@ -647,7 +654,7 @@ function coil_settings_paywall_render_callback() {
 		<?php
 		Rendering\render_settings_section_heading(
 			__( 'Paywall Appearance', 'coil-web-monetization' ),
-			__( 'This paywall replaces the post content for users without an active Coil membership, when access is set to exclusive.', 'coil-web-monetization' )
+			__( 'When a post is set to Exclusive, this paywall replaces the post\'s content for users without an active Coil membership.', 'coil-web-monetization' )
 		);
 		?>
 		<div class="coil-row">
@@ -851,7 +858,7 @@ function coil_settings_exclusive_post_render_callback() {
 		<?php
 		Rendering\render_settings_section_heading(
 			__( 'Exclusive Post Appearance', 'coil-web-monetization' ),
-			__( 'Customize the appearance for exclusive posts on archive pages.', 'coil-web-monetization' )
+			__( 'Customize the appearance of exclusive posts on archive pages.', 'coil-web-monetization' )
 		);
 		?>
 		<div class="coil-row">
@@ -862,7 +869,7 @@ function coil_settings_exclusive_post_render_callback() {
 				Rendering\render_checkbox_that_toggles_content(
 					$padlock_input_id,
 					'coil_exclusive_settings_group[' . $padlock_input_id . ']',
-					__( 'Show padlock icon next to exclusive post titles', 'coil-web-monetization' ),
+					__( 'Show icon next to exclusive post titles', 'coil-web-monetization' ),
 					Admin\get_exlusive_post_setting( $padlock_input_id )
 				);
 
@@ -992,11 +999,11 @@ function coil_settings_post_visibility_render_callback() {
 		<?php
 		Rendering\render_settings_section_heading(
 			__( 'Visibility Settings', 'coil-web-monetization' ),
-			__( 'Select whether you want to designate posts and pages as \'Exclusive\' by default.', 'coil-web-monetization' )
+			__( 'Manage the default visibility for your post types. Content within exclusive post types is only visible to Coil members. Everyone else will see the paywall.', 'coil-web-monetization' )
 		);
 		printf(
 			'<p>%1$s<a href="%2$s">%3$s</a>%4$s</p>',
-			esc_html__( 'Post types can only be marked as exclusive if they are also marked as monetized under ', 'coil-web-monetization' ),
+			esc_html__( 'A post type can only be marked as exclusive if it is also set to Monetized under .', 'coil-web-monetization' ),
 			esc_url( admin_url( 'admin.php?page=coil_settings&tab=general_settings', COIL__FILE__ ) ),
 			esc_html__( 'General Settings', 'coil-web-monetization' ),
 			'.'
@@ -1014,7 +1021,7 @@ function coil_settings_post_visibility_render_callback() {
 		printf(
 			'<p class="%s">%s</p>',
 			esc_attr( 'description' ),
-			esc_html__( 'You can override these settings in the Category, Tag, Page and Post menus.', 'coil-web-monetization' )
+			esc_html__( 'You can override these settings in the Category, Tag, Page, and Post menus.', 'coil-web-monetization' )
 		);
 		?>
 	</div>
@@ -1034,7 +1041,7 @@ function coil_settings_excerpt_display_render_callback() {
 		<?php
 		Rendering\render_settings_section_heading(
 			__( 'Excerpt Settings', 'coil-web-monetization' ),
-			__( 'Use the settings below to select whether to show a short excerpt for any pages, posts, or other content types you choose to gate access to. Support for displaying an excerpt may depend on your particular theme and setup of WordPress.', 'coil-web-monetization' )
+			__( 'Select whether to show a short summary for any pages, posts, or other content types you choose to make exclusive. Whether excerpts are supported and where excerpts appear (for example, under page titles, on archive pages, etc.) depends on your theme.', 'coil-web-monetization' )
 		);
 
 		// Using a function to generate the table with the post type excerpt checkboxes.
@@ -1064,6 +1071,14 @@ function coil_settings_css_selector_render_callback() {
 			__( 'CSS Selector', 'coil-web-monetization' )
 		);
 
+		printf(
+			'<p>%s (<a href="%s" target="_blank">%s</a>)</p>',
+			/* translators: 1) HTML link open tag, 2) HTML link close tag, 3) HTML link open tag, 4) HTML link close tag. */
+			esc_html__( 'This plugin uses CSS selectors to control exclusive content. Many themes use the plugin\'s default selectors. If your exclusive content is being incorrectly shown or hidden, there\'s a strong possibility your theme is using different selectors. Enter your theme\'s CSS selectors here.', 'coil-web-monetization' ),
+			esc_url( 'https://help.coil.com/docs/monetize/content/wp-faq-troubleshooting#everyoneno-one-can-see-my-monetized-content-why' ),
+			esc_html__( 'Learn more', 'coil-web-monetization' )
+		);
+
 		$exclusive_settings = Admin\get_exclusive_settings();
 
 		printf(
@@ -1075,17 +1090,6 @@ function coil_settings_css_selector_render_callback() {
 			esc_attr( $exclusive_settings['coil_content_container'] ),
 			esc_attr( '.content-area .entry-content' )
 		);
-
-		echo '<p class="description">';
-
-		printf(
-			/* translators: 1) HTML link open tag, 2) HTML link close tag, 3) HTML link open tag, 4) HTML link close tag. */
-			esc_html__( 'Enter the CSS selectors set by your theme that could include gated content. Most themes use the pre-filled CSS selectors. (%1$sLearn more%2$s)', 'coil-web-monetization' ),
-			sprintf( '<a href="%s" target="_blank">', esc_url( 'https://help.coil.com/docs/monetize/content/wp-faq-troubleshooting#everyoneno-one-can-see-my-monetized-content-why' ) ),
-			'</a>'
-		);
-
-		echo '</p>';
 		?>
 	</div>
 	<?php
