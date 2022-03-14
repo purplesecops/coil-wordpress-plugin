@@ -498,8 +498,6 @@
 				showVerificationFailureMessage();
 			}, 5000 );
 		}
-
-		maybeAddCoilButton();
 	}
 
 	/**
