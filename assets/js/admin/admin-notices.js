@@ -38,6 +38,12 @@
 		} else {
 			$( '*.exclusive-content-section' ).hide();
 		}
+		const siteLogoSelected = $( '#coil_branding option:selected' ).val() === 'site_logo';
+		if ( siteLogoSelected ) {
+			$( '.set-site-logo-description' ).show();
+		} else {
+			$( '.set-site-logo-description' ).hide();
+		}
 	}
 
 	// Coil Button tab
@@ -107,6 +113,15 @@
 
 	$( document ).on( 'change', 'input[name="coil_exclusive_settings_group[coil_exclusive_toggle]"]', function() {
 		$( '.exclusive-content-section' ).toggle();
+	} );
+
+	$( document ).on( 'change', '#coil_branding', function() {
+		const siteLogoSelected = $( '#coil_branding option:selected' ).val() === 'site_logo';
+		if ( siteLogoSelected ) {
+			$( '.set-site-logo-description' ).show();
+		} else {
+			$( '.set-site-logo-description' ).hide();
+		}
 	} );
 
 	$( document ).on( 'change', 'input[name="coil_button_settings_group[coil_button_toggle]"]', function() {
@@ -181,6 +196,11 @@
 			}
 		} else if ( logoSetting === 'site_logo' ) {
 			logoSrc = siteLogoUrl;
+			if ( logoSrc === '' ) {
+				$( '.site_logo' ).hide();
+			} else {
+				$( '.site_logo' ).show();
+			}
 		}
 
 		$( '.coil-paywall-image' ).attr( 'src', logoSrc );

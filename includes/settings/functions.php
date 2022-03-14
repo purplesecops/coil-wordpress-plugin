@@ -795,14 +795,12 @@ function paywall_branding_render_callback() {
 		esc_attr( 'Show Coil logo' )
 	);
 
-	if ( ! empty( get_custom_logo() ) ) {
-		printf(
-			'<option value="%s" %s>%s</option>',
-			esc_attr( 'site_logo' ),
-			( ! empty( $message_branding_value ) && $message_branding_value === 'site_logo' ? 'selected="selected"' : false ),
-			esc_attr( 'Show website logo' )
-		);
-	}
+	printf(
+		'<option value="%s" %s>%s</option>',
+		esc_attr( 'site_logo' ),
+		( ! empty( $message_branding_value ) && $message_branding_value === 'site_logo' ? 'selected="selected"' : false ),
+		esc_attr( 'Show website logo' )
+	);
 
 	printf(
 		'<option value="%s" %s>%s</option>',
@@ -812,6 +810,15 @@ function paywall_branding_render_callback() {
 	);
 
 	echo '</select>';
+
+	printf(
+		'<p class="%s" style="%s">%s<a href="%s">%s</a>.</p>',
+		esc_attr( 'description set-site-logo-description' ),
+		esc_attr( 'display: none' ),
+		esc_html__( 'You can change your site logo in the ', 'coil-web-monetization' ),
+		esc_url( admin_url( 'customize.php?return=%2Fwp-admin%2Fthemes.php' ) ),
+		esc_html__( 'Appearance Settings', 'coil-web-monetization' )
+	);
 }
 
 /**
