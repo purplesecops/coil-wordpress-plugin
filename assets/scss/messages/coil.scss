@@ -209,10 +209,6 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 				height: 24px;
 				width: 24px;
 			}
-
-			&:hover {
-				background-color: $coil_button_message_hover_color;
-			}
 		}
 
 		@media only screen and (min-width: $message_mobile_breakpoint) {
@@ -269,11 +265,21 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 			div {
 				color: $coil_button_font_color_light_theme;
 			}
-
-			&:hover {
-				background-color: $coil_button_message_hover_color_light_theme;
-			}
 		}
+	}
+}
+
+// Implement hover effect
+body:not( .monetization-initialized ) .coil-button-message-container .coil-button {
+	&:hover {
+		background-color: $coil_button_message_hover_color;
+	}
+}
+
+// Implement hover effect for the light theme
+body:not( .monetization-initialized ) .coil-button-message-container.coil-light-theme .coil-button {
+	&:hover {
+		background-color: $coil_button_message_hover_color_light_theme;
 	}
 }
 
