@@ -5,8 +5,7 @@
 		return;
 	}
 
-	const ajaxUrl = coilAdminParams.ajax_url,
-		siteLogoUrl = coilAdminParams.site_logo_url,
+	const siteLogoUrl = coilAdminParams.site_logo_url,
 		lightCoilLogoUrl = coilAdminParams.coil_logo_url.light,
 		darkCoilLogoUrl = coilAdminParams.coil_logo_url.dark,
 		notMonetizedPostTypes = coilAdminParams.not_monetized_post_types,
@@ -21,28 +20,14 @@
 
 	// Welcome notice
 	if ( activeTabID === 'coil-welcome-settings' ) {
-		const $welcomeNoticeDismissButton = $( '.coil-welcome-notice' );
+		const $welcomeNotice = $( '.coil-welcome-notice' );
 
 		// No welcome notice on this screen.
-		if ( $welcomeNoticeDismissButton.length === 0 ) {
-			return;
+		if ( $welcomeNotice.length === 0 ) {
+			$( '.tab-styling .button-primary' ).show();
+		} else {
+			$( '.tab-styling .button-primary' ).hide();
 		}
-
-		$( '.tab-styling .button-primary' ).addClass( 'disabled' );
-
-		$welcomeNoticeDismissButton.on( 'click', '.notice-dismiss', function() {
-			// Fire ajax request to dismiss notice permanently.
-			( function() {
-				$.ajax( {
-					url: ajaxUrl,
-					type: 'POST',
-					data: {
-						action: 'dismiss_welcome_notice',
-					},
-				} );
-			}() );
-			$( '.tab-styling .button-primary' ).removeClass( 'disabled' );
-		} );
 	}
 
 	// Exclusive Content tab

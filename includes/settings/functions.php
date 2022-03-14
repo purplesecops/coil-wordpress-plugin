@@ -1443,9 +1443,8 @@ function admin_welcome_notice() {
 	}
 
 	$payment_pointer_id = Admin\get_payment_pointer_setting();
-	$notice_dismissed   = get_user_meta( $current_user->ID, 'coil-welcome-notice-dismissed', true );
 
-	if ( $payment_pointer_id || $notice_dismissed === 'true' ) {
+	if ( $payment_pointer_id ) {
 		return;
 	}
 
@@ -1752,17 +1751,4 @@ function coil_term_custom_meta( $action, $term ) {
 
 	<?php
 	wp_nonce_field( 'coil_term_gating_nonce_action', 'term_gating_nonce' );
-}
-
-function dismiss_welcome_notice() {
-
-	global $current_user;
-
-	// Bail early - no user set (somehow).
-	if ( empty( $current_user ) ) {
-		return;
-	}
-
-	// User meta stored as strings, so use 'true' to avoid data type issues.
-	update_user_meta( $current_user->ID, 'coil-welcome-notice-dismissed', 'true' );
 }
