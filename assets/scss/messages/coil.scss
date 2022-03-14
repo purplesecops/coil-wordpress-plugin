@@ -175,6 +175,11 @@ body.coil-hide-excerpt.show-fw-message .entry-content {
 
 // Scenario 3 - Coil button
 .coil-button-message-container {
+	// Hide the Coil button on mobile
+	@media only screen and (max-width: $message_mobile_breakpoint) {
+		display: none;
+	}
+
 	display: flex;
 	position: fixed;
 	width: 100%;
@@ -305,12 +310,6 @@ body:not( .monetization-initialized ) .coil-button-message-container.coil-light-
 			top: -5px;
 			width: 14px;
 		}
-	}
-}
-
-.coil-button-message-container {
-	@media only screen and (max-width: $message_mobile_breakpoint) {
-		display: none;
 	}
 }
 
