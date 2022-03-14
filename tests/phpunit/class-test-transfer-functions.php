@@ -44,6 +44,9 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 		// Testing removal of a deprecated message
 		set_theme_mod( self::$id['fully_gated_excerpt_message'], 'Fully gated excerpt' );
 
+		// Ensure the database doesn't contain a version number
+		delete_option( 'coil_db_ver' );
+
 		// Transferrng settings to the wp_options table
 		Coil\maybe_update_database();
 
@@ -97,6 +100,9 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 		// Testing removal of a deprecated message
 		set_theme_mod( 'coil_partially_gated_excerpt_message', 'Partially gated excerpt' );
 
+		// Ensure the database doesn't contain a version number
+		delete_option( 'coil_db_ver' );
+
 		// Transferrng settings to the wp_options table
 		Coil\maybe_update_database();
 
@@ -138,6 +144,9 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 		set_theme_mod( 'coil_show_donation_bar', false );
 		set_theme_mod( 'coil_title_padlock', false );
 
+		// Ensure the database doesn't contain a version number
+		delete_option( 'coil_db_ver' );
+
 		// Transferrng settings to the wp_options table
 		Coil\maybe_update_database();
 
@@ -167,6 +176,9 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 		// Adding custom appearance settings to the theme_mod
 		set_theme_mod( 'coil_show_donation_bar', true );
 		set_theme_mod( 'coil_title_padlock', true );
+
+		// Ensure the database doesn't contain a version number
+		delete_option( 'coil_db_ver' );
 
 		// Transferrng settings to the wp_options table
 		Coil\maybe_update_database();
@@ -199,6 +211,9 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 		set_theme_mod( 'coil_show_donation_bar', true );
 		set_theme_mod( 'coil_title_padlock', false );
 
+		// Ensure the database doesn't contain a version number
+		delete_option( 'coil_db_ver' );
+
 		// Transferrng settings to the wp_options table
 		Coil\maybe_update_database();
 
@@ -228,6 +243,9 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 		// Adding custom appearance settings to the database and theme_mod
 		update_option( 'coil_exclusive_settings_group', [ 'coil_title_padlock' => false ] );
 		set_theme_mod( 'coil_show_donation_bar', false );
+
+		// Ensure the database doesn't contain a version number
+		delete_option( 'coil_db_ver' );
 
 		// Transferrng settings to the wp_options table
 		Coil\maybe_update_database();
@@ -262,6 +280,9 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 		];
 		update_option( 'coil_messaging_settings_group', $original_messages );
 
+		// Ensure the database doesn't contain a version number
+		delete_option( 'coil_db_ver' );
+
 		// Transferrng settings
 		Coil\maybe_update_database();
 
@@ -295,6 +316,9 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 		];
 		update_option( 'coil_global_settings_group', $original_settings );
 
+		// Ensure the database doesn't contain a version number
+		delete_option( 'coil_db_ver' );
+
 		// Transferrng settings
 		Coil\maybe_update_database();
 
@@ -325,6 +349,9 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 			'page' => 'no',
 		];
 		update_option( 'coil_content_settings_posts_group', $original_settings );
+
+		// Ensure the database doesn't contain a version number
+		delete_option( 'coil_db_ver' );
 
 		// Transferrng settings
 		Coil\maybe_update_database();
@@ -363,6 +390,9 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 		];
 		update_option( 'coil_content_settings_excerpt_group', $original_settings );
 
+		// Ensure the database doesn't contain a version number
+		delete_option( 'coil_db_ver' );
+
 		// Transferrng settings
 		Coil\maybe_update_database();
 
@@ -394,6 +424,9 @@ class Test_Transfer_Functions extends WP_UnitTestCase {
 			'coil_title_padlock'      => false,
 		];
 		update_option( 'coil_appearance_settings_group', $original_settings );
+
+		// Ensure the database doesn't contain a version number
+		delete_option( 'coil_db_ver' );
 
 		// Transferrng settings
 		Coil\maybe_update_database();
