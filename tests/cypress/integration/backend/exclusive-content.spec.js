@@ -76,6 +76,39 @@ describe( 'Exclusive Content settings tab', () => {
 			.should( 'be.checked' );
 	} );
 
+	it( 'Checks that link to Appearance Settings only appears when site_logo is selected', () => {
+		cy
+			.get( '.set-site-logo-description' )
+			.should( 'not.be.visible' );
+
+		cy
+			.get( '#coil_branding' )
+			.select( 'site_logo' );
+
+		cy
+			.get( '.set-site-logo-description' )
+			.should( 'be.visible' );
+
+		cy
+			.get( '#coil_branding' )
+			.select( 'no_logo' );
+
+		cy
+			.get( '.set-site-logo-description' )
+			.should( 'not.be.visible' );
+
+		cy
+			.get( '#coil_branding' )
+			.select( 'site_logo' );
+		cy
+			.get( '#submit' )
+			.click();
+
+		cy
+			.get( '.set-site-logo-description' )
+			.should( 'be.visible' );
+	} );
+
 	it( 'Checks Exclusive Post Appearance defaults', () => {
 		cy
 			.get( '#coil_title_padlock' )
