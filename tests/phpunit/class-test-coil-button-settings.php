@@ -375,43 +375,4 @@ class Test_Coil_Button_Settings extends WP_UnitTestCase {
 
 		$this->assertSame( '', $button_status );
 	}
-
-	/**
-	 * Testing the Coil button mobile display default.
-	 *
-	 * @return void
-	 */
-	public function test_coil_button_mobile_display_default() :  void {
-		// Database defaults must first be setup
-		Coil\maybe_update_database();
-		$defaults        = Admin\get_coil_button_defaults();
-		$retrieved_value = Admin\get_coil_button_setting( 'coil_mobile_button_display' );
-
-		// The default is true
-		$this->assertSame( $defaults['coil_mobile_button_display'], true );
-		$this->assertSame( $defaults['coil_mobile_button_display'], $retrieved_value );
-	}
-
-	/**
-	 * Testing if the Coil button mobile display setting can be retrieved correctly from the wp_options table.
-	 *
-	 * @return void
-	 */
-	public function test_if_the_coil_button_mobile_display_setting_can_be_retrieved_successfully() :  void {
-		// Set the Coil button to be hidden on mobile devices
-		$coil_button_settings = [ 'coil_mobile_button_display' => false ];
-		update_option( 'coil_button_settings_group', $coil_button_settings );
-
-		$retrieved_mobile_display_setting = Admin\get_coil_button_setting( 'coil_mobile_button_display' );
-
-		$this->assertSame( false, $retrieved_mobile_display_setting );
-
-		// Set the Coil button to show on mobile devices
-		$coil_button_settings = [ 'coil_mobile_button_display' => true ];
-		update_option( 'coil_button_settings_group', $coil_button_settings );
-
-		$retrieved_mobile_display_setting = Admin\get_coil_button_setting( 'coil_mobile_button_display' );
-
-		$this->assertSame( true, $retrieved_mobile_display_setting );
-	}
 }

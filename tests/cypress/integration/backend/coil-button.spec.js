@@ -145,10 +145,6 @@ describe( 'Coil button settings tab', () => {
 		cy
 			.get( '#page_button_visibility_show' )
 			.should( 'be.checked' );
-
-		cy
-			.get( '#coil_mobile_button_display' )
-			.should( 'be.checked' );
 	} );
 
 	it( 'Checks coil button visibility settings can be changed', () => {
@@ -158,10 +154,6 @@ describe( 'Coil button settings tab', () => {
 
 		cy
 			.get( '#page_button_visibility_hide' )
-			.click();
-
-		cy
-			.get( '#coil_mobile_button_display' )
 			.click();
 
 		cy
@@ -175,10 +167,6 @@ describe( 'Coil button settings tab', () => {
 		cy
 			.get( '#page_button_visibility_hide' )
 			.should( 'be.checked' );
-
-		cy
-			.get( '#coil_mobile_button_display' )
-			.should( 'not.be.checked' );
 	} );
 } );
 

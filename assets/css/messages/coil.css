@@ -482,7 +482,7 @@ body:not(.monetization-initialized) .coil-button-message-container.coil-light-th
     width: 14px; }
 
 @media only screen and (max-width: 768px) {
-  .coil-button-message-container.hide-mobile-coil-button {
+  .coil-button-message-container {
     display: none; } }
 
 a.coil-serverside-message-button {

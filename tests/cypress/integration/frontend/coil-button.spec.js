@@ -248,17 +248,13 @@ describe( 'Coil button for non WM-enabled users', function() {
 			.type( `{selectall}${ leftMargin }` );
 
 		cy
-			.get( '#coil_mobile_button_display' )
-			.uncheck();
-
-		cy
 			.get( '#submit' )
 			.click();
 
 		cy.visit( '/monetized-and-public/' );
 
 		cy
-			.get( '.coil-button-message-container.top.left.coil-light-theme.coil-button-small.hide-mobile-coil-button' )
+			.get( '.coil-button-message-container.top.left.coil-light-theme.coil-button-small' )
 			.should( 'exist' );
 
 		cy

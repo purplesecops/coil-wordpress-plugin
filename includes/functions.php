@@ -203,7 +203,6 @@ function load_full_assets() : void {
 			'coil_button_unpaid_message'  => Admin\get_coil_button_setting( 'coil_button_text', true ),
 			'coil_button_paid_message'    => Admin\get_coil_button_setting( 'coil_members_button_text', true ),
 			'show_coil_button_to_members' => Admin\get_coil_button_setting( 'coil_button_member_display' ),
-			'show_coil_button_on_mobile'  => Admin\get_coil_button_setting( 'coil_mobile_button_display' ),
 			'coil_button_link'            => Admin\get_coil_button_setting( 'coil_button_link', true ),
 			'paywall_button_text'         => Admin\get_paywall_text_settings_or_default( 'coil_paywall_button_text' ),
 			'paywall_button_link'         => Admin\get_paywall_text_settings_or_default( 'coil_paywall_button_link' ),

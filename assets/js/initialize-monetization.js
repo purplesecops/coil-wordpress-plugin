@@ -13,7 +13,6 @@
 		coilButtonUnpaidMessage = coilParams.coil_button_unpaid_message,
 		coilButtonPaidMessage = coilParams.coil_button_paid_message,
 		showCoilButtonToMembers = Boolean( coilParams.show_coil_button_to_members ),
-		showCoilButtonOnMobile = Boolean( coilParams.show_coil_button_on_mobile ),
 		coilButtonLink = coilParams.coil_button_link,
 		postExcerpt = coilParams.post_excerpt,
 		adminMissingIdNotice = coilParams.admin_missing_id_notice,
@@ -150,10 +149,6 @@
 
 		const modalContainer = document.createElement( 'div' );
 		$( modalContainer ).addClass( 'coil-button-message-container' + ' ' + verticalPosition + ' ' + horizontalPosition );
-
-		if ( ! showCoilButtonOnMobile ) {
-			$( modalContainer ).addClass( 'hide-mobile-coil-button' );
-		}
 
 		let brandingLogo = '';
 

@@ -78,7 +78,6 @@ function maybe_load_database_defaults() {
 		$new_button_settings                       = [];
 		$new_button_settings['coil_button_toggle'] = $defaults['coil_button_toggle'];
 		$new_button_settings['coil_button_member_display'] = $defaults['coil_button_member_display'];
-		$new_button_settings['coil_mobile_button_display'] = $defaults['coil_mobile_button_display'];
 
 		$post_type_options = Coil\get_supported_post_types( 'objects' );
 		// Button visibility default is 'show'

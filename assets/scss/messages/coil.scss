@@ -308,7 +308,7 @@ body:not( .monetization-initialized ) .coil-button-message-container.coil-light-
 	}
 }
 
-.coil-button-message-container.hide-mobile-coil-button {
+.coil-button-message-container {
 	@media only screen and (max-width: $message_mobile_breakpoint) {
 		display: none;
 	}

@@ -373,7 +373,7 @@ function coil_button_settings_group_validation( $coil_button_settings ): array {
 		}
 	}
 
-	$checkbox_fields = [ 'coil_button_toggle', 'coil_button_member_display', 'coil_mobile_button_display' ];
+	$checkbox_fields = [ 'coil_button_toggle', 'coil_button_member_display' ];
 
 	foreach ( $checkbox_fields as $field_name ) {
 		$final_settings[ $field_name ] = isset( $coil_button_settings[ $field_name ] ) && ( $coil_button_settings[ $field_name ] === 'on' || $coil_button_settings[ $field_name ] === true ) ? true : false;
@@ -1412,20 +1412,6 @@ function coil_settings_coil_button_visibility_render_callback() {
 			'<p class="%s">%s</p>',
 			esc_attr( 'description' ),
 			esc_html__( 'You can override these settings in the Category, Tag, Page and Post menus.', 'coil-web-monetization' )
-		);
-
-		$mobile_button_display_id = 'coil_mobile_button_display';
-		Rendering\render_checkbox_field(
-			$mobile_button_display_id,
-			'coil_button_settings_group[' . $mobile_button_display_id . ']',
-			__( 'Show on mobile', 'coil-web-monetization' ),
-			Admin\get_coil_button_setting( $mobile_button_display_id )
-		);
-
-		printf(
-			'<p class="%s">%s</p>',
-			esc_attr( 'description' ),
-			esc_html__( 'On mobile, the button can\'t detect if the user is a Coil member, so if you check this box, the `Support` button will always show.', 'coil-web-monetization' )
 		);
 		?>
 	</div>
