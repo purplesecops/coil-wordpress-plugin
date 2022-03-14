@@ -200,7 +200,7 @@ function maybe_restrict_content( string $content ) : string {
 	switch ( $coil_visibility_status ) {
 		case 'exclusive':
 		case 'gate-tagged-blocks':
-			// Restrict content beneath the Coil Rea More block
+			// Restrict content beneath the Coil Read More block
 			if ( has_read_more_block( $content ) ) {
 
 				$content        = str_replace( $coil_read_more_string, '<div class="coil-restricted-content">', $content );
