@@ -450,7 +450,7 @@ function coil_settings_welcome_render_callback() {
 
 		// Monetization Section
 		Rendering\render_welcome_section(
-			__( 'Monetization', 'coil-web-monetization' ),
+			__( 'Web Monetization', 'coil-web-monetization' ),
 			__( 'The Coil WordPress Plugin lets you enable Web Monetization on your website. With Web Monetization, you automatically receive streaming payments whenever Coil members visit your site.', 'coil-web-monetization' )
 		);
 
@@ -1451,7 +1451,7 @@ function admin_welcome_notice() {
 	<div class="notice is-dismissible coil-welcome-notice">
 		<div class="coil-welcome-notice__content">
 			<h3><?php esc_html_e( 'Welcome to Coil Web Monetization for WordPress', 'coil-web-monetization' ); ?></h3>
-			<p><?php esc_html_e( 'To start using the plugin add your payment pointer in the Monetization tab.', 'coil-web-monetization' ); ?></p>
+			<p><?php esc_html_e( 'Add your payment pointer to start using the plugin.', 'coil-web-monetization' ); ?></p>
 			<p>
 				<?php
 					echo sprintf(
