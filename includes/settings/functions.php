@@ -561,9 +561,9 @@ function coil_settings_payment_pointer_render_callback() {
 		);
 
 		printf(
-			'<p class="%s">%s<a href="%s" target="%s" >%s</a></p>',
+			'<p class="%s">%s (<a href="%s" target="%s" >%s</a>)</p>',
 			esc_attr( 'description' ),
-			esc_html__( 'Don\'t have a digital wallet or know your payment pointer? ', 'coil-web-monetization' ),
+			esc_html__( 'Don\'t have a digital wallet or know your payment pointer?', 'coil-web-monetization' ),
 			esc_url( 'https://webmonetization.org/docs/ilp-wallets' ),
 			esc_attr( '_blank' ),
 			esc_html__( 'Learn more', 'coil-web-monetization' )
@@ -586,7 +586,7 @@ function coil_settings_monetization_render_callback() {
 		<?php
 		Rendering\render_settings_section_heading(
 			__( 'Monetization Settings', 'coil-web-monetization' ),
-			__( 'Manage monetization for specific post types', 'coil-web-monetization' )
+			__( 'Manage the default monetization for your post types. You\'ll receive streaming payments whenever Coil members visit monetized posts.', 'coil-web-monetization' )
 		);
 
 		// Using a function to generate the table with the global monetization radio button options.
@@ -601,7 +601,7 @@ function coil_settings_monetization_render_callback() {
 		printf(
 			'<p class="%s">%s</p>',
 			esc_attr( 'description' ),
-			esc_html__( 'You can override these settings in the Category, Tag, Page and Post menus.', 'coil-web-monetization' )
+			esc_html__( 'You can override these settings in the Category, Tag, Page, and Post menus.', 'coil-web-monetization' )
 		);
 
 		?>
@@ -1504,7 +1504,7 @@ function admin_no_payment_pointer_notice() {
 		<img width="48" height="48" class="coil-no-payment-pointer-notice__icon" src="<?php echo esc_url( plugins_url( 'assets/images/web-mon-icon.svg', COIL__FILE__ ) ); ?>" alt="<?php esc_attr_e( 'Coil', 'coil-web-monetization' ); ?>" />
 		<div class="coil-no-payment-pointer-notice__content">
 			<h3><?php esc_html_e( 'Warning', 'coil-web-monetization' ); ?></h3>
-			<p><?php esc_html_e( 'You haven\'t entered a payment pointer. A payment pointer is required to receive payments and for exclusive content to be recognized.', 'coil-web-monetization' ); ?></p>
+			<p><?php esc_html_e( 'A payment pointer is required to receive payments and to hide exclusive content from visitors who don\'t have an active Coil membership.', 'coil-web-monetization' ); ?></p>
 		</div>
 	</div>
 	<?php
