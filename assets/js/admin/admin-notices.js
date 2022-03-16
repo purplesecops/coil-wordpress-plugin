@@ -23,6 +23,85 @@
 	let formSubmitting = false;
 
 	/* ------------------------------------------------------------------------ *
+	* Helper functions
+	* ------------------------------------------------------------------------ */
+
+	// Gets a list of post types that can cause conflicts (e.g. exclusive, or not-monetized).
+	// Checks each option on the current tab for the specified post types to see if anything incompatible has been selected.
+	// A setting is incompatible if it sets a post type to be exclusive and not-monetized by default.
+	// If an incompatibility is found then a modal is displayed which explains which settings will be changed to ensure compatibility.
+	function displayModal( event, postTypesToCheck, suffix, modalMsg ) {
+		let incompatiblePostTypes = '';
+		// Runs through a list of post types from the database that have the potential to cause conflicts with settings on this tab.
+		// E.g. On the General Content tab all post types that default to exclusive can lead to incompatible settings.
+		postTypesToCheck.forEach( ( postType ) => {
+			// The element ID is formed using the suffix and checks each checkbox that could lead to incompatible settings.
+			const elementId = postType + suffix;
+			// Gathers the names for all post types that have been checked and will create incompatibilities.
+			if ( document.getElementById( elementId ).checked ) {
+				incompatiblePostTypes += postType + 's, ';
+			}
+		} );
+
+		if ( incompatiblePostTypes.length > 0 ) {
+			// Remove trailing comma
+			incompatiblePostTypes = incompatiblePostTypes.slice( 0, -2 );
+			// Inserting an 'and' if there are more than two items in the list
+			incompatiblePostTypes = incompatiblePostTypes.replace( /,([^,]*)$/, ' and$1' );
+			modalMsg = modalMsg.replace( '{postTypes}', incompatiblePostTypes );
+			if ( ! confirm( modalMsg ) && ( typeof event.cancelable !== 'boolean' || event.cancelable ) ) { // eslint-disable-line
+				// The changes have not been confirmed.
+				event.preventDefault();
+				formSubmitting = false;
+			}
+		}
+	}
+
+	// Adds or removes alerting functionality for invalid input that is detected when focus leaves an input field.
+	function focusOutValidityHandler( inputElement, validCondition, msg ) {
+		const nextElement = inputElement.next();
+		let invalidMsgElement = null;
+		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
+			invalidMsgElement = nextElement;
+		}
+		if ( ! validCondition ) {
+			inputElement.css( 'border-color', red );
+			if ( invalidMsgElement === null ) {
+				inputElement.after( '<p class="invalid-input" style="color: ' + red + '">' + msg + '</p>' );
+				const position = inputElement.prev().position();
+				let top;
+				if ( position !== undefined ) {
+					top = position.top;
+				} else {
+					top = 0;
+				}
+				$( 'html, body' ).animate( { scrollTop: top + 'px' } );
+			}
+		} else if ( invalidMsgElement !== null ) {
+			inputElement.removeAttr( 'style' );
+			invalidMsgElement.remove();
+		}
+	}
+
+	// Adds or removes alerting functionality for invalid input that is detected during changes to an input field.
+	function inputValidityHandler( inputElement, validCondition, addAlertWhileTyping, msg ) {
+		const nextElement = inputElement.next();
+		let invalidMsgElement = null;
+		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
+			invalidMsgElement = nextElement;
+		}
+		if ( invalidMsgElement !== null && validCondition ) {
+			inputElement.removeAttr( 'style' );
+			invalidMsgElement.remove();
+		} else if ( addAlertWhileTyping ) {
+			inputElement.css( 'border-color', red );
+			if ( invalidMsgElement === null ) {
+				inputElement.after( '<p class="invalid-input" style="color: ' + red + '">' + msg + '</p>' );
+			}
+		}
+	}
+
+	/* ------------------------------------------------------------------------ *
 	* Initial set-up
 	* ------------------------------------------------------------------------ */
 
@@ -101,37 +180,6 @@
 		}
 	} );
 
-	// Gets a list of post types that can cause conflicts (e.g. exclusive, or not-monetized).
-	// Checks each option on the current tab for the specified post types to see if anything incompatible has been selected.
-	// A setting is incompatible if it sets a post type to be exclusive and not-monetized by default.
-	// If an incompatibility is found then a modal is displayed which explains which settings will be changed to ensure compatibility.
-	function displayModal( event, postTypesToCheck, suffix, modalMsg ) {
-		let incompatiblePostTypes = '';
-		// Runs through a list of post types from the database that have the potential to cause conflicts with settings on this tab.
-		// E.g. On the General Content tab all post types that default to exclusive can lead to incompatible settings.
-		postTypesToCheck.forEach( ( postType ) => {
-			// The element ID is formed using the suffix and checks each checkbox that could lead to incompatible settings.
-			const elementId = postType + suffix;
-			// Gathers the names for all post types that have been checked and will create incompatibilities.
-			if ( document.getElementById( elementId ).checked ) {
-				incompatiblePostTypes += postType + 's, ';
-			}
-		} );
-
-		if ( incompatiblePostTypes.length > 0 ) {
-			// Remove trailing comma
-			incompatiblePostTypes = incompatiblePostTypes.slice( 0, -2 );
-			// Inserting an 'and' if there are more than two items in the list
-			incompatiblePostTypes = incompatiblePostTypes.replace( /,([^,]*)$/, ' and$1' );
-			modalMsg = modalMsg.replace( '{postTypes}', incompatiblePostTypes );
-			if ( ! confirm( modalMsg ) && ( typeof event.cancelable !== 'boolean' || event.cancelable ) ) { // eslint-disable-line
-				// The changes have not been confirmed.
-				event.preventDefault();
-				formSubmitting = false;
-			}
-		}
-	}
-
 	/* ------------------------------------------------------------------------ *
 	* General Settings tab
 	* ------------------------------------------------------------------------ */
@@ -144,31 +192,6 @@
 		focusOutValidityHandler( paymentPointer, validityCondition, invalidPaymentPointerMsg );
 	} );
 
-	function focusOutValidityHandler( inputElement, validCondition, msg ) {
-		const nextElement = inputElement.next();
-		let invalidMsgElement = null;
-		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
-			invalidMsgElement = nextElement;
-		}
-		if ( ! validCondition ) {
-			inputElement.css( 'border-color', red );
-			if ( invalidMsgElement === null ) {
-				inputElement.after( '<p class="invalid-input" style="color: ' + red + '">' + msg + '</p>' );
-				const position = inputElement.prev().position();
-				let top;
-				if ( position !== undefined ) {
-					top = position.top;
-				} else {
-					top = 0;
-				}
-				$( 'html, body' ).animate( { scrollTop: top + 'px' } );
-			}
-		} else if ( invalidMsgElement !== null ) {
-			inputElement.removeAttr( 'style' );
-			invalidMsgElement.remove();
-		}
-	}
-
 	// Removes the invalid input warning if the input becomes valid
 	$( document ).on( 'input', '#coil_payment_pointer', function() {
 		const paymentPointer = $( '#coil_payment_pointer' );
@@ -176,23 +199,6 @@
 		const validityCondition = pattern.test( $( this ).val() );
 		inputValidityHandler( paymentPointer, validityCondition, false, '' );
 	} );
-
-	function inputValidityHandler( inputElement, validCondition, addAlertWhileTyping, msg ) {
-		const nextElement = inputElement.next();
-		let invalidMsgElement = null;
-		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
-			invalidMsgElement = nextElement;
-		}
-		if ( invalidMsgElement !== null && validCondition ) {
-			inputElement.removeAttr( 'style' );
-			invalidMsgElement.remove();
-		} else if ( addAlertWhileTyping ) {
-			inputElement.css( 'border-color', red );
-			if ( invalidMsgElement === null ) {
-				inputElement.after( '<p class="invalid-input" style="color: ' + red + '">' + msg + '</p>' );
-			}
-		}
-	}
 
 	/* ------------------------------------------------------------------------ *
 	* Exclusive Settings tab
