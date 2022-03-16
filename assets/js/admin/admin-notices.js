@@ -12,7 +12,9 @@
 		exclusivePostTypes = coilAdminParams.exclusive_post_types,
 		generalModalMsg = coilAdminParams.general_modal_msg,
 		exclusiveModalMsg = coilAdminParams.exclusive_modal_msg,
-		invalidPaymentPointerMsg = coilAdminParams.invalid_payment_pointer_msg;
+		invalidPaymentPointerMsg = coilAdminParams.invalid_payment_pointer_msg,
+		invalidBtnTextMsg = coilAdminParams.invalid_button_text_msg;
+		// invalidUrl = coilAdminParams.invalid_url;
 
 	const activeTabID = $( '.nav-tab-wrapper a.nav-tab-active' ).attr( 'id' );
 	const red = '#EE4852';
@@ -142,6 +144,8 @@
 			paymentPointer.css( 'border-color', red );
 			if ( ! $( '.invalid-input' ).length ) {
 				paymentPointer.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidPaymentPointerMsg + '</p>' );
+				const position = $( '.invalid-input' ).prev().prev().position();
+				$( 'html, body' ).animate( { scrollTop: position.top + 'px' } );
 			}
 		} else {
 			paymentPointer.removeAttr( 'style' );
@@ -170,7 +174,7 @@
 		$( '.exclusive-content-section' ).toggle();
 	} );
 
-	$( document ).on( 'keyup', '#coil_paywall_title', function() {
+	$( document ).on( 'input', '#coil_paywall_title', function() {
 		if ( $( this ).val() !== '' ) {
 			$( '.coil-paywall-heading' ).text( $( this ).val() );
 		} else {
@@ -178,7 +182,7 @@
 		}
 	} );
 
-	$( document ).on( 'keyup', '#coil_paywall_message', function() {
+	$( document ).on( 'input', '#coil_paywall_message', function() {
 		if ( $( this ).val() !== '' ) {
 			$( '.coil-paywall-body' ).text( $( this ).val() );
 		} else {
@@ -186,11 +190,51 @@
 		}
 	} );
 
-	$( document ).on( 'keyup', '#coil_paywall_button_text', function() {
-		if ( $( this ).val() !== '' ) {
+	// Invalid input alert
+	$( document ).on( 'focusout', '#coil_paywall_button_text', function() {
+		const buttonText = $( '#coil_paywall_button_text' );
+		const nextElement = buttonText.next();
+		let invalidMsg = null;
+		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
+			invalidMsg = nextElement;
+		}
+		const onlyWhiteSpace = /^\s+$/;
+		if ( onlyWhiteSpace.test( $( this ).val() ) ) {
+			buttonText.css( 'border-color', red );
+			if ( invalidMsg === null ) {
+				buttonText.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidBtnTextMsg + '</p>' );
+				const position = $( '.invalid-input' ).prev().prev().position();
+				$( 'html, body' ).animate( { scrollTop: position.top + 'px' } );
+			}
+		} else {
+			buttonText.removeAttr( 'style' );
+			invalidMsg.remove();
+		}
+	} );
+
+	$( document ).on( 'input', '#coil_paywall_button_text', function() {
+		const buttonText = $( '#coil_paywall_button_text' );
+		const nextElement = buttonText.next();
+		let invalidMsg = null;
+		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
+			invalidMsg = nextElement;
+		}
+		const onlyWhiteSpace = /^\s+$/;
+		if ( $( this ).val() !== '' && ! onlyWhiteSpace.test( $( this ).val() ) ) {
 			$( '.coil-paywall-cta' ).text( $( this ).val() );
 		} else {
 			$( '.coil-paywall-cta' ).text( $( this ).attr( 'placeholder' ) );
+		}
+
+		// Invalid input warning
+		if ( onlyWhiteSpace.test( $( this ).val() ) ) {
+			buttonText.css( 'border-color', red );
+			if ( invalidMsg === null ) {
+				buttonText.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidBtnTextMsg + '</p>' );
+			}
+		} else if ( invalidMsg !== null ) {
+			buttonText.removeAttr( 'style' );
+			invalidMsg.remove();
 		}
 	} );
 
