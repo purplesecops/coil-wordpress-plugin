@@ -1646,13 +1646,13 @@ function coil_term_custom_meta( $action, $term ) {
 	if ( $action === 'add' ) {
 		?>
 		<div id="coil_dropdown">
-			<label for="_coil_monetization_term_status"><?php esc_html_e( 'Select a monetization status', 'coil-web-monetization' ); ?></label>
+			<label for="_coil_monetization_term_status"><?php esc_html_e( 'Select a Web Monetization status', 'coil-web-monetization' ); ?></label>
 		<?php
 	} else {
 		?>
 		<tr class="form-field">
 		<th>
-			<?php esc_html_e( 'Select a monetization status', 'coil-web-monetization' ); ?>
+			<?php esc_html_e( 'Select a Web Monetization status', 'coil-web-monetization' ); ?>
 		</th>
 		<td id="coil_dropdown">
 		<?php
