@@ -203,7 +203,8 @@ function load_admin_assets() : void {
 			'general_modal_msg'           => __( 'Removing monetization from {postTypes} will set them as public by default.', 'coil-web-monetization' ),
 			'exclusive_modal_msg'         => __( 'Making {postTypes} exclusive will also set them as monetized by default.', 'coil-web-monetization' ),
 			'invalid_payment_pointer_msg' => __( 'Please provide a valid payment pointer', 'coil-web-monetization' ),
-			'invalid_button_text_msg'     => __( 'Button text cannot be blank', 'coil-web-monetization' ),
+			'invalid_blank_input_msg'     => __( 'Button text cannot be blank', 'coil-web-monetization' ),
+			'invalid_url_message'         => __( 'Please provide a valid URL', 'coil-web-monetization' ),
 		]
 	);
 

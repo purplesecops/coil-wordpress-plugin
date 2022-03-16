@@ -13,8 +13,8 @@
 		generalModalMsg = coilAdminParams.general_modal_msg,
 		exclusiveModalMsg = coilAdminParams.exclusive_modal_msg,
 		invalidPaymentPointerMsg = coilAdminParams.invalid_payment_pointer_msg,
-		invalidBtnTextMsg = coilAdminParams.invalid_button_text_msg;
-		// invalidUrl = coilAdminParams.invalid_url;
+		invalidBlankInputMsg = coilAdminParams.invalid_blank_input_msg,
+		invalidUrlMsg = coilAdminParams.invalid_url_message;
 
 	const activeTabID = $( '.nav-tab-wrapper a.nav-tab-active' ).attr( 'id' );
 	const red = '#EE4852';
@@ -139,7 +139,12 @@
 	// Invalid input alert
 	$( document ).on( 'focusout', '#coil_payment_pointer', function() {
 		const paymentPointer = $( '#coil_payment_pointer' );
-		const pattern = /^(https:\/\/.)|^(http:\/\/.)|^[\$]./;
+		const pattern = /^(https:\/\/.)|^[\$]./;
+		const nextElement = paymentPointer.next();
+		let invalidMsgElement = null;
+		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
+			invalidMsgElement = nextElement;
+		}
 		if ( ! pattern.test( $( this ).val() ) ) {
 			paymentPointer.css( 'border-color', red );
 			if ( ! $( '.invalid-input' ).length ) {
@@ -147,22 +152,24 @@
 				const position = $( '.invalid-input' ).prev().prev().position();
 				$( 'html, body' ).animate( { scrollTop: position.top + 'px' } );
 			}
-		} else {
+		} else if ( invalidMsgElement !== null ) {
 			paymentPointer.removeAttr( 'style' );
-			$( '.invalid-input' ).remove();
+			invalidMsgElement.remove();
 		}
 	} );
 
 	// Removes the invalid input warning if the input becomes valid
 	$( document ).on( 'input', '#coil_payment_pointer', function() {
 		const paymentPointer = $( '#coil_payment_pointer' );
-		const pattern = /^(https:\/\/.)|^(http:\/\/.)|^[\$]./;
-		const isHighlighted = $( '.invalid-input' ).length;
-		if ( isHighlighted ) {
-			if ( pattern.test( $( this ).val() ) ) {
-				paymentPointer.removeAttr( 'style' );
-				$( '.invalid-input' ).remove();
-			}
+		const pattern = /^(https:\/\/.)|^[\$]./;
+		const nextElement = paymentPointer.next();
+		let invalidMsgElement = null;
+		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
+			invalidMsgElement = nextElement;
+		}
+		if ( invalidMsgElement !== null && pattern.test( $( this ).val() ) ) {
+			paymentPointer.removeAttr( 'style' );
+			invalidMsgElement.remove();
 		}
 	} );
 
@@ -192,32 +199,32 @@
 
 	// Invalid input alert
 	$( document ).on( 'focusout', '#coil_paywall_button_text', function() {
-		const buttonText = $( '#coil_paywall_button_text' );
-		const nextElement = buttonText.next();
-		let invalidMsg = null;
+		const buttonTextElement = $( '#coil_paywall_button_text' );
+		const nextElement = buttonTextElement.next();
+		let invalidMsgElement = null;
 		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
-			invalidMsg = nextElement;
+			invalidMsgElement = nextElement;
 		}
 		const onlyWhiteSpace = /^\s+$/;
 		if ( onlyWhiteSpace.test( $( this ).val() ) ) {
-			buttonText.css( 'border-color', red );
-			if ( invalidMsg === null ) {
-				buttonText.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidBtnTextMsg + '</p>' );
+			buttonTextElement.css( 'border-color', red );
+			if ( invalidMsgElement === null ) {
+				buttonTextElement.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidBlankInputMsg + '</p>' );
 				const position = $( '.invalid-input' ).prev().prev().position();
 				$( 'html, body' ).animate( { scrollTop: position.top + 'px' } );
 			}
-		} else {
-			buttonText.removeAttr( 'style' );
-			invalidMsg.remove();
+		} else if ( invalidMsgElement !== null ) {
+			buttonTextElement.removeAttr( 'style' );
+			invalidMsgElement.remove();
 		}
 	} );
 
 	$( document ).on( 'input', '#coil_paywall_button_text', function() {
-		const buttonText = $( '#coil_paywall_button_text' );
-		const nextElement = buttonText.next();
-		let invalidMsg = null;
+		const buttonTextElement = $( '#coil_paywall_button_text' );
+		const nextElement = buttonTextElement.next();
+		let invalidMsgElement = null;
 		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
-			invalidMsg = nextElement;
+			invalidMsgElement = nextElement;
 		}
 		const onlyWhiteSpace = /^\s+$/;
 		if ( $( this ).val() !== '' && ! onlyWhiteSpace.test( $( this ).val() ) ) {
@@ -228,13 +235,66 @@
 
 		// Invalid input warning
 		if ( onlyWhiteSpace.test( $( this ).val() ) ) {
-			buttonText.css( 'border-color', red );
-			if ( invalidMsg === null ) {
-				buttonText.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidBtnTextMsg + '</p>' );
+			buttonTextElement.css( 'border-color', red );
+			if ( invalidMsgElement === null ) {
+				buttonTextElement.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidBlankInputMsg + '</p>' );
 			}
-		} else if ( invalidMsg !== null ) {
-			buttonText.removeAttr( 'style' );
-			invalidMsg.remove();
+		} else if ( invalidMsgElement !== null ) {
+			buttonTextElement.removeAttr( 'style' );
+			invalidMsgElement.remove();
+		}
+	} );
+
+	// Invalid input alert
+	$( document ).on( 'focusout', '#coil_paywall_button_link', function() {
+		const buttonLinkElement = $( '#coil_paywall_button_link' );
+		const nextElement = buttonLinkElement.next();
+		let invalidMsgElement = null;
+		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
+			invalidMsgElement = nextElement;
+		}
+
+		const isValidUrl = ( ( string ) => {
+			let url;
+
+			try {
+				url = new URL( string );
+			} catch ( _ ) {
+				return false;
+			}
+			return url.protocol === 'http:' || url.protocol === 'https:';
+		} )( $( this ).val() );
+
+		if ( ! isValidUrl && $( this ).val() !== '' ) {
+			buttonLinkElement.css( 'border-color', red );
+			if ( invalidMsgElement === null ) {
+				buttonLinkElement.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidUrlMsg + '</p>' );
+				const position = $( '.invalid-input' ).prev().prev().position();
+				$( 'html, body' ).animate( { scrollTop: position.top + 'px' } );
+			}
+		} else if ( invalidMsgElement !== null ) {
+			buttonLinkElement.removeAttr( 'style' );
+			invalidMsgElement.remove();
+		}
+	} );
+
+	$( document ).on( 'input', '#coil_paywall_button_link', function() {
+		const buttonLinkElement = $( '#coil_paywall_button_link' );
+		const nextElement = buttonLinkElement.next();
+		let invalidMsgElement = null;
+		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
+			invalidMsgElement = nextElement;
+		}
+		const onlyWhiteSpace = /^\s+$/;
+		// Invalid input warning
+		if ( onlyWhiteSpace.test( $( this ).val() ) ) {
+			buttonLinkElement.css( 'border-color', red );
+			if ( invalidMsgElement === null ) {
+				buttonLinkElement.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidBlankInputMsg + '</p>' );
+			}
+		} else if ( invalidMsgElement !== null ) {
+			buttonLinkElement.removeAttr( 'style' );
+			invalidMsgElement.remove();
 		}
 	} );
 
