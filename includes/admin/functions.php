@@ -192,16 +192,17 @@ function load_admin_assets() : void {
 	$admin_params = apply_filters(
 		'coil_admin_js_params',
 		[
-			'ajax_url'                 => admin_url( 'admin-ajax.php' ),
-			'site_logo_url'            => get_site_logo_src(),
-			'coil_logo_url'            => [
+			'ajax_url'                    => admin_url( 'admin-ajax.php' ),
+			'site_logo_url'               => get_site_logo_src(),
+			'coil_logo_url'               => [
 				'light' => plugin_dir_url( dirname( __DIR__ ) ) . 'assets/images/coil-icn-black.svg',
 				'dark'  => plugin_dir_url( dirname( __DIR__ ) ) . 'assets/images/coil-icn-white.svg',
 			],
-			'not_monetized_post_types' => get_post_types_with_status( 'monetization', 'not-monetized' ),
-			'exclusive_post_types'     => get_post_types_with_status( 'visibility', 'exclusive' ),
-			'general_modal_msg'        => __( 'Removing monetization from {postTypes} will set them as public by default.', 'coil-web-monetization' ),
-			'exclusive_modal_msg'      => __( 'Making {postTypes} exclusive will also set them as monetized by default.', 'coil-web-monetization' ),
+			'not_monetized_post_types'    => get_post_types_with_status( 'monetization', 'not-monetized' ),
+			'exclusive_post_types'        => get_post_types_with_status( 'visibility', 'exclusive' ),
+			'general_modal_msg'           => __( 'Removing monetization from {postTypes} will set them as public by default.', 'coil-web-monetization' ),
+			'exclusive_modal_msg'         => __( 'Making {postTypes} exclusive will also set them as monetized by default.', 'coil-web-monetization' ),
+			'invalid_payment_pointer_msg' => __( 'Please provide a valid payment pointer', 'coil-web-monetization' ),
 		]
 	);
 

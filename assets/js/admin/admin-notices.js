@@ -11,9 +11,11 @@
 		notMonetizedPostTypes = coilAdminParams.not_monetized_post_types,
 		exclusivePostTypes = coilAdminParams.exclusive_post_types,
 		generalModalMsg = coilAdminParams.general_modal_msg,
-		exclusiveModalMsg = coilAdminParams.exclusive_modal_msg;
+		exclusiveModalMsg = coilAdminParams.exclusive_modal_msg,
+		invalidPaymentPointerMsg = coilAdminParams.invalid_payment_pointer_msg;
 
 	const activeTabID = $( '.nav-tab-wrapper a.nav-tab-active' ).attr( 'id' );
+	const red = '#EE4852';
 	const initialFormData = $( 'form' ).serialize();
 	// formSubmitting keeps track of whether the submit event fired prior to the beforeunload event.
 	let formSubmitting = false;
@@ -127,6 +129,38 @@
 			}
 		}
 	}
+
+	/* ------------------------------------------------------------------------ *
+	* General Settings tab
+	* ------------------------------------------------------------------------ */
+
+	// Invalid input alert
+	$( document ).on( 'focusout', '#coil_payment_pointer', function() {
+		const paymentPointer = $( '#coil_payment_pointer' );
+		const pattern = /^(https:\/\/.)|^(http:\/\/.)|^[\$]./;
+		if ( ! pattern.test( $( this ).val() ) ) {
+			paymentPointer.css( 'border-color', red );
+			if ( ! $( '.invalid-input' ).length ) {
+				paymentPointer.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidPaymentPointerMsg + '</p>' );
+			}
+		} else {
+			paymentPointer.removeAttr( 'style' );
+			$( '.invalid-input' ).remove();
+		}
+	} );
+
+	// Removes the invalid input warning if the input becomes valid
+	$( document ).on( 'input', '#coil_payment_pointer', function() {
+		const paymentPointer = $( '#coil_payment_pointer' );
+		const pattern = /^(https:\/\/.)|^(http:\/\/.)|^[\$]./;
+		const isHighlighted = $( '.invalid-input' ).length;
+		if ( isHighlighted ) {
+			if ( pattern.test( $( this ).val() ) ) {
+				paymentPointer.removeAttr( 'style' );
+				$( '.invalid-input' ).remove();
+			}
+		}
+	} );
 
 	/* ------------------------------------------------------------------------ *
 	* Exclusive Settings tab

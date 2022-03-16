@@ -201,6 +201,12 @@ function coil_general_settings_group_validation( $general_settings ) : array {
 	// Validate the payment pointer
 	if ( in_array( 'coil_payment_pointer', $general_settings_keys, true ) ) {
 		$final_settings['coil_payment_pointer'] = sanitize_text_field( $general_settings['coil_payment_pointer'] );
+		// check if url starts with https://, http://, or $
+		$correct_format = preg_match( '/^(https:\/\/)|^(http:\/\/)|^[\$]/', $final_settings['coil_payment_pointer'] );
+		if ( $correct_format !== 1 && ! empty( $final_settings['coil_payment_pointer'] ) ) {
+			// Insert https:// atthe beginning
+			$final_settings['coil_payment_pointer'] = esc_url( 'https://' . $final_settings['coil_payment_pointer'] );
+		}
 	}
 
 	// Validate the monetization defaults
