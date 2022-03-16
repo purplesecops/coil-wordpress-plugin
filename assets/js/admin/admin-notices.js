@@ -18,6 +18,10 @@
 	// formSubmitting keeps track of whether the submit event fired prior to the beforeunload event.
 	let formSubmitting = false;
 
+	/* ------------------------------------------------------------------------ *
+	* Initial set-up
+	* ------------------------------------------------------------------------ */
+
 	// Welcome notice
 	if ( activeTabID === 'coil-welcome-settings' ) {
 		const $welcomeNotice = $( '.coil-welcome-notice' );
@@ -27,6 +31,20 @@
 			$( '.tab-styling .button-primary' ).show();
 		} else {
 			$( '.tab-styling .button-primary' ).hide();
+		}
+	}
+
+	// General Settings tab
+	if ( activeTabID === 'coil-general-settings' ) {
+		// No payment pointer warning
+		const noPaymentPointerNotice = $( '.coil-no-payment-pointer-notice' );
+		if ( noPaymentPointerNotice.length > 0 ) {
+			noPaymentPointerNotice.hide();
+
+			const settingsUpdated = $( '#setting-error-settings_updated' );
+			if ( settingsUpdated.length > 0 ) {
+				noPaymentPointerNotice.show();
+			}
 		}
 	}
 
@@ -48,6 +66,7 @@
 
 	// Coil Button tab
 	if ( activeTabID === 'coil-button-settings' ) {
+		// Initial set-up
 		const coilButtonEnabled = $( 'input[name="coil_button_settings_group[coil_button_toggle]"]' ).is( ':checked' );
 		if ( coilButtonEnabled ) {
 			$( '*.coil-button-section' ).show();
@@ -56,19 +75,17 @@
 		}
 	}
 
-	// No payment pointer
-	if ( activeTabID === 'coil-general-settings' ) {
-		// No payment pointer warning
-		const noPaymentPointerNotice = $( '.coil-no-payment-pointer-notice' );
-		if ( noPaymentPointerNotice.length > 0 ) {
-			noPaymentPointerNotice.hide();
-
-			const settingsUpdated = $( '#setting-error-settings_updated' );
-			if ( settingsUpdated.length > 0 ) {
-				noPaymentPointerNotice.show();
-			}
+	// A modal to alert users to unsaved settings
+	window.addEventListener( 'beforeunload', function( event ) {
+		if ( ! formSubmitting && initialFormData !== $( 'form' ).serialize() ) {
+			// Cancel the event, preventing default behavior will prompt the user.
+			event.preventDefault();
+			// Chrome requires returnValue to be set
+			event.returnValue = '';
+		} else {
+			delete event.returnValue;
 		}
-	}
+	} );
 
 	// Display a modal when submitting incompatible global visibility and monetization defaults.
 	$( document ).on( 'submit', 'form', function() {
@@ -110,6 +127,10 @@
 			}
 		}
 	}
+
+	/* ------------------------------------------------------------------------ *
+	* Exclusive Settings tab
+	* ------------------------------------------------------------------------ */
 
 	$( document ).on( 'change', 'input[name="coil_exclusive_settings_group[coil_exclusive_toggle]"]', function() {
 		$( '.exclusive-content-section' ).toggle();
@@ -210,19 +231,11 @@
 		$padlockIcon.html( $selectedSvg );
 	} );
 
+	/* ------------------------------------------------------------------------ *
+	* Coil Button tab
+	* ------------------------------------------------------------------------ */
+
 	$( document ).on( 'change', 'input[name="coil_button_settings_group[coil_button_toggle]"]', function() {
 		$( '.coil-button-section' ).toggle();
-	} );
-
-	// A modal to alert users to unsaved settings
-	window.addEventListener( 'beforeunload', function( event ) {
-		if ( ! formSubmitting && initialFormData !== $( 'form' ).serialize() ) {
-			// Cancel the event, preventing default behavior will prompt the user.
-			event.preventDefault();
-			// Chrome requires returnValue to be set
-			event.returnValue = '';
-		} else {
-			delete event.returnValue;
-		}
 	} );
 }( jQuery ) );
