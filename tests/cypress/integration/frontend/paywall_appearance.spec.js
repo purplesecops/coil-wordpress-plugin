@@ -93,7 +93,7 @@ describe( 'Fully restricted posts for non WM-enabled users', () => {
 		checkPaywallText( defaultTitle, defaultMessage, defaultButtonText, defaultButtonLink );
 	} );
 
-	it.only( 'Checks the styling and branding of the pawyall message', () => {
+	it( 'Checks the styling and branding of the pawyall message', () => {
 		cy.visit( '/coil-members-only/' );
 
 		// The default theme is the light theme

@@ -140,23 +140,34 @@
 	$( document ).on( 'focusout', '#coil_payment_pointer', function() {
 		const paymentPointer = $( '#coil_payment_pointer' );
 		const pattern = /^(https:\/\/.)|^[\$]./;
-		const nextElement = paymentPointer.next();
+		const validityCondition = pattern.test( $( this ).val() );
+		focusOutValidityHandler( paymentPointer, validityCondition, invalidPaymentPointerMsg );
+	} );
+
+	function focusOutValidityHandler( inputElement, validCondition, msg ) {
+		const nextElement = inputElement.next();
 		let invalidMsgElement = null;
 		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
 			invalidMsgElement = nextElement;
 		}
-		if ( ! pattern.test( $( this ).val() ) ) {
-			paymentPointer.css( 'border-color', red );
-			if ( ! $( '.invalid-input' ).length ) {
-				paymentPointer.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidPaymentPointerMsg + '</p>' );
-				const position = $( '.invalid-input' ).prev().prev().position();
-				$( 'html, body' ).animate( { scrollTop: position.top + 'px' } );
+		if ( ! validCondition ) {
+			inputElement.css( 'border-color', red );
+			if ( invalidMsgElement === null ) {
+				inputElement.after( '<p class="invalid-input" style="color: ' + red + '">' + msg + '</p>' );
+				const position = inputElement.prev().position();
+				let top;
+				if ( position !== undefined ) {
+					top = position.top;
+				} else {
+					top = 0;
+				}
+				$( 'html, body' ).animate( { scrollTop: top + 'px' } );
 			}
 		} else if ( invalidMsgElement !== null ) {
-			paymentPointer.removeAttr( 'style' );
+			inputElement.removeAttr( 'style' );
 			invalidMsgElement.remove();
 		}
-	} );
+	}
 
 	// Removes the invalid input warning if the input becomes valid
 	$( document ).on( 'input', '#coil_payment_pointer', function() {
@@ -200,23 +211,9 @@
 	// Invalid input alert
 	$( document ).on( 'focusout', '#coil_paywall_button_text', function() {
 		const buttonTextElement = $( '#coil_paywall_button_text' );
-		const nextElement = buttonTextElement.next();
-		let invalidMsgElement = null;
-		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
-			invalidMsgElement = nextElement;
-		}
 		const onlyWhiteSpace = /^\s+$/;
-		if ( onlyWhiteSpace.test( $( this ).val() ) ) {
-			buttonTextElement.css( 'border-color', red );
-			if ( invalidMsgElement === null ) {
-				buttonTextElement.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidBlankInputMsg + '</p>' );
-				const position = $( '.invalid-input' ).prev().prev().position();
-				$( 'html, body' ).animate( { scrollTop: position.top + 'px' } );
-			}
-		} else if ( invalidMsgElement !== null ) {
-			buttonTextElement.removeAttr( 'style' );
-			invalidMsgElement.remove();
-		}
+		const validityCondition = ! onlyWhiteSpace.test( $( this ).val() );
+		focusOutValidityHandler( buttonTextElement, validityCondition, invalidBlankInputMsg );
 	} );
 
 	$( document ).on( 'input', '#coil_paywall_button_text', function() {
@@ -248,12 +245,6 @@
 	// Invalid input alert
 	$( document ).on( 'focusout', '#coil_paywall_button_link', function() {
 		const buttonLinkElement = $( '#coil_paywall_button_link' );
-		const nextElement = buttonLinkElement.next();
-		let invalidMsgElement = null;
-		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
-			invalidMsgElement = nextElement;
-		}
-
 		const isValidUrl = ( ( string ) => {
 			let url;
 
@@ -264,18 +255,9 @@
 			}
 			return url.protocol === 'http:' || url.protocol === 'https:';
 		} )( $( this ).val() );
+		const validityCondition = isValidUrl || $( this ).val() === '';
 
-		if ( ! isValidUrl && $( this ).val() !== '' ) {
-			buttonLinkElement.css( 'border-color', red );
-			if ( invalidMsgElement === null ) {
-				buttonLinkElement.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidUrlMsg + '</p>' );
-				const position = $( '.invalid-input' ).prev().prev().position();
-				$( 'html, body' ).animate( { scrollTop: position.top + 'px' } );
-			}
-		} else if ( invalidMsgElement !== null ) {
-			buttonLinkElement.removeAttr( 'style' );
-			invalidMsgElement.remove();
-		}
+		focusOutValidityHandler( buttonLinkElement, validityCondition, invalidUrlMsg );
 	} );
 
 	$( document ).on( 'input', '#coil_paywall_button_link', function() {

@@ -68,7 +68,7 @@ describe( 'Visibility of content blocks for non WM-enabled users', () => {
 			.should( 'be.visible' );
 	} );
 
-	it.only( 'Check visibility of split content when exclusive content has been disabled', () => {
+	it( 'Check visibility of split content when exclusive content has been disabled', () => {
 		// Ensure exclusive content is disabled
 		cy.addSetting( 'coil_exclusive_settings_group', [
 			{

@@ -19,7 +19,7 @@ describe( 'Plugin Settings Panel', function() {
 		cy.get( '.coil-no-payment-pointer-notice__content' ).should( 'exist' );
 	} );
 
-	it.only( 'Check warning appears if payment pointer is invalid', function( ) {
+	it( 'Check warning appears if payment pointer is invalid', function( ) {
 		const invalidInput = 'abc';
 		const validInput = 'https://well-known-pay';
 		cy
