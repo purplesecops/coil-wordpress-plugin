@@ -115,19 +115,6 @@
 		$( '.exclusive-content-section' ).toggle();
 	} );
 
-	$( document ).on( 'change', '#coil_branding', function() {
-		const siteLogoSelected = $( '#coil_branding option:selected' ).val() === 'site_logo';
-		if ( siteLogoSelected ) {
-			$( '.set-site-logo-description' ).show();
-		} else {
-			$( '.set-site-logo-description' ).hide();
-		}
-	} );
-
-	$( document ).on( 'change', 'input[name="coil_button_settings_group[coil_button_toggle]"]', function() {
-		$( '.coil-button-section' ).toggle();
-	} );
-
 	$( document ).on( 'keyup', '#coil_paywall_title', function() {
 		if ( $( this ).val() !== '' ) {
 			$( '.coil-paywall-heading' ).text( $( this ).val() );
@@ -152,16 +139,6 @@
 		}
 	} );
 
-	$( document ).on( 'change', 'input[name="coil_exclusive_settings_group[coil_title_padlock]"]', function() {
-		$( this ).closest( '.coil-row' ).find( '.coil-column-5' ).toggleClass( 'hidden' );
-	} );
-
-	$( document ).on( 'change', 'input[name="coil_exclusive_settings_group[coil_padlock_icon_position]"]', function() {
-		const padlockPosition = $( this ).val();
-
-		$( '.coil-title-preview-container' ).attr( 'data-padlock-icon-position', padlockPosition );
-	} );
-
 	$( document ).on( 'change', 'input[name="coil_exclusive_settings_group[coil_message_color_theme]"]', function() {
 		const coilTheme = $( this ).val(),
 			logoSetting = $( '#coil_branding' ).val();
@@ -177,6 +154,15 @@
 				logoSrc = darkCoilLogoUrl;
 			}
 			$( '.coil-paywall-image' ).attr( 'src', logoSrc );
+		}
+	} );
+
+	$( document ).on( 'change', '#coil_branding', function() {
+		const siteLogoSelected = $( '#coil_branding option:selected' ).val() === 'site_logo';
+		if ( siteLogoSelected ) {
+			$( '.set-site-logo-description' ).show();
+		} else {
+			$( '.set-site-logo-description' ).hide();
 		}
 	} );
 
@@ -206,12 +192,26 @@
 		$( '.coil-paywall-image' ).attr( 'src', logoSrc );
 	} );
 
+	$( document ).on( 'change', 'input[name="coil_exclusive_settings_group[coil_title_padlock]"]', function() {
+		$( this ).closest( '.coil-row' ).find( '.coil-column-5' ).toggleClass( 'hidden' );
+	} );
+
+	$( document ).on( 'change', 'input[name="coil_exclusive_settings_group[coil_padlock_icon_position]"]', function() {
+		const padlockPosition = $( this ).val();
+
+		$( '.coil-title-preview-container' ).attr( 'data-padlock-icon-position', padlockPosition );
+	} );
+
 	$( document ).on( 'change', 'input[name="coil_exclusive_settings_group[coil_padlock_icon_style]"]', function() {
 		const $thisInput = $( this ),
 			$padlockIcon = $( '.coil-title-preview-container .coil-padlock-icon' ),
 			$selectedSvg = $thisInput.siblings( 'svg' ).clone();
 
 		$padlockIcon.html( $selectedSvg );
+	} );
+
+	$( document ).on( 'change', 'input[name="coil_button_settings_group[coil_button_toggle]"]', function() {
+		$( '.coil-button-section' ).toggle();
 	} );
 
 	// A modal to alert users to unsaved settings
