@@ -84,20 +84,19 @@
 	}
 
 	// Adds or removes alerting functionality for invalid input that is detected during changes to an input field.
-	function inputValidityHandler( inputElement, validCondition, addAlertWhileTyping, msg ) {
+	function inputValidityHandler( inputElement, validCondition, alertWhileTyping, msg ) {
 		const nextElement = inputElement.next();
 		let invalidMsgElement = null;
+		const onlyWhiteSpace = /^\s+$/;
 		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
 			invalidMsgElement = nextElement;
 		}
 		if ( invalidMsgElement !== null && validCondition ) {
 			inputElement.removeAttr( 'style' );
 			invalidMsgElement.remove();
-		} else if ( addAlertWhileTyping ) {
+		} else if ( alertWhileTyping && onlyWhiteSpace.test( inputElement.val() ) && invalidMsgElement === null ) {
 			inputElement.css( 'border-color', red );
-			if ( invalidMsgElement === null ) {
-				inputElement.after( '<p class="invalid-input" style="color: ' + red + '">' + msg + '</p>' );
-			}
+			inputElement.after( '<p class="invalid-input" style="color: ' + red + '">' + msg + '</p>' );
 		}
 	}
 
@@ -341,6 +340,13 @@
 			$selectedSvg = $thisInput.siblings( 'svg' ).clone();
 
 		$padlockIcon.html( $selectedSvg );
+	} );
+
+	$( document ).on( 'input', '#coil_content_container', function() {
+		const cssInputElement = $( '#coil_content_container' );
+		const onlyWhiteSpace = /^\s+$/;
+		const validityCondition = ! onlyWhiteSpace.test( $( this ).val() );
+		inputValidityHandler( cssInputElement, validityCondition, true, invalidBlankInputMsg );
 	} );
 
 	/* ------------------------------------------------------------------------ *
