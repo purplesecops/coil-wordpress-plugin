@@ -173,16 +173,26 @@
 	$( document ).on( 'input', '#coil_payment_pointer', function() {
 		const paymentPointer = $( '#coil_payment_pointer' );
 		const pattern = /^(https:\/\/.)|^[\$]./;
-		const nextElement = paymentPointer.next();
+		const validityCondition = pattern.test( $( this ).val() );
+		inputValidityHandler( paymentPointer, validityCondition, false, '' );
+	} );
+
+	function inputValidityHandler( inputElement, validCondition, addAlertWhileTyping, msg ) {
+		const nextElement = inputElement.next();
 		let invalidMsgElement = null;
 		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
 			invalidMsgElement = nextElement;
 		}
-		if ( invalidMsgElement !== null && pattern.test( $( this ).val() ) ) {
-			paymentPointer.removeAttr( 'style' );
+		if ( invalidMsgElement !== null && validCondition ) {
+			inputElement.removeAttr( 'style' );
 			invalidMsgElement.remove();
+		} else if ( addAlertWhileTyping ) {
+			inputElement.css( 'border-color', red );
+			if ( invalidMsgElement === null ) {
+				inputElement.after( '<p class="invalid-input" style="color: ' + red + '">' + msg + '</p>' );
+			}
 		}
-	} );
+	}
 
 	/* ------------------------------------------------------------------------ *
 	* Exclusive Settings tab
@@ -218,27 +228,14 @@
 
 	$( document ).on( 'input', '#coil_paywall_button_text', function() {
 		const buttonTextElement = $( '#coil_paywall_button_text' );
-		const nextElement = buttonTextElement.next();
-		let invalidMsgElement = null;
-		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
-			invalidMsgElement = nextElement;
-		}
 		const onlyWhiteSpace = /^\s+$/;
+		const validityCondition = ! onlyWhiteSpace.test( $( this ).val() );
+		inputValidityHandler( buttonTextElement, validityCondition, true, invalidBlankInputMsg );
+
 		if ( $( this ).val() !== '' && ! onlyWhiteSpace.test( $( this ).val() ) ) {
 			$( '.coil-paywall-cta' ).text( $( this ).val() );
 		} else {
 			$( '.coil-paywall-cta' ).text( $( this ).attr( 'placeholder' ) );
-		}
-
-		// Invalid input warning
-		if ( onlyWhiteSpace.test( $( this ).val() ) ) {
-			buttonTextElement.css( 'border-color', red );
-			if ( invalidMsgElement === null ) {
-				buttonTextElement.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidBlankInputMsg + '</p>' );
-			}
-		} else if ( invalidMsgElement !== null ) {
-			buttonTextElement.removeAttr( 'style' );
-			invalidMsgElement.remove();
 		}
 	} );
 
@@ -262,22 +259,9 @@
 
 	$( document ).on( 'input', '#coil_paywall_button_link', function() {
 		const buttonLinkElement = $( '#coil_paywall_button_link' );
-		const nextElement = buttonLinkElement.next();
-		let invalidMsgElement = null;
-		if ( nextElement !== null && nextElement.hasClass( 'invalid-input' ) ) {
-			invalidMsgElement = nextElement;
-		}
 		const onlyWhiteSpace = /^\s+$/;
-		// Invalid input warning
-		if ( onlyWhiteSpace.test( $( this ).val() ) ) {
-			buttonLinkElement.css( 'border-color', red );
-			if ( invalidMsgElement === null ) {
-				buttonLinkElement.after( '<p class="invalid-input" style="color: ' + red + '">' + invalidBlankInputMsg + '</p>' );
-			}
-		} else if ( invalidMsgElement !== null ) {
-			buttonLinkElement.removeAttr( 'style' );
-			invalidMsgElement.remove();
-		}
+		const validityCondition = ! onlyWhiteSpace.test( $( this ).val() );
+		inputValidityHandler( buttonLinkElement, validityCondition, true, invalidBlankInputMsg );
 	} );
 
 	$( document ).on( 'change', 'input[name="coil_exclusive_settings_group[coil_message_color_theme]"]', function() {
