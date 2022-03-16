@@ -101,6 +101,17 @@
 		}
 	}
 
+	// Returns a boolean indicating whether a URL is valid (true) or invalid (false)
+	function isValidUrl( string ) {
+		let url;
+		try {
+			url = new URL( string );
+		} catch ( _ ) {
+			return false;
+		}
+		return url.protocol === 'http:' || url.protocol === 'https:';
+	}
+
 	/* ------------------------------------------------------------------------ *
 	* Initial set-up
 	* ------------------------------------------------------------------------ */
@@ -248,17 +259,8 @@
 	// Invalid input alert
 	$( document ).on( 'focusout', '#coil_paywall_button_link', function() {
 		const buttonLinkElement = $( '#coil_paywall_button_link' );
-		const isValidUrl = ( ( string ) => {
-			let url;
-
-			try {
-				url = new URL( string );
-			} catch ( _ ) {
-				return false;
-			}
-			return url.protocol === 'http:' || url.protocol === 'https:';
-		} )( $( this ).val() );
-		const validityCondition = isValidUrl || $( this ).val() === '';
+		const validUrl = isValidUrl( $( this ).val() );
+		const validityCondition = validUrl || $( this ).val() === '';
 
 		focusOutValidityHandler( buttonLinkElement, validityCondition, invalidUrlMsg );
 	} );
@@ -347,5 +349,21 @@
 
 	$( document ).on( 'change', 'input[name="coil_button_settings_group[coil_button_toggle]"]', function() {
 		$( '.coil-button-section' ).toggle();
+	} );
+
+	// Invalid input alert
+	$( document ).on( 'focusout', '#coil_button_link', function() {
+		const buttonLinkElement = $( '#coil_button_link' );
+		const validUrl = isValidUrl( $( this ).val() );
+		const validityCondition = validUrl || $( this ).val() === '';
+
+		focusOutValidityHandler( buttonLinkElement, validityCondition, invalidUrlMsg );
+	} );
+
+	$( document ).on( 'input', '#coil_button_link', function() {
+		const buttonLinkElement = $( '#coil_button_link' );
+		const onlyWhiteSpace = /^\s+$/;
+		const validityCondition = ! onlyWhiteSpace.test( $( this ).val() );
+		inputValidityHandler( buttonLinkElement, validityCondition, true, invalidBlankInputMsg );
 	} );
 }( jQuery ) );
