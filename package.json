@@ -55,7 +55,7 @@
 		"stylelint-order": "^0.8.1"
 	},
 	"dependencies": {
-		"cgb-scripts": "1.21.0",
+		"cgb-scripts": "1.23.1",
 		"classnames": "^2.2.6",
 		"grunt-cli": "*"
 	}
